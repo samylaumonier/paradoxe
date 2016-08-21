@@ -24,6 +24,7 @@ ecmascript-runtime@0.3.14
 ejson@1.0.12
 es5-shim@4.6.14
 fastclick@1.0.12
+fortawesome:fontawesome@4.5.0
 geojson-utils@1.0.9
 hot-code-push@1.0.4
 html-tools@1.0.10
@@ -65,6 +66,7 @@ standard-minifier-js@1.2.0
 templating@1.1.14
 templating-tools@1.0.4
 tracker@1.1.0
+twbs:bootstrap@3.3.6
 ui@1.0.11
 underscore@1.0.9
 url@1.0.10
