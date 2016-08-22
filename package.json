@@ -31,5 +31,11 @@
   "bugs": {
     "url": "https://github.com/shaneBen23/video/issues"
   },
-  "homepage": "https://github.com/shaneBen23/video#readme"
+  "homepage": "https://github.com/shaneBen23/video#readme",
+  "dependencies": {
+    "peerjs_fork_firefox40": "^0.3.15",
+    "react": "^15.3.1",
+    "react-dom": "^15.3.1",
+    "react-router": "^2.7.0"
+  }
 }

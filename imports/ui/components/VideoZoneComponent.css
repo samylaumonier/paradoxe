@@ -2,23 +2,12 @@
 /* desktop */
 @media (min-width: 980px) {
 	body {
-		padding-top: 60px;
-	}
-}
-
-/* tablet */
-@media (max-width: 979px) {
-	.callword, .sendmsgword {
-		display: none;
+		padding-top: 10px;
 	}
 }
 
 /* mobile */
 @media (max-width: 767px) {
-	#myvideo {
-		display: none;
-	}
-
 	.callword, .sendmsgword {
 		display: inline;
 	}
@@ -53,7 +42,7 @@
 .keyzone {
 	padding: 10px 20px 10px;
 	color: #FFFFFF;
-	margin: 0px;
+	margin: 0;
 }
 
 #callzone, #sendmsgzone {
@@ -61,11 +50,10 @@
 }
 
 .callaction, .sendmsgaction {
-	margin-left: 0px !important;
+	margin-left: 0 !important;
 }
 
 #hangupzone {
-	display: none;
 	margin-top: 8px;
 	margin-bottom: 10px;
 }
@@ -80,8 +68,4 @@
 	padding: 7px;
 	height: 358px;
 	overflow: scroll;
-}
-
-#chat {
-	display: none;
 }

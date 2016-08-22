@@ -1,25 +1,10 @@
-import { Template } from 'meteor/templating';
+import { Meteor } from 'meteor/meteor';
+import { render } from 'react-dom';
 
-import '/client/ui/components/callzone.html';
-import '/client/ui/components/hangup.html';
+import '/node_modules/peerjs_fork_firefox40/dist/peer.min';
 
+import { renderRoutes } from '/imports/startup/client/routes.jsx';
 
-var orovideo = new OroVideoPeer();
-orovideo.run();
-
-Template.callzone.events({
-  'click .callaction' : function(e, t) {
-    e.preventDefault();
-    var key = t.find('.callkey').value;
-    orovideo.callAKey(key);
-    return false;
-  }
-});
-
-Template.hangup.events({
-  'click .hangupaction' : function(e, t) {
-    e.preventDefault();
-    orovideo.hangup();
-    return false;
-  }
+Meteor.startup(() => {
+  render(renderRoutes(), document.getElementById('app'));
 });
