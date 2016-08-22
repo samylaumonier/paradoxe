@@ -1,4 +1,11 @@
 {
+  "public": {
+    "peer": {
+      "host": "localhost",
+      "port": 9000,
+      "path": "/main"
+    }
+  },
   "electron": {
     "name": "Video",
     "version": "0.1.0",

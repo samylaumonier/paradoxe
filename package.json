@@ -33,6 +33,7 @@
   },
   "homepage": "https://github.com/shaneBen23/video#readme",
   "dependencies": {
+    "peer": "^0.2.8",
     "peerjs_fork_firefox40": "^0.3.15",
     "react": "^15.3.1",
     "react-dom": "^15.3.1",

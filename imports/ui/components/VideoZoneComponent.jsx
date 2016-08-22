@@ -1,6 +1,6 @@
 import React from 'react';
 
-import './VideoZoneComponent.css';
+import './VideoZoneComponentStyle.css';
 
 import { VideoPeer } from '/imports/api/VideoPeer';
 
@@ -21,8 +21,6 @@ export const VideoZoneComponent = React.createClass({
         });
       }
     });
-
-    console.log('run');
 
     return {
       id: '',

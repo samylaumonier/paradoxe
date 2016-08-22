@@ -1,8 +1,11 @@
+import { Meteor } from 'meteor/meteor';
+
 export class VideoPeer {
   constructor() {
     this.peer = new Peer({
-      key: 'hhfk756t8o2prpb9',
-      debug: 3
+      host: Meteor.settings.public.peer.host,
+      port: Meteor.settings.public.peer.port,
+      path: Meteor.settings.public.peer.path
     });
 
     this.currentCall = null;
