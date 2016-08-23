@@ -1,4 +1,5 @@
 import React from 'react';
+import { browserHistory } from 'react-router';
 
 export const RegisterComponent = React.createClass({
   render: function ()  {
@@ -43,7 +44,6 @@ export const RegisterComponent = React.createClass({
       </form>
     );
   },
-  
   register: function (e) {
     e.preventDefault();
   
@@ -52,15 +52,15 @@ export const RegisterComponent = React.createClass({
     const password = $('#register-password').val();
   
     Accounts.createUser({
-      username: username,
-      email:email,
-      password: password
-    }, function (err) {
-      if(err){
-        toastr.error(err.reason, "Error");
-      }
-      else{
-        toastr.success("the user" + username  + " was created", "User created");
+      username,
+      email,
+      password
+    }, err => {
+      if (err) {
+        toastr.error(err.reason, 'Error');
+      } else {
+        toastr.success(`Welcome ${username}!`);
+        browserHistory.push('/');
       }
     });
   }

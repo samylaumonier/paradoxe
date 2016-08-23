@@ -32,15 +32,15 @@ export const LoginComponent = React.createClass({
   },
   login: function (e) {
     e.preventDefault();
+
     const username = $('#login-username').val();
     const password = $('#login-password').val();
   
     Meteor.loginWithPassword(username, password, (err, res) => {
       if (err) {
         toastr.error(err.reason, 'Error');
-      }
-      else {
-        toastr.success('Welcome back', "Logging in");
+      } else {
+        toastr.success('Welcome back', 'Logged in');
         browserHistory.push('/');
       }
     });

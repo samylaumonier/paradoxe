@@ -1,14 +1,13 @@
-Accounts.onCreateUser(function(options, user) {
-  
-  user.username =  options.profile.username.toLowerCase();
-  
-  var validator = require("email-validator");
-  
-  if(!validator.validate(user.emails[0].address)){
-   throw new Meteor.Error('400','Invalid email')
+import validator from 'email-validator';
+
+Accounts.onCreateUser((options, user) => {
+  user.username =  options.username.toLowerCase();
+
+  if (!validator.validate(user.emails[0].address)) {
+    throw new Meteor.Error('400','Invalid email');
   }
   
-  var invalidEmail = new RegExp([
+  const invalidEmail = new RegExp([
     '@0-mail.com',
     '@1-12.nl',
     '@127-0-0-1.be',
@@ -192,22 +191,9 @@ Accounts.onCreateUser(function(options, user) {
     '@zynd.com'
   ].join('|'));
   
-  var isInvalidEmail = invalidEmail.test(user.emails[0].address);
-  var invalidEmailMessage = "Sorry this email is not allowed";
-  var errorMessage = "";
-  var error = true;
-  
-  
-  if(isInvalidEmail){
-    errorMessage += invalidEmailMessage;
-    error = false;
+  if (invalidEmail.test(user.emails[0].address)) {
+    throw new Meteor.Error('400', 'Sorry, this email is not allowed');
   }
-  
-  if(!error){
-    throw new Meteor.Error('400', errorMessage);
-  }
-  
-  error = null;
   
   return user;
 });
