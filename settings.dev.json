@@ -1,7 +1,7 @@
 {
   "public": {
     "peer": {
-      "host": "localhost",
+      "host": "192.168.43.59",
       "port": 9000,
       "path": "/main"
     }

@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { VideoZoneComponent } from '../components/VideoZoneComponent';
+import { VideoZoneComponent } from '/imports/ui/components/VideoZoneComponent';
 
 export const HomePage = () => (
   <div>

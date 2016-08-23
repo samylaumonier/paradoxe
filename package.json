@@ -33,10 +33,20 @@
   },
   "homepage": "https://github.com/shaneBen23/video#readme",
   "dependencies": {
+    "bcrypt": "^0.8.7",
+    "email-validator": "^1.0.4",
     "peer": "^0.2.8",
     "peerjs_fork_firefox40": "^0.3.15",
     "react": "^15.3.1",
     "react-dom": "^15.3.1",
     "react-router": "^2.7.0"
+  },
+  "devDependencies": {
+    "autoprefixer": "^6.3.1"
+  },
+  "postcss": {
+    "plugins": {
+      "autoprefixer": {"browsers": ["last 2 versions"]}
+    }
   }
 }
