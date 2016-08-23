@@ -38,6 +38,7 @@
     "peer": "^0.2.8",
     "peerjs_fork_firefox40": "^0.3.15",
     "react": "^15.3.1",
+    "react-addons-pure-render-mixin": "^15.3.1",
     "react-dom": "^15.3.1",
     "react-router": "^2.7.0"
   },
@@ -46,7 +47,11 @@
   },
   "postcss": {
     "plugins": {
-      "autoprefixer": {"browsers": ["last 2 versions"]}
+      "autoprefixer": {
+        "browsers": [
+          "last 2 versions"
+        ]
+      }
     }
   }
 }
