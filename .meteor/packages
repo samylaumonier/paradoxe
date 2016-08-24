@@ -18,6 +18,7 @@ shell-server@0.2.1              # Server-side component of the `meteor shell` co
 
 accounts-base
 accounts-password
+check
 less
 react-meteor-data
 static-html
@@ -25,8 +26,9 @@ static-html
 chrismbeckett:toastr
 fortawesome:fontawesome
 juliancwirko:postcss
+matb33:collection-hooks
 meson:electron
+meteorhacks:picker
+ongoworks:security
 semantic:ui
 twbs:bootstrap
-ongoworks:security
-matb33:collection-hooks

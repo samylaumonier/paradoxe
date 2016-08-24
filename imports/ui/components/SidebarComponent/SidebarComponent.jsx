@@ -3,12 +3,33 @@ import { createContainer } from 'meteor/react-meteor-data';
 import React from 'react';
 
 import { SidebarContactItemComponent } from '../SidebarContactItemComponent/SidebarContactItemComponent';
+import { SidebarContactAddComponent } from '../SidebarContactAddComponent/SidebarContactAddComponent';
 
 import './SidebarComponentStyle.less';
 
 const sidebar = React.createClass({
   propTypes: {
     contacts: React.PropTypes.array
+  },
+  componentDidMount: function () {
+    $('#contact-add-modal').modal({
+      context: '#app',
+      closable: false,
+      onApprove: () => {
+        const dropdown = $('#contact-add-modal').find('select');
+        const usernames = dropdown.val() || [];
+
+        dropdown.dropdown('clear');
+
+        Meteor.call('inviteUsers', usernames, (err, res) => {
+          if (err) {
+            toastr.error(err.reason, 'Error');
+          } else {
+            toastr.success(`${res} invitation(s) sent`, 'Invitation(s) sent');
+          }
+        });
+      }
+    });
   },
   render: function () {
     return (
@@ -22,9 +43,8 @@ const sidebar = React.createClass({
         <div className="item">
           <div className="header">
             Contacts
-            <span className="right floated">
-          <i className="add link icon" />
-        </span>
+            <i className="add link icon" onClick={this.openContactAddModal} />
+            <SidebarContactAddComponent />
           </div>
           <div className="ui fluid inverted transparent icon input">
             <input placeholder="Search..." type="text" />
@@ -36,6 +56,9 @@ const sidebar = React.createClass({
         </div>
       </div>
     );
+  },
+  openContactAddModal: function () {
+    $('#contact-add-modal').modal('show');
   }
 });
 
