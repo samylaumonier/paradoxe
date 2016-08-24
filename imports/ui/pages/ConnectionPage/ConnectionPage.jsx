@@ -2,12 +2,13 @@ import React from 'react';
 
 import  './ConnectionPageStyle.css';
 
-import { LoginComponent } from '/imports/ui/components/LoginComponent';
-import { RegisterComponent } from '/imports/ui/components/RegisterComponent';
+import { LoginComponent } from '/imports/ui/components/LoginComponent/LoginComponent';
+import { RegisterComponent } from '/imports/ui/components/RegisterComponent/RegisterComponent';
 
 
 export const ConnectionPage = () => (
-  <div className="ui middle aligned center aligned grid child">
+  <div id="connection-page">
+  <div className="ui middle aligned center aligned grid child segment">
     <div className="column">
       <h1 className="ui teal image header">
         <div className="content">
@@ -25,6 +26,7 @@ export const ConnectionPage = () => (
         </div>
       </div>
     </div>
+  </div>
   </div>
 );
 

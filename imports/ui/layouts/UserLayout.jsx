@@ -1,9 +1,9 @@
 import React from 'react';
 
-import { SidebarComponent } from '../components/SidebarComponent';
+import { SidebarComponent } from '../components/SidebarComponent/SidebarComponent';
 
 export const UserLayout = ({ children }) => (
-  <div className="container">
+  <div>
     <SidebarComponent />
     <div className="pusher">
       {children}

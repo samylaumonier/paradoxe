@@ -1,0 +1,7 @@
+.update-div{
+    width: 70%;
+}
+#post-textarea{
+    width: 100%;
+    resize: none;
+}

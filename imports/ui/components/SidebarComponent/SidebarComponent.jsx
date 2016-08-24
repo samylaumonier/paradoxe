@@ -2,7 +2,7 @@ import { Meteor } from 'meteor/meteor';
 import { createContainer } from 'meteor/react-meteor-data';
 import React from 'react';
 
-import { SidebarContactItemComponent } from './SidebarContactItemComponent';
+import { SidebarContactItemComponent } from '../SidebarContactItemComponent/SidebarContactItemComponent';
 
 import './SidebarComponentStyle.less';
 
@@ -12,7 +12,7 @@ const sidebar = React.createClass({
   },
   render: function () {
     return (
-      <div className="ui vertical inverted visible sidebar menu">
+      <div className="ui vertical inverted left visible sidebar menu">
         <div className="item">
           <a className="ui logo icon image" href="/">
             <img src="http://semantic-ui.com/images/logo.png" />

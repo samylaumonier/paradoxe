@@ -3,7 +3,7 @@ import { Router, Route, IndexRoute, browserHistory } from 'react-router';
 
 import { MainLayout } from '/imports/ui/layouts/MainLayout';
 import { HomePage } from '/imports/ui/pages/HomePage';
-import { ConnectionPage } from '/imports/ui/pages/ConnectionPage';
+import { ConnectionPage } from '/imports/ui/pages/ConnectionPage/ConnectionPage';
 import { UserLayout } from '/imports/ui/layouts/UserLayout';
 
 function requireAuth(nextState, replace) {
