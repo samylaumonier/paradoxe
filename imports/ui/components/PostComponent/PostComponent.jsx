@@ -1,7 +1,9 @@
 import { Meteor } from 'meteor/meteor';
-import { createContainer } from 'meteor/react-meteor-data';
+import { composeWithTracker } from 'react-komposer';
 
 import React from 'react';
+import { If, Then, Else } from 'react-if';
+
 import Masonry from 'react-masonry-component';
 
 import { PostInputComponent } from '/imports/ui/components/PostInputComponent/PostInputComponent';
@@ -24,37 +26,50 @@ const postPage = React.createClass({
     return (
       <div>
         <PostInputComponent />
-        <Masonry className="posts" options={masonryOptions} updateOnEachImageLoad={true}>
-          {this.props.posts.map(post => <PostItemComponent key={post._id} post={post} />)}
-        </Masonry>
+        <div className="ui divider" />
+        <h1>Recent posts</h1>
+        <If condition={this.props.posts.length !== 0}>
+          <Then>
+            <Masonry className="posts" options={masonryOptions} updateOnEachImageLoad={true}>
+              {this.props.posts.map(post => <PostItemComponent key={post._id} post={post} />)}
+            </Masonry>
+          </Then>
+          <Else>
+            <p>No posts yet!</p>
+          </Else>
+        </If>
       </div>
     );
   }
 });
 
-export const PostComponent = createContainer(() => {
-  Meteor.subscribe('posts');
-  
-  const user = Meteor.user();
-  let posts = [];
-  
-  if (user) {
-    const ids = user.profile ? user.profile.contacts : [];
-    
-    ids.push(user._id);
-    
-    posts = Posts.find({
-      userId: {
-        $in: ids
-      }
-    },{
-      sort: {
-        createdAt: -1
-      }
-    }).fetch();
+function composer(props, onData) {
+  const subscription = Meteor.subscribe('home.posts');
+
+  if (subscription.ready()) {
+    const user = Meteor.user();
+    let posts = [];
+
+    if (user) {
+      const ids = user.profile ? user.profile.contacts : [];
+
+      ids.push(user._id);
+
+      posts = Posts.find({
+        userId: {
+          $in: ids
+        }
+      },{
+        sort: {
+          createdAt: -1
+        }
+      }).fetch();
+    }
+
+    onData(null, {
+      posts
+    });
   }
-  
-  return {
-    posts
-  };
-}, postPage);
+}
+
+export const PostComponent = composeWithTracker(composer)(postPage);

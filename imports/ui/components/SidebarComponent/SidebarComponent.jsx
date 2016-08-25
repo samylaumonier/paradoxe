@@ -1,6 +1,8 @@
 import { Meteor } from 'meteor/meteor';
-import { createContainer } from 'meteor/react-meteor-data';
+import { composeWithTracker } from 'react-komposer';
+
 import React from 'react';
+import { Link } from 'react-router';
 
 import { SidebarContactItemComponent } from '../SidebarContactItemComponent/SidebarContactItemComponent';
 import { SidebarContactAddComponent } from '../SidebarContactAddComponent/SidebarContactAddComponent';
@@ -35,10 +37,10 @@ const sidebar = React.createClass({
     return (
       <div className="ui vertical inverted left visible sidebar menu">
         <div className="item">
-          <a className="ui logo icon image" href="/">
+          <Link className="ui logo icon image" to="/">
             <img src="http://semantic-ui.com/images/logo.png" />
-          </a>
-          <a href="/"><b>Epsilon</b></a>
+          </Link>
+          <Link to="/"><b>Epsilon</b></Link>
         </div>
         <div className="item">
           <div className="header">
@@ -62,25 +64,30 @@ const sidebar = React.createClass({
   }
 });
 
-export const SidebarComponent = createContainer(() => {
-  Meteor.subscribe('sidebar.contacts');
 
-  const user = Meteor.user();
-  let contacts = [];
+function composer(props, onData) {
+  const subscription = Meteor.subscribe('sidebar.contacts');
 
-  if (user) {
-    const ids = user.profile ? user.profile.contacts : null;
+  if (subscription.ready()) {
+    const user = Meteor.user();
+    let contacts = [];
 
-    if (ids) {
-      contacts = Meteor.users.find({
-        _id: {
-          $in: ids
-        }
-      }).fetch();
+    if (user) {
+      const ids = user.profile ? user.profile.contacts : null;
+
+      if (ids) {
+        contacts = Meteor.users.find({
+          _id: {
+            $in: ids
+          }
+        }).fetch();
+      }
     }
-  }
 
-  return {
-    contacts
-  };
-}, sidebar);
+    onData(null, {
+      contacts
+    });
+  }
+}
+
+export const SidebarComponent = composeWithTracker(composer)(sidebar);

@@ -1,6 +1,8 @@
 import { Meteor } from 'meteor/meteor';
 import React from 'react';
 
+import './PostItemComponentStyle.less';
+
 export const PostItemComponent = React.createClass({
   render: function () {
     return (
@@ -16,7 +18,7 @@ export const PostItemComponent = React.createClass({
           </span>
           <div className="header">
             <img className="ui avatar image" src="http://semantic-ui.com/images/avatar/small/helen.jpg"/>
-            {this.username()}
+            <span className="username">{this.username()}</span>
           </div>
           <div className="description">
             {this.props.post.content}

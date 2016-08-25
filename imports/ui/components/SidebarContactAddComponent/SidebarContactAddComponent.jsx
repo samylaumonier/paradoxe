@@ -1,5 +1,5 @@
 import { Meteor } from 'meteor/meteor';
-import { createContainer } from 'meteor/react-meteor-data';
+import { composeWithTracker } from 'react-komposer';
 import React from 'react';
 
 const sidebarContactAdd = React.createClass({
@@ -58,8 +58,10 @@ const sidebarContactAdd = React.createClass({
   }
 });
 
-export const SidebarContactAddComponent = createContainer(() => {
-  return {
+function composer(props, onData) {
+  onData(null, {
     userId: Meteor.userId()
-  };
-}, sidebarContactAdd);
+  });
+}
+
+export const SidebarContactAddComponent = composeWithTracker(composer)(sidebarContactAdd);

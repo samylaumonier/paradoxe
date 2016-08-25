@@ -1,7 +1,7 @@
 import { Meteor } from 'meteor/meteor';
 import { Posts } from '/imports/api/collections'
 
-Meteor.publish('posts', function () {
+Meteor.publish('home.posts', function () {
   if (!this.userId) {
     return [];
   }
@@ -27,11 +27,10 @@ Meteor.publish('posts', function () {
         $in: ids
       }
     }, {
-      field: {
+      fields: {
         username: 1
       }
     })
-  ]
-  
+  ];
 });
 

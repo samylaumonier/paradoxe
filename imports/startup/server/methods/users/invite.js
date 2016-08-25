@@ -37,7 +37,8 @@ Meteor.methods({
     targetIds.forEach(targetId => {
       Invitations.upsert({
         userId: this.userId,
-        targetId
+        targetId,
+        username: user.username
       }, {
         $set: {
           sentAt: new Date()
