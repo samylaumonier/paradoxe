@@ -15,7 +15,7 @@ export const UserLayout = React.createClass({
     return (
       <div>
         <SidebarComponent />
-        <div className="pusher">
+        <div className="userLayout">
           {this.props.children}
         </div>
       </div>
