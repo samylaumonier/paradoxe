@@ -13,7 +13,7 @@ const sidebar = React.createClass({
   },
   componentDidMount: function () {
     $('#contact-add-modal').modal({
-      context: '#app',
+      context: '#modals',
       closable: false,
       onApprove: () => {
         const dropdown = $('#contact-add-modal').find('select');

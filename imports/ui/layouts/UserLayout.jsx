@@ -1,6 +1,7 @@
 import React from 'react';
 
 import { SidebarComponent } from '../components/SidebarComponent/SidebarComponent';
+import { NavbarComponent } from '../components/NavbarComponent/NavbarComponent';
 
 export const UserLayout = React.createClass({
   propTypes: {
@@ -16,8 +17,10 @@ export const UserLayout = React.createClass({
       <div>
         <SidebarComponent />
         <div className="userLayout">
+          <NavbarComponent />
           {this.props.children}
         </div>
+        <div id="modals"></div>
       </div>
     );
   }

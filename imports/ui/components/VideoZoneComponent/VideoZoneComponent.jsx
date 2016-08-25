@@ -1,14 +1,14 @@
 import React from 'react';
 
-import './VideoZoneComponentStyle.css';
+import './VideoZoneComponentStyle.less';
 
 import { VideoPeer } from '/imports/api/VideoPeer';
 
-import { PartnerVideoComponent } from './PartnerVideoComponent/PartnerVideoComponent';
-import { MyVideoComponent } from './MyVideoComponent/MyVideoComponent';
-import { CallZoneComponent } from './CallZoneComponent/CallZoneComponent';
-import { HangUpComponent } from './HangUpComponent/HangUpComponent';
-import { ChatComponent } from './ChatComponent/ChatComponent';
+import { PartnerVideoComponent } from '../PartnerVideoComponent/PartnerVideoComponent';
+import { MyVideoComponent } from '../MyVideoComponent/MyVideoComponent';
+import { CallZoneComponent } from '../CallZoneComponent/CallZoneComponent';
+import { HangUpComponent } from '../HangUpComponent/HangUpComponent';
+import { ChatComponent } from '../ChatComponent/ChatComponent';
 
 export const VideoZoneComponent = React.createClass({
   getInitialState: function () {

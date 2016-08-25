@@ -1,12 +1,20 @@
 import { Meteor } from 'meteor/meteor';
-import React from 'react';
 import { createContainer } from 'meteor/react-meteor-data';
+
+import React from 'react';
+import Masonry from 'react-masonry-component';
 
 import { PostInputComponent } from '/imports/ui/components/PostInputComponent/PostInputComponent';
 import { PostItemComponent } from '/imports/ui/components/PostItemComponent/PostItemComponent';
-import './PostComponentStyle.css'
+
+import './PostComponentStyle.less'
 
 import { Posts } from '/imports/api/collections';
+
+const masonryOptions = {
+  transitionDuration: 0,
+  gutter: 20
+};
 
 const postPage = React.createClass({
   propTypes: {
@@ -16,12 +24,9 @@ const postPage = React.createClass({
     return (
       <div>
         <PostInputComponent />
-        <br/>
-        <div className="postPage">
-          <div className="ui stackable four column grid">
-            {this.props.posts.map(post => <PostItemComponent key={post._id} post={post} />)}
-          </div>
-        </div>
+        <Masonry className="posts" options={masonryOptions} updateOnEachImageLoad={true}>
+          {this.props.posts.map(post => <PostItemComponent key={post._id} post={post} />)}
+        </Masonry>
       </div>
     );
   }
