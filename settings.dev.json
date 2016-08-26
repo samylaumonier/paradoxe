@@ -14,6 +14,7 @@
       "win32": "https://myapp.com/download/win/",
       "darwin": "https://myapp.com/download/osx/{{version}}/MyApp.zip"
     },
+
     "sign": "",
     "height": 700,
     "width": 1024,

@@ -45,7 +45,7 @@ const sidebar = React.createClass({
         <div className="item">
           <div className="header">
             Contacts
-            <i className="add link icon" onClick={this.openContactAddModal} />
+            <i id="add-contact-button" className="link add icon" onClick={this.openContactAddModal} />
             <SidebarContactAddComponent />
           </div>
           <div className="ui fluid inverted transparent icon input">

@@ -36,11 +36,7 @@ export const InviteItemComponent = React.createClass({
     const user = Meteor.user();
     console.log(user);
 
-    Meteor.users.update(user._id, {
-      $push: {
-        'profile.contacts': this.props.invite.userId
-      }
-    }, err => {
+    Meteor.call('acceptContact', this.props.invite._id, err => {
       if (err) {
         toastr.error(err.reason, 'Error');
       } else {

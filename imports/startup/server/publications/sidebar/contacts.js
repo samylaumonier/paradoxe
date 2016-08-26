@@ -22,7 +22,8 @@ Meteor.publish('sidebar.contacts', function () {
     }
   }, {
     fields: {
-      username: 1
+      username: 1,
+      'status.online': 1
     }
   });
 });

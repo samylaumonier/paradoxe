@@ -48,7 +48,8 @@
     "react-router": "^2.7.0"
   },
   "devDependencies": {
-    "autoprefixer": "^6.3.1"
+    "autoprefixer": "^6.3.1",
+    "electron-installer-debian": "^0.3.1"
   },
   "postcss": {
     "plugins": {
