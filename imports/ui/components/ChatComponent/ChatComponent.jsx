@@ -1,7 +1,9 @@
 import React from 'react';
 
+import './ChatComponentStyle.less';
+
 export const ChatComponent = () => (
-  <div>
-    chat
+  <div id="chat">
+    <p>chat</p>
   </div>
 );

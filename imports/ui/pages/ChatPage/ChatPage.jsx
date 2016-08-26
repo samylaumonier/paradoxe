@@ -4,6 +4,9 @@ import { composeWithTracker } from 'react-komposer';
 import React from 'react';
 import { If, Then, Else } from 'react-if';
 
+import { ChatComponent } from '/imports/ui/components/ChatComponent/ChatComponent';
+import { ChatSidebarComponent } from '/imports/ui/components/ChatSidebarComponent/ChatSidebarComponent';
+
 import { Messages, userHasContact } from '/imports/api/collections';
 
 const chatPage = React.createClass({
@@ -15,10 +18,13 @@ const chatPage = React.createClass({
   },
   render: function () {
     return (
-      <div className="ui bottom attached segment">
+      <div>
         <If condition={this.props.hasContact}>
           <Then>
-            <p>wsh</p>
+            <div>
+              <ChatComponent />
+              <ChatSidebarComponent />
+            </div>
           </Then>
           <Else>
             <p>404</p>
