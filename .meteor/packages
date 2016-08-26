@@ -34,3 +34,4 @@ peerlibrary:reactive-publish
 semantic:ui
 tmeasday:publish-counts
 twbs:bootstrap
+momentjs:moment

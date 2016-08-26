@@ -24,14 +24,11 @@ export const PostInputComponent = React.createClass({
   },
   newUpdate: function (e) {
     e.preventDefault();
-
     const textarea = $(this.refs.content);
     const content = textarea.val();
-
     Posts.insert({
       content
     });
-
     textarea.val('');
   }
 });

@@ -32,7 +32,7 @@ export const LoginComponent = React.createClass({
   },
   login: function (e) {
     e.preventDefault();
-
+    
     const username = $('#login-username').val();
     const password = $('#login-password').val();
   

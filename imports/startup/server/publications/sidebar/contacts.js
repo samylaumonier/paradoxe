@@ -7,15 +7,13 @@ Meteor.publish('sidebar.contacts', function () {
     }
 
     const user = Meteor.users.findOne(this.userId);
-    let ids = null;
+    let ids = [];
 
     if (user.profile && user.profile.contacts) {
       ids = user.profile.contacts;
     }
 
-    if (!ids) {
-      return [];
-    }
+    ids.push(this.userId);
 
     return Meteor.users.find({
       _id: {

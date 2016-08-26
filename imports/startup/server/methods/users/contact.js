@@ -14,6 +14,15 @@ Meteor.methods({
       throw new Meteor.Error('404', 'Invitation not found.');
     }
 
+    const invertedInvite = Invitations.findOne({
+      userId: user._id,
+      targetId: invitation.userId
+    });
+    
+    if(invertedInvite){
+      Invitations.remove(invertedInvite._id);
+    }
+    
     Meteor.users.update(invitation.targetId, {
       $push: {
         'profile.contacts': invitation.userId
