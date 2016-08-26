@@ -1,15 +1,26 @@
-import React from 'react';
+import { Meteor } from 'meteor/meteor';
+import { composeWithTracker } from 'react-komposer';
 
+import React from 'react';
+import { If, Then } from 'react-if';
 import { Link } from 'react-router';
 
-export const NavbarComponent = React.createClass({
+import './NavbarComponentStyle.less';
+
+const navbar = React.createClass({
   render: function () {
     return (
       <div className="ui top attached menu">
         <Link className="ui icon item" to="/invites">
           <i className="add user icon" />
           &nbsp; Invites
-          <span className="ui mini green circular label">12</span>
+          <If condition={this.props.hasInvites}>
+            <Then>
+              <span className="ui mini green circular label navbar-label">
+                {this.props.invites}
+              </span>
+            </Then>
+          </If>
         </Link>
         <div className="right menu">
           <div className="ui right aligned category search item">
@@ -24,3 +35,20 @@ export const NavbarComponent = React.createClass({
     );
   }
 });
+
+function composer(props, onData) {
+  const subscription = Meteor.subscribe('navbar.invites');
+
+  if (subscription.ready()) {
+    if (Counts.has('navbar.invites')) {
+      const invites = Counts.get('navbar.invites');
+
+      onData(null, {
+        hasInvites: invites > 0,
+        invites
+      });
+    }
+  }
+}
+
+export const NavbarComponent = composeWithTracker(composer)(navbar);

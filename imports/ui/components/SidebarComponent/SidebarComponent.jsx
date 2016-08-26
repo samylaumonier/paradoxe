@@ -64,7 +64,6 @@ const sidebar = React.createClass({
   }
 });
 
-
 function composer(props, onData) {
   const subscription = Meteor.subscribe('sidebar.contacts');
 

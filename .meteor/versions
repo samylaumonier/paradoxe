@@ -87,6 +87,7 @@ srp@1.0.9
 standard-minifier-js@1.2.0
 static-html@1.1.12
 templating-tools@1.0.4
+tmeasday:publish-counts@0.7.3
 tracker@1.1.0
 twbs:bootstrap@3.3.6
 ui@1.0.11
