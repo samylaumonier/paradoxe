@@ -64,6 +64,11 @@ npm-mongo@1.5.48
 observe-sequence@1.0.12
 ongoworks:security@2.0.1
 ordered-dict@1.0.8
+peerlibrary:assert@0.2.5
+peerlibrary:fiber-utils@0.6.0
+peerlibrary:reactive-mongo@0.1.1
+peerlibrary:reactive-publish@0.3.0
+peerlibrary:server-autorun@0.5.2
 promise@0.8.4
 random@1.0.10
 rate-limit@1.0.5

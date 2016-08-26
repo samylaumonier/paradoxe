@@ -14,13 +14,13 @@ export const InviteItemComponent = React.createClass({
         <div className="content">
           <img className="right floated mini ui image" src="http://semantic-ui.com/images/avatar/large/elliot.jpg" />
           <div className="header">
-            {this.props.invite.username}
+            {this.username()}
           </div>
           <div className="meta">
             15 days ago
           </div>
           <div className="description">
-            {this.props.invite.username} would like to add you to their contacts.
+            {this.username()} would like to add you to their contacts.
           </div>
         </div>
         <div className="extra content">
@@ -32,10 +32,11 @@ export const InviteItemComponent = React.createClass({
       </div>
     );
   },
+  username: function () {
+    const user = Meteor.users.findOne(this.props.invite.userId);
+    return user ? user.username : '';
+  },
   onAccept: function () {
-    const user = Meteor.user();
-    console.log(user);
-
     Meteor.call('acceptContact', this.props.invite._id, err => {
       if (err) {
         toastr.error(err.reason, 'Error');

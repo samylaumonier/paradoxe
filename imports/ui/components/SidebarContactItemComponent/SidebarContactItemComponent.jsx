@@ -6,7 +6,7 @@ export const SidebarContactItemComponent = React.createClass({
       <div className="item">
         <span className={"user-status mini ui empty circular label " + this.userStatus(this.props.contact.status)}/>
         <img className="ui avatar image" src="http://semantic-ui.com/images/avatar/small/helen.jpg"/>
-        
+
         <div className="content">
           <div className="header">{this.props.contact.username}</div>
         </div>
@@ -14,7 +14,9 @@ export const SidebarContactItemComponent = React.createClass({
     );
   },
   userStatus: function (status) {
-    if (status.idle) {
+    if (!status) {
+      return 'gray';
+    } else if (status.idle) {
       return 'orange';
     } else if (status.online) {
       return 'green';
