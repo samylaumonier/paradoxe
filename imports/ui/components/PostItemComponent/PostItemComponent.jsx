@@ -27,7 +27,7 @@ export const PostItemComponent = React.createClass({
           </span>
           <span className="right floated">
             <i className="clock icon"/>
-            {moment(this.props.post.createdAt).format('L LTS')}
+            {moment(this.props.post.createdAt).fromNow()}
           </span>
         </div>
       </div>

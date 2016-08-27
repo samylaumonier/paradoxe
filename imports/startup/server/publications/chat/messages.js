@@ -21,8 +21,8 @@ Meteor.publish('chat.messages', function (contactUsername) {
         }),
         Messages.find({
           $or: [
-            { fromUserId: user._id, toUserId: contact._id },
-            { fromUserId: contact._id, toUserId: user._id },
+            { userId: user._id, toUserId: contact._id },
+            { userId: contact._id, toUserId: user._id },
           ]
         }, {
           sort: {

@@ -1,20 +1,17 @@
 import { Meteor } from 'meteor/meteor';
 import { composeWithTracker } from 'react-komposer';
-
 import React from 'react';
 import { If, Then, Else } from 'react-if';
-
 import { ChatComponent } from '/imports/ui/components/ChatComponent/ChatComponent';
 import { ChatSidebarComponent } from '/imports/ui/components/ChatSidebarComponent/ChatSidebarComponent';
-
 import { Messages, userHasContact } from '/imports/api/collections';
 
 const chatPage = React.createClass({
   propTypes: {
-    currentUser: React.PropTypes.object,
-    hasContact: React.PropTypes.bool,
+    user: React.PropTypes.object.isRequired,
+    hasContact: React.PropTypes.bool.isRequired,
     contact: React.PropTypes.object,
-    messages: React.PropTypes.array
+    messages: React.PropTypes.array.isRequired
   },
   render: function () {
     return (
@@ -22,8 +19,8 @@ const chatPage = React.createClass({
         <If condition={this.props.hasContact}>
           <Then>
             <div>
-              <ChatComponent />
-              <ChatSidebarComponent />
+              <ChatComponent messages={this.props.messages} contact={this.props.contact}/>
+              <ChatSidebarComponent user={this.props.user} contact={this.props.contact}/>
             </div>
           </Then>
           <Else>
@@ -52,8 +49,8 @@ function composer(props, onData) {
 
       messages = Messages.find({
         $or: [
-          { fromUserId: user._id, toUserId: contact._id },
-          { fromUserId: contact._id, toUserId: user._id },
+          { userId: user._id, toUserId: contact._id },
+          { userId: contact._id, toUserId: user._id },
         ]
       }, {
         sort: {
@@ -63,7 +60,7 @@ function composer(props, onData) {
     }
 
     onData(null, {
-      currentUser: user,
+      user,
       hasContact,
       contact,
       messages
