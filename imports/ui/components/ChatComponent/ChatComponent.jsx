@@ -82,7 +82,7 @@ const chat = React.createClass({
                     <button className="ui white submit button left-button">
                       <i className="large smile button icon"/>
                     </button>
-                    <textarea ref="content" rows="1"/>
+                    <textarea ref="content" rows="1" required/>
                     <button type="submit" className="ui white submit button">
                       <i className="large send button icon"/>
                     </button>
