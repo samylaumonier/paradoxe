@@ -1,3 +1,4 @@
+import './invitations/accept';
 import './users/invite';
-import './users/contact';
+import './users/remove';
 import './posts/likes';

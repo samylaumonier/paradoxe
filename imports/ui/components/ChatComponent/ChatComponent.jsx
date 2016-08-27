@@ -1,6 +1,7 @@
 import React from 'react';
 import { If, Then, Else } from 'react-if';
 import { composeWithTracker } from 'react-komposer';
+import { browserHistory } from 'react-router';
 import autosize from '/node_modules/autosize/dist/autosize.min';
 
 import { Messages } from '/imports/api/collections';
@@ -21,6 +22,13 @@ const chat = React.createClass({
     });
 
     this.scrollToBottom();
+
+    // Tooltips
+    $(this.refs.navbar).find('[data-content]').popup({
+      context: '#popups',
+      inverted: true,
+      position: 'bottom center'
+    })
   },
   componentDidUpdate: function () {
     this.scrollToBottom();
@@ -29,34 +37,34 @@ const chat = React.createClass({
     return (
       <div id="chat">
         {/*TODO: move to ChatNavbarComponent*/}
-        <div className="ui top attached menu">
-          <span className="ui icon item">
+        <div className="ui top attached menu" ref="navbar">
+          <a className="ui icon item" href="#">
             <i className="file icon"/>
-          </span>
-          <span className="ui icon item">
+          </a>
+          <a className="ui icon item" href="#">
             <i className="game icon"/>
-          </span>
-          <span className="ui icon item">
+          </a>
+          <a className="ui icon item" href="#">
             <i className="phone icon"/>
-          </span>
-          <span className="ui icon item">
+          </a>
+          <a className="ui icon item" href="#">
             <i className="record icon"/>
-          </span>
-          <span className="ui icon item">
+          </a>
+          <a className="ui icon item" href="#">
             <i className="gift icon"/>
-          </span>
-          <span className="ui icon item">
-          <i className="icons">
-            <i className="user icon"/>
-            <i className="red corner dont icon"/>
-          </i>
-          </span>
-          <span className="ui icon item">
-          <i className="icons">
-            <i className="user icon"/>
-            <i className="red corner remove icon"/>
-          </i>
-          </span>
+          </a>
+          <a className="ui icon item" href="#" data-content="Block">
+            <i className="icons">
+              <i className="user icon"/>
+              <i className="red corner dont icon"/>
+            </i>
+          </a>
+          <a className="ui icon item" href="#" data-content="Remove" onClick={this.removeContact}>
+            <i className="icons">
+              <i className="user icon"/>
+              <i className="red corner remove icon"/>
+            </i>
+          </a>
         </div>
         
         <div id="message-zone" ref="messages">
@@ -122,6 +130,16 @@ const chat = React.createClass({
     autosize.update(this.refs.content);
 
     return false;
+  },
+  removeContact: function () {
+    Meteor.call('removeContact', this.props.contact._id, err => {
+      if (err) {
+        toastr.error(err.reason, 'Error');
+      } else {
+        browserHistory.push('/');
+        toastr.success('Contact removed!');
+      }
+    });
   }
 });
 

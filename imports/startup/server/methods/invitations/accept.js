@@ -2,7 +2,7 @@ import { Meteor } from 'meteor/meteor';
 import { Invitations } from '/imports/api/collections';
 
 Meteor.methods({
-  acceptContact: function (invitationsId) {
+  acceptInvitation: function (invitationsId) {
     const user = Meteor.user();
     const invitation = Invitations.findOne(invitationsId);
 
