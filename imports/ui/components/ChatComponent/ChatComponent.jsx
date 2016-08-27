@@ -4,13 +4,14 @@ import { composeWithTracker } from 'react-komposer';
 import { browserHistory } from 'react-router';
 import autosize from '/node_modules/autosize/dist/autosize.min';
 
-import { Messages } from '/imports/api/collections';
+import { Messages, userHasBlockedContact  } from '/imports/api/collections';
 import { ChatMessageComponent } from '../ChatMessageComponent/ChatMessageComponent';
 
 import './ChatComponentStyle.less';
 
 const chat = React.createClass({
   propTypes: {
+    userHasBlockedContact: React.PropTypes.bool.isRequired,
     contact: React.PropTypes.object.isRequired,
     messages: React.PropTypes.array.isRequired
   },
@@ -21,16 +22,11 @@ const chat = React.createClass({
       $(this.refs.messages).css('bottom', `${this.refs.content.offsetHeight + 11}px`);
     });
 
+    this.initTooltips();
     this.scrollToBottom();
-
-    // Tooltips
-    $(this.refs.navbar).find('[data-content]').popup({
-      context: '#popups',
-      inverted: true,
-      position: 'bottom center'
-    })
   },
   componentDidUpdate: function () {
+    this.initTooltips();
     this.scrollToBottom();
   },
   render: function () {
@@ -53,12 +49,24 @@ const chat = React.createClass({
           <a className="ui icon item" href="#">
             <i className="gift icon"/>
           </a>
-          <a className="ui icon item" href="#" data-content="Block">
-            <i className="icons">
-              <i className="user icon"/>
-              <i className="red corner dont icon"/>
-            </i>
-          </a>
+          <If condition={this.props.userHasBlockedContact === true}>
+            <Then>
+              <a className="ui icon item" href="#" data-content="Unblock" onClick={this.unblockContact}>
+                <i className="icons">
+                  <i className="user icon"/>
+                  <i className="green corner dont icon"/>
+                </i>
+              </a>
+            </Then>
+            <Else>
+              <a className="ui icon item" href="#" data-content="Block" onClick={this.blockContact}>
+                <i className="icons">
+                  <i className="user icon"/>
+                  <i className="red corner dont icon"/>
+                </i>
+              </a>
+            </Else>
+          </If>
           <a className="ui icon item" href="#" data-content="Remove" onClick={this.removeContact}>
             <i className="icons">
               <i className="user icon"/>
@@ -103,6 +111,13 @@ const chat = React.createClass({
       </div>
     );
   },
+  initTooltips: function () {
+    $(this.refs.navbar).find('[data-content]').popup({
+      context: '#popups',
+      inverted: true,
+      position: 'bottom center'
+    });
+  },
   scrollToBottom: function () {
     const messages = $(this.refs.messages);
 
@@ -140,13 +155,37 @@ const chat = React.createClass({
         toastr.success('Contact removed!');
       }
     });
-  }
+  },
+  blockContact: function () {
+    Meteor.call('blockContact', this.props.contact._id, err => {
+      if (err) {
+        toastr.error(err.reason, 'Error');
+      } else {
+        toastr.success('Contact blocked!');
+      }
+    });
+  },
+  unblockContact: function () {
+    Meteor.call('unblockContact', this.props.contact._id, err => {
+      if (err) {
+        toastr.error(err.reason, 'Error');
+      } else {
+        toastr.success('Contact unblocked!');
+      }
+    });
+  },
 });
 
 function composer(props, onData) {
-  onData(null, {
-    props
-  });
+  const user = Meteor.user();
+
+  if (user) {
+    onData(null, {
+      userHasBlockedContact: userHasBlockedContact(user, props.contact._id),
+      contact: props.contact,
+      messages: props.messages
+    });
+  }
 }
 
 export const ChatComponent = composeWithTracker(composer)(chat);

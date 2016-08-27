@@ -198,6 +198,7 @@ Accounts.onCreateUser((options, user) => {
 
   user.profile = {
     contacts: [],
+    blockedContacts: [],
     emailHash: md5(user.emails[0].address)
   };
   
