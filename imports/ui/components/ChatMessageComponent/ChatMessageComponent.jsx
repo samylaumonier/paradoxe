@@ -1,5 +1,6 @@
 import { Meteor } from 'meteor/meteor';
 import React from 'react';
+import nl2br from 'react-nl2br';
 import { composeWithTracker } from 'react-komposer';
 
 import { AvatarComponent } from '../AvatarComponent/AvatarComponent';
@@ -26,7 +27,7 @@ const message = React.createClass({
             </div>
           </div>
           <div className="text">
-            {this.props.message.content}
+            {nl2br(this.props.message.content)}
           </div>
         </div>
       </div>
