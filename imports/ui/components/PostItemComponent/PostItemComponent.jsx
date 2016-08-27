@@ -1,9 +1,17 @@
 import { Meteor } from 'meteor/meteor';
 import React from 'react';
+import { composeWithTracker } from 'react-komposer';
+
+import { AvatarComponent } from '../AvatarComponent/AvatarComponent';
 
 import './PostItemComponentStyle.less';
 
-export const PostItemComponent = React.createClass({
+const item = React.createClass({
+  propTypes: {
+    post: React.PropTypes.object.isRequired,
+    user: React.PropTypes.object.isRequired,
+    currentUserId: React.PropTypes.string.isRequired,
+  },
   render: function () {
     return (
       <div className="ui card">
@@ -13,16 +21,16 @@ export const PostItemComponent = React.createClass({
             {this.props.post.likes}
           </span>
           <div className="header">
-            <img className="ui avatar image" src="http://semantic-ui.com/images/avatar/small/helen.jpg"/>
-            <span className="username">{this.username()}</span>
+            <AvatarComponent user={this.props.user} className={"ui avatar image"} size={36}/>
+            <span className="username">{this.props.user.username}</span>
           </div>
           <div className="description">
             {this.props.post.content}
           </div>
         </div>
         <div className="extra content">
-          <span className="left floated like">
-            <i className="like icon" onClick={this.like}/>
+          <span className="left floated like" onClick={this.like}>
+            <i className={"like icon" + this.liked()}/>
             Like
           </span>
           <span className="right floated">
@@ -33,17 +41,28 @@ export const PostItemComponent = React.createClass({
       </div>
     );
   },
-  username: function () {
-    const user = Meteor.users.findOne(this.props.post.userId);
-    if (user) {
-      return user.username;
-    }
-  },
   like: function () {
     Meteor.call('likePost', this.props.post._id, err => {
-      if(err){
+      if (err) {
         toastr.error(err.reason, 'Error');
       }
     });
+  },
+  liked: function () {
+    return this.props.post.likers.includes(this.props.currentUserId) ? ' post-liked' : '';
   }
 });
+
+function composer(props, onData) {
+  const userId = Meteor.userId();
+
+  if (userId) {
+    onData(null, {
+      post: props.post,
+      user: Meteor.users.findOne(props.post.userId),
+      currentUserId: userId,
+    });
+  }
+}
+
+export const PostItemComponent = composeWithTracker(composer)(item);

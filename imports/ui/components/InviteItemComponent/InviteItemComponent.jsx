@@ -1,26 +1,30 @@
+import { Meteor } from 'meteor/meteor';
 import React from 'react';
+import { composeWithTracker } from 'react-komposer';
 
 import { Invitations } from '/imports/api/collections';
+import { AvatarComponent } from '../AvatarComponent/AvatarComponent';
 
 import './InviteItemComponentStyle.less';
 
-export const InviteItemComponent = React.createClass({
+const item = React.createClass({
   propTypes: {
-    invite: React.PropTypes.object
+    invite: React.PropTypes.object.isRequired,
+    user: React.PropTypes.object.isRequired,
   },
   render: function () {
     return (
       <div className="ui card">
         <div className="content">
-          <img className="right floated mini ui image" src="http://semantic-ui.com/images/avatar/large/elliot.jpg" />
+          <AvatarComponent user={this.props.user} className={"right floated mini ui image"} size={35}/>
           <div className="header">
-            {this.username()}
+            {this.props.user.username}
           </div>
           <div className="meta">
             15 days ago
           </div>
           <div className="description">
-            {this.username()} would like to add you to their contacts.
+            {this.props.user.username} would like to add you to their contacts.
           </div>
         </div>
         <div className="extra content">
@@ -31,10 +35,6 @@ export const InviteItemComponent = React.createClass({
         </div>
       </div>
     );
-  },
-  username: function () {
-    const user = Meteor.users.findOne(this.props.invite.userId);
-    return user ? user.username : '';
   },
   onAccept: function () {
     Meteor.call('acceptContact', this.props.invite._id, err => {
@@ -51,3 +51,12 @@ export const InviteItemComponent = React.createClass({
     toastr.success('Invitation declined');
   }
 });
+
+function composer(props, onData) {
+  onData(null, {
+    invite: props.invite,
+    user: Meteor.users.findOne(props.invite.userId)
+  });
+}
+
+export const InviteItemComponent = composeWithTracker(composer)(item);

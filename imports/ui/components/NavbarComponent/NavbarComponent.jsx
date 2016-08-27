@@ -14,10 +14,10 @@ const navbar = React.createClass({
   render: function () {
     return (
       <div className="ui top attached menu">
-        <span className="ui icon item" onClick={this.openContactAddModal}>
+        <a className="ui icon item" onClick={this.openContactAddModal}>
           <i className="add user icon"/>
           &nbsp; Add contacts
-        </span>
+        </a>
         <Link className="ui icon item" to="/invites">
           <i className="users icon"/>
           &nbsp; Invites
@@ -52,7 +52,8 @@ const navbar = React.createClass({
       </div>
     );
   },
-  openContactAddModal: function () {
+  openContactAddModal: function (event) {
+    event.preventDefault();
     $('#contact-add-modal').modal('show');
   },
   logout: function () {

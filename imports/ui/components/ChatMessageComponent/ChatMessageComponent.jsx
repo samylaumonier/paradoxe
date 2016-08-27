@@ -2,6 +2,8 @@ import { Meteor } from 'meteor/meteor';
 import React from 'react';
 import { composeWithTracker } from 'react-komposer';
 
+import { AvatarComponent } from '../AvatarComponent/AvatarComponent';
+
 const message = React.createClass({
   propTypes: {
     message: React.PropTypes.object.isRequired,
@@ -11,7 +13,7 @@ const message = React.createClass({
     return (
       <div className="comment">
         <a className="avatar">
-          <img src="http://semantic-ui.com/images/avatar2/large/matthew.png"/>
+          <AvatarComponent user={this.props.author} size={35}/>
         </a>
         <div className="content">
           <a className="author">{this.props.author.username}</a>

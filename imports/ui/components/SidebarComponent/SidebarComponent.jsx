@@ -4,6 +4,7 @@ import { composeWithTracker } from 'react-komposer';
 import React from 'react';
 import { Link } from 'react-router';
 
+import { AvatarComponent } from '../AvatarComponent/AvatarComponent';
 import { SidebarContactItemComponent } from '../SidebarContactItemComponent/SidebarContactItemComponent';
 
 import './SidebarComponentStyle.less';
@@ -45,7 +46,7 @@ const sidebar = React.createClass({
           <div className="ui middle aligned selection inverted relaxed divided list">
             <div className="item">
               <span className={"user-status-header mini ui empty circular label " + this.userStatus(this.props.user.status)}/>
-              <img className="ui avatar image" src="http://semantic-ui.com/images/avatar/small/helen.jpg"/>
+              <AvatarComponent user={this.props.user} className={"ui avatar image"} size={28}/>
               <div className="content">
                 <div className="header">{this.props.user.username}</div>
               </div>

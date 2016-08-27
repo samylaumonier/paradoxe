@@ -16,7 +16,8 @@ Meteor.publish('chat.messages', function (contactUsername) {
       return [
         Meteor.users.find(contact._id, {
           fields: {
-            username: 1
+            username: 1,
+            'profile.emailHash': 1
           }
         }),
         Messages.find({

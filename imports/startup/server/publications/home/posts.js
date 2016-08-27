@@ -28,7 +28,8 @@ Meteor.publish('home.posts', function () {
         }
       }, {
         fields: {
-          username: 1
+          username: 1,
+          'profile.emailHash': 1
         }
       })
     ];

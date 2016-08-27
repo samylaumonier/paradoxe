@@ -14,8 +14,8 @@ const sidebar = React.createClass({
   render: function () {
     return (
       <div id="chat-sidebar">
-        <ChatSidebarAvatarComponent position="top" image="http://semantic-ui.com/images/avatar2/large/matthew.png" user={this.props.user} />
-        <ChatSidebarAvatarComponent position="bottom" image="http://semantic-ui.com/images/avatar2/large/molly.png" user={this.props.contact} />
+        <ChatSidebarAvatarComponent position="top" user={this.props.contact} />
+        <ChatSidebarAvatarComponent position="bottom" user={this.props.user} />
       </div>
     );
   }

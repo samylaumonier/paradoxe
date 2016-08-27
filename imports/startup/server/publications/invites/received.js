@@ -20,7 +20,8 @@ Meteor.publish('invites.received', function () {
         }
       }, {
         fields: {
-          username: 1
+          username: 1,
+          'profile.emailHash': 1
         }
       })
     ];

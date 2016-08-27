@@ -22,6 +22,7 @@ Meteor.publish('sidebar.contacts', function () {
     }, {
       fields: {
         username: 1,
+        'profile.emailHash': 1,
         'status.online': 1,
         'status.idle': 1
       }

@@ -1,4 +1,5 @@
 import validator from 'email-validator';
+import md5 from 'md5';
 
 Accounts.onCreateUser((options, user) => {
   user.username =  options.username.toLowerCase();
@@ -194,6 +195,11 @@ Accounts.onCreateUser((options, user) => {
   if (invalidEmail.test(user.emails[0].address)) {
     throw new Meteor.Error('400', 'Sorry, this email is not allowed');
   }
+
+  user.profile = {
+    contacts: [],
+    emailHash: md5(user.emails[0].address)
+  };
   
   return user;
 });
