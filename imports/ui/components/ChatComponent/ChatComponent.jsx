@@ -5,6 +5,7 @@ import autosize from '/node_modules/autosize/dist/autosize.min';
 
 import { Messages } from '/imports/api/collections';
 import { ChatMessageComponent } from '../ChatMessageComponent/ChatMessageComponent';
+import { ChatNavbarComponent } from '../ChatNavbarComponent/ChatNavbarComponent';
 
 import './ChatComponentStyle.less';
 
@@ -29,35 +30,8 @@ const chat = React.createClass({
     return (
       <div id="chat">
         {/*TODO: move to ChatNavbarComponent*/}
-        <div className="ui top attached menu">
-          <span className="ui icon item">
-            <i className="file icon"/>
-          </span>
-          <span className="ui icon item">
-            <i className="game icon"/>
-          </span>
-          <span className="ui icon item">
-            <i className="phone icon"/>
-          </span>
-          <span className="ui icon item">
-            <i className="record icon"/>
-          </span>
-          <span className="ui icon item">
-            <i className="gift icon"/>
-          </span>
-          <span className="ui icon item">
-          <i className="icons">
-            <i className="user icon"/>
-            <i className="red corner dont icon"/>
-          </i>
-          </span>
-          <span className="ui icon item">
-          <i className="icons">
-            <i className="user icon"/>
-            <i className="red corner remove icon"/>
-          </i>
-          </span>
-        </div>
+        <ChatNavbarComponent />
+        
         
         <div id="message-zone" ref="messages">
           <If condition={this.props.messages.length !== 0}>
@@ -82,7 +56,7 @@ const chat = React.createClass({
                     <button className="ui white submit button left-button">
                       <i className="large smile button icon"/>
                     </button>
-                    <textarea ref="content" rows="1"/>
+                    <textarea ref="content" rows="1" required/>
                     <button type="submit" className="ui white submit button">
                       <i className="large send button icon"/>
                     </button>
@@ -92,6 +66,7 @@ const chat = React.createClass({
             </form>
           </div>
         </section>
+        
       </div>
     );
   },
@@ -102,7 +77,9 @@ const chat = React.createClass({
       scrollTop: messages.prop('scrollHeight')
     }, 500);
   },
-  // TODO: allow to send message by pressing "enter"?
+  
+  // TODO: send message by pressing "enter"?
+  
   postMessage: function (event) {
     event.preventDefault();
 

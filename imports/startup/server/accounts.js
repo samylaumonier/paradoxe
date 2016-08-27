@@ -3,6 +3,13 @@ import md5 from 'md5';
 
 Accounts.onCreateUser((options, user) => {
   user.username =  options.username.toLowerCase();
+  
+//  var usernameValidator = /?=^.{3,20}$)^[a-zA-Z][a-zA-Z0-9]*[._-]?[a-zA-Z0-9]+$/g;
+  
+//  if (usernameValidator.test(user.username)) {
+//    throw new Meteor.Error('400','Invalid username');
+//  }
+  
 
   if (!validator.validate(user.emails[0].address)) {
     throw new Meteor.Error('400','Invalid email');

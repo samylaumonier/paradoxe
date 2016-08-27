@@ -42,6 +42,7 @@ const navbar = React.createClass({
             <i className="user icon"/>
             <div className="menu">
               <div className="item"> Help</div>
+              <div className="item"> Feedback</div>
               <div className="item"> Settings</div>
               <div className="item" onClick={this.logout}>
                 Logout
