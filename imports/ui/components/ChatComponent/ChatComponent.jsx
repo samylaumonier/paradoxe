@@ -20,14 +20,10 @@ const chat = React.createClass({
       $(this.refs.messages).css('bottom', `${this.refs.content.offsetHeight + 11}px`);
     });
 
-    // TODO: auto scroll to bottom?
-    //this.autorun(function () {
-    //  if (template.subscriptionsReady()) {
-    //    Tracker.afterFlush(function () {
-    //      $('#message-zone').scrollTop($(document).height() - $(window).height());
-    //    });
-    //  }
-    //});
+    this.scrollToBottom();
+  },
+  componentDidUpdate: function () {
+    this.scrollToBottom();
   },
   render: function () {
     return (
@@ -99,6 +95,13 @@ const chat = React.createClass({
       </div>
     );
   },
+  scrollToBottom: function () {
+    const messages = $(this.refs.messages);
+
+    messages.animate({
+      scrollTop: messages.prop('scrollHeight')
+    }, 500);
+  },
   // TODO: allow to send message by pressing "enter"?
   postMessage: function (event) {
     event.preventDefault();
@@ -116,6 +119,8 @@ const chat = React.createClass({
     });
 
     textarea.val('');
+    autosize.update(this.refs.content);
+
     return false;
   }
 });
