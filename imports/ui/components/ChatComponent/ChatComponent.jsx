@@ -1,4 +1,5 @@
 import React from 'react';
+import { If, Then, Else } from 'react-if';
 import { composeWithTracker } from 'react-komposer';
 import autosize from '/node_modules/autosize/dist/autosize.min';
 
@@ -63,9 +64,16 @@ const chat = React.createClass({
         </div>
         
         <div id="message-zone" ref="messages">
-          <div className="ui comments">
-            {this.props.messages.map(message => <ChatMessageComponent key={message._id} message={message} />)}
-          </div>
+          <If condition={this.props.messages.length !== 0}>
+            <Then>
+              <div className="ui comments">
+                {this.props.messages.map(message => <ChatMessageComponent key={message._id} message={message} />)}
+              </div>
+            </Then>
+            <Else>
+              <p>No messages yet!</p>
+            </Else>
+          </If>
         </div>
 
         {/*TODO: move to ChatMessageFormComponent*/}
