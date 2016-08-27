@@ -14,16 +14,6 @@ const navbar = React.createClass({
   render: function () {
     return (
       <div className="ui top attached menu">
-        <div ref="profile" className="ui dropdown icon item">
-          <i className="user icon"/>
-          <div className="menu">
-            <div className="item">Help</div>
-            <div className="item">Settings</div>
-            <div className="item" onClick={this.logout}>
-              Logout
-            </div>
-          </div>
-        </div>
         <span className="ui icon item" onClick={this.openContactAddModal}>
           <i className="add user icon"/>
           &nbsp; Add contacts
@@ -46,6 +36,17 @@ const navbar = React.createClass({
               <i className="search link icon"/>
             </div>
             <div className="results"></div>
+          </div>
+          
+          <div ref="profile" className="ui right dropdown icon item">
+            <i className="user icon"/>
+            <div className="menu">
+              <div className="item"> Help</div>
+              <div className="item"> Settings</div>
+              <div className="item" onClick={this.logout}>
+                Logout
+              </div>
+            </div>
           </div>
         </div>
       </div>
