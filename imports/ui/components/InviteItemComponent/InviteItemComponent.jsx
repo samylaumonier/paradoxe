@@ -37,7 +37,7 @@ const item = React.createClass({
     );
   },
   onAccept: function () {
-    Meteor.call('acceptContact', this.props.invite._id, err => {
+    Meteor.call('acceptInvitation', this.props.invite._id, err => {
       if (err) {
         toastr.error(err.reason, 'Error');
       } else {

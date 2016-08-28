@@ -23,6 +23,7 @@ export const UserLayout = React.createClass({
         </div>
         <SidebarContactAddComponent />
         <div id="modals"></div>
+        <div id="popups"></div>
       </div>
     );
   }

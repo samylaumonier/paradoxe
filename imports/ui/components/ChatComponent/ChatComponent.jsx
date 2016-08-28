@@ -1,16 +1,17 @@
 import React from 'react';
 import { If, Then, Else } from 'react-if';
 import { composeWithTracker } from 'react-komposer';
+import { browserHistory } from 'react-router';
 import autosize from '/node_modules/autosize/dist/autosize.min';
 
-import { Messages } from '/imports/api/collections';
+import { Messages, userHasBlockedContact  } from '/imports/api/collections';
 import { ChatMessageComponent } from '../ChatMessageComponent/ChatMessageComponent';
-import { ChatNavbarComponent } from '../ChatNavbarComponent/ChatNavbarComponent';
 
 import './ChatComponentStyle.less';
 
 const chat = React.createClass({
   propTypes: {
+    userHasBlockedContact: React.PropTypes.bool.isRequired,
     contact: React.PropTypes.object.isRequired,
     messages: React.PropTypes.array.isRequired
   },
@@ -21,17 +22,58 @@ const chat = React.createClass({
       $(this.refs.messages).css('bottom', `${this.refs.content.offsetHeight + 11}px`);
     });
 
+    this.initTooltips();
     this.scrollToBottom();
   },
   componentDidUpdate: function () {
+    this.initTooltips();
     this.scrollToBottom();
   },
   render: function () {
     return (
       <div id="chat">
         {/*TODO: move to ChatNavbarComponent*/}
-        <ChatNavbarComponent />
-        
+        <div className="ui top attached menu" ref="navbar">
+          <a className="ui icon item" href="#">
+            <i className="file icon"/>
+          </a>
+          <a className="ui icon item" href="#">
+            <i className="game icon"/>
+          </a>
+          <a className="ui icon item" href="#">
+            <i className="phone icon"/>
+          </a>
+          <a className="ui icon item" href="#">
+            <i className="record icon"/>
+          </a>
+          <a className="ui icon item" href="#">
+            <i className="gift icon"/>
+          </a>
+          <If condition={this.props.userHasBlockedContact === true}>
+            <Then>
+              <a className="ui icon item" href="#" data-content="Unblock" onClick={this.unblockContact}>
+                <i className="icons">
+                  <i className="user icon"/>
+                  <i className="green corner dont icon"/>
+                </i>
+              </a>
+            </Then>
+            <Else>
+              <a className="ui icon item" href="#" data-content="Block" onClick={this.blockContact}>
+                <i className="icons">
+                  <i className="user icon"/>
+                  <i className="red corner dont icon"/>
+                </i>
+              </a>
+            </Else>
+          </If>
+          <a className="ui icon item" href="#" data-content="Remove" onClick={this.removeContact}>
+            <i className="icons">
+              <i className="user icon"/>
+              <i className="red corner remove icon"/>
+            </i>
+          </a>
+        </div>
         
         <div id="message-zone" ref="messages">
           <If condition={this.props.messages.length !== 0}>
@@ -66,9 +108,15 @@ const chat = React.createClass({
             </form>
           </div>
         </section>
-        
       </div>
     );
+  },
+  initTooltips: function () {
+    $(this.refs.navbar).find('[data-content]').popup({
+      context: '#popups',
+      inverted: true,
+      position: 'bottom center'
+    });
   },
   scrollToBottom: function () {
     const messages = $(this.refs.messages);
@@ -77,9 +125,7 @@ const chat = React.createClass({
       scrollTop: messages.prop('scrollHeight')
     }, 500);
   },
-  
-  // TODO: send message by pressing "enter"?
-  
+  // TODO: allow to send message by pressing "enter"?
   postMessage: function (event) {
     event.preventDefault();
 
@@ -99,13 +145,47 @@ const chat = React.createClass({
     autosize.update(this.refs.content);
 
     return false;
-  }
+  },
+  removeContact: function () {
+    Meteor.call('removeContact', this.props.contact._id, err => {
+      if (err) {
+        toastr.error(err.reason, 'Error');
+      } else {
+        browserHistory.push('/');
+        toastr.success('Contact removed!');
+      }
+    });
+  },
+  blockContact: function () {
+    Meteor.call('blockContact', this.props.contact._id, err => {
+      if (err) {
+        toastr.error(err.reason, 'Error');
+      } else {
+        toastr.success('Contact blocked!');
+      }
+    });
+  },
+  unblockContact: function () {
+    Meteor.call('unblockContact', this.props.contact._id, err => {
+      if (err) {
+        toastr.error(err.reason, 'Error');
+      } else {
+        toastr.success('Contact unblocked!');
+      }
+    });
+  },
 });
 
 function composer(props, onData) {
-  onData(null, {
-    props
-  });
+  const user = Meteor.user();
+
+  if (user) {
+    onData(null, {
+      userHasBlockedContact: userHasBlockedContact(user, props.contact._id),
+      contact: props.contact,
+      messages: props.messages
+    });
+  }
 }
 
 export const ChatComponent = composeWithTracker(composer)(chat);
