@@ -147,22 +147,44 @@ const chat = React.createClass({
     return false;
   },
   removeContact: function () {
-    Meteor.call('removeContact', this.props.contact._id, err => {
-      if (err) {
-        toastr.error(err.reason, 'Error');
-      } else {
-        browserHistory.push('/');
-        toastr.success('Contact removed!');
-      }
+    const contact = this.props.contact;
+    swal({
+      title: "Are you sure?",
+      text: "Are you sure you want to delete this contact?\n If delete this contact, they will be removed from your contact list and you will no longer be able to send them messages.",
+      type: "warning",
+      showCancelButton: true,
+      closeOnConfirm: true,
+      confirmButtonText: "Yes, delete contact!",
+      confirmButtonColor: "#ec6c62"
+    }, function() {
+      Meteor.call('removeContact', contact._id, err => {
+        if (err) {
+          toastr.error(err.reason, 'Error');
+        } else {
+          browserHistory.push('/');
+          toastr.success(contact.username + ' was Deleted!');
+        }
+      });
     });
   },
   blockContact: function () {
-    Meteor.call('blockContact', this.props.contact._id, err => {
-      if (err) {
-        toastr.error(err.reason, 'Error');
-      } else {
-        toastr.success('Contact blocked!');
-      }
+    const contact = this.props.contact;
+    swal({
+      title: "Are you sure?",
+      text: "Are you sure you want to block this contact?\n If you block this contact you will no longer get messages or notifications from them.",
+      type: "warning",
+      showCancelButton: true,
+      closeOnConfirm: true,
+      confirmButtonText: "Yes, block contact!",
+      confirmButtonColor: "#ec6c62"
+    }, function() {
+      Meteor.call('blockContact', contact._id, err => {
+        if (err) {
+          toastr.error(err.reason, 'Error');
+        } else {
+          toastr.success(contact.username + ' was blocked!');
+        }
+      });
     });
   },
   unblockContact: function () {

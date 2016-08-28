@@ -40,13 +40,15 @@ const navbar = React.createClass({
           
           <div ref="profile" className="ui right dropdown icon item">
             <i className="user icon"/>
+            &nbsp; Profile
             <div className="menu">
-              <div className="item"> Help</div>
-              <div className="item"> Feedback</div>
-              <div className="item"> Settings</div>
-              <div className="item" onClick={this.logout}>
+              <div className="item"><i className="life ring icon"/> Help</div>
+              <div className="item"><i className="share icon"/> Feedback</div>
+              <a className="item"><i className="setting icon"/> Settings</a>
+              <a className="item" onClick={this.logout}>
+                <i className="sign out icon"/>
                 Logout
-              </div>
+              </a>
             </div>
           </div>
         </div>

@@ -35,7 +35,7 @@ const sidebar = React.createClass({
   },
   render: function () {
     return (
-      <div className="ui vertical inverted left visible sidebar menu">
+      <div id="sidebar" className="ui vertical inverted left visible sidebar menu">
         <div className="item">
           <Link className="ui logo icon image" to="/">
             <img src="http://semantic-ui.com/images/logo.png"/>

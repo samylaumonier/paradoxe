@@ -1,5 +1,6 @@
 import React from 'react';
 
+
 export const MainLayout = ({ children }) => (
   <div className="container">
     {children}
