@@ -4,8 +4,8 @@ import { composeWithTracker } from 'react-komposer';
 import React from 'react';
 import { Link } from 'react-router';
 
-import { AvatarComponent } from '../AvatarComponent/AvatarComponent';
-import { SidebarContactItemComponent } from '../SidebarContactItemComponent/SidebarContactItemComponent';
+import { AvatarComponent } from '/imports/ui/components/user/AvatarComponent/AvatarComponent';
+import { SidebarContactItemComponent } from '/imports/ui/components/app/sidebar/SidebarContactItemComponent/SidebarContactItemComponent';
 
 import './SidebarComponentStyle.less';
 

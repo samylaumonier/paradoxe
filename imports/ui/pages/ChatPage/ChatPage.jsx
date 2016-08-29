@@ -2,8 +2,8 @@ import { Meteor } from 'meteor/meteor';
 import { composeWithTracker } from 'react-komposer';
 import React from 'react';
 import { If, Then, Else } from 'react-if';
-import { ChatComponent } from '/imports/ui/components/ChatComponent/ChatComponent';
-import { ChatSidebarComponent } from '/imports/ui/components/ChatSidebarComponent/ChatSidebarComponent';
+import { ChatComponent } from '/imports/ui/components/chat/ChatComponent/ChatComponent';
+import { ChatSidebarComponent } from '/imports/ui/components/chat/ChatSidebarComponent/ChatSidebarComponent';
 import { Messages, userHasContact } from '/imports/api/collections';
 
 const chatPage = React.createClass({

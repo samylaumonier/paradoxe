@@ -3,7 +3,7 @@ import { browserHistory } from 'react-router';
 import { If, Then } from 'react-if';
 
 import { getUserStatus, userHasBlockedContact } from '/imports/api/collections';
-import { AvatarComponent } from '../AvatarComponent/AvatarComponent';
+import { AvatarComponent } from '/imports/ui/components/user/AvatarComponent/AvatarComponent';
 
 import './SidebarContactItemComponentStyle.less';
 

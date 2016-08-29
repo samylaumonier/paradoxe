@@ -3,7 +3,7 @@ import React from 'react';
 import nl2br from 'react-nl2br';
 import { composeWithTracker } from 'react-komposer';
 
-import { AvatarComponent } from '../AvatarComponent/AvatarComponent';
+import { AvatarComponent } from '/imports/ui/components/user/AvatarComponent/AvatarComponent';
 
 const message = React.createClass({
   propTypes: {

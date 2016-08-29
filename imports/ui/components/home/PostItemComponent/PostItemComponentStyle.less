@@ -1,0 +1,29 @@
+.posts .ui.card {
+   .header .username {
+    display: inline-block;
+    max-width: 50%;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+
+  .description {
+    overflow: hidden;
+    hyphens: auto;
+  }
+
+  .content:not(.extra) .like.icon,
+  .content:not(.extra) .like.icon:hover {
+    cursor: default;
+    opacity: 1;
+    color: inherit;
+  }
+
+  .extra.content .like {
+    cursor: pointer;
+  }
+
+  .extra.content .like:hover,
+  .extra.content .post-liked {
+    color: #ff2733;
+  }
+}

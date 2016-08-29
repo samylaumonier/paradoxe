@@ -27,5 +27,9 @@
       "name": "Video",
       "schemes": ["myapp"]
     }]
+  },
+  "bot": {
+    "username": "bot",
+    "email": "bot@epislon.com"
   }
 }

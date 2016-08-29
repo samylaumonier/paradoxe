@@ -2,7 +2,7 @@ import { composeWithTracker } from 'react-komposer';
 
 import React from 'react';
 
-import { ChatSidebarAvatarComponent } from '../ChatSidebarAvatarComponent/ChatSidebarAvatarComponent';
+import { ChatSidebarAvatarComponent } from '/imports/ui/components/chat/ChatSidebarAvatarComponent/ChatSidebarAvatarComponent';
 
 import './ChatSidebarComponentStyle.less';
 

@@ -2,7 +2,7 @@ import { Meteor } from 'meteor/meteor';
 import React from 'react';
 import { composeWithTracker } from 'react-komposer';
 
-import { AvatarComponent } from '../AvatarComponent/AvatarComponent';
+import { AvatarComponent } from '/imports/ui/components/user/AvatarComponent/AvatarComponent';
 
 import './PostItemComponentStyle.less';
 

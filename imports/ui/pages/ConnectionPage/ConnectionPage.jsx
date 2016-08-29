@@ -2,8 +2,8 @@ import React from 'react';
 
 import  './ConnectionPageStyle.less';
 
-import { LoginComponent } from '/imports/ui/components/LoginComponent/LoginComponent';
-import { RegisterComponent } from '/imports/ui/components/RegisterComponent/RegisterComponent';
+import { LoginComponent } from '/imports/ui/components/user/LoginComponent/LoginComponent';
+import { RegisterComponent } from '/imports/ui/components/user/RegisterComponent/RegisterComponent';
 
 
 export const ConnectionPage = () => (

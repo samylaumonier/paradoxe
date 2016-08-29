@@ -1,7 +1,7 @@
 import React from 'react';
 
 import { getUserStatus } from '/imports/api/collections';
-import { AvatarComponent } from '../AvatarComponent/AvatarComponent';
+import { AvatarComponent } from '/imports/ui/components/user/AvatarComponent/AvatarComponent';
 
 import './ChatSidebarAvatarComponentStyle.less';
 

@@ -6,8 +6,8 @@ import { If, Then, Else } from 'react-if';
 
 import Masonry from 'react-masonry-component';
 
-import { PostInputComponent } from '/imports/ui/components/PostInputComponent/PostInputComponent';
-import { PostItemComponent } from '/imports/ui/components/PostItemComponent/PostItemComponent';
+import { PostInputComponent } from '/imports/ui/components/home/PostInputComponent/PostInputComponent';
+import { PostItemComponent } from '/imports/ui/components/home/PostItemComponent/PostItemComponent';
 
 import './PostComponentStyle.less'
 

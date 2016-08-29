@@ -5,7 +5,7 @@ import React from 'react';
 import { If, Then, Else } from 'react-if';
 import Masonry from 'react-masonry-component';
 
-import { InviteItemComponent } from '/imports/ui/components/InviteItemComponent/InviteItemComponent';
+import { InviteItemComponent } from '/imports/ui/components/invites/InviteItemComponent/InviteItemComponent';
 
 import './InvitesPageStyle.less'
 
