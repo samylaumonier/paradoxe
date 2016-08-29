@@ -1,4 +1,4 @@
-import { Posts } from '/imports/api/collections'
+import { Posts } from '/imports/api/collections/posts';
 
 Posts.before.insert(function (userId, doc) {
   doc.userId = userId;

@@ -11,7 +11,7 @@ import { PostItemComponent } from '/imports/ui/components/home/PostItemComponent
 
 import './PostComponentStyle.less'
 
-import { Posts } from '/imports/api/collections';
+import { Posts } from '/imports/api/collections/posts';
 
 const masonryOptions = {
   transitionDuration: 0,

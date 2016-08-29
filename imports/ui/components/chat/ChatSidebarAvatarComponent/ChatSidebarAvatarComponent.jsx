@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { getUserStatus } from '/imports/api/collections';
+import { getUserStatus } from '/imports/api/collections/users';
 import { AvatarComponent } from '/imports/ui/components/user/AvatarComponent/AvatarComponent';
 
 import './ChatSidebarAvatarComponentStyle.less';

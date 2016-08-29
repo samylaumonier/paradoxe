@@ -1,6 +1,6 @@
 import { Meteor } from 'meteor/meteor';
 import { check } from 'meteor/check';
-import { Invitations } from '/imports/api/collections';
+import { Invitations } from '/imports/api/collections/invitations';
 
 Meteor.methods({
   inviteUsers: function (usernames) {

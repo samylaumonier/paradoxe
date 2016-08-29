@@ -1,16 +1,22 @@
+import md5 from 'md5';
 import { Meteor } from 'meteor/meteor';
-import { Accounts } from 'meteor/accounts-base';
 
 Meteor.startup(() => {
-  const user = Meteor.users.findOne({
-    username: Meteor.settings.bot.username
-  });
+  const user = Meteor.users.findOne(Meteor.settings.public.bot.id);
 
   if (!user) {
-    Accounts.createUser({
+    Meteor.users.insert({
+      _id: Meteor.settings.public.bot.id,
       username: Meteor.settings.bot.username,
-      email: Meteor.settings.bot.email,
+      emails: [
+        { address: Meteor.settings.bot.email, verified: true }
+      ],
       password: Random.secret(100),
+      profile: {
+        contacts: [],
+        blockedContacts: [],
+        emailHash: md5(Meteor.settings.bot.email)
+      }
     });
   }
 });

@@ -9,7 +9,7 @@ import { InviteItemComponent } from '/imports/ui/components/invites/InviteItemCo
 
 import './InvitesPageStyle.less'
 
-import { Invitations } from '/imports/api/collections';
+import { Invitations } from '/imports/api/collections/invitations';
 
 const masonryOptions = {
   transitionDuration: 0,

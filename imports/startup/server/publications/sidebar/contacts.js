@@ -1,5 +1,5 @@
 import { Meteor } from 'meteor/meteor';
-import { userHasBlockedContact } from '/imports/api/collections';
+import { userHasBlockedContact } from '/imports/api/collections/users';
 
 Meteor.publish('sidebar.contacts', function () {
   this.autorun(function () {

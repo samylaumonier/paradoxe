@@ -1,5 +1,5 @@
 import { Meteor } from 'meteor/meteor';
-import { userHasContact } from '/imports/api/collections';
+import { userHasContact } from '/imports/api/collections/users';
 
 Meteor.methods({
   blockContact: function (contactId) {

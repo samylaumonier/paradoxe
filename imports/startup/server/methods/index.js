@@ -1,3 +1,4 @@
+import './chat/video';
 import './invitations/accept';
 import './users/block';
 import './users/invite';

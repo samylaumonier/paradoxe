@@ -1,4 +1,5 @@
-import { Posts, userHasContact } from '/imports/api/collections';
+import { Posts } from '/imports/api/collections/posts';
+import { userHasContact } from '/imports/api/collections/users';
 
 Meteor.methods({
   likePost: function (postId) {

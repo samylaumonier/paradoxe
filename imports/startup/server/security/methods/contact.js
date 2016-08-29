@@ -1,4 +1,4 @@
-import { userHasContact } from '/imports/api/collections';
+import { userHasContact } from '/imports/api/collections/users';
 
 Security.defineMethod('ifHasContact', {
   fetch: [],

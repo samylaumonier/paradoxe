@@ -1,4 +1,4 @@
-import { Messages } from '/imports/api/collections';
+import { Messages } from '/imports/api/collections/messages';
 
 Messages
   .permit(['insert'])

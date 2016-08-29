@@ -1,4 +1,4 @@
-import { Invitations } from '/imports/api/collections';
+import { Invitations } from '/imports/api/collections/invitations';
 
 Invitations
   .permit(['remove'])

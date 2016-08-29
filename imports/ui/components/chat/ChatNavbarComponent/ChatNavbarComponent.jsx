@@ -3,10 +3,11 @@ import { If, Then, Else } from 'react-if';
 import { composeWithTracker } from 'react-komposer';
 import { browserHistory } from 'react-router';
 
-import { userHasBlockedContact } from '/imports/api/collections';
+import { userHasBlockedContact } from '/imports/api/collections/users';
 
 const navbar = React.createClass({
   propTypes: {
+    startVideoCall: React.PropTypes.func.isRequired,
     userHasBlockedContact: React.PropTypes.bool.isRequired,
     contact: React.PropTypes.object.isRequired
   },
@@ -28,7 +29,7 @@ const navbar = React.createClass({
         <a className="ui icon item" href="#">
           <i className="phone icon"/>
         </a>
-        <a className="ui icon item" href="#">
+        <a className="ui icon item" href="#" data-content="Start video call" onClick={this.startVideoCall}>
           <i className="record icon"/>
         </a>
         <a className="ui icon item" href="#">
@@ -66,6 +67,15 @@ const navbar = React.createClass({
       context: '#popups',
       inverted: true,
       position: 'bottom center'
+    });
+  },
+  startVideoCall: function () {
+    this.props.startVideoCall(id => {
+      Meteor.call('startVideoCall', id, this.props.contact._id, err => {
+        if (err) {
+          toastr.error(err.reason, 'Error');
+        }
+      });
     });
   },
   removeContact: function () {
@@ -136,6 +146,7 @@ function composer(props, onData) {
 
   if (user) {
     onData(null, {
+      startVideoCall: props.startVideoCall,
       userHasBlockedContact: userHasBlockedContact(user, props.contact._id),
       contact: props.contact
     });

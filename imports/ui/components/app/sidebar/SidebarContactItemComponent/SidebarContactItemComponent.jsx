@@ -2,7 +2,7 @@ import React from 'react';
 import { browserHistory } from 'react-router';
 import { If, Then } from 'react-if';
 
-import { getUserStatus, userHasBlockedContact } from '/imports/api/collections';
+import { getUserStatus, userHasBlockedContact } from '/imports/api/collections/users';
 import { AvatarComponent } from '/imports/ui/components/user/AvatarComponent/AvatarComponent';
 
 import './SidebarContactItemComponentStyle.less';

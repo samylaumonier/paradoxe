@@ -1,5 +1,5 @@
 import { Meteor } from 'meteor/meteor';
-import { Invitations } from '/imports/api/collections';
+import { Invitations } from '/imports/api/collections/invitations';
 
 Meteor.methods({
   acceptInvitation: function (invitationsId) {
@@ -18,11 +18,11 @@ Meteor.methods({
       userId: user._id,
       targetId: invitation.userId
     });
-    
-    if(invertedInvite){
+
+    if (invertedInvite) {
       Invitations.remove(invertedInvite._id);
     }
-    
+
     Meteor.users.update(invitation.targetId, {
       $push: {
         'profile.contacts': invitation.userId

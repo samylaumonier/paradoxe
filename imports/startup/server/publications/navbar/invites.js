@@ -1,5 +1,5 @@
 import { Meteor } from 'meteor/meteor';
-import { Invitations } from '/imports/api/collections';
+import { Invitations } from '/imports/api/collections/invitations';
 
 Meteor.publish('navbar.invites', function () {
   if (!this.userId) {

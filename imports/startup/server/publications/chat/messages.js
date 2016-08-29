@@ -1,5 +1,6 @@
 import { Meteor } from 'meteor/meteor';
-import { Messages, userHasContact } from '/imports/api/collections';
+import { Messages } from '/imports/api/collections/messages';
+import { userHasContact } from '/imports/api/collections/users';
 
 Meteor.publish('chat.messages', function (contactUsername) {
   this.autorun(function () {
@@ -14,7 +15,14 @@ Meteor.publish('chat.messages', function (contactUsername) {
 
     if (contact && userHasContact(user, contact._id)) {
       return [
-        Meteor.users.find(contact._id, {
+        Meteor.users.find({
+          _id: {
+            $in: [
+              contact._id,
+              Meteor.settings.public.bot.id
+            ]
+          }
+        }, {
           fields: {
             username: 1,
             'profile.emailHash': 1
@@ -24,6 +32,7 @@ Meteor.publish('chat.messages', function (contactUsername) {
           $or: [
             { userId: user._id, toUserId: contact._id },
             { userId: contact._id, toUserId: user._id },
+            { userId: Meteor.settings.public.bot.id, toUserId: user._id }
           ]
         }, {
           sort: {

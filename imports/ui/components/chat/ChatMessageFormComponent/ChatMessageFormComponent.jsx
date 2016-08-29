@@ -2,7 +2,7 @@ import React from 'react';
 import { composeWithTracker } from 'react-komposer';
 import autosize from '/node_modules/autosize/dist/autosize.min';
 
-import { Messages } from '/imports/api/collections';
+import { Messages } from '/imports/api/collections/messages';
 
 import './ChatMessageFormComponentStyle.less';
 

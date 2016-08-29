@@ -36,10 +36,14 @@ const message = React.createClass({
 });
 
 function composer(props, onData) {
-  onData(null, {
-    message: props.message,
-    author: Meteor.users.findOne(props.message.userId)
-  });
+  const author = Meteor.users.findOne(props.message.userId);
+
+  if (author) {
+    onData(null, {
+      message: props.message,
+      author
+    });
+  }
 }
 
 export const ChatMessageComponent = composeWithTracker(composer)(message);

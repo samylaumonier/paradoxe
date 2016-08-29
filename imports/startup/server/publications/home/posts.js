@@ -1,5 +1,5 @@
 import { Meteor } from 'meteor/meteor';
-import { Posts } from '/imports/api/collections'
+import { Posts } from '/imports/api/collections/posts';
 
 Meteor.publish('home.posts', function () {
   this.autorun(function () {
