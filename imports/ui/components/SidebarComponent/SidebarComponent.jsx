@@ -11,7 +11,8 @@ import './SidebarComponentStyle.less';
 
 const sidebar = React.createClass({
   propTypes: {
-    contacts: React.PropTypes.array
+    user: React.PropTypes.object.isRequired,
+    contacts: React.PropTypes.array.isRequired
   },
   componentDidMount: function () {
     $('#contact-add-modal').modal({
@@ -61,7 +62,7 @@ const sidebar = React.createClass({
             <i className="search icon"/>
           </div>
           <div className="ui mini middle aligned selection inverted relaxed divided list">
-            {this.props.contacts.map(contact => <SidebarContactItemComponent key={contact._id} contact={contact}/>)}
+            {this.props.contacts.map(contact => <SidebarContactItemComponent key={contact._id} user={this.props.user} contact={contact}/>)}
           </div>
         </div>
       </div>

@@ -147,53 +147,61 @@ const chat = React.createClass({
     return false;
   },
   removeContact: function () {
-    const contact = this.props.contact;
     swal({
-      title: "Are you sure?",
-      text: "Are you sure you want to delete this contact?\n If delete this contact, they will be removed from your contact list and you will no longer be able to send them messages.",
-      type: "warning",
+      title: 'Are you sure?',
+      text: 'Are you sure you want to delete this contact?\n If you delete this contact, they will be removed from your contact list and you will no longer be able to send them messages.',
+      type: 'warning',
       showCancelButton: true,
       closeOnConfirm: true,
-      confirmButtonText: "Yes, delete contact!",
-      confirmButtonColor: "#ec6c62"
-    }, function() {
-      Meteor.call('removeContact', contact._id, err => {
+      confirmButtonText: 'Yes, delete contact!',
+      confirmButtonColor: '#ec6c62'
+    }, () => {
+      Meteor.call('removeContact', this.props.contact._id, err => {
         if (err) {
           toastr.error(err.reason, 'Error');
         } else {
           browserHistory.push('/');
-          toastr.success(contact.username + ' was Deleted!');
+          toastr.success(`${this.props.contact.username} has been deleted!`);
         }
       });
     });
   },
   blockContact: function () {
-    const contact = this.props.contact;
     swal({
-      title: "Are you sure?",
-      text: "Are you sure you want to block this contact?\n If you block this contact you will no longer get messages or notifications from them.",
-      type: "warning",
+      title: 'Are you sure?',
+      text: 'Are you sure you want to block this contact?\n If you block this contact, you will no longer get notifications from them and they will no longer see you online.',
+      type: 'warning',
       showCancelButton: true,
       closeOnConfirm: true,
-      confirmButtonText: "Yes, block contact!",
-      confirmButtonColor: "#ec6c62"
-    }, function() {
-      Meteor.call('blockContact', contact._id, err => {
+      confirmButtonText: 'Yes, block contact!',
+      confirmButtonColor: '#ec6c62'
+    }, () => {
+      Meteor.call('blockContact', this.props.contact._id, err => {
         if (err) {
           toastr.error(err.reason, 'Error');
         } else {
-          toastr.success(contact.username + ' was blocked!');
+          toastr.success(`${this.props.contact.username} has been blocked!`);
         }
       });
     });
   },
   unblockContact: function () {
-    Meteor.call('unblockContact', this.props.contact._id, err => {
-      if (err) {
-        toastr.error(err.reason, 'Error');
-      } else {
-        toastr.success('Contact unblocked!');
-      }
+    swal({
+      title: 'Are you sure?',
+      text: 'Are you sure you want to unblock this contact?\n If you unblock this contact, you will get notifications from them and they will see you online.',
+      type: 'warning',
+      showCancelButton: true,
+      closeOnConfirm: true,
+      confirmButtonText: 'Yes, unblock contact!',
+      confirmButtonColor: '#ec6c62'
+    }, () => {
+      Meteor.call('unblockContact', this.props.contact._id, err => {
+        if (err) {
+          toastr.error(err.reason, 'Error');
+        } else {
+          toastr.success('Contact unblocked!');
+        }
+      });
     });
   },
 });

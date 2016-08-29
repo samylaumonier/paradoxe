@@ -1,4 +1,5 @@
 import { Meteor } from 'meteor/meteor';
+import { userHasBlockedContact } from '/imports/api/collections';
 
 Meteor.publish('sidebar.contacts', function () {
   this.autorun(function () {
@@ -6,26 +7,62 @@ Meteor.publish('sidebar.contacts', function () {
       return [];
     }
 
-    const user = Meteor.users.findOne(this.userId);
+    // Selector
+    const currentUser = Meteor.users.findOne(this.userId);
     let ids = [];
 
-    if (user.profile && user.profile.contacts) {
-      ids = user.profile.contacts;
+    if (currentUser.profile && currentUser.profile.contacts) {
+      ids = currentUser.profile.contacts;
     }
 
     ids.push(this.userId);
 
-    return Meteor.users.find({
+    const selector = {
       _id: {
         $in: ids
       }
-    }, {
+    };
+
+    // Options
+    const options = {
       fields: {
         username: 1,
         'profile.emailHash': 1,
+        'profile.blockedContacts': 1,
         'status.online': 1,
         'status.idle': 1
       }
+    };
+
+    // Cursor
+    const cursor = Meteor.users.find(selector, options).observe({
+      added: user => {
+        this.added('users', user._id, transformUser(currentUser, user));
+      },
+      changed: user => {
+        this.changed('users', user._id, transformUser(currentUser, user));
+      },
+      removed: user => {
+        this.removed('users', user._id);
+      }
+    });
+
+    // Publish
+    this.ready();
+
+    this.onStop(function() {
+      cursor.stop();
     });
   });
 });
+
+function transformUser(currentUser, user) {
+  if (currentUser && userHasBlockedContact(user, currentUser._id)) {
+    user.status.online = false;
+    user.status.idle = false;
+  }
+
+  delete user.profile.blockedContacts;
+
+  return user;
+}

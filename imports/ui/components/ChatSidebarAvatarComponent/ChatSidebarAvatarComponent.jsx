@@ -1,5 +1,6 @@
 import React from 'react';
 
+import { getUserStatus } from '/imports/api/collections';
 import { AvatarComponent } from '../AvatarComponent/AvatarComponent';
 
 import './ChatSidebarAvatarComponentStyle.less';
@@ -11,21 +12,8 @@ export const ChatSidebarAvatarComponent = React.createClass({
   render: function () {
     return (
       <div className={"chat-sidebar-avatar " + this.props.position}>
-        <AvatarComponent user={this.props.user} className={"avatar-image " + this.userStatus()} size={280}/>
+        <AvatarComponent user={this.props.user} className={"avatar-image " + getUserStatus(this.props.user.status)} size={280}/>
       </div>
     );
-  },
-  userStatus: function () {
-    const status = this.props.user.status;
-
-    if (!status) {
-      return 'offline';
-    } else if (status.idle) {
-      return 'idle';
-    } else if (status.online) {
-      return 'online';
-    } else {
-      return 'offline';
-    }
   }
 });

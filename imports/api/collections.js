@@ -2,6 +2,18 @@ export const Invitations = new Mongo.Collection('invitations');
 export const Messages = new Mongo.Collection('messages');
 export const Posts = new Mongo.Collection('posts');
 
+export const getUserStatus = function (status) {
+  if (!status) {
+    return 'gray';
+  } else if (status.idle) {
+    return 'orange';
+  } else if (status.online) {
+    return 'green';
+  } else {
+    return 'gray';
+  }
+};
+
 export const userHasContact = function (user, contactId) {
   checkRequiredField(user, 'contacts');
   return user.profile.contacts.includes(contactId);

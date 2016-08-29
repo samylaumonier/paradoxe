@@ -1,7 +1,7 @@
 {
   "public": {
     "peer": {
-      "host": "192.168.43.59",
+      "host": "localhost",
       "port": 9000,
       "path": "/main"
     }
@@ -27,15 +27,5 @@
       "name": "Video",
       "schemes": ["myapp"]
     }]
-  },
-  "users": [
-    {
-      "username": "shane",
-      "password": "test"
-    },
-    {
-      "username": "samy",
-      "password": "test"
-    }
-  ]
+  }
 }
