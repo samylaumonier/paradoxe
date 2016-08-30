@@ -7,9 +7,11 @@ import { userHasBlockedContact } from '/imports/api/collections/users';
 
 const navbar = React.createClass({
   propTypes: {
+    contact: React.PropTypes.object.isRequired,
+    currentCall: React.PropTypes.bool.isRequired,
     startVideoCall: React.PropTypes.func.isRequired,
+    stopVideoCall: React.PropTypes.func.isRequired,
     userHasBlockedContact: React.PropTypes.bool.isRequired,
-    contact: React.PropTypes.object.isRequired
   },
   componentDidMount: function () {
     this.initTooltips();
@@ -20,24 +22,36 @@ const navbar = React.createClass({
   render: function () {
     return (
       <div className="ui top attached menu" ref="navbar">
-        <a className="ui icon item" href="#">
+        <a className="ui icon item">
           <i className="file icon"/>
         </a>
-        <a className="ui icon item" href="#">
+        <a className="ui icon item">
           <i className="game icon"/>
         </a>
-        <a className="ui icon item" href="#">
+        <a className="ui icon item">
           <i className="phone icon"/>
         </a>
-        <a className="ui icon item" href="#" data-content="Start video call" onClick={this.startVideoCall}>
-          <i className="record icon"/>
-        </a>
-        <a className="ui icon item" href="#">
+        <If condition={this.props.currentCall}>
+          <Then>
+            <a className="ui icon item" data-content="Stop video call" onClick={this.stopVideoCall}>
+              <i className="icons">
+                <i className="record icon"/>
+                <i className="red corner remove icon"/>
+              </i>
+            </a>
+          </Then>
+          <Else>
+            <a className="ui icon item" data-content="Start video call" onClick={this.startVideoCall}>
+              <i className="record icon"/>
+            </a>
+          </Else>
+        </If>
+        <a className="ui icon item">
           <i className="gift icon"/>
         </a>
-        <If condition={this.props.userHasBlockedContact === true}>
+        <If condition={this.props.userHasBlockedContact}>
           <Then>
-            <a className="ui icon item" href="#" data-content="Unblock" onClick={this.unblockContact}>
+            <a className="ui icon item" data-content="Unblock" onClick={this.unblockContact}>
               <i className="icons">
                 <i className="user icon"/>
                 <i className="green corner dont icon"/>
@@ -45,7 +59,7 @@ const navbar = React.createClass({
             </a>
           </Then>
           <Else>
-            <a className="ui icon item" href="#" data-content="Block" onClick={this.blockContact}>
+            <a className="ui icon item" data-content="Block" onClick={this.blockContact}>
               <i className="icons">
                 <i className="user icon"/>
                 <i className="red corner dont icon"/>
@@ -53,7 +67,7 @@ const navbar = React.createClass({
             </a>
           </Else>
         </If>
-        <a className="ui icon item" href="#" data-content="Remove" onClick={this.removeContact}>
+        <a className="ui icon item" data-content="Remove" onClick={this.removeContact}>
           <i className="icons">
             <i className="user icon"/>
             <i className="red corner remove icon"/>
@@ -70,13 +84,10 @@ const navbar = React.createClass({
     });
   },
   startVideoCall: function () {
-    this.props.startVideoCall(id => {
-      Meteor.call('startVideoCall', id, this.props.contact._id, err => {
-        if (err) {
-          toastr.error(err.reason, 'Error');
-        }
-      });
-    });
+    this.props.startVideoCall();
+  },
+  stopVideoCall: function () {
+    this.props.stopVideoCall();
   },
   removeContact: function () {
     swal({
@@ -146,9 +157,8 @@ function composer(props, onData) {
 
   if (user) {
     onData(null, {
-      startVideoCall: props.startVideoCall,
+      ...props,
       userHasBlockedContact: userHasBlockedContact(user, props.contact._id),
-      contact: props.contact
     });
   }
 }

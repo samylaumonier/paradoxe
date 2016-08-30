@@ -32,7 +32,7 @@ Meteor.publish('chat.messages', function (contactUsername) {
           $or: [
             { userId: user._id, toUserId: contact._id },
             { userId: contact._id, toUserId: user._id },
-            { userId: Meteor.settings.public.bot.id, toUserId: user._id }
+            { userId: Meteor.settings.public.bot.id, toUserId: { $in: [user._id] } },
           ]
         }, {
           sort: {

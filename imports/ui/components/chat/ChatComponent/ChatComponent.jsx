@@ -13,21 +13,40 @@ const chat = React.createClass({
   propTypes: {
     contact: React.PropTypes.object.isRequired,
     messages: React.PropTypes.array.isRequired,
+    currentCall: React.PropTypes.bool.isRequired,
     startVideoCall: React.PropTypes.func.isRequired,
-    onRinging: React.PropTypes.func.isRequired,
+    stopVideoCall: React.PropTypes.func.isRequired,
+    onAnswer: React.PropTypes.func.isRequired,
+    onDecline: React.PropTypes.func.isRequired,
+    onCancel: React.PropTypes.func.isRequired,
   },
   render: function () {
     return (
       <div id="chat">
-        <ChatNavbarComponent contact={this.props.contact} startVideoCall={this.props.startVideoCall}/>
+        <ChatNavbarComponent
+          contact={this.props.contact}
+          currentCall={this.props.currentCall}
+          startVideoCall={this.props.startVideoCall}
+          stopVideoCall={this.props.stopVideoCall}
+        />
 
         <div id="message-zone" ref="messages">
           <If condition={this.props.messages.length !== 0}>
             <Then>
               <div className="ui comments">
                 {this.props.messages.map(message => message.tag
-                  ? <ChatTaggedMessageComponent key={message._id} message={message} onRinging={this.props.onRinging}/>
-                  : <ChatMessageComponent key={message._id} message={message} />
+                  ? <ChatTaggedMessageComponent
+                    key={message._id}
+                    contact={this.props.contact}
+                    message={message}
+                    onAnswer={this.props.onAnswer}
+                    onDecline={this.props.onDecline}
+                    onCancel={this.props.onCancel}
+                  />
+                  : <ChatMessageComponent
+                    key={message._id}
+                    message={message}
+                  />
                 )}
               </div>
             </Then>
@@ -55,10 +74,7 @@ function composer(props, onData) {
 
   if (user) {
     onData(null, {
-      contact: props.contact,
-      messages: props.messages,
-      startVideoCall: props.startVideoCall,
-      onRinging: props.onRinging,
+      props
     });
   }
 }

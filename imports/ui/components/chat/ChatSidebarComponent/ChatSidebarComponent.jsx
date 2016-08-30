@@ -13,28 +13,38 @@ const sidebar = React.createClass({
   propTypes: {
     user: React.PropTypes.object.isRequired,
     contact: React.PropTypes.object.isRequired,
-    onVideoCall: React.PropTypes.bool.isRequired,
-    startUserVideo: React.PropTypes.func.isRequired,
-    ringing: React.PropTypes.bool.isRequired,
-    startPartnerVideo: React.PropTypes.func.isRequired,
+    stream: React.PropTypes.object,
+    call: React.PropTypes.object,
   },
   render: function () {
     return (
       <div id="chat-sidebar">
-        <If condition={this.props.ringing}>
+        <If condition={this.props.call === null}>
           <Then>
-            <PartnerVideoComponent user={this.props.user} startPartnerVideo={this.props.startPartnerVideo}/>
+            <ChatSidebarAvatarComponent
+              position="top"
+              user={this.props.contact}
+            />
           </Then>
           <Else>
-            <ChatSidebarAvatarComponent position="top" user={this.props.contact} />
+            <PartnerVideoComponent
+              user={this.props.user}
+              call={this.props.call}
+            />
           </Else>
         </If>
-        <If condition={this.props.onVideoCall || this.props.ringing}>
+        <If condition={this.props.stream === null}>
           <Then>
-            <MyVideoComponent user={this.props.user} startUserVideo={this.props.startUserVideo}/>
+            <ChatSidebarAvatarComponent
+              position="bottom"
+              user={this.props.user}
+            />
           </Then>
           <Else>
-            <ChatSidebarAvatarComponent position="bottom" user={this.props.user} />
+            <MyVideoComponent
+              user={this.props.user}
+              stream={this.props.stream}
+            />
           </Else>
         </If>
       </div>

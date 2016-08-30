@@ -1,10 +1,10 @@
 import { Meteor } from 'meteor/meteor';
 import React from 'react';
 import nl2br from 'react-nl2br';
-import { Switch, Case, Default } from 'jsx-switch';
 import { composeWithTracker } from 'react-komposer';
+import { Switch, Case, Default } from 'jsx-switch';
 
-import { INCOMING_VIDEO_CALL, OUTGOING_VIDEO_CALL } from '/imports/api/collections/messages';
+import { INCOMING_VIDEO_CALL_TAG, OUTGOING_VIDEO_CALL_TAG } from '/imports/api/collections/messages';
 
 import { AvatarComponent } from '/imports/ui/components/user/AvatarComponent/AvatarComponent';
 import { ChatIncomingVideoCallComponent } from '/imports/ui/components/chat/ChatIncomingVideoCallComponent/ChatIncomingVideoCallComponent';
@@ -12,9 +12,12 @@ import { ChatOutgoingVideoCallComponent } from '/imports/ui/components/chat/Chat
 
 const message = React.createClass({
   propTypes: {
+    contact: React.PropTypes.object.isRequired,
     message: React.PropTypes.object.isRequired,
     author: React.PropTypes.object.isRequired,
-    onRinging: React.PropTypes.func.isRequired
+    onAnswer: React.PropTypes.func.isRequired,
+    onDecline: React.PropTypes.func.isRequired,
+    onCancel: React.PropTypes.func.isRequired,
   },
   render: function () {
     return (
@@ -31,11 +34,27 @@ const message = React.createClass({
           </div>
           <div className="text">
             <Switch>
-              <Case expr={this.props.message.tag === INCOMING_VIDEO_CALL}>
-                <ChatIncomingVideoCallComponent message={this.props.message} onRinging={this.props.onRinging}/>
+              <Case expr={this.props.message.tag === INCOMING_VIDEO_CALL_TAG}>
+                <ChatIncomingVideoCallComponent
+                  contact={this.props.contact}
+                  message={this.props.message}
+                  onAnswer={this.props.onAnswer}
+                />
               </Case>
-              <Case expr={this.props.message.tag === OUTGOING_VIDEO_CALL}>
-                <ChatOutgoingVideoCallComponent message={this.props.message}/>
+              <Case expr={this.props.message.tag === OUTGOING_VIDEO_CALL_TAG}>
+                <ChatOutgoingVideoCallComponent
+                  contact={this.props.contact}
+                  message={this.props.message}
+                  onDecline={this.props.onDecline}
+                  onCancel={this.props.onCancel}
+                />
+              </Case>
+              <Case expr={this.props.message.tag === OUTGOING_VIDEO_CALL_TAG}>
+                <ChatHungUpVideoCallComponent // TODO
+                  contact={this.props.contact}
+                  message={this.props.message}
+                  onHungUp={this.props.onHungUp}
+                />
               </Case>
               <Default>
                 {nl2br(this.props.message.content)}
@@ -50,9 +69,8 @@ const message = React.createClass({
 
 function composer(props, onData) {
   onData(null, {
-    message: props.message,
+    ...props,
     author: Meteor.users.findOne(props.message.userId),
-    onRinging: props.onRinging,
   });
 }
 
