@@ -1,5 +1,7 @@
 import { Meteor } from 'meteor/meteor';
 import { Invitations } from '/imports/api/collections/invitations';
+import { Notifications } from '/imports/api/collections/notifications';
+import { REQUEST_ACCEPTED } from '/imports/api/collections/notifications';
 
 Meteor.methods({
   acceptInvitation: function (invitationsId) {
@@ -34,5 +36,14 @@ Meteor.methods({
         'profile.contacts': invitation.targetId
       }
     });
+    
+    const notification = {
+      userId: invitation.userId,
+      targetId: invitation.targetId,
+      tag: REQUEST_ACCEPTED,
+      createdAt: new Date()
+    };
+      
+      Notifications.insert(notification);
   },
 });

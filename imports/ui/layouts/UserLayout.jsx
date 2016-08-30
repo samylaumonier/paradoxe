@@ -1,7 +1,7 @@
 import React from 'react';
 
 import { SidebarComponent } from '/imports/ui/components/app/sidebar/SidebarComponent/SidebarComponent';
-import { NavbarComponent } from '/imports/ui/components/app/NavbarComponent/NavbarComponent';
+import { NavbarComponent } from '/imports/ui/components/app/navbar/NavbarComponent/NavbarComponent';
 import { SidebarContactAddComponent } from '/imports/ui/components/app/sidebar/SidebarContactAddComponent/SidebarContactAddComponent';
 
 export const UserLayout = React.createClass({
