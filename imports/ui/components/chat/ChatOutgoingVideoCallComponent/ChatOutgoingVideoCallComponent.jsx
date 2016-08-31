@@ -16,9 +16,18 @@ const component = React.createClass({
     onDecline: React.PropTypes.func.isRequired,
     onCancel: React.PropTypes.func.isRequired,
   },
+  componentDidMount: function () {
+    this.setState({
+      declined: this.props.message.declined,
+    });
+  },
   componentDidUpdate: function () {
-    if (this.props.message.status === DECLINED_STATUS && !this.props.message.declined) {
-      this.props.onDecline(this.props.message);
+    if (this.props.message.status === DECLINED_STATUS && !this.state.declined) {
+      this.setState({
+        declined: true
+      }, () => {
+        this.props.onDecline(this.props.message);
+      });
     }
   },
   render: function () {

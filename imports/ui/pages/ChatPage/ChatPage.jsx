@@ -3,7 +3,7 @@ import { composeWithTracker } from 'react-komposer';
 import React from 'react';
 import { If, Then, Else } from 'react-if';
 
-import { Messages, ANSWERED_STATUS, CANCELED_STATUS, HUNG_UP_STATUS } from '/imports/api/collections/messages';
+import { Messages, ANSWERED_STATUS, CANCELED_STATUS } from '/imports/api/collections/messages';
 import { userHasContact } from '/imports/api/collections/users';
 
 import { ChatComponent } from '/imports/ui/components/chat/ChatComponent/ChatComponent';
@@ -17,10 +17,13 @@ const chatPage = React.createClass({
     messages: React.PropTypes.array.isRequired
   },
   componentWillMount: function () {
-    this.setDefaultState();
+    this.setDefaultState({
+      isHangingUp: false,
+    });
   },
-  setDefaultState: function () {
+  setDefaultState: function (state = {}) {
     this.setState({
+      ...state,
       peer: null,
       stream: null,
       call: null,
@@ -142,16 +145,20 @@ const chatPage = React.createClass({
   },
   stopPeer: function () {
     if (this.state.peer) {
-      if (this.state.call) {
-        this.state.call.close();
-      }
+      this.setState({
+        isHangingUp: true
+      }, () => {
+        if (this.state.call) {
+          this.state.call.close();
+        }
 
-      if (this.state.stream) {
-        this.state.stream.stop();
-      }
+        if (this.state.stream) {
+          this.state.stream.stop();
+        }
 
-      this.state.peer.destroy();
-      this.setDefaultState();
+        this.state.peer.destroy();
+        this.setDefaultState();
+      });
     }
   },
   onAnswer: function (message) {
@@ -173,9 +180,9 @@ const chatPage = React.createClass({
                   contactPeerId: message.contactVideoPeerId,
                   call: this.state.peer.call(message.contactVideoPeerId, stream),
                   callMessageId: message._id,
+                }, () => {
+                  this.listenToConnections();
                 });
-
-                this.listenToConnections();
               }
             });
           } else {
@@ -225,7 +232,13 @@ const chatPage = React.createClass({
     _.each(this.state.peer.connections, connections => {
       connections.forEach(connection => {
         connection.on('close', () => {
-          this.onConnectionLost();
+          if (this.state.isHangingUp) {
+            this.setState({
+              isHangingUp: false
+            });
+          } else {
+            this.onConnectionLost();
+          }
         });
       });
     });
