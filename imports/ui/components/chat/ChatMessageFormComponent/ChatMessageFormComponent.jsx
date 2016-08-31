@@ -9,13 +9,19 @@ import './ChatMessageFormComponentStyle.less';
 const form = React.createClass({
   propTypes: {
     contact: React.PropTypes.object.isRequired,
+    setMessagesHeight: React.PropTypes.func.isRequired,
     scrollToBottom: React.PropTypes.func.isRequired,
+  },
+  getInitialState: function () {
+    return {
+      message: ''
+    };
   },
   componentDidMount: function () {
     autosize(this.refs.content);
 
     this.refs.content.addEventListener('autosize:resized', () => {
-      $(this.refs.messages).css('bottom', `${this.refs.content.offsetHeight + 11}px`);
+      this.props.setMessagesHeight(this.refs.content.offsetHeight + 11);
     });
 
     this.props.scrollToBottom();
@@ -34,7 +40,13 @@ const form = React.createClass({
                   <button className="ui white submit button left-button">
                     <i className="large smile button icon"/>
                   </button>
-                  <textarea ref="content" rows="1" required/>
+                  <textarea
+                    ref="content"
+                    rows="1"
+                    required
+                    onChange={this.updateMessage}
+                    value={this.state.message}
+                  />
                   <button type="submit" className="ui white submit button">
                     <i className="large send button icon"/>
                   </button>
@@ -46,24 +58,29 @@ const form = React.createClass({
       </section>
     );
   },
+  updateMessage: function (event) {
+    this.setState({
+      message: event.target.value
+    });
+  },
   // TODO: allow to send message by pressing "enter"?
   postMessage: function (event) {
     event.preventDefault();
 
-    const textarea = $(this.refs.content);
-    const content = textarea.val();
-
     Messages.insert({
       toUserId: this.props.contact._id,
-      content
+      content: this.state.message,
     }, err => {
       if (err) {
         toastr.error(err.reason, 'Error');
       }
     });
 
-    textarea.val('');
-    autosize.update(this.refs.content);
+    this.setState({
+      message: ''
+    }, () => {
+      autosize.update(this.refs.content);
+    });
 
     return false;
   },

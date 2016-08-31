@@ -9,6 +9,15 @@ import { userHasContact } from '/imports/api/collections/users';
 import { ChatComponent } from '/imports/ui/components/chat/ChatComponent/ChatComponent';
 import { ChatSidebarComponent } from '/imports/ui/components/chat/ChatSidebarComponent/ChatSidebarComponent';
 
+const defaultCallState = {
+  peer: null,
+  stream: null,
+  call: null,
+  userPeerId: null,
+  contactPeerId: null,
+  callMessageId: null,
+};
+
 const chatPage = React.createClass({
   propTypes: {
     user: React.PropTypes.object.isRequired,
@@ -16,21 +25,14 @@ const chatPage = React.createClass({
     contact: React.PropTypes.object,
     messages: React.PropTypes.array.isRequired
   },
-  componentWillMount: function () {
-    this.setDefaultState({
+  getInitialState: function () {
+    return {
+      ...defaultCallState,
       isHangingUp: false,
-    });
+    }
   },
-  setDefaultState: function (state = {}) {
-    this.setState({
-      ...state,
-      peer: null,
-      stream: null,
-      call: null,
-      userPeerId: null,
-      contactPeerId: null,
-      callMessageId: null,
-    });
+  resetVideoCallState: function () {
+    this.setState(defaultCallState);
   },
   render: function () {
     return (
@@ -157,7 +159,7 @@ const chatPage = React.createClass({
         }
 
         this.state.peer.destroy();
-        this.setDefaultState();
+        this.resetVideoCallState();
       });
     }
   },

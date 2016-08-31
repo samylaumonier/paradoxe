@@ -58,9 +58,16 @@ const chat = React.createClass({
           </If>
         </div>
 
-        <ChatMessageFormComponent contact={this.props.contact} scrollToBottom={this.scrollToBottom}/>
+        <ChatMessageFormComponent
+          contact={this.props.contact}
+          setMessagesHeight={this.setMessagesHeight}
+          scrollToBottom={this.scrollToBottom}
+        />
       </div>
     );
+  },
+  setMessagesHeight: function (height) {
+    $(this.refs.messages).css('bottom', `${height}px`);
   },
   scrollToBottom: function () {
     const messages = $(this.refs.messages);
