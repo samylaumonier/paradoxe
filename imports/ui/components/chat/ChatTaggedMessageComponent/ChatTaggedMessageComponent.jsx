@@ -4,11 +4,16 @@ import nl2br from 'react-nl2br';
 import { composeWithTracker } from 'react-komposer';
 import { Switch, Case, Default } from 'jsx-switch';
 
-import { INCOMING_VIDEO_CALL_TAG, OUTGOING_VIDEO_CALL_TAG } from '/imports/api/collections/messages';
+import {
+  INCOMING_VIDEO_CALL_TAG,
+  OUTGOING_VIDEO_CALL_TAG,
+  HUNG_UP_VIDEO_CALL_TAG
+} from '/imports/api/collections/messages';
 
 import { AvatarComponent } from '/imports/ui/components/user/AvatarComponent/AvatarComponent';
 import { ChatIncomingVideoCallComponent } from '/imports/ui/components/chat/ChatIncomingVideoCallComponent/ChatIncomingVideoCallComponent';
 import { ChatOutgoingVideoCallComponent } from '/imports/ui/components/chat/ChatOutgoingVideoCallComponent/ChatOutgoingVideoCallComponent';
+import { ChatHungUpVideoCallComponent } from '/imports/ui/components/chat/ChatHungUpVideoCallComponent/ChatHungUpVideoCallComponent';
 
 const message = React.createClass({
   propTypes: {
@@ -17,6 +22,7 @@ const message = React.createClass({
     author: React.PropTypes.object.isRequired,
     onAnswer: React.PropTypes.func.isRequired,
     onDecline: React.PropTypes.func.isRequired,
+    onHangUp: React.PropTypes.func.isRequired,
     onCancel: React.PropTypes.func.isRequired,
   },
   render: function () {
@@ -49,11 +55,11 @@ const message = React.createClass({
                   onCancel={this.props.onCancel}
                 />
               </Case>
-              <Case expr={this.props.message.tag === OUTGOING_VIDEO_CALL_TAG}>
-                <ChatHungUpVideoCallComponent // TODO
+              <Case expr={this.props.message.tag === HUNG_UP_VIDEO_CALL_TAG}>
+                <ChatHungUpVideoCallComponent
                   contact={this.props.contact}
                   message={this.props.message}
-                  onHungUp={this.props.onHungUp}
+                  onHangUp={this.props.onHangUp}
                 />
               </Case>
               <Default>

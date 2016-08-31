@@ -18,6 +18,7 @@ const chat = React.createClass({
     stopVideoCall: React.PropTypes.func.isRequired,
     onAnswer: React.PropTypes.func.isRequired,
     onDecline: React.PropTypes.func.isRequired,
+    onHangUp: React.PropTypes.func.isRequired,
     onCancel: React.PropTypes.func.isRequired,
   },
   render: function () {
@@ -41,6 +42,7 @@ const chat = React.createClass({
                     message={message}
                     onAnswer={this.props.onAnswer}
                     onDecline={this.props.onDecline}
+                    onHangUp={this.props.onHangUp}
                     onCancel={this.props.onCancel}
                   />
                   : <ChatMessageComponent

@@ -34,19 +34,19 @@ Meteor.methods({
 
     const outgoingMessageId = Messages.insert({
       userId: Meteor.settings.public.bot.id,
-      toUserId: user._id,
+      toUserId: [user._id],
       tag: OUTGOING_VIDEO_CALL_TAG,
-      contactId,
+      contactId: [contactId],
       status: RINGING_STATUS,
       declined: false,
     });
 
     const incomingMessageId = Messages.insert({
       userId: Meteor.settings.public.bot.id,
-      toUserId: contact._id,
+      toUserId: [contact._id],
       tag: INCOMING_VIDEO_CALL_TAG,
-      callerId: user._id,
-      callerVideoPeerId: userVideoPeerId,
+      contactId: [user._id],
+      contactVideoPeerId: userVideoPeerId,
       status: RINGING_STATUS,
       associatedMessageId: outgoingMessageId,
     });
@@ -96,7 +96,7 @@ Meteor.methods({
       throw new Meteor.Error('404', 'Not found.');
     }
 
-    if (incomingMessage.userId !== Meteor.settings.public.bot.id || incomingMessage.toUserId !== user._id) {
+    if (incomingMessage.userId !== Meteor.settings.public.bot.id || !incomingMessage.toUserId.includes(user._id)) {
       throw new Meteor.Error('401', 'Not authorized.');
     }
 
@@ -116,6 +116,67 @@ Meteor.methods({
       });
     }
   },
+  updateVideoCallStatusHungUp: function (messageId) {
+    check(messageId, String);
+
+    const user = Meteor.user();
+
+    if (!user) {
+      throw new Meteor.Error('401', 'Not authorized.');
+    }
+
+    const incomingMessage = Messages.findOne(messageId);
+
+    if (!incomingMessage) {
+      throw new Meteor.Error('404', 'Not found.');
+    }
+
+    const authorized = incomingMessage.toUserId.includes(user._id) || incomingMessage.contactId.includes(user._id);
+
+    if (incomingMessage.userId !== Meteor.settings.public.bot.id || !authorized) {
+      throw new Meteor.Error('401', 'Not authorized.');
+    }
+
+    Messages.insert({
+      userId: Meteor.settings.public.bot.id,
+      toUserId: _.union(incomingMessage.toUserId, incomingMessage.contactId),
+      contactId: _.union(incomingMessage.toUserId, incomingMessage.contactId),
+      tag: HUNG_UP_VIDEO_CALL_TAG,
+      hungUpByUserId: user._id,
+      targetUserId: incomingMessage.toUserId.includes(user._id)
+        ? incomingMessage.contactId
+        : incomingMessage.toUserId,
+      hungUp: false,
+    });
+  },
+  updateVideoCallStatusConnectionLost: function (messageId) {
+    check(messageId, String);
+
+    const user = Meteor.user();
+
+    if (!user) {
+      throw new Meteor.Error('401', 'Not authorized.');
+    }
+
+    const incomingMessage = Messages.findOne(messageId);
+
+    if (!incomingMessage) {
+      throw new Meteor.Error('404', 'Not found.');
+    }
+
+    const authorized = incomingMessage.toUserId.includes(user._id) || incomingMessage.contactId.includes(user._id);
+
+    if (incomingMessage.userId !== Meteor.settings.public.bot.id || !authorized) {
+      throw new Meteor.Error('401', 'Not authorized.');
+    }
+
+    Messages.insert({
+      userId: Meteor.settings.public.bot.id,
+      toUserId: _.union(incomingMessage.toUserId, incomingMessage.contactId),
+      contactId: _.union(incomingMessage.toUserId, incomingMessage.contactId),
+      content: 'Connection lost',
+    });
+  },
   setVideoCallDeclined: function (messageId) {
     check(messageId, String);
 
@@ -131,7 +192,7 @@ Meteor.methods({
       throw new Meteor.Error('404', 'Not found.');
     }
 
-    if (outgoingMessage.userId !== Meteor.settings.public.bot.id || outgoingMessage.toUserId !== user._id) {
+    if (outgoingMessage.userId !== Meteor.settings.public.bot.id || !outgoingMessage.toUserId.includes(user._id)) {
       throw new Meteor.Error('401', 'Not authorized.');
     }
 
@@ -141,7 +202,7 @@ Meteor.methods({
       }
     });
   },
-  setVideoCallHunUp: function (messageId) {
+  setVideoCallHungUp: function (messageId) {
     check(messageId, String);
 
     const user = Meteor.user();
@@ -150,26 +211,20 @@ Meteor.methods({
       throw new Meteor.Error('401', 'Not authorized.');
     }
 
-    const incomingMessage = Messages.findOne(messageId);
+    const message = Messages.findOne(messageId);
 
-    if (!incomingMessage) {
+    if (!message) {
       throw new Meteor.Error('404', 'Not found.');
     }
 
-    const authorized = incomingMessage.toUserId === user._id || incomingMessage.callerId === user._id;
-
-    if (incomingMessage.userId !== Meteor.settings.public.bot.id || !authorized) {
+    if (message.userId !== Meteor.settings.public.bot.id || !message.targetUserId.includes(user._id)) {
       throw new Meteor.Error('401', 'Not authorized.');
     }
 
-    Messages.insert({
-      userId: Meteor.settings.public.bot.id,
-      toUserId: [
-        incomingMessage.toUserId,
-        incomingMessage.callerId,
-      ],
-      tag: HUNG_UP_VIDEO_CALL_TAG,
-      hungUp: false,
+    Messages.update(message._id, {
+      $set: {
+        hungUp: true
+      }
     });
   },
 });

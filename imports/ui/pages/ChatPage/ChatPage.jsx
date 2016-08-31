@@ -43,6 +43,7 @@ const chatPage = React.createClass({
                 stopVideoCall={this.stopVideoCall}
                 onAnswer={this.onAnswer}
                 onDecline={this.onDecline}
+                onHangUp={this.onHangUp}
                 onCancel={this.onCancel}
               />
               <ChatSidebarComponent
@@ -76,14 +77,14 @@ const chatPage = React.createClass({
 
         this.initPeer(userPeerId => {
           if (userPeerId) {
-            const callMessageId = Meteor.call('startVideoCall', userPeerId, this.props.contact._id, err => {
+            Meteor.call('startVideoCall', userPeerId, this.props.contact._id, (err, callMessageId) => {
               if (err) {
                 toastr.error(err.reason, 'Error');
+              } else {
+                this.setState({
+                  callMessageId
+                });
               }
-            });
-
-            this.setState({
-              callMessageId
             });
           } else {
             toastr.error('Unable to connect to the server.', 'Error');
@@ -107,8 +108,6 @@ const chatPage = React.createClass({
     });
 
     peer.on('open', userPeerId => {
-      console.log('on open', userPeerId);
-
       this.setState({
         userPeerId
       });
@@ -117,8 +116,8 @@ const chatPage = React.createClass({
     });
 
     peer.on('call', call => {
-      console.log('on call', call);
       call.answer(this.state.stream);
+      this.listenToConnections();
 
       this.setState({
         call
@@ -129,8 +128,8 @@ const chatPage = React.createClass({
       console.log('peer error', err);
     });
 
-    peer.on('close', err => {
-      console.log('peer close', err);
+    peer.on('close', () => {
+      console.log('peer close');
     });
 
     peer.on('disconnected', () => {
@@ -139,31 +138,6 @@ const chatPage = React.createClass({
 
     this.setState({
       peer
-    });
-  },
-  onAnswer: function (message) {
-    this.getUserStream((err, stream) => {
-      if (err) {
-        toastr.error('Webcam must be allowed to make a video call.', 'Error');
-      } else {
-        this.setState({
-          stream
-        });
-
-        this.initPeer(userPeerId => {
-          if (userPeerId) {
-            Meteor.call('updateVideoCallStatus', message._id, ANSWERED_STATUS);
-
-            this.setState({
-              contactPeerId: message.callerVideoPeerId,
-              call: this.state.peer.call(message.callerVideoPeerId, stream),
-              callMessageId: message._id,
-            });
-          } else {
-            toastr.error('Unable to connect to the server.', 'Error');
-          }
-        });
-      }
     });
   },
   stopPeer: function () {
@@ -180,17 +154,90 @@ const chatPage = React.createClass({
       this.setDefaultState();
     }
   },
+  onAnswer: function (message) {
+    this.getUserStream((err, stream) => {
+      if (err) {
+        toastr.error('Webcam must be allowed to make a video call.', 'Error');
+      } else {
+        this.setState({
+          stream
+        });
+
+        this.initPeer(userPeerId => {
+          if (userPeerId) {
+            Meteor.call('updateVideoCallStatus', message._id, ANSWERED_STATUS, err => {
+              if (err) {
+                toastr.error(err.reason, 'Error');
+              } else {
+                this.setState({
+                  contactPeerId: message.contactVideoPeerId,
+                  call: this.state.peer.call(message.contactVideoPeerId, stream),
+                  callMessageId: message._id,
+                });
+
+                this.listenToConnections();
+              }
+            });
+          } else {
+            toastr.error('Unable to connect to the server.', 'Error');
+          }
+        });
+      }
+    });
+  },
   onDecline: function (message) {
+    Meteor.call('setVideoCallDeclined', message._id, err => {
+      if (err) {
+        toastr.error(err.reason, 'Error');
+      }
+    });
+
     this.stopPeer();
-    Meteor.call('setVideoCallDeclined', message._id);
+  },
+  onHangUp: function (message) {
+    Meteor.call('setVideoCallHungUp', message._id, err => {
+      if (err) {
+        toastr.error(err.reason, 'Error');
+      }
+    });
+
+    this.stopPeer();
   },
   onCancel: function (message) {
+    Meteor.call('updateVideoCallStatus', message._id, CANCELED_STATUS, err => {
+      if (err) {
+        toastr.error(err.reason, 'Error');
+      }
+    });
+
     this.stopPeer();
-    Meteor.call('updateVideoCallStatus', message._id, CANCELED_STATUS);
   },
   stopVideoCall: function () {
+    Meteor.call('updateVideoCallStatusHungUp', this.state.callMessageId, err => {
+      if (err) {
+        toastr.error(err.reason, 'Error');
+      }
+    });
+
     this.stopPeer();
-    Meteor.call('setVideoCallHunUp', this.state.callMessageId);
+  },
+  listenToConnections: function () {
+    _.each(this.state.peer.connections, connections => {
+      connections.forEach(connection => {
+        connection.on('close', () => {
+          this.onConnectionLost();
+        });
+      });
+    });
+  },
+  onConnectionLost: function () {
+    Meteor.call('updateVideoCallStatusConnectionLost', this.state.callMessageId, err => {
+      if (err) {
+        toastr.error(err.reason, 'Error');
+      }
+    });
+
+    this.stopPeer();
   },
 });
 
@@ -211,9 +258,9 @@ function composer(props, onData) {
 
       messages = Messages.find({
         $or: [
-          { userId: user._id, toUserId: contact._id },
-          { userId: contact._id, toUserId: user._id },
-          { userId: Meteor.settings.public.bot.id, toUserId: { $in: [user._id] } },
+          { userId: user._id, toUserId: { $in: [contact._id] } },
+          { userId: contact._id, toUserId: { $in: [user._id] } },
+          { userId: Meteor.settings.public.bot.id, toUserId: { $in: [user._id] }, contactId: { $in: [contact._id] } },
         ]
       }, {
         sort: {

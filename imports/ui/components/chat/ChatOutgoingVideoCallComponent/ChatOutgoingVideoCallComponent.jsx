@@ -54,7 +54,7 @@ const component = React.createClass({
     );
   },
   onCancel: function () {
-    this.props.onCancel(this.props.message._id);
+    this.props.onCancel(this.props.message);
   },
 });
 

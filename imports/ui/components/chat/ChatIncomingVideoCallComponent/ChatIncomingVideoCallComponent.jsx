@@ -39,7 +39,7 @@ const component = React.createClass({
             <span>You declined the video call.</span>
           </Case>
           <Case expr={this.props.message.status === CANCELED_STATUS}>
-            {this.props.contact.username} canceled the video call.
+            <span>{this.props.contact.username} canceled the video call.</span>
           </Case>
           <Case expr={this.props.message.status === MISSED_STATUS}>
             <span>You missed a video call.</span>
