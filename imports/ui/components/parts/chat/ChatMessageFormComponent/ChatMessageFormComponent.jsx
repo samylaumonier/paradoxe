@@ -3,6 +3,7 @@ import autosize from '/node_modules/autosize/dist/autosize.min';
 
 import { Messages } from '/imports/api/collections/messages';
 
+import 'emojione-picker/css/picker.css';
 import './ChatMessageFormComponentStyle.less';
 
 export const ChatMessageFormComponent = React.createClass({
@@ -10,6 +11,9 @@ export const ChatMessageFormComponent = React.createClass({
     contact: React.PropTypes.object.isRequired,
     setMessagesHeight: React.PropTypes.func.isRequired,
     scrollToBottom: React.PropTypes.func.isRequired,
+    toggleEmojis: React.PropTypes.func.isRequired,
+    unselectEmoji: React.PropTypes.func.isRequired,
+    selectedEmoji: React.PropTypes.object,
   },
   getInitialState: function () {
     return {
@@ -28,6 +32,17 @@ export const ChatMessageFormComponent = React.createClass({
   componentDidUpdate: function () {
     this.props.scrollToBottom();
   },
+  componentWillReceiveProps: function (nextProps) {
+    if (nextProps.selectedEmoji) {
+      console.log(nextProps.selectedEmoji);
+
+      this.setState({
+        message: `${this.state.message} ${nextProps.selectedEmoji.shortname}`,
+      }, () => {
+        this.props.unselectEmoji();
+      });
+    }
+  },
   render: function () {
     return (
       <section>
@@ -36,7 +51,7 @@ export const ChatMessageFormComponent = React.createClass({
             <div className="field">
               <div className="ui aligned">
                 <div className="ui center icon action input">
-                  <button className="ui white submit button left-button">
+                  <button className="ui white button left-button" onClick={this.props.toggleEmojis}>
                     <i className="large smile button icon"/>
                   </button>
                   <textarea

@@ -1,4 +1,5 @@
 import React from 'react';
+import nl2br from 'react-nl2br';
 
 import { AvatarComponent } from '/imports/ui/components/parts/user/AvatarComponent/AvatarComponent';
 
@@ -23,7 +24,7 @@ export const PostItemComponent = React.createClass({
             <span className="username">{this.props.user.username}</span>
           </div>
           <div className="description">
-            {this.props.post.content}
+            {nl2br(this.props.post.content)}
           </div>
         </div>
         <div className="extra content">

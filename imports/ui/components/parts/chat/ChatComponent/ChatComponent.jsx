@@ -1,5 +1,6 @@
 import React from 'react';
 import { If, Then, Else } from 'react-if';
+import EmojiPicker from 'emojione-picker';
 
 import { ChatNavbarContainer } from '/imports/ui/containers/parts/chat/ChatNavbarContainer';
 import { ChatMessageContainer } from '/imports/ui/containers/parts/chat/ChatMessageContainer';
@@ -20,6 +21,11 @@ export const ChatComponent = React.createClass({
     onDecline: React.PropTypes.func.isRequired,
     onHangUp: React.PropTypes.func.isRequired,
     onCancel: React.PropTypes.func.isRequired,
+  },
+  getInitialState: function () {
+    return {
+      selectedEmoji: null
+    };
   },
   render: function () {
     return (
@@ -58,16 +64,24 @@ export const ChatComponent = React.createClass({
           </If>
         </div>
 
+        <div id="emojis-container" ref="emojis">
+          <EmojiPicker search={true} onChange={this.onSelectEmoji} />
+        </div>
+
         <ChatMessageFormComponent
           contact={this.props.contact}
           setMessagesHeight={this.setMessagesHeight}
           scrollToBottom={this.scrollToBottom}
+          toggleEmojis={this.toggleEmojis}
+          unselectEmoji={this.unselectEmoji}
+          selectedEmoji={this.state.selectedEmoji}
         />
       </div>
     );
   },
   setMessagesHeight: function (height) {
     $(this.refs.messages).css('bottom', `${height}px`);
+    $(this.refs.emojis).css('bottom', `${height}px`);
   },
   scrollToBottom: function () {
     const messages = $(this.refs.messages);
@@ -75,5 +89,24 @@ export const ChatComponent = React.createClass({
     messages.animate({
       scrollTop: messages.prop('scrollHeight')
     }, 500);
-  }
+  },
+  toggleEmojis: function (event = null) {
+    if (event) {
+      event.preventDefault();
+    }
+
+    $(this.refs.emojis).toggle();
+  },
+  unselectEmoji: function () {
+    this.setState({
+      selectedEmoji: null
+    });
+  },
+  onSelectEmoji: function (emoji) {
+    this.setState({
+      selectedEmoji: emoji
+    });
+
+    this.toggleEmojis();
+  },
 });

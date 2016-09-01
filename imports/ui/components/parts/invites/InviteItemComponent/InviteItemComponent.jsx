@@ -19,7 +19,7 @@ export const InviteItemComponent = React.createClass({
             {this.props.user.username}
           </div>
           <div className="meta">
-            15 days ago
+            {moment(this.props.invite.sentAt).fromNow()}
           </div>
           <div className="description">
             {this.props.user.username} would like to add you to their contacts.
