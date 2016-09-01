@@ -1,8 +1,8 @@
 import React from 'react';
 
-import { SidebarComponent } from '/imports/ui/components/app/sidebar/SidebarComponent/SidebarComponent';
-import { NavbarComponent } from '/imports/ui/components/app/navbar/NavbarComponent/NavbarComponent';
-import { SidebarContactAddComponent } from '/imports/ui/components/app/sidebar/SidebarContactAddComponent/SidebarContactAddComponent';
+import { SidebarContainer } from '/imports/ui/containers/parts/app/sidebar/SidebarContainer';
+import { NavbarContainer } from '/imports/ui/containers/parts/app/navbar/NavbarContainer';
+import { SidebarContactAddComponent } from '/imports/ui/components/parts/app/sidebar/SidebarContactAddComponent/SidebarContactAddComponent';
 
 export const UserLayout = React.createClass({
   propTypes: {
@@ -16,9 +16,9 @@ export const UserLayout = React.createClass({
   render: function () {
     return (
       <div>
-        <SidebarComponent />
+        <SidebarContainer />
         <div className="userLayout">
-          <NavbarComponent />
+          <NavbarContainer />
           {this.props.children}
         </div>
         <SidebarContactAddComponent />
