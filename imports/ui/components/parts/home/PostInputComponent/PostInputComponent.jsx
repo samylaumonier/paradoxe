@@ -1,7 +1,7 @@
 import React from 'react';
 
 import { Posts } from '/imports/api/collections/posts';
-import autosize from '/node_modules/autosize/dist/autosize.min';
+import autosize from 'autosize';
 
 import './PostInputComponentStyle.less';
 

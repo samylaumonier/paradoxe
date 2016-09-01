@@ -1,5 +1,5 @@
 import React from 'react';
-import autosize from '/node_modules/autosize/dist/autosize.min';
+import autosize from 'autosize';
 
 import { Messages } from '/imports/api/collections/messages';
 
@@ -34,8 +34,6 @@ export const ChatMessageFormComponent = React.createClass({
   },
   componentWillReceiveProps: function (nextProps) {
     if (nextProps.selectedEmoji) {
-      console.log(nextProps.selectedEmoji);
-
       this.setState({
         message: `${this.state.message} ${nextProps.selectedEmoji.shortname}`,
       }, () => {
