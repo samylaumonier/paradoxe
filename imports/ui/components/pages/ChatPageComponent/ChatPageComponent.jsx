@@ -11,6 +11,7 @@ const defaultCallState = {
   peer: null,
   stream: null,
   call: null,
+  contactStream: null,
   userPeerId: null,
   contactPeerId: null,
   callMessageId: null,
@@ -21,16 +22,30 @@ export const ChatPageComponent = React.createClass({
     user: React.PropTypes.object.isRequired,
     hasContact: React.PropTypes.bool.isRequired,
     contact: React.PropTypes.object,
-    messages: React.PropTypes.array.isRequired
+    messages: React.PropTypes.array.isRequired,
+    callState: React.PropTypes.object,
+    onStartVideoCall: React.PropTypes.func.isRequired,
+    onStopVideoCall: React.PropTypes.func.isRequired,
   },
   getInitialState: function () {
-    return {
-      ...defaultCallState,
-      isHangingUp: false,
+    return this.props.callState
+      ? { ...this.props.callState, isHangingUp: false }
+      : { ...defaultCallState, isHangingUp: false };
+  },
+  componentWillReceiveProps: function (nextProps) {
+    if (nextProps.callState) {
+      this.setState(nextProps.callState);
+    } else {
+      this.setState({
+        stream: null,
+        call: null,
+        contactStream: null,
+      });
     }
   },
   resetVideoCallState: function () {
     this.setState(defaultCallState);
+    this.props.onStopVideoCall(this.props.contact.username);
   },
   render: function () {
     return (
@@ -53,7 +68,7 @@ export const ChatPageComponent = React.createClass({
                 user={this.props.user}
                 contact={this.props.contact}
                 stream={this.state.stream}
-                call={this.state.call}
+                contactStream={this.state.contactStream}
               />
             </div>
           </Then>
@@ -86,6 +101,10 @@ export const ChatPageComponent = React.createClass({
               } else {
                 this.setState({
                   callMessageId
+                }, () => {
+                  this.props.onStartVideoCall(this.props.contact.username, {
+                    stream
+                  });
                 });
               }
             });
@@ -122,8 +141,16 @@ export const ChatPageComponent = React.createClass({
       call.answer(this.state.stream);
       this.listenToConnections();
 
-      this.setState({
-        call
+      call.on('stream', contactStream => {
+        this.setState({
+          call,
+          contactStream,
+        });
+
+        this.props.onStartVideoCall(this.props.contact.username, {
+          call,
+          contactStream,
+        });
       });
     });
 
@@ -164,6 +191,7 @@ export const ChatPageComponent = React.createClass({
   onAnswer: function (message) {
     this.getUserStream((err, stream) => {
       if (err) {
+        console.log(err);
         toastr.error('Webcam must be allowed to make a video call.', 'Error');
       } else {
         this.setState({
@@ -176,12 +204,22 @@ export const ChatPageComponent = React.createClass({
               if (err) {
                 toastr.error(err.reason, 'Error');
               } else {
+                const call = this.state.peer.call(message.contactVideoPeerId, stream);
+
                 this.setState({
                   contactPeerId: message.contactVideoPeerId,
-                  call: this.state.peer.call(message.contactVideoPeerId, stream),
+                  call,
                   callMessageId: message._id,
                 }, () => {
                   this.listenToConnections();
+
+                  call.on('stream', contactStream => {
+                    this.props.onStartVideoCall(this.props.contact.username, {
+                      stream,
+                      call,
+                      contactStream,
+                    });
+                  });
                 });
               }
             });

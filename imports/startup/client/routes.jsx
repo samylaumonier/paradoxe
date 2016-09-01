@@ -7,9 +7,9 @@ import store from './store';
 import { isAuthHook } from './hooks/routes/connect';
 import { requireAuthHook } from './hooks/routes/main';
 
-import { MainLayout } from '/imports/ui/layouts/MainLayout';
-import { UserLayout } from '/imports/ui/layouts/UserLayout';
+import { MainLayoutComponent } from '/imports/ui/components/layouts/MainLayoutComponent';
 
+import { UserLayoutContainer } from '/imports/ui/containers/layouts/UserLayoutContainer';
 import { ConnectionPageComponent } from '/imports/ui/components/pages/ConnectionPageComponent/ConnectionPageComponent';
 import { HomePageComponent } from '/imports/ui/components/pages/HomePageComponent/HomePageComponent';
 
@@ -19,12 +19,12 @@ import { InvitesPageContainer } from '/imports/ui/containers/pages/InvitesPagesC
 export const renderRoutes = () => (
   <Provider store={store}>
     <Router history={browserHistory}>
-      <Route path="/" component={UserLayout} onEnter={requireAuthHook}>
+      <Route path="/" component={UserLayoutContainer} onEnter={requireAuthHook}>
         <IndexRoute component={HomePageComponent} />
         <Route path="invites" component={InvitesPageContainer} />
         <Route path="chat/:contactUsername" component={ChatPageContainer} />
       </Route>
-      <Route path="/connect" component={MainLayout} onEnter={isAuthHook}>
+      <Route path="/connect" component={MainLayoutComponent} onEnter={isAuthHook}>
         <IndexRoute component={ConnectionPageComponent} />
       </Route>
     </Router>

@@ -3,7 +3,7 @@ import { If, Then, Else } from 'react-if';
 
 import Masonry from 'react-masonry-component';
 
-import { PostInputComponent } from '/imports/ui/components/parts/home/PostInputComponent/PostInputComponent';
+import { PostInputContainer } from '/imports/ui/containers/parts/home/PostInputContainer';
 import { PostItemContainer } from '/imports/ui/containers/parts/home/PostItemContainer';
 
 import './PostsComponentStyle.less';
@@ -20,7 +20,7 @@ export const PostsComponent = React.createClass({
   render: function () {
     return (
       <div>
-        <PostInputComponent />
+        <PostInputContainer />
         <div className="ui divider" />
         <h1>Recent posts</h1>
         <If condition={this.props.posts.length !== 0}>

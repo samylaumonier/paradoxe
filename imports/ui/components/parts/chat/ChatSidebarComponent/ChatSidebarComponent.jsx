@@ -14,12 +14,12 @@ export const ChatSidebarComponent = React.createClass({
     user: React.PropTypes.object.isRequired,
     contact: React.PropTypes.object.isRequired,
     stream: React.PropTypes.object,
-    call: React.PropTypes.object,
+    contactStream: React.PropTypes.object,
   },
   render: function () {
     return (
       <div id="chat-sidebar">
-        <If condition={this.props.call === null}>
+        <If condition={this.props.contactStream === null}>
           <Then>
             <ChatSidebarAvatarComponent
               position="top"
@@ -29,7 +29,7 @@ export const ChatSidebarComponent = React.createClass({
           <Else>
             <PartnerVideoComponent
               user={this.props.user}
-              call={this.props.call}
+              stream={this.props.contactStream}
             />
           </Else>
         </If>

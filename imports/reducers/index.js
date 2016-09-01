@@ -1,9 +1,11 @@
 import { combineReducers } from 'redux';
 
-import { homePosts } from './home/posts';
+import { chats } from './chats';
+import { user } from './user';
 
-const mainReducer = combineReducers({
-  homePosts,
+const rootReducer = combineReducers({
+  chats,
+  user,
 });
 
-export default mainReducer;
+export default rootReducer;

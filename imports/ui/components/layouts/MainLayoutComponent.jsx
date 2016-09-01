@@ -1,12 +1,12 @@
 import React from 'react';
 
 
-export const MainLayout = ({ children }) => (
+export const MainLayoutComponent = ({ children }) => (
   <div className="container">
     {children}
   </div>
 );
 
-MainLayout.propTypes = {
+MainLayoutComponent.propTypes = {
   children: React.PropTypes.node,
 };

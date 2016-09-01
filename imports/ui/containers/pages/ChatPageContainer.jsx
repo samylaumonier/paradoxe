@@ -1,5 +1,9 @@
 import { Meteor } from 'meteor/meteor';
 import { composeWithTracker } from 'react-komposer';
+import { connect } from 'react-redux';
+
+import { saveCallState } from '/imports/actions/chats/save';
+import { deleteCallState } from '/imports/actions/chats/delete';
 
 import { Messages } from '/imports/api/collections/messages';
 import { userHasContact } from '/imports/api/collections/users';
@@ -44,4 +48,24 @@ function composer(props, onData) {
   }
 }
 
-export const ChatPageContainer = composeWithTracker(composer)(ChatPageComponent);
+const mapStateToProps = (state, ownProps) => {
+  return {
+    callState: state.chats[ownProps.params.contactUsername],
+  };
+};
+
+const mapDispatchToProps = (dispatch, ownProps) => {
+  return {
+    onStartVideoCall: (contactUsername, callState) => {
+      dispatch(saveCallState(contactUsername, callState));
+    },
+    onStopVideoCall: contactUsername => {
+      dispatch(deleteCallState(contactUsername));
+    },
+  };
+};
+
+export const ChatPageContainer = connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(composeWithTracker(composer)(ChatPageComponent));
