@@ -97,7 +97,7 @@ export const ChatMessageFormComponent = React.createClass({
     return false;
   },
   onKeyDown: function (event) {
-    if (event.keyCode === 13) {
+    if (!event.shiftKey && event.keyCode === 13) {
       this.postMessage(event);
     }
   },
