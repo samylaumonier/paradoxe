@@ -23,7 +23,7 @@ export const UserLayoutComponent = React.createClass({
     return (
       <div>
         <SidebarContainer />
-        <div className="userLayout">
+        <div className="user-layout">
           <NavbarContainer />
           {this.props.children}
         </div>

@@ -1,4 +1,5 @@
 import React from 'react';
+import { If, Else, Then } from 'react-if';
 import { Link } from 'react-router';
 
 import { getUserStatus } from '/imports/api/collections/users';
@@ -12,6 +13,11 @@ export const SidebarComponent = React.createClass({
   propTypes: {
     user: React.PropTypes.object.isRequired,
     contacts: React.PropTypes.array.isRequired
+  },
+  getInitialState: function () {
+    return {
+      contacts: this.props.contacts,
+    };
   },
   componentDidMount: function () {
     $('#contact-add-modal').modal({
@@ -57,14 +63,32 @@ export const SidebarComponent = React.createClass({
             Contacts
           </div>
           <div className="ui fluid inverted transparent icon input">
-            <input placeholder="Search..." type="text"/>
+            <input placeholder="Search..." type="text" onChange={this.onFilterContacts}/>
             <i className="search icon"/>
           </div>
-          <div className="ui mini middle aligned selection inverted relaxed divided list">
-            {this.props.contacts.map(contact => <SidebarContactItemComponent key={contact._id} user={this.props.user} contact={contact}/>)}
-          </div>
+          <If condition={this.state.contacts.length !== 0}>
+            <Then>
+              <div className="ui mini middle aligned selection inverted relaxed divided list">
+                {this.state.contacts.map(contact =>
+                  <SidebarContactItemComponent
+                    key={contact._id}
+                    user={this.props.user}
+                    contact={contact}
+                  />
+                )}
+              </div>
+            </Then>
+            <Else>
+              <div className="no-contacts">No contact found!</div>
+            </Else>
+          </If>
         </div>
       </div>
     );
+  },
+  onFilterContacts: function (event) {
+    this.setState({
+      contacts: this.props.contacts.filter(contact => contact.username.includes(event.target.value)),
+    });
   },
 });
