@@ -57,6 +57,7 @@ export const ChatMessageFormComponent = React.createClass({
                     rows="1"
                     required
                     onChange={this.updateMessage}
+                    onKeyDown={this.onKeyDown}
                     value={this.state.message}
                   />
                   <button type="submit" className="ui white submit button">
@@ -75,7 +76,6 @@ export const ChatMessageFormComponent = React.createClass({
       message: event.target.value
     });
   },
-  // TODO: allow to send message by pressing "enter"?
   postMessage: function (event) {
     event.preventDefault();
 
@@ -95,5 +95,10 @@ export const ChatMessageFormComponent = React.createClass({
     });
 
     return false;
+  },
+  onKeyDown: function (event) {
+    if (event.keyCode === 13) {
+      this.postMessage(event);
+    }
   },
 });
