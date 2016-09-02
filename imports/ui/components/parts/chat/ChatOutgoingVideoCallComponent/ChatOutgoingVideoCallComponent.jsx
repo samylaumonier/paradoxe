@@ -15,10 +15,12 @@ export const ChatOutgoingVideoCallComponent = React.createClass({
     message: React.PropTypes.object.isRequired,
     onDecline: React.PropTypes.func.isRequired,
     onCancel: React.PropTypes.func.isRequired,
+    onMissed: React.PropTypes.func.isRequired,
   },
   componentDidMount: function () {
     this.setState({
       declined: this.props.message.declined,
+      missed: this.props.message.missed,
     });
   },
   componentDidUpdate: function () {
@@ -27,6 +29,12 @@ export const ChatOutgoingVideoCallComponent = React.createClass({
         declined: true
       }, () => {
         this.props.onDecline(this.props.message);
+      });
+    } else if (this.props.message.status === MISSED_STATUS && !this.state.missed) {
+      this.setState({
+        missed: true
+      }, () => {
+        this.props.onMissed(this.props.message);
       });
     }
   },

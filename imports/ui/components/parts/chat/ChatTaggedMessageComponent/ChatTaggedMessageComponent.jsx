@@ -22,6 +22,7 @@ export const ChatTaggedMessageComponent = React.createClass({
     onDecline: React.PropTypes.func.isRequired,
     onHangUp: React.PropTypes.func.isRequired,
     onCancel: React.PropTypes.func.isRequired,
+    onMissed: React.PropTypes.func.isRequired,
   },
   render: function () {
     return (
@@ -51,6 +52,7 @@ export const ChatTaggedMessageComponent = React.createClass({
                   message={this.props.message}
                   onDecline={this.props.onDecline}
                   onCancel={this.props.onCancel}
+                  onMissed={this.props.onMissed}
                 />
               </Case>
               <Case expr={this.props.message.tag === HUNG_UP_VIDEO_CALL_TAG}>

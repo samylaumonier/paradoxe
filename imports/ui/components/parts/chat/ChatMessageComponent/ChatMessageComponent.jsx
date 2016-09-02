@@ -1,21 +1,18 @@
 import React from 'react';
-import ReactEmoji from 'react-emoji';
+import emojione from 'emojione';
 
 import { AvatarComponent } from '/imports/ui/components/parts/user/AvatarComponent/AvatarComponent';
 
+import './ChatMessageComponentStyle.less';
+
 const newlineRegex = /(\r\n|\n\r|\r|\n)/g;
-const options = {
-  emojiType: 'emojione'
-};
+emojione.ascii = true;
 
 export const ChatMessageComponent = React.createClass({
   propTypes: {
     message: React.PropTypes.object.isRequired,
     author: React.PropTypes.object.isRequired
   },
-  mixins: [
-    ReactEmoji
-  ],
   render: function () {
     return (
       <div className="comment">
@@ -32,17 +29,26 @@ export const ChatMessageComponent = React.createClass({
               <a className="reply">More</a>
             </div>
           </div>
-          <div className="text">
+          <div className="text" ref="text">
             {this.props.message.content.split(newlineRegex).map((line, index) => {
               if (line.match(newlineRegex)) {
                 return <br key={index}/>;
               } else {
-                return this.emojify(line, options);
+                return <span key={index} dangerouslySetInnerHTML={{__html: emojione.toImage(line.trim())}} />;
               }
             })}
           </div>
         </div>
       </div>
     );
-  }
+  },
+  componentDidMount: function () {
+    $(this.refs.text).find('span').each(function () {
+      const line = $(this);
+
+      if (line.contents().length === 1) {
+        line.addClass('big-emojis');
+      }
+    });
+  },
 });

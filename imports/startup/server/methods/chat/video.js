@@ -39,6 +39,7 @@ Meteor.methods({
       contactId: [contactId],
       status: RINGING_STATUS,
       declined: false,
+      missed: false,
     });
 
     const incomingMessageId = Messages.insert({
@@ -199,6 +200,31 @@ Meteor.methods({
     Messages.update(outgoingMessage._id, {
       $set: {
         declined: true
+      }
+    });
+  },
+  setVideoCallMissed: function (messageId) {
+    check(messageId, String);
+
+    const user = Meteor.user();
+
+    if (!user) {
+      throw new Meteor.Error('401', 'Not authorized.');
+    }
+
+    const outgoingMessage = Messages.findOne(messageId);
+
+    if (!outgoingMessage) {
+      throw new Meteor.Error('404', 'Not found.');
+    }
+
+    if (outgoingMessage.userId !== Meteor.settings.public.bot.id || !outgoingMessage.toUserId.includes(user._id)) {
+      throw new Meteor.Error('401', 'Not authorized.');
+    }
+
+    Messages.update(outgoingMessage._id, {
+      $set: {
+        missed: true
       }
     });
   },

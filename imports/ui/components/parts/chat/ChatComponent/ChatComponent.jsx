@@ -21,6 +21,7 @@ export const ChatComponent = React.createClass({
     onDecline: React.PropTypes.func.isRequired,
     onHangUp: React.PropTypes.func.isRequired,
     onCancel: React.PropTypes.func.isRequired,
+    onMissed: React.PropTypes.func.isRequired,
   },
   getInitialState: function () {
     return {
@@ -50,6 +51,7 @@ export const ChatComponent = React.createClass({
                     onDecline={this.props.onDecline}
                     onHangUp={this.props.onHangUp}
                     onCancel={this.props.onCancel}
+                    onMissed={this.props.onMissed}
                   />
                   : <ChatMessageContainer
                     key={message._id}

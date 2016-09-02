@@ -63,6 +63,7 @@ export const ChatPageComponent = React.createClass({
                 onDecline={this.onDecline}
                 onHangUp={this.onHangUp}
                 onCancel={this.onCancel}
+                onMissed={this.onMissed}
               />
               <ChatSidebarComponent
                 user={this.props.user}
@@ -241,6 +242,15 @@ export const ChatPageComponent = React.createClass({
   },
   onHangUp: function (message) {
     Meteor.call('setVideoCallHungUp', message._id, err => {
+      if (err) {
+        toastr.error(err.reason, 'Error');
+      }
+    });
+
+    this.stopPeer();
+  },
+  onMissed: function (message) {
+    Meteor.call('setVideoCallMissed', message._id, err => {
       if (err) {
         toastr.error(err.reason, 'Error');
       }
