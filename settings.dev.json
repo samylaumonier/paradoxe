@@ -7,7 +7,8 @@
     },
     "bot": {
       "id": "bot"
-    }
+    },
+    "filesPath": "../epsilon-files"
   },
   "electron": {
     "name": "Video",

@@ -25,8 +25,7 @@ export const ChatTaggedMessageComponent = React.createClass({
     onHangUp: React.PropTypes.func.isRequired,
     onCancel: React.PropTypes.func.isRequired,
     onMissed: React.PropTypes.func.isRequired,
-    onStartUploadFile: React.PropTypes.func.isRequired,
-    getFiles: React.PropTypes.func.isRequired,
+    getFile: React.PropTypes.func.isRequired,
   },
   render: function () {
     return (
@@ -70,8 +69,7 @@ export const ChatTaggedMessageComponent = React.createClass({
                 <ChatShareFileComponent
                   contact={this.props.contact}
                   message={this.props.message}
-                  onStartUploadFile={this.props.onStartUploadFile}
-                  getFiles={this.props.getFiles}
+                  getFile={this.props.getFile}
                 />
               </Case>
               <Default>

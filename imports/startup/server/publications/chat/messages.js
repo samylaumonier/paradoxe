@@ -1,6 +1,7 @@
 import { Meteor } from 'meteor/meteor';
 import { Messages } from '/imports/api/collections/messages';
 import { userHasContact } from '/imports/api/collections/users';
+import { Files } from '/imports/api/collections/files';
 
 Meteor.publish('chat.messages', function (contactUsername) {
   this.autorun(function () {
@@ -39,7 +40,13 @@ Meteor.publish('chat.messages', function (contactUsername) {
             sentAt: -1
           },
           limit: 500
-        })
+        }),
+        Files.find({
+          $or: [
+            { userId: user._id, 'meta.contactId': { $in: [contact._id] }},
+            { userId: contact._id, 'meta.contactId': { $in: [user._id] }},
+          ]
+        }).cursor,
       ];
     }
 

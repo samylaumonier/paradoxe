@@ -13,8 +13,7 @@ export const MISSED_STATUS = 5;
 export const HUNG_UP_STATUS = 6;
 export const ERROR_STATUS = 7;
 export const UPLOADING_STATUS = 8;
-export const REMOVED_STATUS = 9;
-
-
+export const DELETED_STATUS = 9;
+export const UPLOADED_STATUS = 10;
 
 export const RINGING_DURATION = 30;

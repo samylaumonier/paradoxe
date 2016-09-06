@@ -66,6 +66,8 @@ npm-mongo@1.5.48
 observe-sequence@1.0.12
 ongoworks:security@2.0.1
 ordered-dict@1.0.8
+ostrio:cookies@2.0.4
+ostrio:files@1.5.6
 peerlibrary:assert@0.2.5
 peerlibrary:fiber-utils@0.6.0
 peerlibrary:reactive-mongo@0.1.1
@@ -88,6 +90,7 @@ spacebars-compiler@1.0.12
 srp@1.0.9
 standard-minifier-js@1.2.0
 static-html@1.1.12
+templating@1.1.14
 templating-tools@1.0.4
 tmeasday:publish-counts@0.7.3
 tracker@1.1.0

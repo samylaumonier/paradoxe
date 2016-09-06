@@ -7,6 +7,7 @@ import { deleteCallState } from '/imports/actions/chats/delete';
 
 import { Messages } from '/imports/api/collections/messages';
 import { userHasContact } from '/imports/api/collections/users';
+import { Files } from '/imports/api/collections/files';
 
 import { ChatPageComponent } from '/imports/ui/components/pages/ChatPageComponent/ChatPageComponent';
 
@@ -22,6 +23,7 @@ function composer(props, onData) {
 
     let hasContact = false;
     let messages = [];
+    let files = [];
 
     if (user && contact && userHasContact(user, contact._id)) {
       hasContact = true;
@@ -37,13 +39,21 @@ function composer(props, onData) {
           sentAt: -1
         }
       }).fetch();
+
+      files = Files.find({
+        $or: [
+          { userId: user._id, 'meta.contactId': { $in: [contact._id] }},
+          { userId: contact._id, 'meta.contactId': { $in: [user._id] }},
+        ]
+      }).fetch();
     }
 
     onData(null, {
       user,
       hasContact,
       contact,
-      messages
+      messages,
+      files
     });
   }
 }

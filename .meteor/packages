@@ -26,13 +26,14 @@ static-html@1.1.12
 chrismbeckett:toastr
 fortawesome:fontawesome
 juliancwirko:postcss
+kevohagan:sweetalert
 matb33:collection-hooks
 meson:electron
 meteorhacks:picker
 mizzao:user-status
 momentjs:moment
 ongoworks:security
+ostrio:files
 peerlibrary:reactive-publish
 semantic:ui
 tmeasday:publish-counts
-kevohagan:sweetalert

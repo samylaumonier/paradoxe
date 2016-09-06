@@ -17,8 +17,12 @@ const defaultCallState = {
   callMessageId: null,
 };
 
-const defaultState = {
+const defaultFileState = {
   files: [],
+  uploads: [],
+};
+
+const defaultState = {
   isHangingUp: false
 };
 
@@ -28,14 +32,17 @@ export const ChatPageComponent = React.createClass({
     hasContact: React.PropTypes.bool.isRequired,
     contact: React.PropTypes.object,
     messages: React.PropTypes.array.isRequired,
+    files: React.PropTypes.array.isRequired,
     callState: React.PropTypes.object,
+    fileState: React.PropTypes.object,
     onStartVideoCall: React.PropTypes.func.isRequired,
     onStopVideoCall: React.PropTypes.func.isRequired,
   },
   getInitialState: function () {
-    return this.props.callState
-      ? { ...this.props.callState, ...defaultState }
-      : { ...defaultCallState, ...defaultState };
+    const callState = this.props.callState || defaultCallState;
+    const fileState = this.props.fileState || defaultFileState;
+
+    return { ...callState, ...fileState, ...defaultState };
   },
   componentWillReceiveProps: function (nextProps) {
     if (nextProps.callState) {
@@ -70,8 +77,7 @@ export const ChatPageComponent = React.createClass({
                 onCancel={this.onCancel}
                 onMissed={this.onMissed}
                 onAddFile={this.onAddFile}
-                onStartUploadFile={this.onStartUploadFile}
-                getFiles={this.getFiles}
+                getFile={this.getFile}
               />
               <ChatSidebarComponent
                 user={this.props.user}
@@ -82,6 +88,7 @@ export const ChatPageComponent = React.createClass({
             </div>
           </Then>
           <Else>
+            {/*TODO: 404*/}
             <p>404</p>
           </Else>
         </If>
@@ -311,15 +318,14 @@ export const ChatPageComponent = React.createClass({
   onAddFile: function (file) {
     const files = this.state.files;
     files.push(file);
+
     this.setState({
       files
     });
   },
-  onStartUploadFile: function (fileId) {
-    const file = this.getFiles;
-    return file;
-  },
-  getFiles: function (fileId) {
-    return _.findWhere(this.state.files, {id: fileId});
+  getFile: function (fileId) {
+    return _.findWhere(this.state.files, {
+      id: fileId
+    });
   },
 });
