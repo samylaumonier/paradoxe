@@ -22,7 +22,7 @@
     "height": 700,
     "width": 1024,
     "minHeight": 500,
-    "minWidth": 950,
+    "minWidth": 760,
     "frame": true,
     "title-bar-style": "visible",
     "resizable": true,

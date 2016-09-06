@@ -1,6 +1,7 @@
 import React from 'react';
 import { Switch, Case, Default } from 'jsx-switch';
 
+
 import {
   ANSWERED_STATUS,
   CANCELED_STATUS,
@@ -14,6 +15,9 @@ export const ChatIncomingVideoCallComponent = React.createClass({
     contact: React.PropTypes.object.isRequired,
     message: React.PropTypes.object.isRequired,
     onAnswer: React.PropTypes.func.isRequired,
+  },
+  componentDidMount: function () {
+    
   },
   render: function () {
     return (
@@ -30,6 +34,7 @@ export const ChatIncomingVideoCallComponent = React.createClass({
                 <i className="remove icon" />
                 Decline
               </button>
+              <audio src="/sounds/incoming.mp3" autoPlay hidden loop/>
             </span>
           </Case>
           <Case expr={this.props.message.status === ANSWERED_STATUS}>

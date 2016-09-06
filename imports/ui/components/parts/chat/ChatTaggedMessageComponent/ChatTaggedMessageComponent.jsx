@@ -5,13 +5,15 @@ import { Switch, Case, Default } from 'jsx-switch';
 import {
   INCOMING_VIDEO_CALL_TAG,
   OUTGOING_VIDEO_CALL_TAG,
-  HUNG_UP_VIDEO_CALL_TAG
+  HUNG_UP_VIDEO_CALL_TAG,
+  FILE_UPLOAD_TAG
 } from '/imports/api/collections/messages';
 
 import { AvatarComponent } from '/imports/ui/components/parts/user/AvatarComponent/AvatarComponent';
 import { ChatIncomingVideoCallComponent } from '/imports/ui/components/parts/chat/ChatIncomingVideoCallComponent/ChatIncomingVideoCallComponent';
 import { ChatOutgoingVideoCallComponent } from '/imports/ui/components/parts/chat/ChatOutgoingVideoCallComponent/ChatOutgoingVideoCallComponent';
 import { ChatHungUpVideoCallComponent } from '/imports/ui/components/parts/chat/ChatHungUpVideoCallComponent/ChatHungUpVideoCallComponent';
+import { ChatShareFileComponent } from '/imports/ui/components/parts/chat/ChatShareFileComponent/ChatShareFileComponent';
 
 export const ChatTaggedMessageComponent = React.createClass({
   propTypes: {
@@ -23,6 +25,8 @@ export const ChatTaggedMessageComponent = React.createClass({
     onHangUp: React.PropTypes.func.isRequired,
     onCancel: React.PropTypes.func.isRequired,
     onMissed: React.PropTypes.func.isRequired,
+    onStartUploadFile: React.PropTypes.func.isRequired,
+    getFiles: React.PropTypes.func.isRequired,
   },
   render: function () {
     return (
@@ -60,6 +64,14 @@ export const ChatTaggedMessageComponent = React.createClass({
                   contact={this.props.contact}
                   message={this.props.message}
                   onHangUp={this.props.onHangUp}
+                />
+              </Case>
+              <Case expr={this.props.message.tag === FILE_UPLOAD_TAG}>
+                <ChatShareFileComponent
+                  contact={this.props.contact}
+                  message={this.props.message}
+                  onStartUploadFile={this.props.onStartUploadFile}
+                  getFiles={this.props.getFiles}
                 />
               </Case>
               <Default>

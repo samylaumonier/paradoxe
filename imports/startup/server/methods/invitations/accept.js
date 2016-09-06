@@ -35,11 +35,14 @@ Meteor.methods({
         'profile.contacts': invitation.targetId
       }
     });
+    
+    const invitedUser = Meteor.users.findOne(invitation.targetId);
 
     const notification = {
       userId: invitation.userId,
       targetId: invitation.targetId,
       tag: REQUEST_ACCEPTED,
+      url: '/' + invitedUser.username,
       createdAt: new Date()
     };
 

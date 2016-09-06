@@ -17,6 +17,11 @@ const defaultCallState = {
   callMessageId: null,
 };
 
+const defaultState = {
+  files: [],
+  isHangingUp: false
+};
+
 export const ChatPageComponent = React.createClass({
   propTypes: {
     user: React.PropTypes.object.isRequired,
@@ -29,8 +34,8 @@ export const ChatPageComponent = React.createClass({
   },
   getInitialState: function () {
     return this.props.callState
-      ? { ...this.props.callState, isHangingUp: false }
-      : { ...defaultCallState, isHangingUp: false };
+      ? { ...this.props.callState, ...defaultState }
+      : { ...defaultCallState, ...defaultState };
   },
   componentWillReceiveProps: function (nextProps) {
     if (nextProps.callState) {
@@ -64,6 +69,9 @@ export const ChatPageComponent = React.createClass({
                 onHangUp={this.onHangUp}
                 onCancel={this.onCancel}
                 onMissed={this.onMissed}
+                onAddFile={this.onAddFile}
+                onStartUploadFile={this.onStartUploadFile}
+                getFiles={this.getFiles}
               />
               <ChatSidebarComponent
                 user={this.props.user}
@@ -299,5 +307,19 @@ export const ChatPageComponent = React.createClass({
     });
 
     this.stopPeer();
+  },
+  onAddFile: function (file) {
+    const files = this.state.files;
+    files.push(file);
+    this.setState({
+      files
+    });
+  },
+  onStartUploadFile: function (fileId) {
+    const file = this.getFiles;
+    return file;
+  },
+  getFiles: function (fileId) {
+    return _.findWhere(this.state.files, {id: fileId});
   },
 });

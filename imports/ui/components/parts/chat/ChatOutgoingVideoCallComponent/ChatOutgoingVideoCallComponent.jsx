@@ -49,6 +49,7 @@ export const ChatOutgoingVideoCallComponent = React.createClass({
                 <i className="remove icon"/>
                 Cancel
               </button>
+              <audio src="/sounds/outgoing.ogg" autoPlay hidden loop/>
             </span>
           </Case>
           <Case expr={this.props.message.status === ANSWERED_STATUS}>

@@ -1,5 +1,5 @@
 import React from 'react';
-import { If, Then } from 'react-if';
+import { If, Then, Else } from 'react-if';
 import { Link } from 'react-router';
 
 import './NavbarComponentStyle.less';
@@ -34,14 +34,6 @@ export const NavbarComponent = React.createClass({
         </Link>
         
         <div className="right menu">
-          <div className="ui right aligned category search item">
-            <div className="ui transparent icon input">
-              <input className="prompt" placeholder="Search..." type="text"/>
-              <i className="search link icon"/>
-            </div>
-            <div className="results"></div>
-          </div>
-  
           <div ref="notification" className="ui pointing dropdown icon item">
             <i className="bell icon"/>
             &nbsp; Notification
@@ -54,7 +46,6 @@ export const NavbarComponent = React.createClass({
             </If>
             <i className="dropdown icon"/>
             <div id="notifications-menu" className="menu">
-  
               {this.props.notifications.map(notification =>
                 <NavbarNotificationItemContainer
                   key={notification._id}
@@ -62,11 +53,18 @@ export const NavbarComponent = React.createClass({
                   notification={notification}
                 />
               )}
-              
-              <div className="item">
-                <p className="center">Mark all as seen.</p>
-              </div>
-            
+              <If condition={this.props.hasNotifications}>
+                <Then>
+                  <div className="item">
+                    <p className="center">Mark all as seen.</p>
+                  </div>
+                </Then>
+                <Else>
+                  <div className="item">
+                    <p className="center">No notifications.</p>
+                  </div>
+                </Else>
+              </If>
             </div>
           </div>
           
