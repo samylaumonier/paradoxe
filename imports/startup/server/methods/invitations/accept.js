@@ -42,8 +42,9 @@ Meteor.methods({
       userId: invitation.userId,
       targetId: invitation.targetId,
       tag: REQUEST_ACCEPTED,
-      url: '/' + invitedUser.username,
-      createdAt: new Date()
+      url: '/chat/' + invitedUser.username,
+      createdAt: new Date(),
+      seen: false
     };
 
     Notifications.insert(notification);

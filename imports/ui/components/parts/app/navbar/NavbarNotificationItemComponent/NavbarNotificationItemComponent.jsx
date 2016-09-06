@@ -1,6 +1,8 @@
+import { Meteor } from 'meteor/meteor';
 import React from 'react';
-import { Link } from 'react-router';
-import { Switch, Case, Default } from 'jsx-switch';
+import { browserHistory } from 'react-router';
+
+import { Switch, Case } from 'jsx-switch';
 
 import { CONTACT_REQUEST, REQUEST_ACCEPTED, MISSED_CALL } from '/imports/api/collections/notifications';
 
@@ -14,7 +16,7 @@ export const NavbarNotificationItemComponent = React.createClass({
   render: function () {
     return (
       <div>
-        <a className="item" href={this.props.notification.url}>
+        <div className="item" onClick={this.seen}>
           <AvatarComponent user={this.props.user} className={"ui avatar image"} size={22}/>
           <b className="username">{this.props.user.username}</b>
           <Switch>
@@ -28,8 +30,17 @@ export const NavbarNotificationItemComponent = React.createClass({
               <p className="header">Try to contact you.</p>
             </Case>
           </Switch>
-        </a>
+        </div>
       </div>
     );
   },
+  seen: function () {
+    Meteor.call('notificationSeen', this.props.notification._id, err => {
+      if(err){
+        toastr.error(err.reason, 'Error');
+      }
+    });
+    
+    browserHistory.push(this.props.notification.url);
+  }
 });

@@ -9,7 +9,8 @@ Meteor.publish('navbar.notifications', function () {
   const user = Meteor.users.findOne(this.userId);
   
   return Notifications.find({
-    userId: user._id
+    userId: user._id,
+    seen: false
   });
   
 });
