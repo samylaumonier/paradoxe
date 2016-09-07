@@ -6,6 +6,7 @@ import { ANSWERED_STATUS, CANCELED_STATUS } from '/imports/api/collections/messa
 
 import { ChatContainer } from '/imports/ui/containers/parts/chat/ChatContainer';
 import { ChatSidebarComponent } from '/imports/ui/components/parts/chat/ChatSidebarComponent/ChatSidebarComponent';
+import { NotFoundPageComponent } from '/imports/ui/components/pages/NotFoundPageComponent/NotFoundPageComponent';
 
 const defaultCallState = {
   peer: null,
@@ -88,8 +89,7 @@ export const ChatPageComponent = React.createClass({
             </div>
           </Then>
           <Else>
-            {/*TODO: 404*/}
-            <p>404</p>
+            <NotFoundPageComponent />
           </Else>
         </If>
       </div>

@@ -19,7 +19,7 @@ export const ChatNavbarComponent = React.createClass({
   render: function () {
     return (
       <div className="ui top attached menu" ref="navbar">
-        <a className="ui icon item">
+        <a className="ui icon item" data-content="Select a file">
           <i className="file icon"/>
         </a>
         <a className="ui icon item">
