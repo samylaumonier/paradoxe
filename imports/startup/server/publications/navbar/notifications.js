@@ -6,34 +6,27 @@ Meteor.publish('navbar.notifications', function () {
     if (!this.userId) {
       return [];
     }
+  
+    const user = Meteor.users.findOne(this.userId);
+  
+    const notifications = Notifications.find({
+      userId: user._id,
+      seen: false
+    });
+  
+  
+    return [
+      notifications,
+      Meteor.users.find({
+        _id: {
+          $in: _.pluck(notifications.fetch(), 'targetId')
+        }
+      }, {
+        fields: {
+          username: 1,
+          'profile.emailHash': 1
+        }
+      })
+    ]
   });
-
-  const user = Meteor.users.findOne(this.userId);
-  
-  const notifications = Notifications.find({
-    userId: user._id,
-    seen: false
-  });
-  
-  
-  return [
-    notifications,
-    Meteor.users.find({
-      _id: {
-        $in: _.pluck(notifications.fetch(), 'targetId')
-      }
-    }, {
-      fields: {
-        username: 1,
-        'profile.emailHash': 1
-      }
-    })
-  ]
-  
-  
-  
-  
-  
-  
-  
 });
