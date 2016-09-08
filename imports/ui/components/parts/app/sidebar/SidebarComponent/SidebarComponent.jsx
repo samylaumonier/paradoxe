@@ -16,6 +16,7 @@ export const SidebarComponent = React.createClass({
   },
   getInitialState: function () {
     return {
+      filter: '',
       contacts: this.props.contacts,
     };
   },
@@ -38,6 +39,15 @@ export const SidebarComponent = React.createClass({
         });
       }
     });
+  },
+  componentWillReceiveProps: function (nextProps) {
+    if (nextProps.contacts) {
+      this.setState({
+        contacts: this.state.filter.length === 0
+          ? nextProps.contacts
+          : nextProps.contacts.filter(contact => contact.username.includes(this.state.filter)),
+      });
+    }
   },
   render: function () {
     return (
@@ -88,6 +98,7 @@ export const SidebarComponent = React.createClass({
   },
   onFilterContacts: function (event) {
     this.setState({
+      filter: event.target.value,
       contacts: this.props.contacts.filter(contact => contact.username.includes(event.target.value)),
     });
   },
