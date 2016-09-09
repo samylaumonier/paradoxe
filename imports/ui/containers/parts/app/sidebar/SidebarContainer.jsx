@@ -1,32 +1,31 @@
-import { Meteor } from 'meteor/meteor';
-import { composeWithTracker } from 'react-komposer';
+import { connect } from 'react-redux';
+
+import { loadContacts } from '/imports/actions/sidebar/contacts/load';
+import { filterContacts } from '/imports/actions/sidebar/contacts/filter';
 
 import { SidebarComponent } from '/imports/ui/components/parts/app/sidebar/SidebarComponent/SidebarComponent';
 
-function composer(props, onData) {
-  const subscription = Meteor.subscribe('sidebar.contacts');
+const mapStateToProps = state => {
+  return {
+    user: state.user,
+    contacts: state.sidebar.contactsFilter.length
+      ? state.sidebar.contacts.filter(contact => contact.username.includes(state.sidebar.contactsFilter))
+      : state.sidebar.contacts,
+  };
+};
 
-  if (subscription.ready()) {
-    const user = Meteor.user();
-    let contacts = [];
+const mapDispatchToProps = dispatch => {
+  return {
+    loadContacts: () => {
+      dispatch(loadContacts());
+    },
+    onFilterContacts: filter => {
+      dispatch(filterContacts(filter));
+    },
+  };
+};
 
-    if (user) {
-      const ids = user.profile ? user.profile.contacts : null;
-
-      if (ids) {
-        contacts = Meteor.users.find({
-          _id: {
-            $in: ids
-          }
-        }).fetch();
-      }
-    }
-
-    onData(null, {
-      user: Meteor.user(),
-      contacts
-    });
-  }
-}
-
-export const SidebarContainer = composeWithTracker(composer)(SidebarComponent);
+export const SidebarContainer = connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(SidebarComponent);

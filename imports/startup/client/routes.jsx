@@ -2,7 +2,7 @@ import React from 'react';
 import { Provider } from 'react-redux';
 import { Router, Route, IndexRoute, browserHistory } from 'react-router';
 
-import store from './store';
+import store from '/imports/store';
 
 import { isAuthHook } from './hooks/routes/connect';
 import { requireAuthHook } from './hooks/routes/main';

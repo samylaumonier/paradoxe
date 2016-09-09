@@ -1,11 +1,25 @@
-import { Meteor } from 'meteor/meteor';
 import React from 'react';
 
-export const SidebarContactAddComponent = React.createClass({
+export const AddContactsModalComponent = React.createClass({
   propTypes: {
-    userId: React.PropTypes.string
+    user: React.PropTypes.object.isRequired,
+    loginToken: React.PropTypes.string.isRequired,
   },
   componentDidMount: function () {
+    const modal = $(this.refs.modal);
+
+    modal.modal({
+      context: '#modals',
+      closable: false,
+      onApprove: () => {
+        const dropdown = modal.find('select');
+        const usernames = dropdown.val() || [];
+
+        dropdown.dropdown('clear');
+        this.props.inviteUsers(usernames);
+      }
+    });
+
     const dropdown = $(this.refs.dropdown);
 
     dropdown.dropdown({
@@ -16,8 +30,8 @@ export const SidebarContactAddComponent = React.createClass({
         throttle: 100,
         cache: false,
         beforeXHR: xhr => {
-          xhr.setRequestHeader('X-User-Id', Meteor.userId());
-          xhr.setRequestHeader('X-Login-Token', localStorage.getItem('Meteor.loginToken'));
+          xhr.setRequestHeader('X-User-Id', this.props.user._id);
+          xhr.setRequestHeader('X-Login-Token', this.props.loginToken);
         },
         beforeSend: settings => {
           settings.urlData = {
@@ -32,7 +46,7 @@ export const SidebarContactAddComponent = React.createClass({
   },
   render: function () {
     return (
-      <div className="ui modal" id="contact-add-modal">
+      <div className="ui modal" ref="modal" id="contact-add-modal">
         <i className="close icon" />
         <div className="header">
           Add contacts

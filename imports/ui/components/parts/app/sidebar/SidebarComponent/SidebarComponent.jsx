@@ -12,42 +12,12 @@ import './SidebarComponentStyle.less';
 export const SidebarComponent = React.createClass({
   propTypes: {
     user: React.PropTypes.object.isRequired,
-    contacts: React.PropTypes.array.isRequired
-  },
-  getInitialState: function () {
-    return {
-      filter: '',
-      contacts: this.props.contacts,
-    };
+    contacts: React.PropTypes.array.isRequired,
+    loadContacts: React.PropTypes.func.isRequired,
+    onFilterContacts: React.PropTypes.func.isRequired,
   },
   componentDidMount: function () {
-    $('#contact-add-modal').modal({
-      context: '#modals',
-      closable: false,
-      onApprove: () => {
-        const dropdown = $('#contact-add-modal').find('select');
-        const usernames = dropdown.val() || [];
-        
-        dropdown.dropdown('clear');
-        
-        Meteor.call('inviteUsers', usernames, (err, res) => {
-          if (err) {
-            toastr.error(err.reason, 'Error');
-          } else {
-            toastr.success(`${res} invitation(s) sent`, 'Invitation(s) sent');
-          }
-        });
-      }
-    });
-  },
-  componentWillReceiveProps: function (nextProps) {
-    if (nextProps.contacts) {
-      this.setState({
-        contacts: this.state.filter.length === 0
-          ? nextProps.contacts
-          : nextProps.contacts.filter(contact => contact.username.includes(this.state.filter)),
-      });
-    }
+    this.props.loadContacts();
   },
   render: function () {
     return (
@@ -73,13 +43,17 @@ export const SidebarComponent = React.createClass({
             Contacts
           </div>
           <div className="ui fluid inverted transparent icon input">
-            <input placeholder="Search..." type="text" onChange={this.onFilterContacts}/>
+            <input
+              placeholder="Search..."
+              type="text"
+              onChange={event => this.props.onFilterContacts(event.target.value)}
+            />
             <i className="search icon"/>
           </div>
-          <If condition={this.state.contacts.length !== 0}>
+          <If condition={this.props.contacts.length !== 0}>
             <Then>
               <div className="ui mini middle aligned selection inverted relaxed divided list">
-                {this.state.contacts.map(contact =>
+                {this.props.contacts.map(contact =>
                   <SidebarContactItemComponent
                     key={contact._id}
                     user={this.props.user}
@@ -95,11 +69,5 @@ export const SidebarComponent = React.createClass({
         </div>
       </div>
     );
-  },
-  onFilterContacts: function (event) {
-    this.setState({
-      filter: event.target.value,
-      contacts: this.props.contacts.filter(contact => contact.username.includes(event.target.value)),
-    });
   },
 });

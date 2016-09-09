@@ -2,8 +2,7 @@ import React from 'react';
 
 import { SidebarContainer } from '/imports/ui/containers/parts/app/sidebar/SidebarContainer';
 import { NavbarContainer } from '/imports/ui/containers/parts/app/navbar/NavbarContainer';
-
-import { SidebarContactAddComponent } from '/imports/ui/components/parts/app/sidebar/SidebarContactAddComponent/SidebarContactAddComponent';
+import { AddContactsModalContainer } from '/imports/ui/containers/parts/app/modals/AddContactsModalContainer';
 
 export const UserLayoutComponent = React.createClass({
   propTypes: {
@@ -27,7 +26,7 @@ export const UserLayoutComponent = React.createClass({
           <NavbarContainer />
           {this.props.children}
         </div>
-        <SidebarContactAddComponent />
+        <AddContactsModalContainer />
         <div id="modals"></div>
         <div id="popups"></div>
       </div>
