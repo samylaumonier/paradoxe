@@ -10,21 +10,18 @@ export default store => next => action => {
 
   // setTimeout is fixing this bug: https://github.com/meteor/react-packages/issues/99
   setTimeout(() => {
-    const { subscribe, get, onChange } = action.meteor;
-
     if (subscriptions[action.type]) {
-      console.log('stopping');
       const subscriptionId = subscriptions[action.type].subscriptionId;
+
       computations[subscriptionId].stop();
       subscriptions[action.type].stop();
     }
 
-    const subscription = subscribe();
+    const subscription = action.meteor.subscribe();
     const subscriptionId = subscription.subscriptionId;
-    subscriptions[action.type] = subscription;
 
+    subscriptions[action.type] = subscription;
     computations[subscriptionId] = Tracker.autorun(() => {
-      const data = get();
       const ready = subscription.ready();
 
       store.dispatch({
@@ -33,17 +30,11 @@ export default store => next => action => {
       });
 
       if (ready) {
-        if (onChange) {
-          onChange(data);
-        }
-
         store.dispatch({
           type: `${action.type}_CHANGED`,
-          data,
+          data: action.meteor.get(),
         });
       }
     });
-
-    console.log(subscriptions, computations);
   }, 0);
 };

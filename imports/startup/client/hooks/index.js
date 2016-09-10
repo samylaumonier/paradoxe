@@ -1,3 +1,3 @@
 import './routes/chat';
-import './routes/connect';
-import './routes/main';
+import './routes/guest';
+import './routes/auth';

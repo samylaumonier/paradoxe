@@ -4,8 +4,8 @@ import { Router, Route, IndexRoute, browserHistory } from 'react-router';
 
 import store from '/imports/store';
 
-import { isAuthHook } from './hooks/routes/connect';
-import { requireAuthHook } from './hooks/routes/main';
+import { requireGuestHook } from './hooks/routes/guest';
+import { requireAuthHook } from './hooks/routes/auth';
 
 import { MainLayoutComponent } from '/imports/ui/components/layouts/MainLayoutComponent';
 
@@ -24,7 +24,7 @@ export const renderRoutes = () => (
         <Route path="invites" component={InvitesPageContainer} />
         <Route path="chat/:contactUsername" component={ChatPageContainer} />
       </Route>
-      <Route path="/connect" component={MainLayoutComponent} onEnter={isAuthHook}>
+      <Route path="/connect" component={MainLayoutComponent} onEnter={requireGuestHook}>
         <IndexRoute component={ConnectionPageComponent} />
       </Route>
     </Router>

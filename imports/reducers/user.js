@@ -1,9 +1,16 @@
-import { INIT_USER } from '/imports/actions/users/init';
+import { USER_CHANGED } from '/imports/actions/user/load';
 
-export function user(state = null, action) {
+const initialState = {
+  ready: false,
+};
+
+export function user(state = initialState, action) {
   switch (action.type) {
-    case INIT_USER:
-      return action.user;
+    case USER_CHANGED:
+      return {
+        ...action.data,
+        ready: true,
+      };
     default:
       return state;
   }

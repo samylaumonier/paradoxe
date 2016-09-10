@@ -1,31 +1,19 @@
-import { Meteor } from 'meteor/meteor';
-import { composeWithTracker } from 'react-komposer';
 import { connect } from 'react-redux';
 
-import { initUser } from '/imports/actions/users/init';
+import { loadUser } from '/imports/actions/user/load';
 
 import { UserLayoutComponent } from '/imports/ui/components/layouts/UserLayoutComponent';
 
-function composer(props, onData) {
-  const user = Meteor.user();
-
-  if (user) {
-    onData(null, {
-      user,
-    });
-  }
-}
-
-const mapStateToProps = (state, ownProps) => {
+const mapStateToProps = state => {
   return {
-
+    user: state.user,
   };
 };
 
-const mapDispatchToProps = (dispatch, ownProps) => {
+const mapDispatchToProps = dispatch => {
   return {
-    onInit: user => {
-      dispatch(initUser(user));
+    loadUser: () => {
+      dispatch(loadUser());
     }
   };
 };
@@ -33,4 +21,4 @@ const mapDispatchToProps = (dispatch, ownProps) => {
 export const UserLayoutContainer = connect(
   mapStateToProps,
   mapDispatchToProps
-)(composeWithTracker(composer)(UserLayoutComponent));
+)(UserLayoutComponent);

@@ -1,4 +1,5 @@
 import React from 'react';
+import { If, Then } from 'react-if';
 
 import { SidebarContainer } from '/imports/ui/containers/parts/app/sidebar/SidebarContainer';
 import { NavbarContainer } from '/imports/ui/containers/parts/app/navbar/NavbarContainer';
@@ -8,10 +9,10 @@ export const UserLayoutComponent = React.createClass({
   propTypes: {
     children: React.PropTypes.node,
     user: React.PropTypes.object.isRequired,
-    onInit: React.PropTypes.func.isRequired,
+    loadUser: React.PropTypes.func.isRequired,
   },
   componentWillMount: function () {
-    this.props.onInit(this.props.user);
+    this.props.loadUser();
   },
   componentDidMount: function () {
     $.fn.api.settings.api = {
@@ -21,12 +22,18 @@ export const UserLayoutComponent = React.createClass({
   render: function () {
     return (
       <div>
-        <SidebarContainer />
-        <div className="user-layout">
-          <NavbarContainer />
-          {this.props.children}
-        </div>
-        <AddContactsModalContainer />
+        <If condition={this.props.user.ready === true}>
+          <Then>
+            <div>
+              <SidebarContainer />
+              <div className="user-layout">
+                <NavbarContainer />
+                {this.props.children}
+              </div>
+              <AddContactsModalContainer />
+            </div>
+          </Then>
+        </If>
         <div id="modals"></div>
         <div id="popups"></div>
       </div>

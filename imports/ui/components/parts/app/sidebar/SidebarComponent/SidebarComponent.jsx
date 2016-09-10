@@ -16,7 +16,7 @@ export const SidebarComponent = React.createClass({
     loadContacts: React.PropTypes.func.isRequired,
     onFilterContacts: React.PropTypes.func.isRequired,
   },
-  componentDidMount: function () {
+  componentWillMount: function () {
     this.props.loadContacts();
   },
   render: function () {

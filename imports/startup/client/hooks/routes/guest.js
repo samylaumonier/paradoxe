@@ -1,4 +1,6 @@
-export const isAuthHook = function (nextState, replace) {
+import { Meteor } from 'meteor/meteor';
+
+export const requireGuestHook = (nextState, replace) => {
   if (Meteor.userId()) {
     replace({
       pathname: '/',
