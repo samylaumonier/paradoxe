@@ -1,7 +1,9 @@
 import React from 'react';
-import { browserHistory } from 'react-router';
 
 export const RegisterComponent = React.createClass({
+  propTypes: {
+    register: React.PropTypes.func.isRequired,
+  },
   render: function ()  {
     return (
       <form className="column" onSubmit={this.register}>
@@ -16,7 +18,7 @@ export const RegisterComponent = React.createClass({
               <div className="field">
                 <label>Username</label>
                 <div className="ui left icon input">
-                  <input id="register-username" type="text" placeholder="Username" required/>
+                  <input ref="username" type="text" placeholder="Username" required/>
                   <i className="user icon"/>
                 </div>
               </div>
@@ -25,7 +27,7 @@ export const RegisterComponent = React.createClass({
               <div className="field">
                 <label>Email</label>
                 <div className="ui left icon input">
-                  <input id="register-email" type="email" placeholder="Email" required/>
+                  <input ref="email" type="email" placeholder="Email" required/>
                   <i className="at icon"/>
                 </div>
               </div>
@@ -35,7 +37,7 @@ export const RegisterComponent = React.createClass({
           <div className="field">
             <label>Password</label>
             <div className="ui left icon input">
-              <input id="register-password" type="password" placeholder="Password" required/>
+              <input ref="password" type="password" placeholder="Password" required/>
               <i className="lock icon"/>
             </div>
           </div>
@@ -47,21 +49,10 @@ export const RegisterComponent = React.createClass({
   register: function (e) {
     e.preventDefault();
   
-    const email = $('#register-email').val();
-    const username = $('#register-username').val();
-    const password = $('#register-password').val();
-  
-    Accounts.createUser({
-      username,
-      email,
-      password
-    }, err => {
-      if (err) {
-        toastr.error(err.reason, 'Error');
-      } else {
-        toastr.success(`Welcome ${username}!`);
-        browserHistory.push('/');
-      }
-    });
+    const username = $(this.refs.username).val();
+    const email = $(this.refs.email).val();
+    const password = $(this.refs.password).val();
+
+    this.props.register(username, email, password);
   }
 });

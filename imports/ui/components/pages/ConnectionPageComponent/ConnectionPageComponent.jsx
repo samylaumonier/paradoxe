@@ -1,7 +1,7 @@
 import React from 'react';
 
-import { LoginComponent } from '/imports/ui/components/parts/user/LoginComponent/LoginComponent';
-import { RegisterComponent } from '/imports/ui/components/parts/user/RegisterComponent/RegisterComponent';
+import { LoginContainer } from '/imports/ui/containers/parts/user/LoginContainer';
+import { RegisterContainer } from '/imports/ui/containers/parts/user/RegisterContainer';
 
 import  './ConnectionPageComponentStyle.less';
 
@@ -17,8 +17,8 @@ export const ConnectionPageComponent = () => (
         <br/>
         <div className="ui large form">
           <div className="ui two column middle aligned very relaxed stackable grid">
-            <LoginComponent />
-            <RegisterComponent />
+            <LoginContainer />
+            <RegisterContainer />
           </div>
         </div>
       </div>

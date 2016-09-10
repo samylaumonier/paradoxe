@@ -1,7 +1,9 @@
 import React from 'react';
-import { browserHistory } from 'react-router';
 
 export const LoginComponent = React.createClass({
+  propTypes: {
+    login: React.PropTypes.func.isRequired,
+  },
   render: function ()  {
     return (
       <form className="column" onSubmit={this.login}>
@@ -14,14 +16,14 @@ export const LoginComponent = React.createClass({
           <div className="field">
             <label>Username</label>
             <div className="ui left icon input">
-              <input id="login-username" type="text" placeholder="Username" required/>
+              <input ref="username" type="text" placeholder="Username" required/>
               <i className="user icon"/>
             </div>
           </div>
           <div className="field">
             <label>Password</label>
             <div className="ui left icon input">
-              <input id="login-password" type="password" placeholder="Password" required/>
+              <input ref="password" type="password" placeholder="Password" required/>
               <i className="lock icon"/>
             </div>
           </div>
@@ -33,16 +35,9 @@ export const LoginComponent = React.createClass({
   login: function (e) {
     e.preventDefault();
     
-    const username = $('#login-username').val();
-    const password = $('#login-password').val();
-  
-    Meteor.loginWithPassword(username, password, (err, res) => {
-      if (err) {
-        toastr.error(err.reason, 'Error');
-      } else {
-        toastr.success('Welcome back', 'Logged in');
-        browserHistory.push('/');
-      }
-    });
+    const username = $(this.refs.username).val();
+    const password = $(this.refs.password).val();
+
+    this.props.login(username, password);
   }
 });
