@@ -15,7 +15,12 @@ const masonryOptions = {
 
 export const PostsComponent = React.createClass({
   propTypes: {
-    posts: React.PropTypes.array
+    postsReady: React.PropTypes.bool.isRequired,
+    posts: React.PropTypes.array.isRequired,
+    loadPosts: React.PropTypes.func.isRequired,
+  },
+  componentWillMount: function () {
+    this.props.loadPosts();
   },
   render: function () {
     return (

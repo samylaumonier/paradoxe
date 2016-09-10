@@ -1,37 +1,25 @@
-import { Meteor } from 'meteor/meteor';
-import { composeWithTracker } from 'react-komposer';
+import { connect } from 'react-redux';
 
-import { Posts } from '/imports/api/collections/posts';
+import { loadPosts } from '/imports/actions/home/posts/load';
 
 import { PostsComponent } from '/imports/ui/components/parts/home/PostsComponent/PostsComponent';
 
-function composer(props, onData) {
-  const subscription = Meteor.subscribe('home.posts');
+const mapStateToProps = state => {
+  return {
+    postsReady: state.home.postsReady,
+    posts: state.home.posts,
+  };
+};
 
-  if (subscription.ready()) {
-    const user = Meteor.user();
-    let posts = [];
-
-    if (user) {
-      const ids = user.profile ? user.profile.contacts : [];
-
-      ids.push(user._id);
-
-      posts = Posts.find({
-        userId: {
-          $in: ids
-        }
-      },{
-        sort: {
-          createdAt: -1
-        }
-      }).fetch();
+const mapDispatchToProps = dispatch => {
+  return {
+    loadPosts: () => {
+      dispatch(loadPosts());
     }
+  };
+};
 
-    onData(null, {
-      posts
-    });
-  }
-}
-
-export const PostsContainer = composeWithTracker(composer)(PostsComponent);
+export const PostsContainer = connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(PostsComponent);
