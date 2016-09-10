@@ -1,5 +1,5 @@
 import { Meteor } from 'meteor/meteor';
-import { Invitations } from '/imports/api/collections/invitations';
+import { Invites } from '/imports/api/collections/invites';
 
 Meteor.publish('navbar.invites', function () {
   if (!this.userId) {
@@ -8,7 +8,7 @@ Meteor.publish('navbar.invites', function () {
 
   const user = Meteor.users.findOne(this.userId);
 
-  Counts.publish(this, 'navbar.invites', Invitations.find({
+  Counts.publish(this, 'navbar.invites', Invites.find({
     targetId: user._id
   }));
 });

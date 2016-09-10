@@ -1,11 +1,11 @@
 import { Meteor } from 'meteor/meteor';
-import { Invitations } from '/imports/api/collections/invitations';
+import { Invites } from '/imports/api/collections/invites';
 import { Notifications, REQUEST_ACCEPTED } from '/imports/api/collections/notifications';
 
 Meteor.methods({
   acceptInvitation: function (invitationsId) {
     const user = Meteor.user();
-    const invitation = Invitations.findOne(invitationsId);
+    const invitation = Invites.findOne(invitationsId);
 
     if (!user) {
       throw new Meteor.Error('401', 'Not authorized.');
@@ -15,13 +15,13 @@ Meteor.methods({
       throw new Meteor.Error('404', 'Invitation not found.');
     }
 
-    const invertedInvite = Invitations.findOne({
+    const invertedInvite = Invites.findOne({
       userId: user._id,
       targetId: invitation.userId
     });
 
     if (invertedInvite) {
-      Invitations.remove(invertedInvite._id);
+      Invites.remove(invertedInvite._id);
     }
 
     Meteor.users.update(invitation.targetId, {

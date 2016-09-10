@@ -1,5 +1,5 @@
 import { Meteor } from 'meteor/meteor';
-import { Invitations } from '/imports/api/collections/invitations';
+import { Invites } from '/imports/api/collections/invites';
 
 Meteor.publish('invites.received', function () {
   this.autorun(function () {
@@ -8,8 +8,8 @@ Meteor.publish('invites.received', function () {
     }
     
     const user = Meteor.users.findOne(this.userId);
-    const invitations = Invitations.find({
-      targetId: user._id
+    const invitations = Invites.find({
+      targetId: user._id,
     });
     
     return [
@@ -23,7 +23,7 @@ Meteor.publish('invites.received', function () {
           username: 1,
           'profile.emailHash': 1
         }
-      })
+      }),
     ];
   });
 });

@@ -14,7 +14,7 @@ import { ConnectionPageComponent } from '/imports/ui/components/pages/Connection
 import { HomePageComponent } from '/imports/ui/components/pages/HomePageComponent/HomePageComponent';
 
 import { ChatPageContainer } from '/imports/ui/containers/pages/ChatPageContainer';
-import { InvitesPageContainer } from '/imports/ui/containers/pages/InvitesPagesContainer';
+import { InvitesPageContainer } from '/imports/ui/containers/pages/InvitesPageContainer';
 
 export const renderRoutes = () => (
   <Provider store={store}>

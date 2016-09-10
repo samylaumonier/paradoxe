@@ -1,13 +1,30 @@
-import { Meteor } from 'meteor/meteor';
-import { composeWithTracker } from 'react-komposer';
+import { connect } from 'react-redux';
+
+import { acceptInvite } from '/imports/actions/invites/accept';
+import { declineInvite } from '/imports/actions/invites/decline';
 
 import { InviteItemComponent } from '/imports/ui/components/parts/invites/InviteItemComponent/InviteItemComponent';
 
-function composer(props, onData) {
-  onData(null, {
-    invite: props.invite,
-    user: Meteor.users.findOne(props.invite.userId)
-  });
-}
+const mapStateToProps = (state, props) => {
+  return {
+    user: _.findWhere(state.invites.users, {
+      _id: props.invite.userId,
+    }),
+  };
+};
 
-export const InviteItemContainer = composeWithTracker(composer)(InviteItemComponent);
+const mapDispatchToProps = (dispatch, props) => {
+  return {
+    acceptInvite: () => {
+      dispatch(acceptInvite(props.invite._id));
+    },
+    declineInvite: () => {
+      dispatch(declineInvite(props.invite._id));
+    },
+  };
+};
+
+export const InviteItemContainer = connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(InviteItemComponent);

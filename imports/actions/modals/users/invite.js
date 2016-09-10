@@ -1,6 +1,7 @@
+import { Meteor } from 'meteor/meteor';
+
 export function inviteUsers(usernames) {
   return () => {
-
     Meteor.call('inviteUsers', usernames, (err, res) => {
       if (err) {
         toastr.error(err.reason, 'Error');

@@ -1,6 +1,5 @@
 import React from 'react';
 
-import { Invitations } from '/imports/api/collections/invitations';
 import { AvatarComponent } from '/imports/ui/components/parts/user/AvatarComponent/AvatarComponent';
 
 import './InviteItemComponentStyle.less';
@@ -8,9 +7,14 @@ import './InviteItemComponentStyle.less';
 export const InviteItemComponent = React.createClass({
   propTypes: {
     invite: React.PropTypes.object.isRequired,
-    user: React.PropTypes.object.isRequired,
+    acceptInvite: React.PropTypes.func.isRequired,
+    declineInvite: React.PropTypes.func.isRequired,
   },
   render: function () {
+    if (!this.props.user) {
+      return null;
+    }
+
     return (
       <div className="ui card">
         <div className="content">
@@ -27,25 +31,11 @@ export const InviteItemComponent = React.createClass({
         </div>
         <div className="extra content">
           <div className="ui two buttons">
-            <div className="ui basic green button" onClick={this.onAccept}>Accept</div>
-            <div className="ui basic red button" onClick={this.onDecline}>Decline</div>
+            <div className="ui basic green button" onClick={this.props.acceptInvite}>Accept</div>
+            <div className="ui basic red button" onClick={this.props.declineInvite}>Decline</div>
           </div>
         </div>
       </div>
     );
   },
-  onAccept: function () {
-    Meteor.call('acceptInvitation', this.props.invite._id, err => {
-      if (err) {
-        toastr.error(err.reason, 'Error');
-      } else {
-        Invitations.remove(this.props.invite._id);
-        toastr.success('Invitation accepted');
-      }
-    });
-  },
-  onDecline: function () {
-    Invitations.remove(this.props.invite._id);
-    toastr.success('Invitation declined');
-  }
 });

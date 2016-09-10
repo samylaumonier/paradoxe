@@ -1,6 +1,6 @@
 import { Meteor } from 'meteor/meteor';
 import { check } from 'meteor/check';
-import { Invitations } from '/imports/api/collections/invitations';
+import { Invites } from '/imports/api/collections/invites';
 
 Meteor.methods({
   inviteUsers: function (usernames) {
@@ -35,7 +35,7 @@ Meteor.methods({
     const targetIds = _.pluck(targets.fetch(), '_id');
 
     targetIds.forEach(targetId => {
-      Invitations.upsert({
+      Invites.upsert({
         userId: this.userId,
         targetId
       }, {

@@ -13,7 +13,12 @@ const masonryOptions = {
 
 export const InvitesPageComponent = React.createClass({
   propTypes: {
-    invites: React.PropTypes.array
+    ready: React.PropTypes.bool.isRequired,
+    invites: React.PropTypes.array.isRequired,
+    loadInvites: React.PropTypes.func.isRequired,
+  },
+  componentWillMount: function () {
+    this.props.loadInvites();
   },
   render: function () {
     return (
@@ -22,7 +27,12 @@ export const InvitesPageComponent = React.createClass({
         <If condition={this.props.invites.length !== 0}>
           <Then>
             <Masonry className="invites" options={masonryOptions} updateOnEachImageLoad={true}>
-              {this.props.invites.map(invite => <InviteItemContainer key={invite._id} invite={invite} />)}
+              {this.props.invites.map(invite =>
+                <InviteItemContainer
+                  key={invite._id}
+                  invite={invite}
+                />
+              )}
             </Masonry>
           </Then>
           <Else>

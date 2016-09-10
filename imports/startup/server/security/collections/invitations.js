@@ -1,6 +1,6 @@
-import { Invitations } from '/imports/api/collections/invitations';
+import { Invites } from '/imports/api/collections/invites';
 
-Invitations
+Invites
   .permit(['remove'])
   .ifLoggedIn()
   .ifIsTarget()
