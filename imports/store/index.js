@@ -4,8 +4,8 @@ import createLogger from 'redux-logger';
 
 import rootReducer from '/imports/reducers';
 
-import sources from '/imports/middlwares/sources';
-import subscriptions from '/imports/middlwares/subscriptions';
+import sources from '/imports/middlewares/sources';
+import subscriptions from '/imports/middlewares/subscriptions';
 
 const logger = createLogger();
 

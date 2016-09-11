@@ -26,7 +26,7 @@ export function loadInvites() {
 
             const users = Meteor.users.find({
               _id: {
-                $in: _.pluck(invites, 'userId')
+                $in: _.uniq(_.pluck(invites, 'userId')),
               },
             }).fetch();
 

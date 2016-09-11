@@ -19,7 +19,7 @@ export function loadPosts() {
             const ids = user.profile ? user.profile.contacts : [];
             ids.push(user._id);
 
-            return Posts.find({
+            const posts = Posts.find({
               userId: {
                 $in: ids,
               },
@@ -28,6 +28,17 @@ export function loadPosts() {
                 createdAt: -1,
               },
             }).fetch();
+
+            const users = Meteor.users.find({
+              _id: {
+                $in:  _.uniq(_.pluck(posts, 'userId')),
+              },
+            }).fetch();
+
+            return {
+              posts,
+              users,
+            };
           }
 
           return [];

@@ -8,8 +8,10 @@ import './PostItemComponentStyle.less';
 export const PostItemComponent = React.createClass({
   propTypes: {
     post: React.PropTypes.object.isRequired,
+    author: React.PropTypes.object.isRequired,
     user: React.PropTypes.object.isRequired,
-    currentUserId: React.PropTypes.string.isRequired,
+    liked: React.PropTypes.bool.isRequired,
+    likePost: React.PropTypes.func.isRequired,
   },
   render: function () {
     return (
@@ -20,16 +22,16 @@ export const PostItemComponent = React.createClass({
             {this.props.post.likes}
           </span>
           <div className="header">
-            <AvatarComponent user={this.props.user} className={"ui avatar image"} size={36}/>
-            <span className="username">{this.props.user.username}</span>
+            <AvatarComponent user={this.props.author} className={"ui avatar image"} size={36}/>
+            <span className="username">{this.props.author.username}</span>
           </div>
           <div className="description">
             {nl2br(this.props.post.content)}
           </div>
         </div>
         <div className="extra content">
-          <span className="left floated like" onClick={this.like}>
-            <i className={"like icon" + this.liked()}/>
+          <span className="left floated like" onClick={this.props.likePost}>
+            <i className={`like icon ${this.props.liked ? 'post-liked' : ''}`}/>
             Like
           </span>
           <span className="right floated">
@@ -40,14 +42,4 @@ export const PostItemComponent = React.createClass({
       </div>
     );
   },
-  like: function () {
-    Meteor.call('likePost', this.props.post._id, err => {
-      if (err) {
-        toastr.error(err.reason, 'Error');
-      }
-    });
-  },
-  liked: function () {
-    return this.props.post.likers.includes(this.props.currentUserId) ? ' post-liked' : '';
-  }
 });

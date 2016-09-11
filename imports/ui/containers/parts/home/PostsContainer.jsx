@@ -6,7 +6,7 @@ import { PostsComponent } from '/imports/ui/components/parts/home/PostsComponent
 
 const mapStateToProps = state => {
   return {
-    postsReady: state.home.postsReady,
+    ready: state.home.ready,
     posts: state.home.posts,
   };
 };

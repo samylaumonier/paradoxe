@@ -1,19 +1,28 @@
-import { Meteor } from 'meteor/meteor';
-import { composeWithTracker } from 'react-komposer';
+import { connect } from 'react-redux';
+
+import { likePost } from '/imports/actions/home/posts/like';
 
 import { PostItemComponent } from '/imports/ui/components/parts/home/PostItemComponent/PostItemComponent';
 
-function composer(props, onData) {
-  const userId = Meteor.userId();
+const mapStateToProps = (state, props) => {
+  return {
+    author: _.findWhere(state.home.users, {
+      _id: props.post.userId,
+    }),
+    user: state.user,
+    liked: props.post.likers.includes(state.user._id),
+  };
+};
 
-  if (userId) {
-    /** @namespace props.post.userId */
-    onData(null, {
-      post: props.post,
-      user: Meteor.users.findOne(props.post.userId),
-      currentUserId: userId,
-    });
-  }
-}
+const mapDispatchToProps = (dispatch, props) => {
+  return {
+    likePost: () => {
+      dispatch(likePost(props.post._id));
+    }
+  };
+};
 
-export const PostItemContainer = composeWithTracker(composer)(PostItemComponent);
+export const PostItemContainer = connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(PostItemComponent);

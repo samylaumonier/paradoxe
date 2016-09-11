@@ -1,16 +1,16 @@
 import { connect } from 'react-redux';
 
-import { addPost } from '/imports/actions/posts/add';
+import { addPost } from '/imports/actions/home/posts/add';
 
 import { PostInputComponent } from '/imports/ui/components/parts/home/PostInputComponent/PostInputComponent';
 
-const mapStateToProps = (state, ownProps) => {
+const mapStateToProps = () => {
   return {
 
   };
 };
 
-const mapDispatchToProps = (dispatch, ownProps) => {
+const mapDispatchToProps = dispatch => {
   return {
     onSubmit: content => {
       dispatch(addPost(content));

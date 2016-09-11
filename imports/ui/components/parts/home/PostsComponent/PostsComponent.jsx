@@ -15,7 +15,7 @@ const masonryOptions = {
 
 export const PostsComponent = React.createClass({
   propTypes: {
-    postsReady: React.PropTypes.bool.isRequired,
+    ready: React.PropTypes.bool.isRequired,
     posts: React.PropTypes.array.isRequired,
     loadPosts: React.PropTypes.func.isRequired,
   },
@@ -26,12 +26,12 @@ export const PostsComponent = React.createClass({
     return (
       <div>
         <PostInputContainer />
-        <div className="ui divider" />
+        <div className="ui divider"/>
         <h1>Recent posts</h1>
         <If condition={this.props.posts.length !== 0}>
           <Then>
             <Masonry className="posts" options={masonryOptions} updateOnEachImageLoad={true}>
-              {this.props.posts.map(post => <PostItemContainer key={post._id} post={post} />)}
+              {this.props.posts.map(post => <PostItemContainer key={post._id} post={post}/>)}
             </Masonry>
           </Then>
           <Else>
