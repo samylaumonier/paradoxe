@@ -1,13 +1,13 @@
 import { Meteor } from 'meteor/meteor';
 
-export const CONTACTS_SUBSCRIPTION = 'CONTACTS_SUBSCRIPTION';
-export const CONTACTS_SUBSCRIPTION_READY = 'CONTACTS_SUBSCRIPTION_READY';
-export const CONTACTS_SUBSCRIPTION_CHANGED = 'CONTACTS_SUBSCRIPTION_CHANGED';
+export const SIDEBAR_CONTACTS_SUBSCRIPTION = 'SIDEBAR_CONTACTS_SUBSCRIPTION';
+export const SIDEBAR_CONTACTS_SUBSCRIPTION_READY = 'SIDEBAR_CONTACTS_SUBSCRIPTION_READY';
+export const SIDEBAR_CONTACTS_SUBSCRIPTION_CHANGED = 'SIDEBAR_CONTACTS_SUBSCRIPTION_CHANGED';
 
 export function loadContacts() {
   return dispatch => {
     dispatch({
-      type: CONTACTS_SUBSCRIPTION,
+      type: SIDEBAR_CONTACTS_SUBSCRIPTION,
       meteor: {
         subscribe: () => Meteor.subscribe('sidebar.contacts'),
         get: () => {

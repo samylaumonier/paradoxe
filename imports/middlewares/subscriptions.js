@@ -24,17 +24,17 @@ export default store => next => action => {
     computations[subscriptionId] = Tracker.autorun(() => {
       const ready = subscription.ready();
 
-      store.dispatch({
-        type: `${action.type}_READY`,
-        ready,
-      });
-
       if (ready) {
         store.dispatch({
           type: `${action.type}_CHANGED`,
           data: action.meteor.get(),
         });
       }
+
+      store.dispatch({
+        type: `${action.type}_READY`,
+        ready,
+      });
     });
   }, 0);
 };

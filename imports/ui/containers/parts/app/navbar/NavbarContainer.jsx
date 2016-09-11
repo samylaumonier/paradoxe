@@ -1,33 +1,36 @@
-import { Meteor } from 'meteor/meteor';
-import { composeWithTracker } from 'react-komposer';
+import { connect } from 'react-redux';
 
-import { Notifications } from '/imports/api/collections/notifications';
+import { loadInvites } from '/imports/actions/navbar/invites/load';
+import { loadNotifications } from '/imports/actions/navbar/notifications/load';
+import { logout } from '/imports/actions/user/logout';
+
 import { NavbarComponent } from '/imports/ui/components/parts/app/navbar/NavbarComponent/NavbarComponent';
 
-function composer(props, onData) {
-  const invitesSubscription = Meteor.subscribe('navbar.invites');
-  const notificationSubscription = Meteor.subscribe('navbar.notifications');
+const mapStateToProps = state => {
+  return {
+    hasInvites: state.navbar.totalInvites > 0,
+    totalInvites: state.navbar.totalInvites,
+    hasNotifications: state.navbar.notifications.length > 0,
+    totalNotifications: state.navbar.notifications.length,
+    notifications: state.navbar.notifications,
+  };
+};
 
-  if (invitesSubscription.ready() && notificationSubscription.ready()) {
-    const invites = Counts.get('navbar.invites');
-    const user = Meteor.user();
+const mapDispatchToProps = dispatch => {
+  return {
+    loadInvites: () => {
+      dispatch(loadInvites());
+    },
+    loadNotifications: () => {
+      dispatch(loadNotifications());
+    },
+    logout: () => {
+      dispatch(logout());
+    },
+  };
+};
 
-    let notifications = Notifications.find({
-      userId: user._id
-    },{
-      sort: {
-        createdAt: -1
-      }
-    }).fetch();
-
-    onData(null, {
-      hasNotifications: notifications.length > 0,
-      notificationCount: notifications.length,
-      notifications,
-      hasInvites: invites > 0,
-      invites
-    });
-  }
-}
-
-export const NavbarContainer = composeWithTracker(composer)(NavbarComponent);
+export const NavbarContainer = connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(NavbarComponent);

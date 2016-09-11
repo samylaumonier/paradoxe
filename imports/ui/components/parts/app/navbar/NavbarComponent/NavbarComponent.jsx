@@ -8,7 +8,18 @@ import { NavbarNotificationItemContainer } from '/imports/ui/containers/parts/ap
 
 export const NavbarComponent = React.createClass({
   propTypes: {
-    notifications: React.PropTypes.array
+    hasInvites: React.PropTypes.bool.isRequired,
+    totalInvites: React.PropTypes.number.isRequired,
+    loadInvites: React.PropTypes.func.isRequired,
+    hasNotifications: React.PropTypes.bool.isRequired,
+    totalNotifications: React.PropTypes.number.isRequired,
+    notifications: React.PropTypes.array.isRequired,
+    loadNotifications: React.PropTypes.func.isRequired,
+    logout: React.PropTypes.func.isRequired,
+  },
+  componentWillMount: function () {
+    this.props.loadInvites();
+    this.props.loadNotifications();
   },
   componentDidMount: function () {
     $(this.refs.profile).dropdown();
@@ -27,12 +38,11 @@ export const NavbarComponent = React.createClass({
           <If condition={this.props.hasInvites}>
             <Then>
               <span className="ui mini green circular label navbar-label">
-                {this.props.invites}
+                {this.props.totalInvites}
               </span>
             </Then>
           </If>
         </Link>
-        
         <div className="right menu">
           <div ref="notification" className="ui pointing dropdown icon item">
             <i className="bell icon"/>
@@ -40,7 +50,7 @@ export const NavbarComponent = React.createClass({
             <If condition={this.props.hasNotifications}>
               <Then>
                 <span className="ui mini green circular label navbar-label">
-                  {this.props.notificationCount}
+                  {this.props.totalNotifications}
                 </span>
               </Then>
             </If>
@@ -49,7 +59,6 @@ export const NavbarComponent = React.createClass({
               {this.props.notifications.map(notification =>
                 <NavbarNotificationItemContainer
                   key={notification._id}
-                  user={this.props.user}
                   notification={notification}
                 />
               )}
@@ -67,7 +76,6 @@ export const NavbarComponent = React.createClass({
               </If>
             </div>
           </div>
-          
           <div ref="profile" className="ui pointing dropdown icon item">
             <i className="user icon"/>
             &nbsp; Profile <i className="dropdown icon"/>
@@ -75,7 +83,7 @@ export const NavbarComponent = React.createClass({
               <div className="item"><i className="life ring icon"/> Help</div>
               <div className="item"><i className="share icon"/> Feedback</div>
               <a className="item"><i className="setting icon"/> Settings</a>
-              <a className="item" onClick={this.logout}>
+              <a className="item" onClick={this.props.logout}>
                 <i className="sign out icon"/>
                 Logout
               </a>
@@ -89,7 +97,4 @@ export const NavbarComponent = React.createClass({
     event.preventDefault();
     $('#contact-add-modal').modal('show');
   },
-  logout: function () {
-    Meteor.logout();
-  }
 });

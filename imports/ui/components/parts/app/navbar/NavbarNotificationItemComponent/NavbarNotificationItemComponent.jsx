@@ -1,6 +1,4 @@
-import { Meteor } from 'meteor/meteor';
 import React from 'react';
-import { browserHistory } from 'react-router';
 
 import { Switch, Case } from 'jsx-switch';
 
@@ -12,11 +10,12 @@ export const NavbarNotificationItemComponent = React.createClass({
   propTypes: {
     notification: React.PropTypes.object.isRequired,
     user: React.PropTypes.object.isRequired,
+    markNotificationSeen: React.PropTypes.func.isRequired,
   },
   render: function () {
     return (
       <div>
-        <div className="item" onClick={this.seen}>
+        <div className="item" onClick={this.props.markNotificationSeen}>
           <AvatarComponent user={this.props.user} className={"ui avatar image"} size={22}/>
           <b className="username">{this.props.user.username}</b>
           <Switch>
@@ -27,20 +26,11 @@ export const NavbarNotificationItemComponent = React.createClass({
               <p className="header">Has accepted your contact request.</p>
             </Case>
             <Case expr={this.props.notification.tag === MISSED_CALL}>
-              <p className="header">Try to contact you.</p>
+              <p className="header">Tried to contact you.</p>
             </Case>
           </Switch>
         </div>
       </div>
     );
   },
-  seen: function () {
-    Meteor.call('notificationSeen', this.props.notification._id, err => {
-      if(err){
-        toastr.error(err.reason, 'Error');
-      }
-    });
-    
-    browserHistory.push(this.props.notification.url);
-  }
 });
