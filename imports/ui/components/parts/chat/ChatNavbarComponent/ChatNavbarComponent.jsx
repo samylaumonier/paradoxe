@@ -5,10 +5,10 @@ import { browserHistory } from 'react-router';
 export const ChatNavbarComponent = React.createClass({
   propTypes: {
     contact: React.PropTypes.object.isRequired,
-    currentCall: React.PropTypes.bool.isRequired,
+    currentVideoCall: React.PropTypes.bool.isRequired,
+    userHasBlockedContact: React.PropTypes.bool.isRequired,
     startVideoCall: React.PropTypes.func.isRequired,
     stopVideoCall: React.PropTypes.func.isRequired,
-    userHasBlockedContact: React.PropTypes.bool.isRequired,
   },
   componentDidMount: function () {
     this.initTooltips();
@@ -28,9 +28,9 @@ export const ChatNavbarComponent = React.createClass({
         <a className="ui icon item">
           <i className="phone icon"/>
         </a>
-        <If condition={this.props.currentCall}>
+        <If condition={this.props.currentVideoCall}>
           <Then>
-            <a className="ui icon item" data-content="Stop video call" onClick={this.stopVideoCall}>
+            <a className="ui icon item" data-content="Stop video call" onClick={this.props.stopVideoCall}>
               <i className="icons">
                 <i className="record icon"/>
                 <i className="red corner remove icon"/>
@@ -38,7 +38,7 @@ export const ChatNavbarComponent = React.createClass({
             </a>
           </Then>
           <Else>
-            <a className="ui icon item" data-content="Start video call" onClick={this.startVideoCall}>
+            <a className="ui icon item" data-content="Start video call" onClick={this.props.startVideoCall}>
               <i className="record icon"/>
             </a>
           </Else>
@@ -80,12 +80,7 @@ export const ChatNavbarComponent = React.createClass({
       position: 'bottom center'
     });
   },
-  startVideoCall: function () {
-    this.props.startVideoCall();
-  },
-  stopVideoCall: function () {
-    this.props.stopVideoCall();
-  },
+  // TODO: create smart component + mapDispatchToProps
   removeContact: function () {
     swal({
       title: 'Are you sure?',

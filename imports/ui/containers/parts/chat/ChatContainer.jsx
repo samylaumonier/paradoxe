@@ -1,16 +1,21 @@
-import { Meteor } from 'meteor/meteor';
-import { composeWithTracker } from 'react-komposer';
+import { connect } from 'react-redux';
 
 import { ChatComponent } from '/imports/ui/components/parts/chat/ChatComponent/ChatComponent';
 
-function composer(props, onData) {
-  const user = Meteor.user();
+const mapStateToProps = (state, props) => {
+  return {
+    user: state.user,
+    messages: state.chats[props.contact.username].messages,
+  };
+};
 
-  if (user) {
-    onData(null, {
-      props
-    });
-  }
-}
+const mapDispatchToProps = () => {
+  return {
 
-export const ChatContainer = composeWithTracker(composer)(ChatComponent);
+  };
+};
+
+export const ChatContainer = connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(ChatComponent);

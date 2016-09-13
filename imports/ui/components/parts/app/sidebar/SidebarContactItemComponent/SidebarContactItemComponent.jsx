@@ -37,6 +37,7 @@ export const SidebarContactItemComponent = React.createClass({
     );
   },
   openChat: function () {
+    // TODO: create smart component + mapDispatchToProps
     browserHistory.push(`/chat/${this.props.contact.username}`);
   },
   initTooltips: function () {

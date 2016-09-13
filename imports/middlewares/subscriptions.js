@@ -34,6 +34,9 @@ export default store => next => action => {
       store.dispatch({
         type: `${action.type}_READY`,
         ready,
+        data: action.meteor.onReadyData
+          ? action.meteor.onReadyData()
+          : null,
       });
     });
   }, 0);

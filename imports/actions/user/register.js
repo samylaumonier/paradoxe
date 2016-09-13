@@ -1,8 +1,8 @@
 import { Accounts } from 'meteor/accounts-base';
-import { browserHistory } from 'react-router';
+import { push } from 'react-router-redux';
 
 export function register(username, email, password) {
-  return () => {
+  return dispatch => {
     Accounts.createUser({
       username,
       email,
@@ -12,7 +12,7 @@ export function register(username, email, password) {
         toastr.error(err.reason, 'Error');
       } else {
         toastr.success(`Welcome ${username}!`);
-        browserHistory.push('/');
+        dispatch(push('/'));
       }
     });
   };

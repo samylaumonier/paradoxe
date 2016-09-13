@@ -8,7 +8,8 @@ export const ChatShareFileComponent = React.createClass({
   propTypes: {
     contact: React.PropTypes.object.isRequired,
     message: React.PropTypes.object.isRequired,
-    getFile: React.PropTypes.func.isRequired,
+    // TODO
+    // getFile: React.PropTypes.func.isRequired,
   },
   render: function () {
     return (

@@ -1,4 +1,5 @@
 import { combineReducers } from 'redux';
+import { routerReducer } from 'react-router-redux';
 
 import { chats } from './chats';
 import { home } from './home';
@@ -14,6 +15,7 @@ const rootReducer = combineReducers({
   navbar,
   user,
   sidebar,
+  routing: routerReducer,
 });
 
 export default rootReducer;

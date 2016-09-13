@@ -13,28 +13,28 @@ export const ChatOutgoingVideoCallComponent = React.createClass({
   propTypes: {
     contact: React.PropTypes.object.isRequired,
     message: React.PropTypes.object.isRequired,
-    onDecline: React.PropTypes.func.isRequired,
-    onCancel: React.PropTypes.func.isRequired,
-    onMissed: React.PropTypes.func.isRequired,
+    videoCallDeclined: React.PropTypes.func.isRequired,
+    videoCallMissed: React.PropTypes.func.isRequired,
+    cancelVideoCall: React.PropTypes.func.isRequired,
   },
-  componentDidMount: function () {
-    this.setState({
+  getInitialState: function () {
+    return {
       declined: this.props.message.declined,
       missed: this.props.message.missed,
-    });
+    };
   },
-  componentDidUpdate: function () {
+  componentWillMount: function () {
     if (this.props.message.status === DECLINED_STATUS && !this.state.declined) {
       this.setState({
-        declined: true
+        declined: true,
       }, () => {
-        this.props.onDecline(this.props.message);
+        this.props.videoCallDeclined();
       });
     } else if (this.props.message.status === MISSED_STATUS && !this.state.missed) {
       this.setState({
-        missed: true
+        missed: true,
       }, () => {
-        this.props.onMissed(this.props.message);
+        this.props.videoCallMissed();
       });
     }
   },
@@ -45,7 +45,7 @@ export const ChatOutgoingVideoCallComponent = React.createClass({
           <Case expr={this.props.message.status === RINGING_STATUS}>
             <span>
               You are making a video call to {this.props.contact.username}.
-              <button className="ui labeled icon button" onClick={this.onCancel}>
+              <button className="ui labeled icon button" onClick={this.props.cancelVideoCall}>
                 <i className="remove icon"/>
                 Cancel
               </button>
@@ -70,8 +70,5 @@ export const ChatOutgoingVideoCallComponent = React.createClass({
         </Switch>
       </div>
     );
-  },
-  onCancel: function () {
-    this.props.onCancel(this.props.message);
   },
 });

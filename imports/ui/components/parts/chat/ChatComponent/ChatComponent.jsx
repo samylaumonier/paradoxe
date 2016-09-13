@@ -1,5 +1,4 @@
 import React from 'react';
-import { If, Then, Else } from 'react-if';
 import EmojiPicker from 'emojione-picker';
 
 import { ChatNavbarContainer } from '/imports/ui/containers/parts/chat/ChatNavbarContainer';
@@ -14,66 +13,32 @@ export const ChatComponent = React.createClass({
   propTypes: {
     contact: React.PropTypes.object.isRequired,
     messages: React.PropTypes.array.isRequired,
-    currentCall: React.PropTypes.bool.isRequired,
-    startVideoCall: React.PropTypes.func.isRequired,
-    stopVideoCall: React.PropTypes.func.isRequired,
-    onAnswer: React.PropTypes.func.isRequired,
-    onDecline: React.PropTypes.func.isRequired,
-    onHangUp: React.PropTypes.func.isRequired,
-    onCancel: React.PropTypes.func.isRequired,
-    onMissed: React.PropTypes.func.isRequired,
-    onAddFile: React.PropTypes.func.isRequired,
-    getFile: React.PropTypes.func.isRequired,
   },
   getInitialState: function () {
     return {
-      selectedEmoji: null
+      selectedEmoji: null,
     };
   },
   render: function () {
+    const messages = this.props.messages.length
+      ? <div className="ui comments">
+        {this.props.messages.map(message => message.tag
+          ? <ChatTaggedMessageContainer key={message._id} contact={this.props.contact} message={message}/>
+          : <ChatMessageContainer key={message._id} message={message}/>
+        )}
+      </div>
+      :  <p>No messages yet!</p>;
+
     return (
-      <ChatReceiverContainer contact={this.props.contact} onAddFile={this.props.onAddFile}>
+      <ChatReceiverContainer contact={this.props.contact}>
         <div id="chat">
-          <ChatNavbarContainer
-            contact={this.props.contact}
-            currentCall={this.props.currentCall}
-            startVideoCall={this.props.startVideoCall}
-            stopVideoCall={this.props.stopVideoCall}
-          />
-
+          <ChatNavbarContainer contact={this.props.contact}/>
           <div id="message-zone" ref="messages">
-            <If condition={this.props.messages.length !== 0}>
-              <Then>
-                <div className="ui comments">
-                  {this.props.messages.map(message => message.tag
-                    ? <ChatTaggedMessageContainer
-                      key={message._id}
-                      contact={this.props.contact}
-                      message={message}
-                      onAnswer={this.props.onAnswer}
-                      onDecline={this.props.onDecline}
-                      onHangUp={this.props.onHangUp}
-                      onCancel={this.props.onCancel}
-                      onMissed={this.props.onMissed}
-                      getFile={this.props.getFile}
-                    />
-                    : <ChatMessageContainer
-                      key={message._id}
-                      message={message}
-                    />
-                  )}
-                </div>
-              </Then>
-              <Else>
-                <p>No messages yet!</p>
-              </Else>
-            </If>
+            {messages}
           </div>
-
           <div id="emojis-container" ref="emojis">
             <EmojiPicker search={true} onChange={this.onSelectEmoji}/>
           </div>
-
           <ChatMessageFormComponent
             contact={this.props.contact}
             setMessagesHeight={this.setMessagesHeight}

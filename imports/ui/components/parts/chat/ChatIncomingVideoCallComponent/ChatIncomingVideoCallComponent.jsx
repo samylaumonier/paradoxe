@@ -1,7 +1,6 @@
 import React from 'react';
 import { Switch, Case, Default } from 'jsx-switch';
 
-
 import {
   ANSWERED_STATUS,
   CANCELED_STATUS,
@@ -14,10 +13,8 @@ export const ChatIncomingVideoCallComponent = React.createClass({
   propTypes: {
     contact: React.PropTypes.object.isRequired,
     message: React.PropTypes.object.isRequired,
-    onAnswer: React.PropTypes.func.isRequired,
-  },
-  componentDidMount: function () {
-    
+    answerVideoCall: React.PropTypes.func.isRequired,
+    declineVideoCall: React.PropTypes.func.isRequired,
   },
   render: function () {
     return (
@@ -26,11 +23,11 @@ export const ChatIncomingVideoCallComponent = React.createClass({
           <Case expr={this.props.message.status === RINGING_STATUS}>
             <span>
               {this.props.contact.username} wants to start a video call.
-              <button className="ui labeled icon button" onClick={this.onAnswer}>
+              <button className="ui labeled icon button" onClick={this.props.answerVideoCall}>
                 <i className="record icon" />
                 Answer
               </button>
-              <button className="ui labeled icon button" onClick={this.onDecline}>
+              <button className="ui labeled icon button" onClick={this.props.declineVideoCall}>
                 <i className="remove icon" />
                 Decline
               </button>
@@ -55,11 +52,5 @@ export const ChatIncomingVideoCallComponent = React.createClass({
         </Switch>
       </div>
     );
-  },
-  onAnswer: function () {
-    this.props.onAnswer(this.props.message);
-  },
-  onDecline: function () {
-    Meteor.call('updateVideoCallStatus', this.props.message._id, DECLINED_STATUS);
   },
 });

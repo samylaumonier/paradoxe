@@ -1,33 +1,26 @@
-import { Meteor } from 'meteor/meteor';
 import React from 'react';
-import { If, Else, Then } from 'react-if';
 
 export const ChatHungUpVideoCallComponent = React.createClass({
   propTypes: {
+    user: React.PropTypes.object.isRequired,
     contact: React.PropTypes.object.isRequired,
     message: React.PropTypes.object.isRequired,
-    onHangUp: React.PropTypes.func.isRequired,
+    videoCallHungUp: React.PropTypes.func.isRequired,
   },
   componentDidMount: function () {
-    if (!this.props.message.hungUp && this.props.message.targetUserId.includes(Meteor.userId())) {
-      this.props.onHangUp(this.props.message);
+    if (!this.props.message.hungUp && this.props.message.targetUserId.includes(this.props.user._id)) {
+      this.props.videoCallHungUp(this.props.message);
     }
   },
   render: function () {
+    const message = this.props.message.hungUpByUserId === this.props.contact._id
+      ? <span>{this.props.contact.username} has hung up the video call.</span>
+      : <span>You have hung up the video call.</span>;
+
     return (
       <div>
-        <If condition={this.props.message.hungUpByUserId === this.props.contact._id}>
-          <Then>
-            <span>{this.props.contact.username} has hung up the video call.</span>
-          </Then>
-          <Else>
-            <span>You have hung up the video call.</span>
-          </Else>
-        </If>
+        {message}
       </div>
     );
-  },
-  onCancel: function () {
-    this.props.onCancel(this.props.message._id);
   },
 });

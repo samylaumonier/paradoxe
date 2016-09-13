@@ -4,7 +4,10 @@ import { getUserStatus } from '/imports/api/collections/users';
 export const MyVideoComponent = React.createClass({
   propTypes: {
     user: React.PropTypes.object.isRequired,
-    stream: React.PropTypes.object,
+    stream: React.PropTypes.object.isRequired,
+  },
+  shouldComponentUpdate: function (nextProps) {
+    return this.props.stream.id !== nextProps.stream.id;
   },
   render: function () {
     return (

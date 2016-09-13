@@ -10,9 +10,9 @@ import {
 } from '/imports/api/collections/messages';
 
 import { AvatarComponent } from '/imports/ui/components/parts/user/AvatarComponent/AvatarComponent';
-import { ChatIncomingVideoCallComponent } from '/imports/ui/components/parts/chat/ChatIncomingVideoCallComponent/ChatIncomingVideoCallComponent';
-import { ChatOutgoingVideoCallComponent } from '/imports/ui/components/parts/chat/ChatOutgoingVideoCallComponent/ChatOutgoingVideoCallComponent';
-import { ChatHungUpVideoCallComponent } from '/imports/ui/components/parts/chat/ChatHungUpVideoCallComponent/ChatHungUpVideoCallComponent';
+import { ChatIncomingVideoCallContainer } from '/imports/ui/containers/parts/chat/ChatIncomingVideoCallContainer';
+import { ChatOutgoingVideoCallContainer } from '/imports/ui/containers/parts/chat/ChatOutgoingVideoCallContainer';
+import { ChatHungUpVideoCallContainer } from '/imports/ui/containers/parts/chat/ChatHungUpVideoCallContainer';
 import { ChatShareFileComponent } from '/imports/ui/components/parts/chat/ChatShareFileComponent/ChatShareFileComponent';
 
 export const ChatTaggedMessageComponent = React.createClass({
@@ -20,12 +20,6 @@ export const ChatTaggedMessageComponent = React.createClass({
     contact: React.PropTypes.object.isRequired,
     message: React.PropTypes.object.isRequired,
     author: React.PropTypes.object.isRequired,
-    onAnswer: React.PropTypes.func.isRequired,
-    onDecline: React.PropTypes.func.isRequired,
-    onHangUp: React.PropTypes.func.isRequired,
-    onCancel: React.PropTypes.func.isRequired,
-    onMissed: React.PropTypes.func.isRequired,
-    getFile: React.PropTypes.func.isRequired,
   },
   render: function () {
     return (
@@ -43,34 +37,16 @@ export const ChatTaggedMessageComponent = React.createClass({
           <div className="text">
             <Switch>
               <Case expr={this.props.message.tag === INCOMING_VIDEO_CALL_TAG}>
-                <ChatIncomingVideoCallComponent
-                  contact={this.props.contact}
-                  message={this.props.message}
-                  onAnswer={this.props.onAnswer}
-                />
+                <ChatIncomingVideoCallContainer contact={this.props.contact} message={this.props.message}/>
               </Case>
               <Case expr={this.props.message.tag === OUTGOING_VIDEO_CALL_TAG}>
-                <ChatOutgoingVideoCallComponent
-                  contact={this.props.contact}
-                  message={this.props.message}
-                  onDecline={this.props.onDecline}
-                  onCancel={this.props.onCancel}
-                  onMissed={this.props.onMissed}
-                />
+                <ChatOutgoingVideoCallContainer contact={this.props.contact} message={this.props.message}/>
               </Case>
               <Case expr={this.props.message.tag === HUNG_UP_VIDEO_CALL_TAG}>
-                <ChatHungUpVideoCallComponent
-                  contact={this.props.contact}
-                  message={this.props.message}
-                  onHangUp={this.props.onHangUp}
-                />
+                <ChatHungUpVideoCallContainer contact={this.props.contact} message={this.props.message}/>
               </Case>
               <Case expr={this.props.message.tag === FILE_UPLOAD_TAG}>
-                <ChatShareFileComponent
-                  contact={this.props.contact}
-                  message={this.props.message}
-                  getFile={this.props.getFile}
-                />
+                {/*<ChatShareFileComponent contact={this.props.contact} message={this.props.message}/>*/}
               </Case>
               <Default>
                 {nl2br(this.props.message.content)}
