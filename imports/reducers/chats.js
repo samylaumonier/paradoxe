@@ -12,6 +12,7 @@ const defaultVideoCallState = {
   userPeerId: null,
   contactPeerId: null,
   callMessageId: null,
+  isRinging: false,
   isHangingUp: false,
 };
 

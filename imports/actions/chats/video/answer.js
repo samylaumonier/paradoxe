@@ -14,7 +14,10 @@ export function answerVideoCall(contact, message) {
       } else {
         dispatch(chatVideoUpdate(contact, { stream }));
         dispatch(initVideoPeer(contact, (userPeerId, peer) => {
-          dispatch(chatVideoUpdate(contact, { userPeerId }));
+          dispatch(chatVideoUpdate(contact, {
+            userPeerId,
+            isRinging: false,
+          }));
 
           if (userPeerId) {
             dispatch(setStatusAnswered(contact, message, stream, peer));

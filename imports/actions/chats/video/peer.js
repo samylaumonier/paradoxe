@@ -41,6 +41,7 @@ export function stopVideoPeer(contact, peer) {
     if (peer) {
       dispatch(chatVideoUpdate(contact, {
         isHangingUp: true,
+        isRinging: false,
       }));
 
       const videoCallState = getState().chats[contact.username].videoCall;

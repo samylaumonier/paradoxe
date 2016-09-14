@@ -19,7 +19,10 @@ export function startVideoCall(contact) {
             if (err) {
               toastr.error(err.reason, 'Error');
             } else {
-              dispatch(chatVideoUpdate(contact, { callMessageId }));
+              dispatch(chatVideoUpdate(contact, {
+                callMessageId,
+                isRinging: true,
+              }));
             }
           });
         }));
