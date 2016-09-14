@@ -12,17 +12,28 @@ export const ChatPageComponent = React.createClass({
     contact: React.PropTypes.object,
     loadMessages: React.PropTypes.func.isRequired,
   },
+  getInitialState: function () {
+    return {
+      ready: false,
+    };
+  },
   componentWillMount: function () {
     this.props.loadMessages();
   },
   componentWillReceiveProps: function (nextProps) {
+    if (!this.state.ready && nextProps.ready) {
+      this.setState({
+        ready: true,
+      });
+    }
+
     if (this.props.contact && !nextProps.contact
       || this.props.contact && nextProps.contact && this.props.contact._id !== nextProps.contact._id) {
       this.props.loadMessages(nextProps.params.contactUsername);
     }
   },
   render: function () {
-    if (!this.props.ready) {
+    if (!this.state.ready) {
       // TODO: spinner
       return (
         <div>
@@ -31,18 +42,12 @@ export const ChatPageComponent = React.createClass({
       );
     }
 
-    const children = this.props.hasContact
+    return this.props.hasContact
       ? <div>
         <ChatContainer contact={this.props.contact}/>
         <ChatSidebarContainer contact={this.props.contact}/>
       </div>
       : <NotFoundPageComponent />;
-
-    return (
-      <div>
-        {children}
-      </div>
-    );
   },
   // TODO
   // onAddFile: function (file) {

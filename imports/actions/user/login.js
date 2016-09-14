@@ -1,14 +1,14 @@
 import { Meteor } from 'meteor/meteor';
-import { push } from 'react-router-redux';
+import { browserHistory } from 'react-router';
 
 export function login(username, password) {
-  return dispatch => {
+  return () => {
     Meteor.loginWithPassword(username, password, err => {
       if (err) {
         toastr.error(err.reason, 'Error');
       } else {
         toastr.success('Welcome back!', 'Logged in');
-        dispatch(push('/'));
+        browserHistory.push('/');
       }
     });
   };

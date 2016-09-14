@@ -11,7 +11,7 @@ export const MyVideoComponent = React.createClass({
   },
   render: function () {
     return (
-      <div className="chat-sidebar-avatar bottom" >
+      <div className="chat-sidebar-avatar bottom" key={this.props.stream.id}>
         <video
           className={"avatar-image " + getUserStatus(this.props.user.status)}
           src={URL.createObjectURL(this.props.stream)}

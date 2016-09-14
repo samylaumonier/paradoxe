@@ -1,9 +1,14 @@
 import { Meteor } from 'meteor/meteor';
-import { push } from 'react-router-redux';
+import { browserHistory } from 'react-router';
 
 export function logout() {
-  return dispatch => {
-    Meteor.logout();
-    dispatch(push('/connect'));
+  return () => {
+    Meteor.logout(err => {
+      if (err) {
+        toastr.error(err.reason, 'Error');
+      } else {
+        browserHistory.push('/connect');
+      }
+    });
   };
 }

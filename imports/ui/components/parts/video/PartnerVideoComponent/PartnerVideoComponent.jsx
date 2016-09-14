@@ -11,7 +11,7 @@ export const PartnerVideoComponent = React.createClass({
   },
   render: function () {
     return (
-      <div className="chat-sidebar-avatar top" >
+      <div className="chat-sidebar-avatar top" key={this.props.stream.id}>
         <video
           ref="video"
           className={"avatar-image " + getUserStatus(this.props.user.status)}

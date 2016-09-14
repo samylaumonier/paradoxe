@@ -1,7 +1,6 @@
 import React from 'react';
 import { Provider } from 'react-redux';
 import { Router, Route, IndexRoute, browserHistory } from 'react-router';
-import { syncHistoryWithStore } from 'react-router-redux';
 
 import store from '/imports/store';
 
@@ -17,18 +16,16 @@ import { HomePageComponent } from '/imports/ui/components/pages/HomePageComponen
 import { ChatPageContainer } from '/imports/ui/containers/pages/ChatPageContainer';
 import { InvitesPageContainer } from '/imports/ui/containers/pages/InvitesPageContainer';
 
-const history = syncHistoryWithStore(browserHistory, store);
-
 export const renderRoutes = () => (
   <Provider store={store}>
-    <Router history={history}>
+    <Router history={browserHistory}>
       <Route path="/" component={UserLayoutContainer} onEnter={requireAuthHook}>
-        <IndexRoute component={HomePageComponent} />
-        <Route path="invites" component={InvitesPageContainer} />
-        <Route path="chat/:contactUsername" component={ChatPageContainer} />
+        <IndexRoute component={HomePageComponent}/>
+        <Route path="invites" component={InvitesPageContainer}/>
+        <Route path="chat/:contactUsername" component={ChatPageContainer}/>
       </Route>
       <Route path="/connect" component={MainLayoutComponent} onEnter={requireGuestHook}>
-        <IndexRoute component={ConnectionPageComponent} />
+        <IndexRoute component={ConnectionPageComponent}/>
       </Route>
     </Router>
   </Provider>

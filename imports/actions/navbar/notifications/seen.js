@@ -1,14 +1,14 @@
 import { Meteor } from 'meteor/meteor';
-import { push } from 'react-router-redux';
+import { browserHistory } from 'react-router';
 
 export function markNotificationSeen(notification) {
-  return dispatch => {
+  return () => {
     Meteor.call('notificationSeen', notification._id, err => {
       if (err) {
         toastr.error(err.reason, 'Error');
       }
     });
 
-    dispatch(push(notification.url));
+    browserHistory.push(notification.url);
   };
 }
