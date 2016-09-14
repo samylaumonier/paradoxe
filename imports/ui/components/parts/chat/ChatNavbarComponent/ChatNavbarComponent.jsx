@@ -56,7 +56,7 @@ export const ChatNavbarComponent = React.createClass({
         </a>
         {videoCallControl}
         <a className="ui icon item">
-          <i className="gift icon"/>
+          <i className="lightning icon"/>
         </a>
         {blockContactControl}
         <a className="ui icon item" data-content="Remove" onClick={this.props.removeContact}>

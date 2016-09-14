@@ -26,10 +26,10 @@ export const SidebarComponent = React.createClass({
           <Link className="ui logo icon image" to="/">
             <img src="/images/logo.png"/>
           </Link>
-          <Link to="/"><b>Epsilon</b></Link>
+          <Link to="/"><b>Glib</b></Link>
         </div>
         <div className="item">
-          <div className="ui middle aligned selection inverted relaxed divided list">
+          <Link className="ui middle aligned selection inverted relaxed divided list" to="/profile">
             <div className="item">
               <span className={"user-status-header mini ui empty circular label " + getUserStatus(this.props.user.status)}/>
               <AvatarComponent user={this.props.user} className={"ui avatar image"} size={28}/>
@@ -37,7 +37,7 @@ export const SidebarComponent = React.createClass({
                 <div className="header">{this.props.user.username}</div>
               </div>
             </div>
-          </div>
+          </Link>
           <div className="ui inverted horizontal divider header">
             <i className="users icon"/>
             Contacts

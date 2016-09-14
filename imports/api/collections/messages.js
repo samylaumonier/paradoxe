@@ -1,5 +1,63 @@
 export const Messages = new Mongo.Collection('messages');
 
+export const MessagesSchema = new SimpleSchema({
+  _id: {
+    type: String,
+  },
+  userId: {
+    type: String,
+  },
+  toUserId: {
+    type: [String],
+  },
+  createdAt: {
+    type: Date,
+  },
+  tag: {
+    type: Number,
+    optional: true,
+  },
+  contactId: {
+    type: [String],
+    optional: true,
+  },
+  status: {
+    type: Number,
+    optional: true,
+  },
+  declined: {
+    type: Boolean,
+    optional: true,
+  },
+  missed: {
+    type: Boolean,
+    optional: true,
+  },
+  hungUp: {
+    type: Boolean,
+    optional: true,
+  },
+  content: {
+    type: String,
+  },
+  associatedMessageId: {
+    type: String,
+    optional: true,
+  },
+  contactVideoPeerId: {
+    type: String,
+    optional: true,
+  },
+  hungUpByUserId: {
+    type: String,
+    optional: true,
+  },
+  targetUserId: {
+    type: [String],
+    optional: true,
+  },
+});
+
 export const INCOMING_VIDEO_CALL_TAG = 1;
 export const OUTGOING_VIDEO_CALL_TAG = 2;
 export const HUNG_UP_VIDEO_CALL_TAG = 3;

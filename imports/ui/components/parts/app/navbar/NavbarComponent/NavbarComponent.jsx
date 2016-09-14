@@ -78,11 +78,10 @@ export const NavbarComponent = React.createClass({
           </div>
           <div ref="profile" className="ui pointing dropdown icon item">
             <i className="user icon"/>
-            &nbsp; Profile <i className="dropdown icon"/>
+            &nbsp; <i className="dropdown icon"/>
             <div className="menu">
               <div className="item"><i className="life ring icon"/> Help</div>
-              <div className="item"><i className="share icon"/> Feedback</div>
-              <a className="item"><i className="setting icon"/> Settings</a>
+              <div className="item"><i className="external icon"/> Feedback</div>
               <a className="item" onClick={this.props.logout}>
                 <i className="sign out icon"/>
                 Logout

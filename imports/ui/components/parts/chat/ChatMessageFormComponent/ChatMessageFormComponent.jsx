@@ -8,6 +8,7 @@ import './ChatMessageFormComponentStyle.less';
 
 export const ChatMessageFormComponent = React.createClass({
   propTypes: {
+    user: React.PropTypes.object.isRequired,
     contact: React.PropTypes.object.isRequired,
     setMessagesHeight: React.PropTypes.func.isRequired,
     scrollToBottom: React.PropTypes.func.isRequired,
@@ -53,6 +54,7 @@ export const ChatMessageFormComponent = React.createClass({
                     <i className="large smile button icon"/>
                   </button>
                   <textarea
+                    placeholder={"Message " + this.props.contact.username}
                     ref="content"
                     rows="1"
                     required
@@ -79,11 +81,20 @@ export const ChatMessageFormComponent = React.createClass({
   postMessage: function (event) {
     event.preventDefault();
 
+    const message = this.state.message.trim();
+    
+    console.log(message);
+    
+    if(!message){
+      return false;
+    }
+    
     Messages.insert({
-      toUserId: this.props.contact._id,
-      content: this.state.message,
+      toUserId: [this.props.contact._id],
+      content: message,
     }, err => {
       if (err) {
+        console.log("error:", err);
         toastr.error(err.reason, 'Error');
       }
     });

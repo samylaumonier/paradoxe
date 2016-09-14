@@ -40,6 +40,7 @@ export const ChatComponent = React.createClass({
             <EmojiPicker search={true} onChange={this.onSelectEmoji}/>
           </div>
           <ChatMessageFormComponent
+            user={this.props.user}
             contact={this.props.contact}
             setMessagesHeight={this.setMessagesHeight}
             scrollToBottom={this.scrollToBottom}

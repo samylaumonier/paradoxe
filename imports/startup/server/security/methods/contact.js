@@ -4,6 +4,13 @@ Security.defineMethod('ifHasContact', {
   fetch: [],
   transform: null,
   allow(type, arg, userId, doc) {
-    return userId && userHasContact(Meteor.user(), doc[arg.contactIdField]);
+    if (!userId){
+      return false;
+    }
+    const user = Meteor.user();
+    
+    return doc[arg.contactIdField].every( contactId => {
+      return userHasContact(user, contactId);
+    });
   },
 });

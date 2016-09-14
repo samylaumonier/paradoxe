@@ -37,3 +37,5 @@ ostrio:files
 peerlibrary:reactive-publish
 semantic:ui
 tmeasday:publish-counts
+aldeed:simple-schema
+aldeed:collection2
