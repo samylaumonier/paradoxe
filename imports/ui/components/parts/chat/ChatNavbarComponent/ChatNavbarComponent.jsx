@@ -1,6 +1,4 @@
 import React from 'react';
-import { If, Then, Else } from 'react-if';
-import { browserHistory } from 'react-router';
 
 export const ChatNavbarComponent = React.createClass({
   propTypes: {
@@ -9,6 +7,9 @@ export const ChatNavbarComponent = React.createClass({
     userHasBlockedContact: React.PropTypes.bool.isRequired,
     startVideoCall: React.PropTypes.func.isRequired,
     stopVideoCall: React.PropTypes.func.isRequired,
+    removeContact: React.PropTypes.func.isRequired,
+    blockContact: React.PropTypes.func.isRequired,
+    unblockContact: React.PropTypes.func.isRequired,
   },
   componentDidMount: function () {
     this.initTooltips();
@@ -17,6 +18,31 @@ export const ChatNavbarComponent = React.createClass({
     this.initTooltips();
   },
   render: function () {
+    const videoCallControl = this.props.currentVideoCall
+      ? <a className="ui icon item" data-content="Stop video call" onClick={this.props.stopVideoCall}>
+        <i className="icons">
+          <i className="record icon"/>
+          <i className="red corner remove icon"/>
+        </i>
+      </a>
+      : <a className="ui icon item" data-content="Start video call" onClick={this.props.startVideoCall}>
+        <i className="record icon"/>
+      </a>;
+
+    const blockContactControl = this.props.userHasBlockedContact
+      ? <a className="ui icon item" data-content="Unblock" onClick={this.props.unblockContact}>
+        <i className="icons">
+          <i className="user icon"/>
+          <i className="green corner dont icon"/>
+        </i>
+      </a>
+      : <a className="ui icon item" data-content="Block" onClick={this.props.blockContact}>
+        <i className="icons">
+          <i className="user icon"/>
+          <i className="red corner dont icon"/>
+        </i>
+      </a>;
+
     return (
       <div className="ui top attached menu" ref="navbar">
         <a className="ui icon item" data-content="Select a file">
@@ -28,43 +54,12 @@ export const ChatNavbarComponent = React.createClass({
         <a className="ui icon item">
           <i className="phone icon"/>
         </a>
-        <If condition={this.props.currentVideoCall}>
-          <Then>
-            <a className="ui icon item" data-content="Stop video call" onClick={this.props.stopVideoCall}>
-              <i className="icons">
-                <i className="record icon"/>
-                <i className="red corner remove icon"/>
-              </i>
-            </a>
-          </Then>
-          <Else>
-            <a className="ui icon item" data-content="Start video call" onClick={this.props.startVideoCall}>
-              <i className="record icon"/>
-            </a>
-          </Else>
-        </If>
+        {videoCallControl}
         <a className="ui icon item">
           <i className="gift icon"/>
         </a>
-        <If condition={this.props.userHasBlockedContact}>
-          <Then>
-            <a className="ui icon item" data-content="Unblock" onClick={this.unblockContact}>
-              <i className="icons">
-                <i className="user icon"/>
-                <i className="green corner dont icon"/>
-              </i>
-            </a>
-          </Then>
-          <Else>
-            <a className="ui icon item" data-content="Block" onClick={this.blockContact}>
-              <i className="icons">
-                <i className="user icon"/>
-                <i className="red corner dont icon"/>
-              </i>
-            </a>
-          </Else>
-        </If>
-        <a className="ui icon item" data-content="Remove" onClick={this.removeContact}>
+        {blockContactControl}
+        <a className="ui icon item" data-content="Remove" onClick={this.props.removeContact}>
           <i className="icons">
             <i className="user icon"/>
             <i className="red corner remove icon"/>
@@ -78,68 +73,6 @@ export const ChatNavbarComponent = React.createClass({
       context: '#popups',
       inverted: true,
       position: 'bottom center'
-    });
-  },
-  // TODO: create smart component + mapDispatchToProps
-  removeContact: function () {
-    swal({
-      title: 'Are you sure?',
-      text: 'Are you sure you want to delete this contact?\n If you delete this contact, they will be removed from ' +
-        'your contact list and you will no longer be able to send them messages.',
-      type: 'warning',
-      showCancelButton: true,
-      closeOnConfirm: true,
-      confirmButtonText: 'Yes, delete contact!',
-      confirmButtonColor: '#ec6c62'
-    }, () => {
-      Meteor.call('removeContact', this.props.contact._id, err => {
-        if (err) {
-          toastr.error(err.reason, 'Error');
-        } else {
-          browserHistory.push('/');
-          toastr.success(`${this.props.contact.username} has been deleted!`);
-        }
-      });
-    });
-  },
-  blockContact: function () {
-    swal({
-      title: 'Are you sure?',
-      text: 'Are you sure you want to block this contact?\n If you block this contact, you will no longer get ' +
-        'notifications from them and they will no longer see you online.',
-      type: 'warning',
-      showCancelButton: true,
-      closeOnConfirm: true,
-      confirmButtonText: 'Yes, block contact!',
-      confirmButtonColor: '#ec6c62'
-    }, () => {
-      Meteor.call('blockContact', this.props.contact._id, err => {
-        if (err) {
-          toastr.error(err.reason, 'Error');
-        } else {
-          toastr.success(`${this.props.contact.username} has been blocked!`);
-        }
-      });
-    });
-  },
-  unblockContact: function () {
-    swal({
-      title: 'Are you sure?',
-      text: 'Are you sure you want to unblock this contact?\n If you unblock this contact, you will get ' +
-        'notifications from them and they will see you online.',
-      type: 'warning',
-      showCancelButton: true,
-      closeOnConfirm: true,
-      confirmButtonText: 'Yes, unblock contact!',
-      confirmButtonColor: '#ec6c62'
-    }, () => {
-      Meteor.call('unblockContact', this.props.contact._id, err => {
-        if (err) {
-          toastr.error(err.reason, 'Error');
-        } else {
-          toastr.success('Contact unblocked!');
-        }
-      });
     });
   },
 });

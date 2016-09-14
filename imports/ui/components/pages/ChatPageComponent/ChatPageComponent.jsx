@@ -30,6 +30,9 @@ export const ChatPageComponent = React.createClass({
     if (this.props.contact && !nextProps.contact
       || this.props.contact && nextProps.contact && this.props.contact._id !== nextProps.contact._id) {
       this.props.loadMessages(nextProps.params.contactUsername);
+      this.setState({
+        ready: false,
+      });
     }
   },
   render: function () {
