@@ -1,5 +1,4 @@
 import React from 'react';
-import { If, Then, Else } from 'react-if';
 import { Link } from 'react-router';
 
 import './NavbarComponentStyle.less';
@@ -26,6 +25,18 @@ export const NavbarComponent = React.createClass({
     $(this.refs.notification).dropdown();
   },
   render: function () {
+    const totalInvites = this.props.hasInvites
+      ? <span className="ui mini green circular label navbar-label">{this.props.totalInvites}</span>
+      : null;
+
+    const totalNotifications = this.props.hasNotifications
+      ? <span className="ui mini green circular label navbar-label">{this.props.totalNotifications}</span>
+      : null;
+
+    const notificationsHelper = this.props.hasNotifications
+      ? <p className="center">Mark all as seen.</p>
+      : <p className="center">No notifications.</p>;
+
     return (
       <div className="ui top attached menu">
         <a className="ui icon item" onClick={this.openContactAddModal}>
@@ -34,46 +45,20 @@ export const NavbarComponent = React.createClass({
         </a>
         <Link className="ui icon item" to="/invites">
           <i className="users icon"/>
-          &nbsp; Invites
-          <If condition={this.props.hasInvites}>
-            <Then>
-              <span className="ui mini green circular label navbar-label">
-                {this.props.totalInvites}
-              </span>
-            </Then>
-          </If>
+          &nbsp; Invites {totalInvites}
         </Link>
         <div className="right menu">
           <div ref="notification" className="ui pointing dropdown icon item">
             <i className="bell icon"/>
-            &nbsp; Notification
-            <If condition={this.props.hasNotifications}>
-              <Then>
-                <span className="ui mini green circular label navbar-label">
-                  {this.props.totalNotifications}
-                </span>
-              </Then>
-            </If>
+            &nbsp; Notification {totalNotifications}
             <i className="dropdown icon"/>
             <div id="notifications-menu" className="menu">
               {this.props.notifications.map(notification =>
-                <NavbarNotificationItemContainer
-                  key={notification._id}
-                  notification={notification}
-                />
+                <NavbarNotificationItemContainer key={notification._id} notification={notification}/>
               )}
-              <If condition={this.props.hasNotifications}>
-                <Then>
-                  <div className="item">
-                    <p className="center">Mark all as seen.</p>
-                  </div>
-                </Then>
-                <Else>
-                  <div className="item">
-                    <p className="center">No notifications.</p>
-                  </div>
-                </Else>
-              </If>
+              <div className="item">
+                {notificationsHelper}
+              </div>
             </div>
           </div>
           <div ref="profile" className="ui pointing dropdown icon item">

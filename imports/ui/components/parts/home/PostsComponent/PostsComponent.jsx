@@ -1,6 +1,4 @@
 import React from 'react';
-import { If, Then, Else } from 'react-if';
-
 import Masonry from 'react-masonry-component';
 
 import { PostInputContainer } from '/imports/ui/containers/parts/home/PostInputContainer';
@@ -23,21 +21,18 @@ export const PostsComponent = React.createClass({
     this.props.loadPosts();
   },
   render: function () {
+    const posts = this.props.posts.length
+      ? <Masonry className="posts" options={masonryOptions} updateOnEachImageLoad={true}>
+        {this.props.posts.map(post => <PostItemContainer key={post._id} post={post}/>)}
+      </Masonry>
+      : <p>No posts yet!</p>;
+
     return (
       <div>
         <PostInputContainer />
         <div className="ui divider"/>
         <h1>Recent posts</h1>
-        <If condition={this.props.posts.length !== 0}>
-          <Then>
-            <Masonry className="posts" options={masonryOptions} updateOnEachImageLoad={true}>
-              {this.props.posts.map(post => <PostItemContainer key={post._id} post={post}/>)}
-            </Masonry>
-          </Then>
-          <Else>
-            <p>No posts yet!</p>
-          </Else>
-        </If>
+        {posts}
       </div>
     );
   }
