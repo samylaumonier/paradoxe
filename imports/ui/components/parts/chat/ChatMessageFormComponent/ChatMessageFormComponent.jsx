@@ -21,13 +21,14 @@ export const ChatMessageFormComponent = React.createClass({
     };
   },
   componentDidMount: function () {
-    autosize(this.refs.content);
+    const content = this.refs.content;
+    autosize(content);
 
-    this.refs.content.addEventListener('autosize:resized', () => {
-      this.props.setMessagesHeight(this.refs.content.offsetHeight + 11);
+    content.addEventListener('autosize:resized', () => {
+      this.props.setMessagesHeight(content.offsetHeight + 11);
     });
 
-    this.props.scrollToBottom();
+    this.props.scrollToBottom(false);
   },
   componentDidUpdate: function () {
     this.props.scrollToBottom();

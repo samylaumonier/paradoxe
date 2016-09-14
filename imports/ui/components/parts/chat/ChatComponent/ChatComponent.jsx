@@ -55,12 +55,12 @@ export const ChatComponent = React.createClass({
     $(this.refs.messages).css('bottom', `${height}px`);
     $(this.refs.emojis).css('bottom', `${height}px`);
   },
-  scrollToBottom: function () {
+  scrollToBottom: function (smooth = true) {
     const messages = $(this.refs.messages);
 
     messages.animate({
-      scrollTop: messages.prop('scrollHeight')
-    }, 500);
+      scrollTop: messages.prop('scrollHeight'),
+    }, smooth ? 500 : 0);
   },
   toggleEmojis: function (event = null) {
     if (event) {

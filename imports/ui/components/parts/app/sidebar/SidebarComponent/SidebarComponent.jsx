@@ -1,17 +1,15 @@
 import React from 'react';
-import { If, Else, Then } from 'react-if';
 import { Link } from 'react-router';
 
-import { getUserStatus } from '/imports/api/collections/users';
-
 import { AvatarComponent } from '/imports/ui/components/parts/user/AvatarComponent/AvatarComponent';
-import { SidebarContactItemComponent } from '/imports/ui/components/parts/app/sidebar/SidebarContactItemComponent/SidebarContactItemComponent';
+import { SidebarContactItemContainer } from '/imports/ui/containers/parts/app/sidebar/SidebarContactItemContainer';
 
 import './SidebarComponentStyle.less';
 
 export const SidebarComponent = React.createClass({
   propTypes: {
     user: React.PropTypes.object.isRequired,
+    userStatus: React.PropTypes.string.isRequired,
     contacts: React.PropTypes.array.isRequired,
     loadContacts: React.PropTypes.func.isRequired,
     onFilterContacts: React.PropTypes.func.isRequired,
@@ -20,6 +18,12 @@ export const SidebarComponent = React.createClass({
     this.props.loadContacts();
   },
   render: function () {
+    const contacts = this.props.contacts.length
+      ? <div className="ui mini middle aligned selection inverted relaxed divided list">
+        {this.props.contacts.map(contact => <SidebarContactItemContainer key={contact._id} contact={contact}/>)}
+      </div>
+      : <div className="no-contacts">No contact found!</div>;
+
     return (
       <div id="sidebar" className="ui vertical inverted left visible sidebar menu">
         <div className="item">
@@ -31,7 +35,7 @@ export const SidebarComponent = React.createClass({
         <div className="item">
           <div className="ui middle aligned selection inverted relaxed divided list">
             <div className="item">
-              <span className={"user-status-header mini ui empty circular label " + getUserStatus(this.props.user.status)}/>
+              <span className={`user-status-header mini ui empty circular label ${this.props.userStatus}`}/>
               <AvatarComponent user={this.props.user} className={"ui avatar image"} size={28}/>
               <div className="content">
                 <div className="header">{this.props.user.username}</div>
@@ -50,22 +54,7 @@ export const SidebarComponent = React.createClass({
             />
             <i className="search icon"/>
           </div>
-          <If condition={this.props.contacts.length !== 0}>
-            <Then>
-              <div className="ui mini middle aligned selection inverted relaxed divided list">
-                {this.props.contacts.map(contact =>
-                  <SidebarContactItemComponent
-                    key={contact._id}
-                    user={this.props.user}
-                    contact={contact}
-                  />
-                )}
-              </div>
-            </Then>
-            <Else>
-              <div className="no-contacts">No contact found!</div>
-            </Else>
-          </If>
+          {contacts}
         </div>
       </div>
     );
