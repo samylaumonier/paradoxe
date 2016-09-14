@@ -1,5 +1,4 @@
 import React from 'react';
-import { If, Then, Else } from 'react-if';
 import numeral from 'numeral';
 
 import {
@@ -97,6 +96,11 @@ export const ChatShareFileCardComponent = React.createClass({
     return '';
   },
   render: function () {
+    const disabled = this.props.fileInfo.status === UPLOADING_STATUS ? 'disabled' : '';
+    const redButton = this.props.file !== undefined && this.props.fileInfo.status === UPLOADING_STATUS
+      ? <div className="ui basic red button" onClick={this.onCancel}>Cancel</div>
+      : <div className={`ui basic red button ${disabled}`} onClick={this.onDelete}>Delete</div>;
+
     return (
       <div className="card">
         <div className="content">
@@ -127,21 +131,7 @@ export const ChatShareFileCardComponent = React.createClass({
             >
               Download
             </a>
-            <If condition={this.props.file !== undefined && this.props.fileInfo.status === UPLOADING_STATUS}>
-              <Then>
-                <div className="ui basic red button" onClick={this.onCancel}>
-                  Cancel
-                </div>
-              </Then>
-              <Else>
-                <div
-                  className={`ui basic red button ${this.props.fileInfo.status === UPLOADING_STATUS ? 'disabled' : ''}`}
-                  onClick={this.onDelete}
-                >
-                  Delete
-                </div>
-              </Else>
-            </If>
+            {redButton}
           </div>
         </div>
       </div>

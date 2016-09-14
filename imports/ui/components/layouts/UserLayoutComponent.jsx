@@ -1,5 +1,4 @@
 import React from 'react';
-import { If, Then } from 'react-if';
 
 import { SidebarContainer } from '/imports/ui/containers/parts/app/sidebar/SidebarContainer';
 import { NavbarContainer } from '/imports/ui/containers/parts/app/navbar/NavbarContainer';
@@ -20,20 +19,20 @@ export const UserLayoutComponent = React.createClass({
     };
   },
   render: function () {
+    const children = this.props.user.ready
+      ? <div>
+        <SidebarContainer />
+        <div className="user-layout">
+          <NavbarContainer />
+          {this.props.children}
+        </div>
+        <AddContactsModalContainer />
+      </div>
+      : null;
+
     return (
       <div>
-        <If condition={this.props.user.ready === true}>
-          <Then>
-            <div>
-              <SidebarContainer />
-              <div className="user-layout">
-                <NavbarContainer />
-                {this.props.children}
-              </div>
-              <AddContactsModalContainer />
-            </div>
-          </Then>
-        </If>
+        {children}
         <div id="modals"></div>
         <div id="popups"></div>
       </div>
