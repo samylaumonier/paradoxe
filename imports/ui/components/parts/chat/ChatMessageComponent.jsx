@@ -10,8 +10,9 @@ emojione.ascii = true;
 
 export const ChatMessageComponent = React.createClass({
   propTypes: {
+    contact: React.PropTypes.object.isRequired,
     message: React.PropTypes.object.isRequired,
-    author: React.PropTypes.object.isRequired
+    author: React.PropTypes.object.isRequired,
   },
   render: function () {
     return (

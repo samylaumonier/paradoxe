@@ -36,7 +36,10 @@ export function loadInvites() {
             };
           }
 
-          return [];
+          return {
+            invites: [],
+            users: [],
+          };
         },
       },
     });
