@@ -1,4 +1,5 @@
 import { Meteor } from 'meteor/meteor';
+import numeral from 'numeral';
 import { FilesCollection } from 'meteor/ostrio:files';
 
 /** @namespace Meteor.settings.public.filesPath */
@@ -8,12 +9,11 @@ export const Files = new FilesCollection({
   collectionName: 'files',
   allowClientCode: false, // Disallow remove files from client
   onBeforeUpload: file => {
-    console.log(file.size);
-    // Allow upload files under 2 GB
     if (file.size <= Meteor.settings.public.uploadMaxFileSize) {
       return true;
     } else {
-      return 'Please upload file with size equal to or less than 10MB.';
+      const max = numeral(Meteor.settings.public.uploadMaxFileSize).format('0.00 b');
+      return `Please upload file with size equal to or less than ${max}.`;
     }
   }
 });

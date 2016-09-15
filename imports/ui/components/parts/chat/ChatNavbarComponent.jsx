@@ -1,10 +1,14 @@
 import React from 'react';
 
+import '/imports/ui/styles/parts/chat/ChatNavbarComponentStyle.less';
+
 export const ChatNavbarComponent = React.createClass({
   propTypes: {
     contact: React.PropTypes.object.isRequired,
     currentVideoCall: React.PropTypes.bool.isRequired,
     userHasBlockedContact: React.PropTypes.bool.isRequired,
+    fileListToArray: React.PropTypes.func.isRequired,
+    startUploadFiles: React.PropTypes.func.isRequired,
     startVideoCall: React.PropTypes.func.isRequired,
     stopVideoCall: React.PropTypes.func.isRequired,
     removeContact: React.PropTypes.func.isRequired,
@@ -46,10 +50,11 @@ export const ChatNavbarComponent = React.createClass({
       </a>;
 
     return (
-      <div className="ui top attached menu" ref="navbar">
-        <a className="ui icon item" data-content="Select a file">
+      <div className="ui top attached menu" ref="navbar" id="chat-navbar">
+        <a className="ui icon item" data-content="Select a file" onClick={this.openSelectFilesPage}>
           <i className="file icon"/>
         </a>
+        <input type="file" className="hidden" ref="files" onChange={this.startUploadFiles} multiple/>
         <a className="ui icon item">
           <i className="game icon"/>
         </a>
@@ -74,7 +79,18 @@ export const ChatNavbarComponent = React.createClass({
     $(this.refs.navbar).find('[data-content]').popup({
       context: '#popups',
       inverted: true,
-      position: 'bottom center'
+      position: 'bottom center',
     });
+  },
+  openSelectFilesPage: function () {
+    $(this.refs.files).click();
+  },
+  startUploadFiles: function (event) {
+    const files = this.props.fileListToArray(event.target.files);
+
+    if (files) {
+      this.props.startUploadFiles(files);
+      $(this.refs.files).val('');
+    }
   },
 });

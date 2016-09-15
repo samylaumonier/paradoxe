@@ -4,6 +4,10 @@ export function filesDropped(contact, files) {
   const filesInfo = [];
 
   files.forEach(file => {
+    if (!file.id) {
+      file.id = Random.id(8);
+    }
+
     filesInfo.push({
       id: file.id,
       name: file.name,
