@@ -8,15 +8,15 @@ Meteor.publish('invites.received', function () {
     }
     
     const user = Meteor.users.findOne(this.userId);
-    const invitations = Invites.find({
+    const invites = Invites.find({
       targetId: user._id,
     });
     
     return [
-      invitations,
+      invites,
       Meteor.users.find({
         _id: {
-          $in: _.pluck(invitations.fetch(), 'userId')
+          $in: _.pluck(invites.fetch(), 'userId')
         }
       }, {
         fields: {

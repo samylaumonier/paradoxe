@@ -3,44 +3,44 @@ import { Invites } from '/imports/api/collections/invites';
 import { Notifications, REQUEST_ACCEPTED } from '/imports/api/collections/notifications';
 
 Meteor.methods({
-  acceptInvitation: function (invitationsId) {
+  acceptInvitation: function (invitesId) {
     const user = Meteor.user();
-    const invitation = Invites.findOne(invitationsId);
+    const invite = Invites.findOne(invitesId);
 
     if (!user) {
       throw new Meteor.Error('401', 'Not authorized.');
     }
 
-    if (!invitation) {
-      throw new Meteor.Error('404', 'Invitation not found.');
+    if (!invite) {
+      throw new Meteor.Error('404', 'Invite not found.');
     }
 
     const invertedInvite = Invites.findOne({
       userId: user._id,
-      targetId: invitation.userId
+      targetId: invite.userId
     });
 
     if (invertedInvite) {
       Invites.remove(invertedInvite._id);
     }
 
-    Meteor.users.update(invitation.targetId, {
+    Meteor.users.update(invite.targetId, {
       $push: {
-        'profile.contacts': invitation.userId
+        'profile.contacts': invite.userId
       }
     });
 
-    Meteor.users.update(invitation.userId, {
+    Meteor.users.update(invite.userId, {
       $push: {
-        'profile.contacts': invitation.targetId
+        'profile.contacts': invite.targetId
       }
     });
     
-    const invitedUser = Meteor.users.findOne(invitation.targetId);
+    const invitedUser = Meteor.users.findOne(invite.targetId);
 
     const notification = {
-      userId: invitation.userId,
-      targetId: invitation.targetId,
+      userId: invite.userId,
+      targetId: invite.targetId,
       tag: REQUEST_ACCEPTED,
       url: '/chat/' + invitedUser.username,
       createdAt: new Date(),

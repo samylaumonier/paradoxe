@@ -1,6 +1,6 @@
 import './chat/file';
 import './chat/video';
-import './invitations/accept';
+import './invites/accept';
 import './posts/likes';
 import './navbar/notifications';
 import './users/block';
