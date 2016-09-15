@@ -16,7 +16,7 @@ export function loadPosts() {
           const user = Meteor.user();
 
           if (user) {
-            const ids = user.profile ? user.profile.contacts : [];
+            const ids = user.profile && user.profile.contacts ? user.profile.contacts : [];
             ids.push(user._id);
 
             const posts = Posts.find({
@@ -41,7 +41,10 @@ export function loadPosts() {
             };
           }
 
-          return [];
+          return {
+            posts: [],
+            users: [],
+          };
         },
       },
     });

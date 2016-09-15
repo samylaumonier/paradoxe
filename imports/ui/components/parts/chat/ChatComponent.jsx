@@ -24,7 +24,7 @@ export const ChatComponent = React.createClass({
       ? <div className="ui comments">
         {this.props.messages.map(message => message.tag
           ? <ChatTaggedMessageContainer key={message._id} contact={this.props.contact} message={message}/>
-          : <ChatMessageContainer key={message._id} message={message}/>
+          : <ChatMessageContainer key={message._id} contact={this.props.contact} message={message}/>
         )}
       </div>
       :  <p>No messages yet!</p>;
