@@ -1,7 +1,7 @@
 import React from 'react';
 import autosize from 'autosize';
 
-import '/imports/ui/styles/home/PostInputComponentStyle.less';
+import '/imports/ui/styles/parts/home/PostInputComponentStyle.less';
 
 export const PostInputComponent = React.createClass({
   propTypes: {

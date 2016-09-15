@@ -1,6 +1,7 @@
 export const Messages = new Mongo.Collection('messages');
 
 export const MessagesSchema = new SimpleSchema({
+//  _id is need when using the schema with a check function, if attaching it to a collection it should be removed
   _id: {
     type: String,
   },

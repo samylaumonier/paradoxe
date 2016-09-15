@@ -59,7 +59,7 @@ export const ChatComponent = React.createClass({
   scrollToBottom: function (smooth = true) {
     const messages = $(this.refs.messages);
 
-    messages.animate({
+    messages.stop().animate({
       scrollTop: messages.prop('scrollHeight'),
     }, smooth ? 500 : 0);
   },

@@ -4,7 +4,7 @@ import Masonry from 'react-masonry-component';
 import { PostInputContainer } from '/imports/ui/containers/parts/home/PostInputContainer';
 import { PostItemContainer } from '/imports/ui/containers/parts/home/PostItemContainer';
 
-import '/imports/ui/styles/home/PostsComponentStyle.less';
+import '/imports/ui/styles/parts/home/PostsComponentStyle.less';
 
 const masonryOptions = {
   transitionDuration: 0,

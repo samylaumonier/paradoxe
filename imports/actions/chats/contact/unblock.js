@@ -10,7 +10,7 @@ export function unblockContact(contact) {
       confirmButtonText: 'Yes, unblock contact!',
       confirmButtonColor: '#ec6c62'
     }, () => {
-      Meteor.call('unblockContact', this.props.contact._id, err => {
+      Meteor.call('unblockContact', contact._id, err => {
         if (err) {
           toastr.error(err.reason, 'Error');
         } else {

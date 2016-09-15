@@ -31,12 +31,12 @@
     "title-bar-style": "visible",
     "resizable": true,
     "protocols": [{
-      "name": "Video",
+      "name": "Glib",
       "schemes": ["myapp"]
     }]
   },
   "bot": {
     "username": "bot",
-    "email": "bot@epislon.com"
+    "email": "bot@glib.com"
   }
 }

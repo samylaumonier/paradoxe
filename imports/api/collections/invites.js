@@ -1,9 +1,6 @@
 export const Invites = new Mongo.Collection('invites');
 
 InvitesSchema = new SimpleSchema({
-  _id: {
-    type: String,
-  },
   userId: {
     type: String,
   },

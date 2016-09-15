@@ -3,7 +3,7 @@ import nl2br from 'react-nl2br';
 
 import { AvatarComponent } from '/imports/ui/components/parts/user/AvatarComponent';
 
-import '/imports/ui/styles/home/PostItemComponentStyle.less';
+import '/imports/ui/styles/parts/home/PostItemComponentStyle.less';
 
 export const PostItemComponent = React.createClass({
   propTypes: {

@@ -3,6 +3,7 @@ import React from 'react';
 import { ChatContainer } from '/imports/ui/containers/parts/chat/ChatContainer';
 import { ChatSidebarContainer } from '/imports/ui/containers/parts/chat/ChatSidebarContainer';
 import { NotFoundPageComponent } from '/imports/ui/components/pages/NotFoundPageComponent';
+import { SpinnerComponent } from '/imports/ui/components/parts/app/spinner/SpinnerComponent';
 
 export const ChatPageComponent = React.createClass({
   propTypes: {
@@ -37,11 +38,8 @@ export const ChatPageComponent = React.createClass({
   },
   render: function () {
     if (!this.state.ready) {
-      // TODO: spinner
       return (
-        <div>
-          Loading...
-        </div>
+        <SpinnerComponent />
       );
     }
 
