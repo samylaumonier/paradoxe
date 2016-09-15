@@ -1,3 +1,5 @@
+import { FileSchema } from './files';
+
 export const Messages = new Mongo.Collection('messages');
 
 export const MessagesSchema = new SimpleSchema({
@@ -40,6 +42,7 @@ export const MessagesSchema = new SimpleSchema({
   },
   content: {
     type: String,
+    optional: true,
   },
   associatedMessageId: {
     type: String,
@@ -55,6 +58,14 @@ export const MessagesSchema = new SimpleSchema({
   },
   targetUserId: {
     type: [String],
+    optional: true,
+  },
+  sender: {
+    type: [String],
+    optional: true,
+  },
+  files: {
+    type: [FileSchema],
     optional: true,
   },
 });

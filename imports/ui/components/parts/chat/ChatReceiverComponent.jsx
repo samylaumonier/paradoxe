@@ -7,9 +7,7 @@ export const ChatReceiverComponent = React.createClass({
   propTypes: {
     children: React.PropTypes.node,
     contact: React.PropTypes.object.isRequired,
-    // TODO
-    // onFileDrop: React.PropTypes.func.isRequired,
-    // onAddFile: React.PropTypes.func.isRequired,
+    onFileDrop: React.PropTypes.func.isRequired,
   },
   getInitialState: function () {
     return {

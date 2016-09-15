@@ -1,6 +1,9 @@
 import { CHAT_SUBSCRIPTION_READY, CHAT_SUBSCRIPTION_CHANGED } from '/imports/actions/chats/load';
 import { CHAT_VIDEO_UPDATE } from '/imports/actions/chats/video/update';
 import { CHAT_VIDEO_RESET } from '/imports/actions/chats/video/reset';
+import { CHAT_FILES_DROPPED } from '/imports/actions/chats/file/dropped';
+import { CHAT_FILES_UPLOAD_STARTED } from '/imports/actions/chats/file/upload';
+import { CHAT_FILE_CLEAN } from '/imports/actions/chats/file/clean';
 
 const initialState = {};
 
@@ -23,6 +26,8 @@ export const defaultChatState = {
   messages: [],
   users: [],
   files: [],
+  localFiles: [],
+  uploadHandlers: [],
   videoCall: {
     ...defaultVideoCallState,
   },
@@ -69,6 +74,31 @@ export function chats(state = initialState, action) {
       nextState[action.contact.username].videoCall = {
         ...defaultVideoCallState,
       };
+
+      return nextState;
+    case CHAT_FILES_DROPPED:
+      nextState = getNextState(state, action.contact.username);
+      nextState[action.contact.username].localFiles = [
+        ...nextState[action.contact.username].localFiles,
+        ...action.files,
+      ];
+
+      return nextState;
+    case CHAT_FILES_UPLOAD_STARTED:
+      nextState = getNextState(state, action.contact.username);
+      nextState[action.contact.username].uploadHandlers.push(action.uploadHandler);
+
+      return nextState;
+    case CHAT_FILE_CLEAN:
+      nextState = getNextState(state, action.contact.username);
+
+      const index = nextState[action.contact.username].localFiles.findIndex(localFile => localFile.id === action.localFileId);
+
+      if (index > -1) {
+        console.log('before remove', nextState[action.contact.username].localFiles);
+        nextState[action.contact.username].localFiles.splice(index, 1);
+        console.log('after remove', nextState[action.contact.username].localFiles);
+      }
 
       return nextState;
     default:

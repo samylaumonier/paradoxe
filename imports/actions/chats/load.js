@@ -22,6 +22,8 @@ export function loadChat(contactUsername) {
           };
 
           delete chatState.videoCall;
+          delete chatState.localFiles;
+          delete chatState.uploadHandlers;
 
           if (user) {
             chatState.contact = Meteor.users.findOne({

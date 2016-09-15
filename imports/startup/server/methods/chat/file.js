@@ -10,6 +10,9 @@ import {
 
 Meteor.methods({
   uploadFile: function (files, contactId) {
+    check(files, Array);
+    check(contactId, String);
+
     const user = Meteor.user();
     
     if (!user) {
@@ -35,7 +38,7 @@ Meteor.methods({
       files: files.map(file => {
         file.status = UPLOADING_STATUS;
         return file;
-      })
+      }),
     });
   },
   updateFileStatus: function (messageId, fileInfoId, status, fileId = null) {
@@ -72,6 +75,37 @@ Meteor.methods({
 
       Messages.update(messageId, {
         $set: values,
+      });
+    }
+  },
+  updateFileProgress: function (messageId, fileInfoId, progress) {
+    check(messageId, String);
+    check(fileInfoId, String);
+    check(progress, Number);
+
+    const user = Meteor.user();
+
+    if (!user) {
+      throw new Meteor.Error('401', 'Not authorized.');
+    }
+
+    const message = Messages.findOne(messageId);
+
+    if (!message) {
+      throw new Meteor.Error('404', 'Not found.');
+    }
+
+    if (message.userId !== Meteor.settings.public.bot.id || !message.toUserId.includes(user._id)) {
+      throw new Meteor.Error('401', 'Not authorized.');
+    }
+
+    const index = message.files.findIndex(file => file.id === fileInfoId);
+
+    if (index > -1) {
+      Messages.update(messageId, {
+        $set: {
+          [`files.${index}.progress`]: progress,
+        },
       });
     }
   },

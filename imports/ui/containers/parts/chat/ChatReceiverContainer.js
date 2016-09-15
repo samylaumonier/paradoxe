@@ -1,35 +1,19 @@
-import { Meteor } from 'meteor/meteor';
 import { connect } from 'react-redux';
+
+import { filesDropped } from '/imports/actions/chats/file/dropped';
 
 import { ChatReceiverComponent } from '/imports/ui/components/parts/chat/ChatReceiverComponent';
 
-const mapStateToProps = (state, ownProps) => {
+const mapStateToProps = () => {
   return {
 
   };
 };
 
-const mapDispatchToProps = (dispatch, ownProps) => {
+const mapDispatchToProps = (dispatch, props) => {
   return {
-    onFileDrop: (e, files) => {
-      const fileInfo = [];
-
-      files.forEach(file => {
-        fileInfo.push({
-          id: file.id,
-          name: file.name,
-          type: file.type,
-          size: file.size
-        });
-
-        ownProps.onAddFile(file);
-      });
-
-      Meteor.call('uploadFile', fileInfo, ownProps.contact._id, err => {
-        if (err) {
-          toastr.error(err.reason, 'Error');
-        }
-      });
+    onFileDrop: (event, files) => {
+      dispatch(filesDropped(props.contact, files));
     },
   };
 };

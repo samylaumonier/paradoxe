@@ -4,12 +4,10 @@ import { ChatShareFileCardContainer } from '/imports/ui/containers/parts/chat/Ch
 
 import '/imports/ui/styles/parts/chat/ChatShareFileComponentStyle.less';
 
-export const ChatShareFileComponent = React.createClass({
+export const ChatShareFilesComponent = React.createClass({
   propTypes: {
     contact: React.PropTypes.object.isRequired,
     message: React.PropTypes.object.isRequired,
-    // TODO
-    // getFile: React.PropTypes.func.isRequired,
   },
   render: function () {
     return (
@@ -21,7 +19,6 @@ export const ChatShareFileComponent = React.createClass({
               contact={this.props.contact}
               message={this.props.message}
               fileInfo={fileInfo}
-              file={this.props.getFile(fileInfo.id)}
              />
           )}
         </div>

@@ -50,18 +50,4 @@ export const ChatPageComponent = React.createClass({
       </div>
       : <NotFoundPageComponent />;
   },
-  // TODO
-  // onAddFile: function (file) {
-  //   const files = this.state.files;
-  //   files.push(file);
-  //
-  //   this.setState({
-  //     files
-  //   });
-  // },
-  // getFile: function (fileId) {
-  //   return _.findWhere(this.state.files, {
-  //     id: fileId
-  //   });
-  // },
 });

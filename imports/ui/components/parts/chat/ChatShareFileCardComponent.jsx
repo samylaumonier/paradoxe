@@ -7,80 +7,36 @@ import {
   UPLOADED_STATUS,
   UPLOADING_STATUS
 } from '/imports/api/collections/messages';
-import { Files } from '/imports/api/collections/files';
 
 export const ChatShareFileCardComponent = React.createClass({
   propTypes: {
+    user: React.PropTypes.object.isRequired,
     contact: React.PropTypes.object.isRequired,
     message: React.PropTypes.object.isRequired,
     fileInfo: React.PropTypes.object.isRequired,
+    progress: React.PropTypes.number,
+    localFile: React.PropTypes.object,
+    uploadHandler: React.PropTypes.object,
     file: React.PropTypes.object,
-    fileRef: React.PropTypes.object,
-  },
-  getInitialState: function () {
-    return {
-      upload: this.props.file && this.props.fileInfo.status === UPLOADING_STATUS
-        ? Files.insert({
-          file: this.props.file,
-          meta: {
-            contactId: [this.props.contact._id],
-          },
-          streams: 'dynamic',
-          chunkSize: 'dynamic'
-        }, false)
-        : null,
-    };
+    downloadLink: React.PropTypes.string,
+    startUpload: React.PropTypes.func.isRequired,
+    cancelUpload: React.PropTypes.func.isRequired,
+    deleteFile: React.PropTypes.func.isRequired,
   },
   componentDidMount: function () {
-    const progress = $(this.refs.progress);
-
-    if (this.state.upload !== null) {
-      this.state.upload.on('start', () => {
-        progress.progress({
-          percent: 0,
-        });
-      });
-
-      this.state.upload.on('end', (err, fileRef) => {
-        if (!err) {
-          Meteor.call('updateFileStatus', this.props.message._id, this.props.fileInfo.id, UPLOADED_STATUS, fileRef._id, err => {
-            if (err) {
-              toastr.error(err.reason, 'Error');
-            }
-          });
-        }
-      });
-
-      this.state.upload.on('error', err => {
-        toastr.error(err.reason, 'Error');
-
-        Meteor.call('updateFileStatus', this.props.message._id, this.props.fileInfo.id, ERROR_STATUS, err => {
-          if (err) {
-            toastr.error(err.reason, 'Error');
-          }
-        });
-      });
-
-      this.state.upload.on('progress', percent => {
-        progress.progress({
-          percent,
-        });
-      });
-
-      this.state.upload.on('abort', () => {
-        Meteor.call('updateFileStatus', this.props.message._id, this.props.fileInfo.id, CANCELED_STATUS, err => {
-          if (err) {
-            toastr.error(err.reason, 'Error');
-          }
-        });
-      });
-
-      this.state.upload.start();
-    } else if (this.props.fileInfo.status === UPLOADED_STATUS) {
-      progress.progress({
-        percent: 100,
-      });
+    if (this.props.fileInfo.status === UPLOADING_STATUS && this.props.localFile && !this.props.uploadHandler) {
+      this.props.startUpload(this.props.localFile);
     }
+
+    this.updateProgress();
+  },
+  componentDidUpdate: function () {
+    this.updateProgress();
+  },
+  updateProgress: function () {
+    $(this.refs.progress).progress({
+      percent: this.props.progress,
+    });
   },
   label: function () {
     if (this.props.fileInfo.status === UPLOADING_STATUS) {
@@ -97,9 +53,11 @@ export const ChatShareFileCardComponent = React.createClass({
   },
   render: function () {
     const disabled = this.props.fileInfo.status === UPLOADING_STATUS ? 'disabled' : '';
-    const redButton = this.props.file !== undefined && this.props.fileInfo.status === UPLOADING_STATUS
-      ? <div className="ui basic red button" onClick={this.onCancel}>Cancel</div>
-      : <div className={`ui basic red button ${disabled}`} onClick={this.onDelete}>Delete</div>;
+    const indicating = this.props.fileInfo.status === UPLOADING_STATUS ? 'indicating' : 'disabled';
+
+    const redButton = this.props.message.sender.includes(this.props.user._id) && this.props.fileInfo.status === UPLOADING_STATUS
+      ? <div className="ui basic red button" onClick={this.props.cancelUpload}>Cancel</div>
+      : <div className={`ui basic red button ${disabled}`} onClick={this.props.deleteFile}>Delete</div>;
 
     return (
       <div className="card">
@@ -111,7 +69,7 @@ export const ChatShareFileCardComponent = React.createClass({
             {numeral(this.props.fileInfo.size).format('0.00 b')} - {this.props.fileInfo.type}
           </div>
           <div className="description">
-            <div className="ui indicating progress" ref="progress">
+            <div className={`ui ${indicating} progress`} ref="progress">
               <div className="bar">
                 <div className="progress"></div>
               </div>
@@ -124,9 +82,9 @@ export const ChatShareFileCardComponent = React.createClass({
         <div className="extra content">
           <div className="ui two buttons">
             <a
-              className={`ui basic green button ${this.props.fileRef === null ? 'disabled' : ''}`}
-              href={`${this.props.fileRef ? this.props.fileRef.link()  : ''}?download=true`}
-              download={this.props.fileRef ? this.props.fileRef.name : ''}
+              className={`ui basic green button ${this.props.file === null ? 'disabled' : ''}`}
+              href={this.props.downloadLink}
+              download={this.props.file ? this.props.file.name : ''}
               target="_parent"
             >
               Download
@@ -136,19 +94,5 @@ export const ChatShareFileCardComponent = React.createClass({
         </div>
       </div>
     );
-  },
-  onCancel: function () {
-    if (this.state.upload) {
-      this.state.upload.abort();
-    }
-  },
-  onDelete: function () {
-    Meteor.call('deleteFile', this.props.message._id, this.props.fileInfo.id, err => {
-      if (err) {
-        toastr.error(err.reason, 'Error');
-      } else {
-        toastr.success('File deleted.');
-      }
-    });
   },
 });

@@ -13,7 +13,7 @@ import { AvatarComponent } from '/imports/ui/components/parts/user/AvatarCompone
 import { ChatIncomingVideoCallContainer } from '/imports/ui/containers/parts/chat/ChatIncomingVideoCallContainer';
 import { ChatOutgoingVideoCallContainer } from '/imports/ui/containers/parts/chat/ChatOutgoingVideoCallContainer';
 import { ChatHungUpVideoCallContainer } from '/imports/ui/containers/parts/chat/ChatHungUpVideoCallContainer';
-import { ChatShareFileComponent } from '/imports/ui/components/parts/chat/ChatShareFileComponent';
+import { ChatShareFilesComponent } from '/imports/ui/components/parts/chat/ChatShareFilesComponent';
 
 export const ChatTaggedMessageComponent = React.createClass({
   propTypes: {
@@ -46,7 +46,7 @@ export const ChatTaggedMessageComponent = React.createClass({
                 <ChatHungUpVideoCallContainer contact={this.props.contact} message={this.props.message}/>
               </Case>
               <Case expr={this.props.message.tag === FILE_UPLOAD_TAG}>
-                {/*<ChatShareFileComponent contact={this.props.contact} message={this.props.message}/>*/}
+                <ChatShareFilesComponent contact={this.props.contact} message={this.props.message}/>
               </Case>
               <Default>
                 {nl2br(this.props.message.content)}
