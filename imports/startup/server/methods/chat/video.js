@@ -40,6 +40,7 @@ Meteor.methods({
       status: RINGING_STATUS,
       declined: false,
       missed: false,
+      ended: false,
     });
 
     const incomingMessageId = Messages.insert({
@@ -50,6 +51,7 @@ Meteor.methods({
       contactVideoPeerId: userVideoPeerId,
       status: RINGING_STATUS,
       associatedMessageId: outgoingMessageId,
+      ended: false,
     });
 
     Messages.update(outgoingMessageId, {
@@ -138,6 +140,8 @@ Meteor.methods({
       throw new Meteor.Error('401', 'Not authorized.');
     }
 
+    setCallEnded([incomingMessage._id, incomingMessage.associatedMessageId]);
+
     Messages.insert({
       userId: Meteor.settings.public.bot.id,
       toUserId: _.union(incomingMessage.toUserId, incomingMessage.contactId),
@@ -170,6 +174,8 @@ Meteor.methods({
     if (incomingMessage.userId !== Meteor.settings.public.bot.id || !authorized) {
       throw new Meteor.Error('401', 'Not authorized.');
     }
+
+    setCallEnded([incomingMessage._id, incomingMessage.associatedMessageId]);
 
     Messages.insert({
       userId: Meteor.settings.public.bot.id,
@@ -254,3 +260,13 @@ Meteor.methods({
     });
   },
 });
+
+function setCallEnded(ids) {
+  ids.forEach(id => {
+    Messages.update(id, {
+      $set: {
+        ended: true
+      }
+    });
+  });
+}

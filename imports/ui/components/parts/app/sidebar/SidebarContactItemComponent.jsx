@@ -12,6 +12,7 @@ export const SidebarContactItemComponent = React.createClass({
     userHasBlockedContact: React.PropTypes.bool.isRequired,
     incomingCall: React.PropTypes.array,
     outgoingCall: React.PropTypes.array,
+    videoCall: React.PropTypes.array,
     openChat: React.PropTypes.func.isRequired,
   },
   componentDidMount: function () {
@@ -34,6 +35,9 @@ export const SidebarContactItemComponent = React.createClass({
         <audio src="/sounds/outgoing.ogg" autoPlay hidden loop/>
       </i>: null;
 
+    const videoCallIcon = this.props.videoCall.length ?
+      <i className="record icon" data-content="Video call" /> : null;
+
     return (
       <div className="item" onClick={this.props.openChat}>
         <span className={`user-status mini ui empty circular label ${this.props.contactStatus}`}/>
@@ -44,6 +48,7 @@ export const SidebarContactItemComponent = React.createClass({
             {blockedIcon}
             {incomingCallIcon}
             {outgoingCallIcon}
+            {videoCallIcon}
           </div>
         </div>
       </div>

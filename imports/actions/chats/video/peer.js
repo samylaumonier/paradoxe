@@ -1,4 +1,4 @@
-import { chatVideoListenToConnections } from './connection';
+import { chatVideoConnectionLost, chatVideoListenToConnections } from './connection';
 import { chatVideoReset } from './reset';
 import { chatVideoUpdate } from './update';
 
@@ -28,7 +28,14 @@ export function initVideoPeer(contact, onOpen) {
       });
     });
 
-    peer.on('error', console.log);
+    peer.on('error', err => {
+      console.log('peer error', err);
+
+      if (err.type === 'disconnected') {
+        dispatch(chatVideoConnectionLost(contact, peer));
+      }
+    });
+
     peer.on('close', () => console.log('peer close'));
     peer.on('disconnected', () => console.log('peer disconnected'));
 

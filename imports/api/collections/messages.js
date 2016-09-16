@@ -36,6 +36,10 @@ export const MessagesSchema = new SimpleSchema({
     type: Boolean,
     optional: true,
   },
+  ended: {
+    type: Boolean,
+    optional: true,
+  },
   hungUp: {
     type: Boolean,
     optional: true,

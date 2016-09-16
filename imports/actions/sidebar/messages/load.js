@@ -4,7 +4,8 @@ import {
   Messages,
   INCOMING_VIDEO_CALL_TAG,
   OUTGOING_VIDEO_CALL_TAG,
-  RINGING_STATUS
+  RINGING_STATUS,
+  ANSWERED_STATUS
 } from '/imports/api/collections/messages';
 
 export const SIDEBAR_MESSAGES_SUBSCRIPTION = 'SIDEBAR_MESSAGES_SUBSCRIPTION';
@@ -24,24 +25,18 @@ export function loadMessages() {
             const ids = user.profile && user.profile.contacts ? user.profile.contacts : null;
 
             if (ids) {
-              return _.union(
-                Messages.find({
-                  tag: INCOMING_VIDEO_CALL_TAG,
-                  status: RINGING_STATUS,
-                  $or: [
-                    { toUserId: { $in: user.profile.contacts }, contactId: { $in: [user._id] } },
-                    { toUserId: { $in: [user._id] }, contactId: { $in: user.profile.contacts } },
-                  ],
-                }).fetch(),
-                Messages.find({
-                  tag: OUTGOING_VIDEO_CALL_TAG,
-                  status: RINGING_STATUS,
-                  $or: [
-                    { toUserId: { $in: user.profile.contacts }, contactId: { $in: [user._id] } },
-                    { toUserId: { $in: [user._id] }, contactId: { $in: user.profile.contacts } },
-                  ],
-                }).fetch()
-              );
+              return Messages.find({
+                tag: {
+                  $in: [INCOMING_VIDEO_CALL_TAG, OUTGOING_VIDEO_CALL_TAG]
+                },
+                status: {
+                  $in: [RINGING_STATUS, ANSWERED_STATUS]
+                },
+                $or: [
+                  { toUserId: { $in: ids }, contactId: { $in: [user._id] } },
+                  { toUserId: { $in: [user._id] }, contactId: { $in: ids } },
+                ],
+              }).fetch();
             }
           }
 

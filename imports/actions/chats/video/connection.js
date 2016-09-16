@@ -22,7 +22,16 @@ export function chatVideoListenToConnections(contact, peer) {
 }
 
 export function chatVideoConnectionLost(contact, peer) {
-  return dispatch => {
+  return (dispatch, getState) => {
+    const incomingMessageId = getState().chats[contact.username].videoCall.callMessageId;
     dispatch(stopVideoPeer(contact, peer));
+
+    if (incomingMessageId) {
+      Meteor.call('updateVideoCallStatusConnectionLost', incomingMessageId, err => {
+        if (err) {
+          toastr.error(err.reason, 'Error');
+        }
+      });
+    }
   };
 }
