@@ -46,7 +46,6 @@ export const ChatIncomingVideoCallComponent = React.createClass({
                 <i className="remove icon" />
                 Decline
               </button>
-              <audio src="/sounds/incoming.mp3" autoPlay hidden loop/>
             </span>
           </Case>
           <Case expr={this.props.message.status === ANSWERED_STATUS}>

@@ -80,10 +80,8 @@ export const ANSWERED_STATUS = 2;
 export const DECLINED_STATUS = 3;
 export const CANCELED_STATUS = 4;
 export const MISSED_STATUS = 5;
-export const HUNG_UP_STATUS = 6;
-export const ERROR_STATUS = 7;
-export const UPLOADING_STATUS = 8;
-export const DELETED_STATUS = 9;
-export const UPLOADED_STATUS = 10;
+export const ERROR_STATUS = 6;
+export const UPLOADING_STATUS = 7;
+export const UPLOADED_STATUS = 8;
 
 export const RINGING_DURATION = 30;

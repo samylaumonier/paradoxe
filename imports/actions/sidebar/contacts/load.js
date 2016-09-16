@@ -14,7 +14,7 @@ export function loadContacts() {
           const user = Meteor.user();
 
           if (user) {
-            const ids = user.profile ? user.profile.contacts : null;
+            const ids = user.profile && user.profile.contacts ? user.profile.contacts : null;
 
             if (ids) {
               return Meteor.users.find({

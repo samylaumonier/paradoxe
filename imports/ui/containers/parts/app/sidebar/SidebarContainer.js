@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 import { getUserStatus } from '/imports/api/collections/users';
 
 import { loadContacts } from '/imports/actions/sidebar/contacts/load';
+import { loadMessages } from '/imports/actions/sidebar/messages/load';
 import { filterContacts } from '/imports/actions/sidebar/contacts/filter';
 
 import { SidebarComponent } from '/imports/ui/components/parts/app/sidebar/SidebarComponent';
@@ -21,6 +22,9 @@ const mapDispatchToProps = dispatch => {
   return {
     loadContacts: () => {
       dispatch(loadContacts());
+    },
+    loadMessages: () => {
+      dispatch(loadMessages());
     },
     onFilterContacts: filter => {
       dispatch(filterContacts(filter));

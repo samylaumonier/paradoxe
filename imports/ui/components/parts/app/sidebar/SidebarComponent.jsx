@@ -12,10 +12,12 @@ export const SidebarComponent = React.createClass({
     userStatus: React.PropTypes.string.isRequired,
     contacts: React.PropTypes.array.isRequired,
     loadContacts: React.PropTypes.func.isRequired,
+    loadMessages: React.PropTypes.func.isRequired,
     onFilterContacts: React.PropTypes.func.isRequired,
   },
   componentWillMount: function () {
     this.props.loadContacts();
+    this.props.loadMessages();
   },
   render: function () {
     const contacts = this.props.contacts.length

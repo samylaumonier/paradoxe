@@ -10,6 +10,8 @@ export const SidebarContactItemComponent = React.createClass({
     contact: React.PropTypes.object.isRequired,
     contactStatus: React.PropTypes.string.isRequired,
     userHasBlockedContact: React.PropTypes.bool.isRequired,
+    incomingCall: React.PropTypes.array,
+    outgoingCall: React.PropTypes.array,
     openChat: React.PropTypes.func.isRequired,
   },
   componentDidMount: function () {
@@ -19,9 +21,18 @@ export const SidebarContactItemComponent = React.createClass({
     this.initTooltips();
   },
   render: function () {
-    const blockedIcon = this.props.userHasBlockedContact
-      ? <i className="red dont icon user-blocked" data-content="Blocked"/>
-      : null;
+    const blockedIcon = this.props.userHasBlockedContact ?
+      <i className="red dont icon" data-content="Blocked"/> : null;
+
+    const incomingCallIcon = this.props.incomingCall.length ?
+      <i className="green record icon" data-content="Incoming call">
+        <audio src="/sounds/incoming.mp3" autoPlay hidden loop/>
+      </i> : null;
+
+    const outgoingCallIcon = this.props.outgoingCall.length ?
+      <i className="blue record icon" data-content="Outgoing call">
+        <audio src="/sounds/outgoing.ogg" autoPlay hidden loop/>
+      </i>: null;
 
     return (
       <div className="item" onClick={this.props.openChat}>
@@ -31,6 +42,8 @@ export const SidebarContactItemComponent = React.createClass({
           <div className="header" ref="header">
             {this.props.contact.username}
             {blockedIcon}
+            {incomingCallIcon}
+            {outgoingCallIcon}
           </div>
         </div>
       </div>

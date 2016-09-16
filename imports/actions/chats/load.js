@@ -42,7 +42,7 @@ export function loadChat(contactUsername) {
                   ]
                 }, {
                   sort: {
-                    sentAt: -1
+                    createdAt: 1
                   }
                 }).fetch();
 
