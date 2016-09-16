@@ -3,7 +3,7 @@ import Masonry from 'react-masonry-component';
 
 import { InviteItemContainer } from '/imports/ui/containers/parts/invites/InviteItemContainer';
 
-import '/imports/ui/styles/pages/InvitesPageComponentStyle.less'
+import '/imports/ui/styles/pages/InvitesPageComponentStyle.less';
 
 const masonryOptions = {
   transitionDuration: 0,

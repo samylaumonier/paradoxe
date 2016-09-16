@@ -12,7 +12,7 @@ export function register(username, email, password) {
         toastr.error(err.reason, 'Error');
       } else {
         toastr.success(`Welcome ${username}!`);
-        browserHistory.push('/');
+        browserHistory.push('/posts');
       }
     });
   };

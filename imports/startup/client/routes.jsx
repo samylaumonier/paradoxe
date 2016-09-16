@@ -12,7 +12,8 @@ import { MainLayoutComponent } from '/imports/ui/components/layouts/MainLayoutCo
 import { UserLayoutContainer } from '/imports/ui/containers/layouts/UserLayoutContainer';
 import { ConnectionPageComponent } from '/imports/ui/components/pages/ConnectionPageComponent';
 import { HomePageComponent } from '/imports/ui/components/pages/HomePageComponent';
-import { ProfilePageComponent } from '/imports/ui/components/pages/ProfilePageComponent';
+import { LandingPageComponent } from '/imports/ui/components/pages/LandingPageComponent';
+import { ProfilePageContainer } from '/imports/ui/containers/pages/ProfilePageContainer';
 
 import { ChatPageContainer } from '/imports/ui/containers/pages/ChatPageContainer';
 import { InvitesPageContainer } from '/imports/ui/containers/pages/InvitesPageContainer';
@@ -20,14 +21,15 @@ import { InvitesPageContainer } from '/imports/ui/containers/pages/InvitesPageCo
 export const renderRoutes = () => (
   <Provider store={store}>
     <Router history={browserHistory}>
-      <Route path="/" component={UserLayoutContainer} onEnter={requireAuthHook}>
-        <IndexRoute component={HomePageComponent}/>
-        <Route path="invites" component={InvitesPageContainer}/>
-        <Route path="profile" component={ProfilePageComponent}/>
-        <Route path="chat/:contactUsername" component={ChatPageContainer}/>
+      <Route path="/" component={MainLayoutComponent} onEnter={requireGuestHook}>
+        <IndexRoute component={LandingPageComponent}/>
+        <Route path="connect" component={ConnectionPageComponent}/>
       </Route>
-      <Route path="/connect" component={MainLayoutComponent} onEnter={requireGuestHook}>
-        <IndexRoute component={ConnectionPageComponent}/>
+      <Route path="/" component={UserLayoutContainer} onEnter={requireAuthHook}>
+        <Route path="profile" component={ProfilePageContainer}/>
+        <Route path="invites" component={InvitesPageContainer}/>
+        <Route path="posts" component={HomePageComponent}/>
+        <Route path="chat/:contactUsername" component={ChatPageContainer}/>
       </Route>
     </Router>
   </Provider>

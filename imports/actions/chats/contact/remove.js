@@ -16,7 +16,7 @@ export function removeContact(contact) {
         if (err) {
           toastr.error(err.reason, 'Error');
         } else {
-          browserHistory.push('/');
+          browserHistory.push('/posts');
           toastr.success(`${contact.username} has been deleted!`);
         }
       });

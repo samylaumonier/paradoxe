@@ -8,7 +8,7 @@ export function login(username, password) {
         toastr.error(err.reason, 'Error');
       } else {
         toastr.success('Welcome back!', 'Logged in');
-        browserHistory.push('/');
+        browserHistory.push('/posts');
       }
     });
   };
