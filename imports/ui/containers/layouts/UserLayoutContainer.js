@@ -7,6 +7,7 @@ import { UserLayoutComponent } from '/imports/ui/components/layouts/UserLayoutCo
 const mapStateToProps = state => {
   return {
     user: state.user,
+    notifications: state.notifications,
   };
 };
 

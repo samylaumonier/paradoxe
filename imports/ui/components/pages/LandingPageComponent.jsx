@@ -73,21 +73,15 @@ export const LandingPageComponent = React.createClass({
                   startup
                 </a>
                 <a className="active item">
-                  <i className="flaticon-home"/> Home
+                  <i className="home"/> Home
                 </a>
                 <a className="item">
-                  <i className="flaticon-mail"/> Messages
+                  <i className="mail"/> Messages
                 </a>
                 <a className="item">
-                  <i className="flaticon-heart"/> Friends
+                  <i className="heart"/> Friends
                 </a>
                 <div className="right menu">
-                  <div className="item">
-                    <div className="ui icon input">
-                      <input placeholder="Search..." type="text"/>
-                      <i className="flaticon-position link icon"/>
-                    </div>
-                  </div>
                   <a className="ui item">
                     Logout
                   </a>
@@ -97,9 +91,11 @@ export const LandingPageComponent = React.createClass({
                 <h1 className="ui inverted centered header">
                   An Old Cat Can Learn New Tricks
                 </h1>
-                <p className="ui centered lead">At least he won't reach his highest potential unless<br/>you enroll him
-                  in Cat University's 2013 className.</p>
-                <a href="#" className="large basic inverted animated fade ui button">
+                <p className="ui center aligned">
+                  At least he won't reach his highest potential unless<br/>
+                  you enroll him in Cat University's 2013 className.
+                </p>
+                <a href="#" className="center aligned large basic inverted animated fade ui button">
                   <div className="visible content">Come to ICU 2013</div>
                   <div className="hidden content">Register Now</div>
                 </a>
@@ -158,14 +154,6 @@ export const LandingPageComponent = React.createClass({
             <h3 className="subscribe-header">Subscribe to Mailing List</h3>
             <p className="ui centered lead large">At least he won't reach his highest potential unless you enroll him in
               Cat University's 2013 className.</p>
-            <div className="ui form eight wide subscribe column">
-              <div className="field">
-                <div className="ui fluid action input">
-                  <input placeholder="Susbcribe..." type="text"/>
-                  <div className="ui button">Susbcribe</div>
-                </div>
-              </div>
-            </div>
           </div>
         </div>
         <div className="ui recent-works vertical segment">
@@ -182,8 +170,31 @@ export const LandingPageComponent = React.createClass({
             <div className="fourteen wide column">
               <div className="ui three column aligned stackable divided grid">
                 <div className="column">
-                  <div className="ui card"
-                       data-html="<div className='header'>User Rating</div><div className='content'><div className='ui star rating'><i className='active icon'/><i className='active icon'/><i className='active icon'/><i className='icon'/><i className='icon'/></div></div>">
+                  <div className="ui card">
+                    <div className="image">
+                      <img src="images/totoro-horizontal.jpg"/>
+                    </div>
+                    <div className="content">
+                      <div className="header">My Neighbor Totoro</div>
+                      <div className="description">
+                        Two sisters move to the country with their father in order to be closer to their hospitalized
+                        mother, and discover the surrounding trees are inhabited by magical spirits.
+                      </div>
+                    </div>
+                    <div className="ui two bottom attached buttons">
+                      <div className="ui button">
+                        <i className="plus icon"/>
+                        Queue
+                      </div>
+                      <div className="ui pink button">
+                        <i className="play icon"/>
+                        Watch
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div className="column">
+                  <div className="ui card">
                     <div className="image">
                       <img src="images/totoro-horizontal.jpg"/>
                     </div>
@@ -207,33 +218,7 @@ export const LandingPageComponent = React.createClass({
                   </div>
                 </div>
                 <div className="column">
-                  <div className="ui card"
-                       data-html="<div className='header'>User Rating</div><div className='content'><div className='ui star rating'><i className='active icon'/><i className='active icon'/><i className='active icon'/><i className='icon'/><i className='icon'/></div></div>">
-                    <div className="image">
-                      <img src="images/totoro-horizontal.jpg"/>
-                    </div>
-                    <div className="content">
-                      <div className="header">My Neighbor Totoro</div>
-                      <div className="description">
-                        Two sisters move to the country with their father in order to be closer to their hospitalized
-                        mother, and discover the surrounding trees are inhabited by magical spirits.
-                      </div>
-                    </div>
-                    <div className="ui two bottom attached buttons">
-                      <div className="ui button">
-                        <i className="flaticon-plus icon"/>
-                        Queue
-                      </div>
-                      <div className="ui pink button">
-                        <i className="flaticon-play icon"/>
-                        Watch
-                      </div>
-                    </div>
-                  </div>
-                </div>
-                <div className="column">
-                  <div className="ui card"
-                       data-html="<div className='header'>User Rating</div><div className='content'><div className='ui star rating'><i className='active icon'/><i className='active icon'/><i className='active icon'/><i className='icon'/><i className='icon'/></div></div>">
+                  <div className="ui card">
                     <div className="image">
                       <img src="images/totoro-horizontal.jpg"/>
                     </div>
