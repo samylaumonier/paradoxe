@@ -16,13 +16,17 @@
     "icon": {
       "darwin": "public/icons/glib.icns"
     },
-    "version": "0.1.0",
+    "version": "0.0.1",
     "description": "Video call and chat application.",
     "downloadUrls": {
       "win32": "https://myapp.com/download/win/",
-      "darwin": "https://myapp.com/download/osx/{{version}}/MyApp.zip"
+      "darwin": "https://myapp.com/download/osx/{{version}}/MyApp.zip",
+      "arch": "https://myapp.com/download/linux/{{version}}/glib.tar"
     },
-
+    "builds": [{
+      "platform": "win32",
+      "arch": "ia32"
+    }],
     "sign": "",
     "height": 700,
     "width": 1024,
@@ -33,8 +37,9 @@
     "resizable": true,
     "protocols": [{
       "name": "Glib",
-      "schemes": ["myapp"]
-    }]
+      "schemes": ["glib"]
+    }],
+    "autoBuild": false
   },
   "bot": {
     "username": "bot",

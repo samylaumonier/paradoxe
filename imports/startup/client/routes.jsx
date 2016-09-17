@@ -26,7 +26,6 @@ export const renderRoutes = () => (
         <Route path="connect" component={ConnectionPageComponent}/>
       </Route>
       <Route path="/" component={UserLayoutContainer} onEnter={requireAuthHook}>
-        <Route path="profile" component={ProfilePageContainer}/>
         <Route path="invites" component={InvitesPageContainer}/>
         <Route path="posts" component={HomePageComponent}/>
         <Route path="chat/:contactUsername" component={ChatPageContainer}/>

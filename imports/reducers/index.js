@@ -1,4 +1,5 @@
 import { combineReducers } from 'redux';
+import { reducer as notifications } from 'react-notification-system-redux';
 
 import { chats } from './chats';
 import { home } from './home';
@@ -14,6 +15,7 @@ const rootReducer = combineReducers({
   navbar,
   user,
   sidebar,
+  notifications,
 });
 
 export default rootReducer;
