@@ -6,7 +6,8 @@ import {
   INCOMING_VIDEO_CALL_TAG,
   OUTGOING_VIDEO_CALL_TAG,
   HUNG_UP_VIDEO_CALL_TAG,
-  FILE_UPLOAD_TAG
+  FILE_UPLOAD_TAG,
+  shouldMarkMessageAsRead
 } from '/imports/api/collections/messages';
 
 import { AvatarComponent } from '/imports/ui/components/parts/user/AvatarComponent';
@@ -20,6 +21,12 @@ export const ChatTaggedMessageComponent = React.createClass({
     contact: React.PropTypes.object.isRequired,
     message: React.PropTypes.object.isRequired,
     author: React.PropTypes.object.isRequired,
+    readMessage: React.PropTypes.func.isRequired,
+  },
+  componentDidMount: function () {
+    if (shouldMarkMessageAsRead(this.props.message)) {
+      this.props.readMessage();
+    }
   },
   render: function () {
     return (

@@ -1,5 +1,7 @@
 import { connect } from 'react-redux';
 
+import { readMessage } from '/imports/actions/chats/message/read';
+
 import { ChatTaggedMessageComponent } from '/imports/ui/components/parts/chat/ChatTaggedMessageComponent';
 
 const mapStateToProps = (state, props) => {
@@ -10,9 +12,11 @@ const mapStateToProps = (state, props) => {
   };
 };
 
-const mapDispatchToProps = () => {
+const mapDispatchToProps = (dispatch, props) => {
   return {
-
+    readMessage: () => {
+      dispatch(readMessage(props.message._id));
+    },
   };
 };
 

@@ -1,5 +1,6 @@
 import { Meteor } from 'meteor/meteor';
 import { check } from 'meteor/check';
+
 import {
   Messages,
   INCOMING_VIDEO_CALL_TAG,

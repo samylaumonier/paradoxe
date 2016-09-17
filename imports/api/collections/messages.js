@@ -1,6 +1,24 @@
+import { Meteor } from 'meteor/meteor';
+
 import { FileSchema } from './files';
 
 export const Messages = new Mongo.Collection('messages');
+
+export const INCOMING_VIDEO_CALL_TAG = 1;
+export const OUTGOING_VIDEO_CALL_TAG = 2;
+export const HUNG_UP_VIDEO_CALL_TAG = 3;
+export const FILE_UPLOAD_TAG = 4;
+
+export const RINGING_STATUS = 1;
+export const ANSWERED_STATUS = 2;
+export const DECLINED_STATUS = 3;
+export const CANCELED_STATUS = 4;
+export const MISSED_STATUS = 5;
+export const ERROR_STATUS = 6;
+export const UPLOADING_STATUS = 7;
+export const UPLOADED_STATUS = 8;
+
+export const RINGING_DURATION = 30;
 
 export const MessagesSchema = new SimpleSchema({
 //  _id is need when using the schema with a check function, if attaching it to a collection it should be removed
@@ -15,6 +33,9 @@ export const MessagesSchema = new SimpleSchema({
   },
   createdAt: {
     type: Date,
+  },
+  read: {
+    type: [String],
   },
   tag: {
     type: Number,
@@ -74,18 +95,42 @@ export const MessagesSchema = new SimpleSchema({
   },
 });
 
-export const INCOMING_VIDEO_CALL_TAG = 1;
-export const OUTGOING_VIDEO_CALL_TAG = 2;
-export const HUNG_UP_VIDEO_CALL_TAG = 3;
-export const FILE_UPLOAD_TAG = 4;
+export function getSidebarMessages(user) {
+  const contacts = user.profile && user.profile.contacts ? user.profile.contacts : [];
 
-export const RINGING_STATUS = 1;
-export const ANSWERED_STATUS = 2;
-export const DECLINED_STATUS = 3;
-export const CANCELED_STATUS = 4;
-export const MISSED_STATUS = 5;
-export const ERROR_STATUS = 6;
-export const UPLOADING_STATUS = 7;
-export const UPLOADED_STATUS = 8;
+  return Messages.find({
+    $or: [
+      // Video call related messages
+      {
+        tag: {
+          $in: [INCOMING_VIDEO_CALL_TAG, OUTGOING_VIDEO_CALL_TAG]
+        },
+        status: {
+          $in: [RINGING_STATUS, ANSWERED_STATUS]
+        },
+        $or: [
+          { toUserId: { $in: contacts }, contactId: { $in: [user._id] } },
+          { toUserId: { $in: [user._id] }, contactId: { $in: contacts } },
+        ],
+      },
+      // Unread messages
+      {
+        read: {
+          $nin: [user._id],
+        },
+        toUserId: {
+          $in: [user._id],
+        },
+        $or: [
+          { userId: { $in: contacts } },
+          { contactId: { $in: contacts } },
+        ]
+      },
+    ],
+  });
+}
 
-export const RINGING_DURATION = 30;
+export function shouldMarkMessageAsRead(message) {
+  const user = Meteor.user();
+  return message.toUserId.includes(user._id) && !message.read.includes(user._id);
+}

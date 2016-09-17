@@ -1,4 +1,5 @@
 import './chat/file';
+import './chat/message';
 import './chat/video';
 import './invites/accept';
 import './posts/likes';

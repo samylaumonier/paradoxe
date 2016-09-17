@@ -1,6 +1,8 @@
 import React from 'react';
 import emojione from 'emojione';
 
+import { shouldMarkMessageAsRead } from '/imports/api/collections/messages';
+
 import { AvatarComponent } from '/imports/ui/components/parts/user/AvatarComponent';
 
 import '/imports/ui/styles/parts/chat/ChatMessageComponentStyle.less';
@@ -13,6 +15,20 @@ export const ChatMessageComponent = React.createClass({
     contact: React.PropTypes.object.isRequired,
     message: React.PropTypes.object.isRequired,
     author: React.PropTypes.object.isRequired,
+    readMessage: React.PropTypes.func.isRequired,
+  },
+  componentDidMount: function () {
+    $(this.refs.text).find('span').each(function () {
+      const line = $(this);
+
+      if (line.contents().length === 1) {
+        line.addClass('big-emojis');
+      }
+    });
+
+    if (shouldMarkMessageAsRead(this.props.message)) {
+      this.props.readMessage();
+    }
   },
   render: function () {
     return (
@@ -42,14 +58,5 @@ export const ChatMessageComponent = React.createClass({
         </div>
       </div>
     );
-  },
-  componentDidMount: function () {
-    $(this.refs.text).find('span').each(function () {
-      const line = $(this);
-
-      if (line.contents().length === 1) {
-        line.addClass('big-emojis');
-      }
-    });
   },
 });

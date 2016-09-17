@@ -10,6 +10,7 @@ export const SidebarContactItemComponent = React.createClass({
     contact: React.PropTypes.object.isRequired,
     contactStatus: React.PropTypes.string.isRequired,
     userHasBlockedContact: React.PropTypes.bool.isRequired,
+    newMessages: React.PropTypes.array,
     incomingCall: React.PropTypes.array,
     outgoingCall: React.PropTypes.array,
     videoCall: React.PropTypes.array,
@@ -21,9 +22,27 @@ export const SidebarContactItemComponent = React.createClass({
   componentDidUpdate: function () {
     this.initTooltips();
   },
+  componentWillReceiveProps: function (nextProps) {
+    if (nextProps.newMessages && this.props.newMessages.length !== 0) {
+      if (nextProps.newMessages.length > this.props.newMessages.length) {
+        this.replaySound(this.refs.messages);
+      }
+    }
+  },
+  replaySound: function (audio) {
+    audio.currentTime = 0;
+    audio.play();
+  },
   render: function () {
     const blockedIcon = this.props.userHasBlockedContact ?
       <i className="red dont icon" data-content="Blocked"/> : null;
+
+    const totalNewMessages = this.props.newMessages.length;
+    const newMessagesTooltip = `${totalNewMessages} new message${totalNewMessages > 1 ? 's' : ''}`;
+    const newMessagesIcon = totalNewMessages ?
+      <i className="mail icon" data-content={newMessagesTooltip}>
+        <audio src="/sounds/message.mp3" autoPlay hidden ref="messages"/>
+      </i> : null;
 
     const incomingCallIcon = this.props.incomingCall.length ?
       <i className="green record icon" data-content="Incoming call">
@@ -46,6 +65,7 @@ export const SidebarContactItemComponent = React.createClass({
           <div className="header" ref="header">
             {this.props.contact.username}
             {blockedIcon}
+            {newMessagesIcon}
             {incomingCallIcon}
             {outgoingCallIcon}
             {videoCallIcon}

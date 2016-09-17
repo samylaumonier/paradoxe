@@ -84,8 +84,6 @@ export const ChatMessageFormComponent = React.createClass({
 
     const message = this.state.message.trim();
     
-    console.log(message);
-    
     if(!message){
       return false;
     }
@@ -95,7 +93,6 @@ export const ChatMessageFormComponent = React.createClass({
       content: message,
     }, err => {
       if (err) {
-        console.log("error:", err);
         toastr.error(err.reason, 'Error');
       }
     });
