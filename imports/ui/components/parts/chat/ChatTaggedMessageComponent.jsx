@@ -7,14 +7,17 @@ import {
   OUTGOING_VIDEO_CALL_TAG,
   HUNG_UP_VIDEO_CALL_TAG,
   FILE_UPLOAD_TAG,
+  NUDGE_TAG,
   shouldMarkMessageAsRead
 } from '/imports/api/collections/messages';
 
-import { AvatarComponent } from '/imports/ui/components/parts/user/AvatarComponent';
 import { ChatIncomingVideoCallContainer } from '/imports/ui/containers/parts/chat/ChatIncomingVideoCallContainer';
 import { ChatOutgoingVideoCallContainer } from '/imports/ui/containers/parts/chat/ChatOutgoingVideoCallContainer';
 import { ChatHungUpVideoCallContainer } from '/imports/ui/containers/parts/chat/ChatHungUpVideoCallContainer';
+
+import { AvatarComponent } from '/imports/ui/components/parts/user/AvatarComponent';
 import { ChatShareFilesComponent } from '/imports/ui/components/parts/chat/ChatShareFilesComponent';
+import { ChatNudgeComponent } from '/imports/ui/components/parts/chat/ChatNudgeComponent';
 
 export const ChatTaggedMessageComponent = React.createClass({
   propTypes: {
@@ -54,6 +57,9 @@ export const ChatTaggedMessageComponent = React.createClass({
               </Case>
               <Case expr={this.props.message.tag === FILE_UPLOAD_TAG}>
                 <ChatShareFilesComponent contact={this.props.contact} message={this.props.message}/>
+              </Case>
+              <Case expr={this.props.message.tag === NUDGE_TAG}>
+                <ChatNudgeComponent contact={this.props.contact} message={this.props.message}/>
               </Case>
               <Default>
                 {nl2br(this.props.message.content)}

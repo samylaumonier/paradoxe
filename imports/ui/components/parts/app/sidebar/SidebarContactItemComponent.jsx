@@ -10,11 +10,13 @@ export const SidebarContactItemComponent = React.createClass({
     contact: React.PropTypes.object.isRequired,
     contactStatus: React.PropTypes.string.isRequired,
     userHasBlockedContact: React.PropTypes.bool.isRequired,
-    newMessages: React.PropTypes.array,
-    incomingCall: React.PropTypes.array,
-    outgoingCall: React.PropTypes.array,
-    videoCall: React.PropTypes.array,
+    newMessages: React.PropTypes.array.isRequired,
+    incomingCall: React.PropTypes.array.isRequired,
+    outgoingCall: React.PropTypes.array.isRequired,
+    videoCall: React.PropTypes.array.isRequired,
+    nudgeMessages: React.PropTypes.array.isRequired,
     openChat: React.PropTypes.func.isRequired,
+    nudgeUser: React.PropTypes.func.isRequired,
   },
   componentDidMount: function () {
     this.initTooltips();
@@ -23,13 +25,29 @@ export const SidebarContactItemComponent = React.createClass({
     this.initTooltips();
   },
   componentWillReceiveProps: function (nextProps) {
-    if (nextProps.newMessages && this.props.newMessages.length !== 0) {
-      if (nextProps.newMessages.length > this.props.newMessages.length) {
-        this.replaySound(this.refs.messages);
+    // Nudge sound
+    if (nextProps.nudgeMessages && nextProps.nudgeMessages.length > this.props.nudgeMessages.length) {
+      this.playSound(this.refs.nudge);
+
+      const messages = [];
+
+      nextProps.nudgeMessages.forEach(nudgeMessage => {
+        if (nudgeMessage.targetUserId.includes(this.props.user._id)) {
+          messages.push(nudgeMessage);
+        }
+      });
+
+      if (messages.length) {
+        this.props.nudgeUser(messages);
       }
     }
+
+    // New message sound
+    else if (nextProps.newMessages && nextProps.newMessages.length > this.props.newMessages.length) {
+      this.playSound(this.refs.messages);
+    }
   },
-  replaySound: function (audio) {
+  playSound: function (audio) {
     audio.currentTime = 0;
     audio.play();
   },
@@ -40,9 +58,7 @@ export const SidebarContactItemComponent = React.createClass({
     const totalNewMessages = this.props.newMessages.length;
     const newMessagesTooltip = `${totalNewMessages} new message${totalNewMessages > 1 ? 's' : ''}`;
     const newMessagesIcon = totalNewMessages ?
-      <i className="mail icon" data-content={newMessagesTooltip}>
-        <audio src="/sounds/message.mp3" autoPlay hidden ref="messages"/>
-      </i> : null;
+      <i className="mail icon" data-content={newMessagesTooltip} /> : null;
 
     const incomingCallIcon = this.props.incomingCall.length ?
       <i className="green record icon" data-content="Incoming call">
@@ -71,6 +87,8 @@ export const SidebarContactItemComponent = React.createClass({
             {videoCallIcon}
           </div>
         </div>
+        <audio src="/sounds/message.mp3" hidden ref="messages"/>
+        <audio src="/sounds/nudge.mp3" hidden ref="nudge"/>
       </div>
     );
   },

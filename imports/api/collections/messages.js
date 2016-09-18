@@ -8,6 +8,7 @@ export const INCOMING_VIDEO_CALL_TAG = 1;
 export const OUTGOING_VIDEO_CALL_TAG = 2;
 export const HUNG_UP_VIDEO_CALL_TAG = 3;
 export const FILE_UPLOAD_TAG = 4;
+export const NUDGE_TAG = 5;
 
 export const RINGING_STATUS = 1;
 export const ANSWERED_STATUS = 2;
@@ -18,7 +19,9 @@ export const ERROR_STATUS = 6;
 export const UPLOADING_STATUS = 7;
 export const UPLOADED_STATUS = 8;
 
+// In seconds
 export const RINGING_DURATION = 30;
+export const NUDGE_LIMIT = 15;
 
 export const MessagesSchema = new SimpleSchema({
 //  _id is need when using the schema with a check function, if attaching it to a collection it should be removed
@@ -93,6 +96,10 @@ export const MessagesSchema = new SimpleSchema({
     type: [FileSchema],
     optional: true,
   },
+  nudged: {
+    type: Boolean,
+    optional: true,
+  },
 });
 
 export function getSidebarMessages(user) {
@@ -125,6 +132,13 @@ export function getSidebarMessages(user) {
           { userId: { $in: contacts } },
           { contactId: { $in: contacts } },
         ]
+      },
+      // Nudge messages
+      {
+        tag: NUDGE_TAG,
+        sender: { $in: contacts },
+        targetUserId: { $in: [user._id] },
+        nudged: false,
       },
     ],
   });

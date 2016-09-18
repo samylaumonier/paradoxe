@@ -11,6 +11,7 @@ export const ChatNavbarComponent = React.createClass({
     startUploadFiles: React.PropTypes.func.isRequired,
     startVideoCall: React.PropTypes.func.isRequired,
     stopVideoCall: React.PropTypes.func.isRequired,
+    sendNudge: React.PropTypes.func.isRequired,
     removeContact: React.PropTypes.func.isRequired,
     blockContact: React.PropTypes.func.isRequired,
     unblockContact: React.PropTypes.func.isRequired,
@@ -62,7 +63,7 @@ export const ChatNavbarComponent = React.createClass({
           <i className="phone icon"/>
         </a>
         {videoCallControl}
-        <a className="ui icon item">
+        <a className="ui icon item" data-content="Send a nudge" onClick={this.props.sendNudge}>
           <i className="lightning icon"/>
         </a>
         {blockContactControl}

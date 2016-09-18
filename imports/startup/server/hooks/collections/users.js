@@ -200,13 +200,14 @@ Accounts.onCreateUser((options, user) => {
   ].join('|'));
   
   if (invalidEmail.test(user.emails[0].address)) {
-    throw new Meteor.Error('400', 'Sorry, this email is not allowed');
+    throw new Meteor.Error('400', 'Sorry, this email is not allowed.');
   }
 
   user.profile = {
     contacts: [],
     blockedContacts: [],
-    emailHash: md5(user.emails[0].address)
+    emailHash: md5(user.emails[0].address),
+    lastNudgeSentAt: {},
   };
   
   return user;

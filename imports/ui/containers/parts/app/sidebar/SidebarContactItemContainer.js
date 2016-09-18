@@ -1,10 +1,12 @@
 import { connect } from 'react-redux';
 import { browserHistory } from 'react-router';
 
+import { nudgeUser } from '/imports/actions/user/nudge.js';
 import { getUserStatus, userHasBlockedContact } from '/imports/api/collections/users';
 import {
   INCOMING_VIDEO_CALL_TAG,
   OUTGOING_VIDEO_CALL_TAG,
+  NUDGE_TAG,
   RINGING_STATUS,
   ANSWERED_STATUS
 } from '/imports/api/collections/messages';
@@ -36,6 +38,7 @@ const mapStateToProps = (state, props) => {
       message.status === ANSWERED_STATUS &&
       message.ended === false
     ),
+    nudgeMessages: messages.filter(message => message.tag === NUDGE_TAG && !message.nudged),
   };
 };
 
@@ -43,7 +46,10 @@ const mapDispatchToProps = (dispatch, props) => {
   return {
     openChat: () => {
       browserHistory.push(`/chat/${props.contact.username}`);
-    }
+    },
+    nudgeUser: nudgeMessages => {
+      dispatch(nudgeUser(nudgeMessages));
+    },
   };
 };
 
