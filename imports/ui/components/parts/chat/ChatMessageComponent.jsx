@@ -12,10 +12,12 @@ emojione.ascii = true;
 
 export const ChatMessageComponent = React.createClass({
   propTypes: {
+    user: React.PropTypes.object.isRequired,
     contact: React.PropTypes.object.isRequired,
     message: React.PropTypes.object.isRequired,
     author: React.PropTypes.object.isRequired,
     readMessage: React.PropTypes.func.isRequired,
+    deleteMessage: React.PropTypes.func.isRequired,
   },
   componentDidMount: function () {
     $(this.refs.text).find('span').each(function () {
@@ -31,6 +33,14 @@ export const ChatMessageComponent = React.createClass({
     }
   },
   render: function () {
+    const canDelete = this.props.message.userId === this.props.user._id ?
+      <div className="actions">
+        <a className="reply" onClick={this.props.deleteMessage}>
+          <i className="trash outline icon"/> Delete
+        </a>
+      </div>
+      : <span/>;
+    
     return (
       <div className="comment">
         <a className="avatar">
@@ -42,9 +52,7 @@ export const ChatMessageComponent = React.createClass({
             <div className="date">
               {moment(this.props.message.createdAt).fromNow()}
             </div>
-            <div className="actions">
-              <a className="reply">More</a>
-            </div>
+            {canDelete}
           </div>
           <div className="text" ref="text">
             {this.props.message.content.split(newlineRegex).map((line, index) => {

@@ -1,17 +1,17 @@
 import Notifications from 'react-notification-system-redux';
 
-export function deleteFile(message, localFileId) {
+export function deleteMessage(messageId) {
   return dispatch => {
     swal({
       title: 'Are you sure?',
-      text: 'If you delete this file you will not be able to recover it.',
+      text: 'If you delete this message you will not be able to recover it.',
       type: 'warning',
       showCancelButton: true,
       closeOnConfirm: true,
-      confirmButtonText: 'Yes, delete file',
+      confirmButtonText: 'Yes, delete message',
       confirmButtonColor: '#ec6c62'
     }, () => {
-      Meteor.call('deleteFile', message._id, localFileId, err => {
+      Meteor.call('deleteMessage', messageId, err => {
         if (err) {
           dispatch(
             Notifications.error({
@@ -23,15 +23,7 @@ export function deleteFile(message, localFileId) {
             })
           )
         } else {
-          dispatch(
-            Notifications.success({
-              title: `Action completed`,
-              message: `The file was deleted successfully.`,
-              position: 'tr',
-              autoDismiss: 3,
-              dismissible: true,
-            })
-          )
+          
         }
       });
     });

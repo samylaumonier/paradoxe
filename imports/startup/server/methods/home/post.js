@@ -39,6 +39,27 @@ Meteor.methods({
         }
       });
     }
-  }
+  },
+  deletePost: function (postId) {
+    check(postId, String);
+    
+    const user = Meteor.user();
+    
+    if (!user) {
+      throw new Meteor.Error('401', 'Not authorized.');
+    }
+    
+    const post = Posts.findOne(postId);
+    
+    if (!post) {
+      throw new Meteor.Error('404', 'Not found.');
+    }
+    
+    if (post.userId != user._id) {
+      throw new Meteor.Error('401', 'Not authorized.');
+    }
+  
+    Posts.remove(post._id);
+  },
 });
 

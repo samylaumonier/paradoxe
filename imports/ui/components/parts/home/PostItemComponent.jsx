@@ -12,12 +12,20 @@ export const PostItemComponent = React.createClass({
     user: React.PropTypes.object.isRequired,
     liked: React.PropTypes.bool.isRequired,
     likePost: React.PropTypes.func.isRequired,
+    deletePost: React.PropTypes.func.isRequired,
   },
   render: function () {
+    const canDelete = this.props.post.userId === this.props.user._id ?
+      <a className="reply" onClick={this.props.deletePost}>
+        <i className="trash outline icon"/>
+      </a> :
+      <span/>;
+    
     return (
       <div className="ui card">
         <div className="content">
           <span className="right floated">
+            {canDelete}
             <i className="like icon"/>
             {this.props.post.likes}
           </span>
