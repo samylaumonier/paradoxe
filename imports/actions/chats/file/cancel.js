@@ -12,7 +12,7 @@ export function cancelUpload(contact, message, localFileId) {
     if (uploadHandler) {
       uploadHandler.abort();
     } else {
-      updateFileStatus(message, localFileId, CANCELED_STATUS);
+      dispatch(updateFileStatus(message, localFileId, CANCELED_STATUS));
     }
   };
 }

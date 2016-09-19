@@ -25,12 +25,12 @@ export function startUpload(contact, message, file) {
     uploadHandler.localFileId = file.id;
 
     uploadHandler.on('start', () => {
-      updateFileProgress(message, file, 0);
+      dispatch(updateFileProgress(message, file, 0));
     });
 
     uploadHandler.on('end', (err, fileRef) => {
       if (!err) {
-        updateFileStatus(message, file.id, UPLOADED_STATUS, fileRef._id);
+        dispatch(updateFileStatus(message, file.id, UPLOADED_STATUS, fileRef._id));
       }
 
       dispatch(cleanChatFiles(contact, file.id));
@@ -46,11 +46,11 @@ export function startUpload(contact, message, file) {
           dismissible: true
         })
       );
-      updateFileStatus(message, file.id, ERROR_STATUS);
+      dispatch(updateFileStatus(message, file.id, ERROR_STATUS));
     });
 
     uploadHandler.on('progress', percent => {
-      updateFileProgress(message, file, percent);
+      dispatch(updateFileProgress(message, file, percent));
     });
 
     uploadHandler.on('abort', () => {

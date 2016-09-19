@@ -21,9 +21,7 @@ export function deleteMessage(messageId) {
               autoDismiss: 3,
               dismissible: true,
             })
-          )
-        } else {
-          
+          );
         }
       });
     });

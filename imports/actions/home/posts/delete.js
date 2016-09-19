@@ -21,9 +21,7 @@ export function deletePost(postId) {
               autoDismiss: 3,
               dismissible: true,
             })
-          )
-        } else {
-          
+          );
         }
       });
     });

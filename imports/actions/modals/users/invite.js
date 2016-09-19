@@ -15,14 +15,12 @@ export function inviteUsers(usernames) {
           })
         );
       } else {
-        let word = 'Invite';
-        if (res > 1){
-          word = 'Invites';
-        }
+        const s = res > 1 ? 's' : '';
+
         dispatch(
           Notifications.success({
-            title: `${word} sent`,
-            message: `${res} ${word} sent!`,
+            title: `Invite${s} sent`,
+            message: `${res} invite${s} sent!`,
             position: 'tr',
             autoDismiss: 5,
             dismissible: true

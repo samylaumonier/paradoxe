@@ -21,7 +21,7 @@ export function deleteFile(message, localFileId) {
               autoDismiss: 3,
               dismissible: true,
             })
-          )
+          );
         } else {
           dispatch(
             Notifications.success({
@@ -31,7 +31,7 @@ export function deleteFile(message, localFileId) {
               autoDismiss: 3,
               dismissible: true,
             })
-          )
+          );
         }
       });
     });
