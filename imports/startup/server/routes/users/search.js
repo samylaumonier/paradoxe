@@ -28,11 +28,12 @@ Picker.route('/users/search', function (params, req, res) {
     return false;
   }
 
-  // Exclude connected user and his contacts
+  // Exclude bot, connected user and his contacts
   const excludeIds = user.profile && user.profile.contacts
     ? user.profile.contacts
     : [];
 
+  excludeIds.push(Meteor.settings.public.bot.id);
   excludeIds.push(userId);
 
   // Find users

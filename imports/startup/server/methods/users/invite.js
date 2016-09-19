@@ -18,6 +18,7 @@ Meteor.methods({
     const user = Meteor.users.findOne(this.userId);
     const excludedIds = user.profile && user.profile.contacts ? user.profile.contacts : [];
 
+    excludedIds.push(Meteor.settings.public.bot.id);
     excludedIds.push(this.userId);
 
     // Find users to invite
