@@ -1,10 +1,19 @@
 import { Meteor } from 'meteor/meteor';
+import Notifications from 'react-notification-system-redux';
 
 export function likePost(postId) {
-  return () => {
+  return dispatch => {
     Meteor.call('likePost', postId, err => {
       if (err) {
-        toastr.error(err.reason, 'Error');
+        dispatch(
+          Notifications.error({
+            title: `An error occurred`,
+            message: err.reason,
+            position: 'tr',
+            autoDismiss: 5,
+            dismissible: true
+          })
+        );
       }
     });
   };

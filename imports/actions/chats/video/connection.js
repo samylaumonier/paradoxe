@@ -1,3 +1,5 @@
+import Notifications from 'react-notification-system-redux';
+
 import { stopVideoPeer } from './peer';
 import { chatVideoUpdate } from './update';
 
@@ -29,7 +31,15 @@ export function chatVideoConnectionLost(contact, peer) {
     if (incomingMessageId) {
       Meteor.call('updateVideoCallStatusConnectionLost', incomingMessageId, err => {
         if (err) {
-          toastr.error(err.reason, 'Error');
+          dispatch(
+            Notifications.error({
+              title: `An error occurred`,
+              message: err.reason,
+              position: 'tr',
+              autoDismiss: 5,
+              dismissible: true
+            })
+          );
         }
       });
     }

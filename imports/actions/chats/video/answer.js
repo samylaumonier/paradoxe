@@ -1,3 +1,5 @@
+import Notifications from 'react-notification-system-redux';
+
 import { chatVideoListenToConnections } from './connection';
 import { initVideoPeer } from './peer';
 import { getVideoUserStream } from './stream';
@@ -10,7 +12,15 @@ export function answerVideoCall(contact, message) {
     dispatch(getVideoUserStream((err, stream) => {
       if (err) {
         console.log(err);
-        toastr.error('Webcam must be allowed to make a video call.', 'Error');
+        dispatch(
+          Notifications.error({
+            title: `An error occurred`,
+            message: 'Webcam must be allowed to make a video call.',
+            position: 'tr',
+            autoDismiss: 5,
+            dismissible: true
+          })
+        );
       } else {
         dispatch(chatVideoUpdate(contact, { stream }));
         dispatch(initVideoPeer(contact, (userPeerId, peer) => {
@@ -22,7 +32,15 @@ export function answerVideoCall(contact, message) {
           if (userPeerId) {
             dispatch(setStatusAnswered(contact, message, stream, peer));
           } else {
-            toastr.error('Unable to connect to the server.', 'Error');
+            dispatch(
+              Notifications.error({
+                title: `An error occurred`,
+                message: 'Unable to connect to the server.',
+                position: 'tr',
+                autoDismiss: 5,
+                dismissible: true
+              })
+            );
           }
         }));
       }
@@ -34,7 +52,15 @@ function setStatusAnswered(contact, message, stream, peer) {
   return dispatch => {
     Meteor.call('updateVideoCallStatus', message._id, ANSWERED_STATUS, err => {
       if (err) {
-        toastr.error(err.reason, 'Error');
+        dispatch(
+          Notifications.error({
+            title: `An error occurred`,
+            message: err.reason,
+            position: 'tr',
+            autoDismiss: 5,
+            dismissible: true
+          })
+        );
       } else {
         const call = peer.call(message.contactVideoPeerId, stream);
 

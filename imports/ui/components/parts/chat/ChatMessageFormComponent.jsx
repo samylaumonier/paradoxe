@@ -1,6 +1,8 @@
 import React from 'react';
 import autosize from 'autosize';
 
+import Notifications from 'react-notification-system-redux';
+
 import { Messages } from '/imports/api/collections/messages';
 
 import 'emojione-picker/css/picker.css';
@@ -93,7 +95,17 @@ export const ChatMessageFormComponent = React.createClass({
       content: message,
     }, err => {
       if (err) {
-        toastr.error(err.reason, 'Error');
+        return dispatch => {
+          dispatch(
+            Notifications.error({
+              title: `An error occurred`,
+              message: err.reason,
+              position: 'tr',
+              autoDismiss: 3,
+              dismissible: true
+            })
+          );
+        };
       }
     });
 

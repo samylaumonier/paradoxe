@@ -1,3 +1,5 @@
+import Notifications from 'react-notification-system-redux';
+
 import { stopVideoPeer } from './peer';
 
 export function stopVideoCall(contact) {
@@ -6,7 +8,15 @@ export function stopVideoCall(contact) {
 
     Meteor.call('updateVideoCallStatusHungUp', videoCallState.callMessageId, err => {
       if (err) {
-        toastr.error(err.reason, 'Error');
+        dispatch(
+          Notifications.error({
+            title: `An error occurred`,
+            message: err.reason,
+            position: 'tr',
+            autoDismiss: 5,
+            dismissible: true
+          })
+        );
       }
     });
 

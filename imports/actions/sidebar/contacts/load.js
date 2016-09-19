@@ -29,7 +29,7 @@ export function loadContacts() {
               
               oldContacts.forEach(oldContact => {
                 const contact = _.findWhere(contacts, { _id: oldContact._id });
-                if (contact && !oldContact.status.online && contact.status.online) {
+                if (contact && oldContact.status && !oldContact.status.online && contact.status && contact.status.online) {
                   dispatch(
                     Notifications.info({
                       title: `New connection`,

@@ -1,6 +1,8 @@
 import { Files } from '/imports/api/collections/files';
 import { cleanChatFiles } from './clean';
 
+import Notifications from 'react-notification-system-redux';
+
 import {
   CANCELED_STATUS,
   ERROR_STATUS,
@@ -35,7 +37,15 @@ export function startUpload(contact, message, file) {
     });
 
     uploadHandler.on('error', err => {
-      toastr.error(err.reason, 'Error');
+      dispatch(
+        Notifications.error({
+          title: `An error occurred`,
+          message: err.reason,
+          position: 'tr',
+          autoDismiss: 5,
+          dismissible: true
+        })
+      );
       updateFileStatus(message, file.id, ERROR_STATUS);
     });
 
@@ -59,17 +69,37 @@ export function startUpload(contact, message, file) {
 }
 
 function updateFileProgress(message, file, progress) {
-  Meteor.call('updateFileProgress', message._id, file.id, progress, err => {
-    if (err) {
-      toastr.error(err.reason, 'Error');
-    }
-  });
+  return dispatch => {
+    Meteor.call('updateFileProgress', message._id, file.id, progress, err => {
+      if (err) {
+        dispatch(
+          Notifications.error({
+            title: `An error occurred`,
+            message: err.reason,
+            position: 'tr',
+            autoDismiss: 5,
+            dismissible: true
+          })
+        );
+      }
+    });
+  }
 }
 
 export function updateFileStatus(message, localFileId, status, fileRefId = null) {
-  Meteor.call('updateFileStatus', message._id, localFileId, status, fileRefId, err => {
-    if (err) {
-      toastr.error(err.reason, 'Error');
-    }
-  });
+  return dispatch => {
+    Meteor.call('updateFileStatus', message._id, localFileId, status, fileRefId, err => {
+      if (err) {
+        dispatch(
+          Notifications.error({
+            title: `An error occurred`,
+            message: err.reason,
+            position: 'tr',
+            autoDismiss: 5,
+            dismissible: true
+          })
+        );
+      }
+    });
+  }
 }

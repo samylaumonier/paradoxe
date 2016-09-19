@@ -7,7 +7,15 @@ export function login(username, password) {
   return dispatch => {
     Meteor.loginWithPassword(username, password, err => {
       if (err) {
-        toastr.error(err.reason, 'Error');
+        dispatch(
+          Notifications.error({
+            title: `An error occurred`,
+            message: err.reason,
+            position: 'tr',
+            autoDismiss: 5,
+            dismissible: true
+          })
+        );
       } else {
         dispatch(
           Notifications.success({

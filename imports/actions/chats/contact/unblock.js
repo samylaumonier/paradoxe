@@ -1,5 +1,7 @@
+import Notifications from 'react-notification-system-redux';
+
 export function unblockContact(contact) {
-  return () => {
+  return dispatch => {
     swal({
       title: 'Are you sure?',
       text: 'Are you sure you want to unblock this contact?\n If you unblock this contact, you will get ' +
@@ -12,9 +14,25 @@ export function unblockContact(contact) {
     }, () => {
       Meteor.call('unblockContact', contact._id, err => {
         if (err) {
-          toastr.error(err.reason, 'Error');
+          dispatch(
+            Notifications.error({
+              title: `An error occurred`,
+              message: err.reason,
+              position: 'tr',
+              autoDismiss: 5,
+              dismissible: true
+            })
+          );
         } else {
-          toastr.success('Contact unblocked!');
+          dispatch(
+            Notifications.success({
+              title: `Contact unblocked`,
+              message: `${contact.username} has been unblocked!`,
+              position: 'tr',
+              autoDismiss: 5,
+              dismissible: true
+            })
+          );
         }
       });
     });
