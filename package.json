@@ -60,9 +60,11 @@
     "react-redux": "^4.4.5",
     "react-router": "^2.7.0",
     "react-router-redux": "^4.0.5",
+    "react-youtube": "^7.1.1",
     "redux": "^3.5.2",
     "redux-logger": "^2.6.1",
-    "redux-thunk": "^2.1.0"
+    "redux-thunk": "^2.1.0",
+    "youtube-regex": "^1.0.5"
   },
   "devDependencies": {
     "autoprefixer": "^6.3.1",

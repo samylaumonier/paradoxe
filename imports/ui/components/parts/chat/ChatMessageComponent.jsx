@@ -1,5 +1,7 @@
 import React from 'react';
 import emojione from 'emojione';
+// import youtubeRegex from 'youtube-regex';
+// import YouTube from 'react-youtube';
 
 import { shouldMarkMessageAsRead } from '/imports/api/collections/messages';
 
@@ -40,6 +42,18 @@ export const ChatMessageComponent = React.createClass({
         </a>
       </div>
       : <span/>;
+
+    const message = this.props.message.content.split(newlineRegex).map((line, index) => {
+      if (line.match(newlineRegex)) {
+        return <br key={index}/>;
+      } else {
+        /*const html = line.trim().replace(youtubeRegex(), (match, videoId) => {
+          return <YouTube videoId={videoId}/>;
+        });*/
+
+        return <span key={index} dangerouslySetInnerHTML={{__html: emojione.toImage(line.trim())}} />;
+      }
+    });
     
     return (
       <div className="comment">
@@ -55,13 +69,7 @@ export const ChatMessageComponent = React.createClass({
             {canDelete}
           </div>
           <div className="text" ref="text">
-            {this.props.message.content.split(newlineRegex).map((line, index) => {
-              if (line.match(newlineRegex)) {
-                return <br key={index}/>;
-              } else {
-                return <span key={index} dangerouslySetInnerHTML={{__html: emojione.toImage(line.trim())}} />;
-              }
-            })}
+            {message}
           </div>
         </div>
       </div>
