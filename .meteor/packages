@@ -23,19 +23,19 @@ less@2.7.5
 random
 static-html@1.1.12
 
+aldeed:collection2
+aldeed:simple-schema
 chrismbeckett:toastr
 fortawesome:fontawesome
 juliancwirko:postcss
 kevohagan:sweetalert
 matb33:collection-hooks
-meson:electron
 meteorhacks:picker
 mizzao:user-status
 momentjs:moment
 ongoworks:security
 ostrio:files
 peerlibrary:reactive-publish
+risetechnologies:electron-builder
 semantic:ui
 tmeasday:publish-counts
-aldeed:simple-schema
-aldeed:collection2

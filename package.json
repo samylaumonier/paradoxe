@@ -15,6 +15,11 @@
     "chat",
     "social"
   ],
+  "author": {
+    "name": "Glib Inc",
+    "email": "contact@glib.io",
+    "url": "https://glib.io/"
+  },
   "contributors": [
     {
       "name": "Shane Benjamin",

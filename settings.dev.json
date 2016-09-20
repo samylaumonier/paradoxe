@@ -11,38 +11,43 @@
     "filesPath": "../glib-files",
     "uploadMaxFileSize": 2147483648
   },
-  "electron": {
-    "name": "Glib",
-    "icon": {
-      "darwin": "public/icons/glib.icns"
-    },
-    "version": "0.0.1",
-    "description": "Video call and chat application.",
-    "downloadUrls": {
-      "win32": "https://myapp.com/download/win/",
-      "darwin": "https://myapp.com/download/osx/{{version}}/MyApp.zip",
-      "arch": "https://myapp.com/download/linux/{{version}}/glib.tar"
-    },
-    "builds": [{
-      "platform": "win32",
-      "arch": "ia32"
-    }],
-    "sign": "",
-    "height": 700,
-    "width": 1024,
-    "minHeight": 500,
-    "minWidth": 770,
-    "frame": true,
-    "title-bar-style": "visible",
-    "resizable": true,
-    "protocols": [{
-      "name": "Glib",
-      "schemes": ["glib"]
-    }],
-    "autoBuild": false
-  },
   "bot": {
     "username": "bot",
     "email": "bot@glib.com"
+  },
+  "electron": {
+    "name": "Glib",
+    "version": "0.0.1",
+    "description": "Multiplatform video and chat application",
+    "homepage": "http://localhost:3000",
+    "license": "MIT",
+    "author": {
+      "name": "Glib Inc",
+      "email": "contact@glib.io",
+      "url": "https://glib.io/"
+    },
+    "windowOptions": {
+      "height": 700,
+      "width": 1024,
+      "minHeight": 500,
+      "minWidth": 770,
+      "frame": true,
+      "resizable": true
+    }
+  },
+  "electronBuilder": {
+    "targets": ["CURRENT"],
+    "autoRun": true,
+    "devMetadata": {
+      "build": {
+        "linux": {
+          "category": "InstantMessaging",
+          "target": "rpm"
+        }
+      },
+      "directories": {
+        "buildResources": "build/linux/"
+      }
+    }
   }
 }

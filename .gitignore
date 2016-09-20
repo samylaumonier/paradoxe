@@ -1,4 +1,4 @@
 node_modules/
 settings.json
 /.idea/
-/.meteor-electron/
+/.meteor-electron-builder/
