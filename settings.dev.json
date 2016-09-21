@@ -16,7 +16,8 @@
     "email": "bot@glib.com"
   },
   "electron": {
-    "name": "Glib",
+    "name": "glib-messenger",
+    "productName": "Glib",
     "version": "0.0.1",
     "description": "Multiplatform video and chat application",
     "homepage": "http://localhost:3000",
@@ -27,26 +28,30 @@
       "url": "https://glib.io/"
     },
     "windowOptions": {
-      "height": 700,
       "width": 1024,
-      "minHeight": 500,
+      "height": 700,
       "minWidth": 770,
-      "frame": true,
-      "resizable": true
-    }
+      "minHeight": 500,
+      "autoHideMenuBar": true,
+      "webPreferences": {
+        "devTools": false
+      }
+    },
+    "feedURL": "http://localhost:3000/"
   },
   "electronBuilder": {
-    "targets": ["CURRENT"],
     "autoRun": true,
     "devMetadata": {
       "build": {
+        "appId": "glib-messenger",
+        "productName": "Glib",
         "linux": {
-          "category": "InstantMessaging",
-          "target": "rpm"
+          "category": "Network;InstantMessaging;",
+          "target": ["rpm", "deb", "tar.gz"]
         }
       },
       "directories": {
-        "buildResources": "build/linux/"
+        "buildResources": "private/build/"
       }
     }
   }

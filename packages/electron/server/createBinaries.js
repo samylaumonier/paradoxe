@@ -123,6 +123,7 @@ const createBinaries = new Promise((resolve, reject) => {
   const buildInfo = {
     output: outputDir,
     name: appSettings.name,
+    productName: electronSettings.productName,
     buildRequired: buildRequired && devSettings.autoRun,
   };
 

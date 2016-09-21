@@ -64,6 +64,8 @@ const launchApp = buildInfo => {
   } else if (process.platform === 'darwin') {
     binaryPath = path.join(buildInfo.output, 'mac', `${buildInfo.name}.app`, 'Contents', 'MacOS', buildInfo.name);
     args.push(path.join(buildInfo.output, 'mac', `${buildInfo.name}.app`, 'Resources'));
+  } else if (process.platform === 'linux') {
+    binaryPath = path.join(buildInfo.output, 'linux-unpacked', buildInfo.productName);
   } else {
     throw new Error(`unsupported platform: ${process.platform}`);
   }

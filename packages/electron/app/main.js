@@ -19,7 +19,7 @@ const windowOptions = _.defaults(settings.windowOptions, {
   height: settings.height || 600,
   resizable: true,
   frame: true,
-  title: settings.name,
+  title: settings.productName || settings.name,
 });
 
 
