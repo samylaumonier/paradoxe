@@ -41,6 +41,7 @@
   },
   "electronBuilder": {
     "autoRun": true,
+    "targets": ["CURRENT", "WINDOWS", "LINUX"],
     "devMetadata": {
       "build": {
         "appId": "glib-messenger",
@@ -48,6 +49,10 @@
         "linux": {
           "category": "Network;InstantMessaging;",
           "target": ["rpm", "deb", "tar.gz"]
+        },
+        "win": {
+          "target": ["squirrel", "zip"],
+          "iconUrl": "http://localhost:3000/public/icon.ico"
         }
       },
       "directories": {
