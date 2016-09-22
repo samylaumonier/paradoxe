@@ -1,0 +1,7 @@
+{
+  "main": "main.js",
+  "dependencies": {
+    "electron-debug": "^0.5.1",
+    "lodash": "^4.15.0"
+  }
+}
