@@ -1,3 +1,4 @@
+import '/imports/startup/server/helpers';
 import '/imports/startup/server/hooks';
 import '/imports/startup/server/init';
 import '/imports/startup/server/methods';

@@ -13,7 +13,6 @@ import { UserLayoutContainer } from '/imports/ui/containers/layouts/UserLayoutCo
 import { ConnectionPageComponent } from '/imports/ui/components/pages/ConnectionPageComponent';
 import { HomePageComponent } from '/imports/ui/components/pages/HomePageComponent';
 import { LandingPageComponent } from '/imports/ui/components/pages/LandingPageComponent';
-import { ProfilePageContainer } from '/imports/ui/containers/pages/ProfilePageContainer';
 
 import { ChatPageContainer } from '/imports/ui/containers/pages/ChatPageContainer';
 import { InvitesPageContainer } from '/imports/ui/containers/pages/InvitesPageContainer';

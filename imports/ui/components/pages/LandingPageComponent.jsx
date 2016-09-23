@@ -69,17 +69,16 @@ export const LandingPageComponent = React.createClass({
           <div className="ui page grid">
             <div className="column">
               <div className="ui secondary pointing menu">
-                <a className="logo item">
-                  startup
-                </a>
+                <p className="logo item">
+                  <a href="" className="">
+                    <img  className="logo-item" src="/images/logo.png" alt="glib logo"/>
+                  </a>
+                </p>
                 <a className="active item">
                   <i className="home"/> Home
                 </a>
                 <a className="item">
                   <i className="mail"/> Messages
-                </a>
-                <a className="item">
-                  <i className="heart"/> Friends
                 </a>
                 <div className="right menu">
                   <a className="ui item">
@@ -89,15 +88,23 @@ export const LandingPageComponent = React.createClass({
               </div>
               <div className="ui hidden transition information">
                 <h1 className="ui inverted centered header">
-                  An Old Cat Can Learn New Tricks
+                  Glib
                 </h1>
-                <p className="ui center aligned">
-                  At least he won't reach his highest potential unless<br/>
-                  you enroll him in Cat University's 2013 className.
+                <p className="ui centered">
+                  Glib is a multi platform messaging application.<br/>
+                  Get it now for one of the following platform.
                 </p>
                 <a href="#" className="center aligned large basic inverted animated fade ui button">
-                  <div className="visible content">Come to ICU 2013</div>
-                  <div className="hidden content">Register Now</div>
+                  <div className="visible content"><i className="windows icon"/></div>
+                  <div className="hidden content">Get</div>
+                </a>
+                <a href="#" className="center aligned large basic inverted animated fade ui button">
+                  <div className="visible content"><i className="apple icon"/></div>
+                  <div className="hidden content">Get</div>
+                </a>
+                <a href="#" className="center aligned large basic inverted animated fade ui button">
+                  <div className="visible content"><i className="linux icon"/></div>
+                  <div className="hidden content">Get</div>
                 </a>
                 <div className="ui centerted image">
                   <img src="images/banner.png"/>
@@ -363,37 +370,47 @@ export const LandingPageComponent = React.createClass({
           <div className="ui stackable center aligned page grid">
             <div className="four column row">
               <div className="column">
-                <h5 className="ui inverted header">Courses</h5>
                 <div className="ui inverted link list">
-                  <a className="item">Registration</a>
-                  <a className="item">Course Calendar</a>
                   <a className="item">Professors</a>
                 </div>
               </div>
               <div className="column">
-                <h5 className="ui inverted header">Library</h5>
                 <div className="ui inverted link list">
-                  <a className="item">A-Z</a>
-                  <a className="item">Most Popular</a>
                   <a className="item">Recently Changed</a>
                 </div>
               </div>
               <div className="column">
-                <h5 className="ui inverted header">Community</h5>
                 <div className="ui inverted link list">
-                  <a className="item">BBS</a>
-                  <a className="item">Careers</a>
                   <a className="item">Privacy Policy</a>
                 </div>
               </div>
               <div className="column">
-                <h5 className="ui inverted header">Designed By</h5>
                 <addr>
-                  <a className="item" href="http://scripteden.com">
-                    <img src="images/scripteden-logo-g.png" alt="Logo" style={{height:20 + "px"}}/>
-                  </a>
-                  <br/>
-                  <a href="http://scripteden.com/downloads/bootstrap/">Bootstrap Templates</a> <br/>
+                  <a href="http://scripteden.com/downloads/semantic-ui/">Semantic UI Templates</a>
+                </addr>
+              </div>
+            </div>
+          </div>
+  
+          <div className="ui stackable center aligned page grid">
+            <div className="four column row">
+              <div className="column">
+                <div className="ui inverted link list">
+                  <a className="item">Professors</a>
+                </div>
+              </div>
+              <div className="column">
+                <div className="ui inverted link list">
+                  <a className="item">Recently Changed</a>
+                </div>
+              </div>
+              <div className="column">
+                <div className="ui inverted link list">
+                  <a className="item">Privacy Policy</a>
+                </div>
+              </div>
+              <div className="column">
+                <addr>
                   <a href="http://scripteden.com/downloads/semantic-ui/">Semantic UI Templates</a>
                 </addr>
               </div>
