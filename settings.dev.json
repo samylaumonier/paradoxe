@@ -11,6 +11,10 @@
     "filesPath": "../glib-files",
     "uploadMaxFileSize": 2147483648
   },
+  "peer": {
+    "port": 9000,
+    "proxied": false
+  },
   "bot": {
     "username": "bot",
     "email": "bot@glib.com"
