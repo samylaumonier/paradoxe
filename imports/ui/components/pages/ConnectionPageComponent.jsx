@@ -11,7 +11,7 @@ export const ConnectionPageComponent = () => (
       <div className="column">
         <h1 className="ui teal image header">
           <div className="content">
-            Welcome to Epsilon
+            Paradoxe
           </div>
         </h1>
         <br/>

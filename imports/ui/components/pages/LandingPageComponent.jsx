@@ -70,352 +70,323 @@ export const LandingPageComponent = React.createClass({
             <div className="column">
               <div className="ui secondary pointing menu">
                 <p className="logo item">
-                  <a href="" className="">
-                    <img  className="logo-item" src="/images/logo.png" alt="glib logo"/>
+                  <a>
+                    <img  className="logo-item" src="/images/logo.png" alt="Paradoxe logo"/>
                   </a>
                 </p>
-                <a className="active item">
-                  <i className="home"/> Home
-                </a>
-                <a className="item">
-                  <i className="mail"/> Messages
+                <a className="ui item">
+                  Paradoxe
                 </a>
                 <div className="right menu">
-                  <a className="ui item">
-                    Logout
+                  <a className="ui active item button" href="/connect">
+                    Web app
                   </a>
                 </div>
               </div>
-              <div className="ui hidden transition information">
-                <h1 className="ui inverted centered header">
-                  Glib
+              <div id="page-header" className="ui hidden transition information">
+                <h1 className="ui inverted centered hudge header">
+                  Paradoxe Alpha
                 </h1>
                 <p className="ui centered">
-                  Glib is a multi platform messaging application.<br/>
-                  Get it now for one of the following platform.
+                  When simplicity meets functionality. <br/>
+                  We get extraordinary.
                 </p>
-                <a href="#" className="center aligned large basic inverted animated fade ui button">
-                  <div className="visible content"><i className="windows icon"/></div>
-                  <div className="hidden content">Get</div>
-                </a>
-                <a href="#" className="center aligned large basic inverted animated fade ui button">
-                  <div className="visible content"><i className="apple icon"/></div>
-                  <div className="hidden content">Get</div>
-                </a>
-                <a href="#" className="center aligned large basic inverted animated fade ui button">
-                  <div className="visible content"><i className="linux icon"/></div>
-                  <div className="hidden content">Get</div>
-                </a>
-                <div className="ui centerted image">
-                  <img src="images/banner.png"/>
+                <div id="download-buttons">
+                  <a href="#" className="center aligned large basic inverted animated fade ui button">
+                    <div className="visible content"><i className="windows icon"/></div>
+                    <div className="hidden content">Get it</div>
+                  </a>
+                  <a href="#" className="center aligned large basic inverted animated fade ui button">
+                    <div className="visible content"><i className="apple icon"/></div>
+                    <div className="hidden content">Get it</div>
+                  </a>
+                  <a href="#" className="center aligned large basic inverted animated fade ui button">
+                    <div className="visible content"><i className="linux icon"/></div>
+                    <div className="hidden content">Get it</div>
+                  </a>
                 </div>
+                {/*<div className="ui centerted image">*/}
+                  {/*<img src="images/banner-2.jpg"/>*/}
+                {/*</div>*/}
               </div>
             </div>
           </div>
         </div>
+        
         <div className="ui vertical feature segment">
           <div className="ui centered page grid">
-            <div className="fourteen wide column">
-              <div className="ui three column center aligned stackable divided grid">
-                <div className="column column-feature">
-                  <div className="ui icon header">
-                    <i className="flaticon-connecting icon"/>
-                    Courses
+            
+            <div className="eight wide centered column">
+              <h2 className="center aligned ui huge header">
+                What does it do ?
+              </h2>
+              <div className="ui divider"></div>
+              <p className="ui centered lead">Here are some of the things we do best.</p>
+            </div>
+            
+            <div className="sixteen wide column">
+              <br/>
+              <div className="ui two column aligned stackable grid">
+                
+                <div className="six wide column">
+                  <div className="ui header">
+                    Direct messaging
                   </div>
-                  <p>Take your kitty to a cat-ducation course and learn how to treat her well.</p>
                   <p>
-                    <a className="ui button" href="#">
-                      Learn
-                    </a>
+                    Messaging is without a doubt one of the most used forms of communication, and this is something we believe we have async
+                    Done very well. No worries when you send a message with us we will get the job do. So send a DM it's
+                    <b> privacy and security.</b>
+                    
                   </p>
                 </div>
-                <div className="column column-feature">
-                  <div className="ui icon header">
-                    <i className="flaticon-calendar icon"/>
-                    Library
+                <div className="ten wide column">
+                  <div className="ui centerted image">
+                    <img src="images/chat-bubble.png"/>
                   </div>
-                  <p>Dig through our cat library to found out amazing things you can do with your kitty.</p>
-                  <p>
-                    <a className="ui green right labeled icon button" href="#">
-                      Research
-                      <i className="right flaticon-move icon"/>
-                    </a>
-                  </p>
                 </div>
-                <div className="column column-feature">
-                  <div className="ui icon header">
-                    <i className="flaticon-speech icon"/>
-                    Community
-                  </div>
-                  <p>Get feedback on your cat from a community of loving pet owners on our online...</p>
-                  <p>
-                    <a className="ui button" href="#">
-                      Share
-                    </a>
-                  </p>
-                </div>
+                
               </div>
             </div>
           </div>
+          <br/>
+        </div>
+        
+        <div className="ui vertical feature segment">
           <div className="ui centered page grid">
-            <h3 className="subscribe-header">Subscribe to Mailing List</h3>
-            <p className="ui centered lead large">At least he won't reach his highest potential unless you enroll him in
-              Cat University's 2013 className.</p>
+            <div className="sixteen wide column">
+              
+              <div className="ui two column aligned stackable grid">
+                
+                <div className="ten wide column">
+                  <div className="ui centerted image">
+                    <img src="images/video-audio.png"/>
+                  </div>
+                </div>
+                
+                <div className="six wide column">
+                  <div className="ui header">
+                    Video and audio calls
+                  </div>
+                  <p>
+                    It's not just about keeping in touch it's about how you keep in touch.
+                    Keep in touch with your contacts through <b>cristal clear video and audio. </b>
+                    Give a friend a call and we would love to hear what you think.
+                  </p>
+                </div>
+                
+              </div>
+            </div>
           </div>
         </div>
+        
+        <div className="ui vertical feature segment">
+          <div className="ui centered page grid">
+            <div className="sixteen wide column">
+              
+              <div className="ui two column aligned stackable grid">
+          
+          
+                <div className="six wide column">
+                  <div className="ui icon header">
+                    {/*<i className="file icon"/>*/}
+                    File transfer
+                  </div>
+                  <p>
+                    <b>Drag, drop and it's sent. </b> It's that easy to share file. Send any file of any type you need to share,
+                    we will make sure it get's there. Your files will be safely stored in your conversation.
+                    It will remain accessible until you or your contact feels like it needs to be removed.
+                  </p>
+                </div>
+  
+                <div className="ten wide column">
+                  <div className="ui centerted image">
+                    <img src="images/files.png"/>
+                  </div>
+                </div>
+                
+              </div>
+            </div>
+          </div>
+          <br/>
+        </div>
+
+        <div className="ui vertical feature segment">
+          <div className="ui centered page grid">
+            <div className="sixteen wide column">
+              
+              <div className="ui two column aligned stackable grid">
+          
+                <div className="ten wide column">
+                  <div className="ui centerted image">
+                    <img src="images/browsers.png"/>
+                  </div>
+                </div>
+          
+                <div className="six wide column">
+                  <div className="ui icon header">
+                    Browser based use
+                  </div>
+                  <p>
+                    On the go or using a friends PC.
+                    No problem just click <a href="/connect">here</a> for the web version.
+                    Our video and and audio calls are <b>supported by a number of web browsers. </b>
+                    Like Chrome, Firefox, Opera. So you never have to be disconnected.
+                  </p>
+                </div>
+                
+              </div>
+            </div>
+          </div>
+          <br/>
+        </div>
+  
+  
         <div className="ui recent-works vertical segment">
           <div className="ui very relaxed stackable centered page grid">
+            
             <div className="row">
               <div className="eight wide centered column">
-                <h1 className="center aligned ui inverted header">
-                  Recent Works
-                </h1>
-                <div className="ui horizontal divider"><i className="white flaticon-camera icon"/></div>
-                <p className="ui centered lead">Checkout Our Recently Completed Works<br/>you will be amazed!.</p>
+                <div className="ui horizontal divider"><i className="huge white star icon"/></div>
               </div>
             </div>
-            <div className="fourteen wide column">
-              <div className="ui three column aligned stackable divided grid">
-                <div className="column">
-                  <div className="ui card">
-                    <div className="image">
-                      <img src="images/totoro-horizontal.jpg"/>
-                    </div>
-                    <div className="content">
-                      <div className="header">My Neighbor Totoro</div>
-                      <div className="description">
-                        Two sisters move to the country with their father in order to be closer to their hospitalized
-                        mother, and discover the surrounding trees are inhabited by magical spirits.
-                      </div>
-                    </div>
-                    <div className="ui two bottom attached buttons">
-                      <div className="ui button">
-                        <i className="plus icon"/>
-                        Queue
-                      </div>
-                      <div className="ui pink button">
-                        <i className="play icon"/>
-                        Watch
-                      </div>
-                    </div>
-                  </div>
-                </div>
-                <div className="column">
-                  <div className="ui card">
-                    <div className="image">
-                      <img src="images/totoro-horizontal.jpg"/>
-                    </div>
-                    <div className="content">
-                      <div className="header">My Neighbor Totoro</div>
-                      <div className="description">
-                        Two sisters move to the country with their father in order to be closer to their hospitalized
-                        mother, and discover the surrounding trees are inhabited by magical spirits.
-                      </div>
-                    </div>
-                    <div className="ui two bottom attached buttons">
-                      <div className="ui button">
-                        <i className="flaticon-plus icon"/>
-                        Queue
-                      </div>
-                      <div className="ui pink button">
-                        <i className="flaticon-play icon"/>
-                        Watch
-                      </div>
-                    </div>
-                  </div>
-                </div>
-                <div className="column">
-                  <div className="ui card">
-                    <div className="image">
-                      <img src="images/totoro-horizontal.jpg"/>
-                    </div>
-                    <div className="content">
-                      <div className="header">My Neighbor Totoro</div>
-                      <div className="description">
-                        Two sisters move to the country with their father in order to be closer to their hospitalized
-                        mother, and discover the surrounding trees are inhabited by magical spirits.
-                      </div>
-                    </div>
-                    <div className="ui two bottom attached buttons">
-                      <div className="ui button">
-                        <i className="flaticon-plus icon"/>
-                        Queue
-                      </div>
-                      <div className="ui pink button">
-                        <i className="flaticon-play icon"/>
-                        Watch
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
+            
           </div>
         </div>
-        <div className="ui vertical segment">
+        
+        
+        {/*<div className="ui recent-works vertical segment">*/}
+          {/*<div className="ui very relaxed stackable centered page grid">*/}
+            {/**/}
+            {/*<div className="row">*/}
+              {/*<div className="eight wide centered column">*/}
+                {/*<h2 className="center aligned ui inverted header">*/}
+                  {/*Recent Works*/}
+                {/*</h2>*/}
+                {/*<div className="ui horizontal divider"><i className="white camera icon"/></div>*/}
+                {/*<p className="ui centered lead">Checkout Our Recently Completed Works<br/>you will be amazed!.</p>*/}
+              {/*</div>*/}
+            {/*</div>*/}
+            {/**/}
+            {/*<div className="fourteen wide column">*/}
+              {/*<div className="ui three column aligned stackable divided grid">*/}
+                {/**/}
+                {/*<div className="column">*/}
+                  {/*<div className="ui centered card">*/}
+                    {/*<div className="content">*/}
+                      {/*<div className="ui icon header">*/}
+                        {/*<i className="file icon"/>*/}
+                        {/*My Neighbor Totoro*/}
+                      {/*</div>*/}
+                      {/*<div className="description">*/}
+                        {/*Two sisters move to the country with their father in order to be closer to their hospitalized*/}
+                        {/*mother, and discover the surrounding trees are inhabited by magical spirits.*/}
+                      {/*</div>*/}
+                    {/*</div>*/}
+                  {/*</div>*/}
+                {/*</div>*/}
+                {/**/}
+                {/*<div className="column">*/}
+                  {/*<div className="ui centered card">*/}
+                    {/*<div className="content">*/}
+                      {/*<div className="ui icon header">*/}
+                        {/*<i className="file icon"/>*/}
+                        {/*My Neighbor Totoro*/}
+                      {/*</div>*/}
+                      {/*<div className="description">*/}
+                        {/*Two sisters move to the country with their father in order to be closer to their hospitalized*/}
+                        {/*mother, and discover the surrounding trees are inhabited by magical spirits.*/}
+                      {/*</div>*/}
+                    {/*</div>*/}
+                  {/*</div>*/}
+                {/*</div>*/}
+                {/**/}
+                {/*<div className="column centered">*/}
+                  {/*<div className="ui centered card">*/}
+                    {/*<div className="content">*/}
+                      {/*<div className="ui icon header">*/}
+                        {/*<i className="file icon"/>*/}
+                        {/*My Neighbor Totoro*/}
+                      {/*</div>*/}
+                      {/*<div className="description">*/}
+                        {/*Two sisters move to the country with their father in order to be closer to their hospitalized*/}
+                        {/*mother, and discover the surrounding trees are inhabited by magical spirits.*/}
+                      {/*</div>*/}
+                    {/*</div>*/}
+                  {/*</div>*/}
+                {/*</div>*/}
+                {/**/}
+              {/*</div>*/}
+            {/*</div>*/}
+          {/*</div>*/}
+        {/*</div>*/}
+        
+        
+        <div className="ui vertical segment white-footer">
           <div className="ui stackable center aligned page grid">
-            <div className="row">
-              <div className="eight wide column">
-                <h1 className="ui header">
-                  Our Clients
-                </h1>
-                <div className="ui horizontal divider"><i className="flaticon-settings icon"/></div>
-                <p className="ui centered lead">
-                  Many Companies Rely on Our Cat Knowledge
-                </p>
-                <br/>
-              </div>
-            </div>
-            <div className="four column logo row">
+            
+            <div className="three column row">
+              
               <div className="column">
-                <div className="ui shape">
-                  <div className="sides">
-                    <div className="active side">
-                      <i className="huge flaticon-facebook icon"/>
-                    </div>
-                    <div className="side">
-                      <i className="huge flaticon-google icon"/>
-                    </div>
-                    <div className="side">
-                      <i className="huge flaticon-twitter icon"/>
-                    </div>
-                    <div className="side">
-                      <i className="huge flaticon-pinterest icon"/>
-                    </div>
-                    <div className="side">
-                      <i className="huge flaticon-google icon"/>
-                    </div>
-                    <div className="side">
-                      <i className="huge flaticon-more icon"/>
-                    </div>
-                  </div>
+                <h5 className="ui header using-paradoxe">Using Paradoxe</h5>
+                <div className="ui link list">
+                  <a className="item">Support</a>
+                  <a className="item">Feedback</a>
                 </div>
               </div>
+                
               <div className="column">
-                <div className="ui shape">
-                  <div className="sides">
-                    <div className="side">
-                      <i className="huge flaticon-google icon"/>
-                    </div>
-                    <div className="side">
-                      <i className="huge flaticon-more icon"/>
-                    </div>
-                    <div className="active side">
-                      <i className="huge flaticon-twitter icon"/>
-                    </div>
-                    <div className="side">
-                      <i className="huge flaticon-facebook icon"/>
-                    </div>
-                    <div className="side">
-                      <i className="huge flaticon-google icon"/>
-                    </div>
-                    <div className="side">
-                      <i className="huge flaticon-twitter icon"/>
-                    </div>
-                  </div>
+                <h5 className="ui header paradoxe">Paradoxe</h5>
+                <div className="ui link list">
+                  <a className="item">About</a>
                 </div>
               </div>
+                
               <div className="column">
-                <div className="ui shape">
-                  <div className="sides">
-                    <div className="active side">
-                      <i className="huge flaticon-facebook icon"/>
-                    </div>
-                    <div className="side">
-                      <i className="huge flaticon-google icon"/>
-                    </div>
-                    <div className="side">
-                      <i className="huge flaticon-twitter icon"/>
-                    </div>
-                    <div className="side">
-                      <i className="huge flaticon-pinterest icon"/>
-                    </div>
-                    <div className="side">
-                      <i className="huge flaticon-google icon"/>
-                    </div>
-                    <div className="side">
-                      <i className="huge flaticon-more icon"/>
-                    </div>
-                  </div>
+                <h5 className="ui header download">Download</h5>
+                <div className="ui link list">
+                  <a className="item">Windows</a>
+                  <a className="item">Mac ox</a>
+                  <a className="item">Linux</a>
                 </div>
               </div>
-              <div className="column">
-                <div className="ui shape">
-                  <div className="sides">
-                    <div className="side">
-                      <i className="huge flaticon-google icon"/>
-                    </div>
-                    <div className="side">
-                      <i className="huge flaticon-more icon"/>
-                    </div>
-                    <div className="active side">
-                      <i className="huge flaticon-twitter icon"/>
-                    </div>
-                    <div className="side">
-                      <i className="huge flaticon-facebook icon"/>
-                    </div>
-                    <div className="side">
-                      <i className="huge flaticon-google icon"/>
-                    </div>
-                    <div className="side">
-                      <i className="huge flaticon-twitter icon"/>
-                    </div>
-                  </div>
-                </div>
-              </div>
+              
             </div>
           </div>
         </div>
+        
+        
         <div className="ui inverted footer vertical segment center">
-          <div className="ui stackable center aligned page grid">
-            <div className="four column row">
-              <div className="column">
-                <div className="ui inverted link list">
-                  <a className="item">Professors</a>
-                </div>
-              </div>
-              <div className="column">
-                <div className="ui inverted link list">
-                  <a className="item">Recently Changed</a>
-                </div>
-              </div>
-              <div className="column">
-                <div className="ui inverted link list">
-                  <a className="item">Privacy Policy</a>
-                </div>
-              </div>
-              <div className="column">
-                <addr>
-                  <a href="http://scripteden.com/downloads/semantic-ui/">Semantic UI Templates</a>
-                </addr>
-              </div>
-            </div>
-          </div>
+          
+            <div className="ui centered page grid">
+              <div className="sixteen wide column">
+        
+                <div className="ui two column aligned stackable grid">
+          
+                  <div className="eight wide column">
+                    
   
-          <div className="ui stackable center aligned page grid">
-            <div className="four column row">
-              <div className="column">
-                <div className="ui inverted link list">
-                  <a className="item">Professors</a>
+                    <div className="ui four column aligned stackable grid">
+                      
+                      <div className="column">
+                        <a className="item icon inverted">
+                          <i className="twitter icon"/>
+                          Twitter
+                        </a>
+                      </div>
+                    </div>
+                    
+                  </div>
+          
+                  <div className="eight wide column">
+                    <a className="item inverted"><b>© Paradoxe</b></a>
+                  </div>
+        
                 </div>
-              </div>
-              <div className="column">
-                <div className="ui inverted link list">
-                  <a className="item">Recently Changed</a>
-                </div>
-              </div>
-              <div className="column">
-                <div className="ui inverted link list">
-                  <a className="item">Privacy Policy</a>
-                </div>
-              </div>
-              <div className="column">
-                <addr>
-                  <a href="http://scripteden.com/downloads/semantic-ui/">Semantic UI Templates</a>
-                </addr>
               </div>
             </div>
-          </div>
+
+
+
         </div>
       </div>
     );

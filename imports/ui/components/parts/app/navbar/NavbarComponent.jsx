@@ -39,7 +39,7 @@ export const NavbarComponent = React.createClass({
 
     return (
       <div className="ui top attached menu">
-        <a className="ui icon item" onClick={this.openContactAddModal}>
+        <a className="ui item" onClick={this.openContactAddModal}>
           <i className="add user icon"/>
           &nbsp; Add contacts
         </a>
@@ -48,10 +48,10 @@ export const NavbarComponent = React.createClass({
           &nbsp; Invites {totalInvites}
         </Link>
         <div className="right menu">
-          <div ref="notification" className="ui pointing dropdown icon item">
+          <div ref="notification" className="ui dropdown icon item">
             <i className="bell icon"/>
-            &nbsp; Notification {totalNotifications}
-            <i className="dropdown icon"/>
+            &nbsp; {totalNotifications}
+            <i className="dropdown left"/>
             <div id="notifications-menu" className="menu">
               {this.props.notifications.map(notification =>
                 <NavbarNotificationItemContainer key={notification._id} notification={notification}/>
@@ -61,7 +61,7 @@ export const NavbarComponent = React.createClass({
               </div>
             </div>
           </div>
-          <div ref="profile" className="ui pointing dropdown icon item">
+          <div ref="profile" className="ui dropdown icon item">
             <i className="user icon"/>
             &nbsp; <i className="dropdown icon"/>
             <div className="menu">

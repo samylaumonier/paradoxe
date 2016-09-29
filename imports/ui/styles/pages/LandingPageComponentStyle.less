@@ -1,7 +1,24 @@
 #landingPage{
+  #page-header h1{
+    font-size: 26px;
+    font-weight: bold;
+  }
+
+  #download-buttons{
+    padding-bottom: 50px;
+  }
+
+  #page-header p{
+    font-size: 16px;
+  }
+
   .logo-item {
     height: 30px;
     width: 30px;
+  }
+
+  .white {
+    color: white;
   }
 
   overflow: scroll;
@@ -29,16 +46,16 @@
   ---------------*/
 
   .ui.inverted.segment.masthead, .ui.primary.inverted.segment {
-    //background: rgba(231, 76, 60,1.0);
-    //background: -moz-linear-gradient(-45deg,  rgba(241, 196, 15,1.0) 0%, rgba(230, 126, 34,1.0) 69%, rgba(231, 76, 60,1.0) 89%);
-    //background: -webkit-gradient(linear, left top, right bottom, color-stop(0%,rgba(241, 196, 15,1.0)), color-stop(69%,rgba(230, 126, 34,1.0)), color-stop(89%,rgba(231, 76, 60,1.0)));
-    //background: -webkit-linear-gradient(-45deg,  rgba(241, 196, 15,1.0) 0%,rgba(230, 126, 34,1.0) 69%,rgba(231, 76, 60,1.0) 89%);
-    //background: -o-linear-gradient(-45deg,  rgba(241, 196, 15,1.0) 0%,rgba(230, 126, 34,1.0) 69%,rgba(231, 76, 60,1.0) 89%);
-    //background: -ms-linear-gradient(-45deg,  rgba(241, 196, 15,1.0) 0%,rgba(230, 126, 34,1.0) 69%,rgba(231, 76, 60,1.0) 89%);
-    //background: linear-gradient(135deg,  rgba(241, 196, 15,1.0) 0%,rgba(230, 126, 34,1.0) 69%,rgba(231, 76, 60,1.0) 89%);
+    background: rgba(255,228,124,1.0);
+    background: -moz-linear-gradient(-45deg,  rgba(124,148,255,1.0) 0%, rgba(255,138,124,1.0) 69%, rgba(255,228,124,1.0) 89%);
+    background: -webkit-gradient(linear, left top, right bottom, color-stop(0%,rgba(124,148,255,1.0)), color-stop(69%,rgba(255,138,124,1.0)), color-stop(89%,rgba(255,228,124,1.0)));
+    background: -webkit-linear-gradient(-45deg,  rgba(124,148,255,1.0) 0%,rgba(255,138,124,1.0) 69%,rgba(255,228,124,1.0) 89%);
+    background: -o-linear-gradient(-45deg,  rgba(124,148,255,1.0) 0%,rgba(255,138,124,1.0) 69%,rgba(255,228,124,1.0) 89%);
+    background: -ms-linear-gradient(-45deg,  rgba(124,148,255,1.0) 0%,rgba(255,138,124,1.0) 69%,rgba(255,228,124,1.0) 89%);
+    background: linear-gradient(135deg,  rgba(124,148,255,1.0) 0%,rgba(255,138,124,1.0) 69%,rgba(255,228,124,1.0) 89%);
 
-    background: url("/background/lake.jpg") no-repeat center center;
-    background-size: cover;
+    //background: url("/background/space.jpg") no-repeat center center;
+    //background-size: cover;
     text-align: center;
     color: #fff;
   }
@@ -75,60 +92,49 @@
     border-radius: 0;
     padding-top: 0 !important;
   }
-  #home .ui.vertical.feature.segment .column,
-  #home .ui.vertical.feature.segment .column:after,
-  #home .ui.vertical.feature.segment .column:before{
+
+  .ui.vertical.feature.segment{
+    padding: 70px 0;
+  }
+
+   .ui.vertical.feature.segment .column,
+   .ui.vertical.feature.segment .column:after,
+   .ui.vertical.feature.segment .column:before{
     box-shadow: none !important;
   }
 
-  #home p.ui.centered.lead{
-    font-weight: 300;
-    font-size: 16pt;
-    padding: 0px 30px;
-    line-height: 1.5;
-    text-align: center;
-    margin-bottom: 0.7em;
-  }
-  #home .ui.vertical.feature.segment p{
+  .ui.vertical.feature.segment p{
     font-weight: 300;
     font-size: 11pt;
-    padding: 15px 30px;
-    line-height: 1.5;
   }
 
-  #home .ui.vertical.feature.segment .column .ui.icon.header{
-    margin-top: 10px;
+  .ui.vertical.feature.segment .column .ui.icon.header{
+    margin-top: 0;
+    font-size: 16pt;
   }
 
-  #home .column-feature .ui.icon.header .icon {
-    border: 1px solid #64B244;
-    color: #64B244;
-    border-radius: 500px;
-    display: block;
-    float: none;
-    font-size: 2em;
-    height: 80px;
-    line-height: 80px;
-    margin: 0 auto 15px;
-    opacity: 1;
-    padding: 0;
-    width: 80px;
+  .ui.vertical.feature.segment.ui.huge.header{
+    font-size: 32px;
   }
 
-  #home .ui.vertical.feature.segment .column.column-feature:hover{
+  .ui.vertical.feature.segment .ui.header + p{
+    color: #666666;
+  }
+
+  .ui.vertical.feature.segment .column.column-feature:hover{
     background: #fafafa !important;
   }
-  #home .ui.vertical.feature.segment .column.column-feature{
+  .ui.vertical.feature.segment .column.column-feature{
     border: 1px solid #eee;
     border-top: 0;
   }
 
-  #home .ui.vertical.feature.segment .column.column-feature:nth-child(2){
+  .ui.vertical.feature.segment .column.column-feature:nth-child(2){
     border-left: 0;
     border-right: 0;
   }
 
-  #home .subscribe.column{
+  .subscribe.column{
     padding: 0 !important;box-shadow: none !important;border:0 !important;
   }
 
@@ -181,15 +187,19 @@
   ------------------*/
 
   .ui.recent-works{
-    background: rgb(14,21,58);
-    background: -moz-linear-gradient(45deg,  rgba(14,21,58,1) 0%, rgba(115,107,147,1) 48%, rgba(243,201,215,1) 100%);
-    background: -webkit-gradient(linear, left bottom, right top, color-stop(0%,rgba(14,21,58,1)), color-stop(48%,rgba(115,107,147,1)), color-stop(100%,rgba(243,201,215,1)));
-    background: -webkit-linear-gradient(45deg,  rgba(14,21,58,1) 0%,rgba(115,107,147,1) 48%,rgba(243,201,215,1) 100%);
-    background: -o-linear-gradient(45deg,  rgba(14,21,58,1) 0%,rgba(115,107,147,1) 48%,rgba(243,201,215,1) 100%);
-    background: -ms-linear-gradient(45deg,  rgba(14,21,58,1) 0%,rgba(115,107,147,1) 48%,rgba(243,201,215,1) 100%);
-    background: linear-gradient(45deg,  rgba(14,21,58,1) 0%,rgba(115,107,147,1) 48%,rgba(243,201,215,1) 100%);
+    background: rgb(255,228,124,1);
+    background: -moz-linear-gradient(45deg,  rgba(255,228,124,1) 0%, rgba(255,138,124,1) 48%, rgba(124,148,255,1) 100%);
+    background: -webkit-gradient(linear, left bottom, right top, color-stop(0%,rgba(255,228,124,1)), color-stop(48%,rgba(255,138,124,1)), color-stop(100%,rgba(124,148,255,1)));
+    background: -webkit-linear-gradient(45deg,  rgba(255,228,124,1) 0%,rgba(255,138,124,1) 48%,rgba(124,148,255,1) 100%);
+    background: -o-linear-gradient(45deg,  rgba(255,228,124,1) 0%,rgba(255,138,124,1) 48%,rgba(124,148,255,1) 100%);
+    background: -ms-linear-gradient(45deg,  rgba(255,228,124,1) 0%,rgba(255,138,124,1) 48%,rgba(124,148,255,1) 100%);
+    background: linear-gradient(45deg,  rgba(255,228,124,1) 0%,rgba(255,138,124,1) 48%,rgba(124,148,255,1) 100%);
     filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#0e153a', endColorstr='#f3c9d7',GradientType=1 );
 
+  }
+
+  .ui.recent-works .huge.star {
+    font-size: 14px;
   }
 
   .ui.recent-works .column{
@@ -242,66 +252,31 @@
   /*--------------
       Footer
   ---------------*/
+  .ui.vertical.segment.white-footer{
+    padding: 40px 0;
+  }
 
-  #home .footer.segment {
-    background-color: #000000;
-    padding: 3rem 0rem;
+  .ui.vertical.segment.white-footer .header.using-paradoxe{
+    color: rgba(255,228,124,1);
+  }
+
+  .ui.vertical.segment.white-footer .header.paradoxe{
+    color: rgba(255,138,124,1);
+  }
+
+  .ui.vertical.segment.white-footer .header.download{
+    color: rgba(124,148,255,1);
   }
 
 
-  /*******************************
-            Responsive
-  *******************************/
+  .footer.segment {
+    background-color: #ecf0f1;
+    padding: 20px 0;
+    color: white !important;
+  }
 
-  /* Mobile Only */
-  @media only screen and (max-width : 768px) {
-
-    #home .menu .right.menu > .item {
-      display: none;
-    }
-
-    #home .menu .right.menu > .mobile.item {
-      display: block;
-    }
-    #home .menu .right.menu > .mobile.item .menu {
-      left: auto;
-      right: 0em;
-    }
-
-    #home h1 {
-      font-size: 1.5em;
-    }
-    #home .masthead.segment .information {
-      margin-left: 170px;
-    }
-
-    #home .masthead.segment .image {
-      width: 170px;
-    }
-
-    #home .masthead.segment .button {
-      font-size: 1rem;
-    }
-
-    #home .overview .divided.grid .header .icon {
-      font-size: 1.5em;
-    }
-
-    #home .overview .divided.grid .header + p {
-      min-height: 0px;
-    }
-
-    #home .masthead.segment .column {
-      font-size: 0.7rem;
-    }
-
-    #home .masthead.segment .column p {
-      display: none;
-    }
-
-    #home .selection.list .right.floated {
-      display: none;
-    }
+  .footer.segment .column .item.inverted{
+    color: #7f8c8d;
   }
 }
 
