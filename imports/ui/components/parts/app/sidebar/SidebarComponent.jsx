@@ -27,7 +27,7 @@ export const SidebarComponent = React.createClass({
       : <div className="no-contacts">No contact found!</div>;
 
     return (
-      <div id="sidebar" className="ui vertical inverted left visible sidebar menu">
+      <div id="sidebar" className="ui vertical inverted left visible sidebar secondary menu">
         <div className="item">
           <Link className="ui logo icon image" to="/posts">
             <img src="/images/logo.png"/>

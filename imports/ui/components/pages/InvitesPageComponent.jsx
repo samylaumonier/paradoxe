@@ -32,7 +32,7 @@ export const InvitesPageComponent = React.createClass({
       : <p>No invites yet!</p>;
 
     return (
-      <div className="ui bottom attached segment">
+      <div className="ui bottom attached secondary segment">
         <h1>Pending invites</h1>
         {invites}
       </div>

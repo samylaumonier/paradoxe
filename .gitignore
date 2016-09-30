@@ -2,3 +2,4 @@ node_modules/
 settings.json
 /.idea/
 /.meteor-electron-builder/
+/pm2-meteor.json

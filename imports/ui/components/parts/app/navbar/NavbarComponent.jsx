@@ -38,39 +38,39 @@ export const NavbarComponent = React.createClass({
       : <p className="center">No notifications.</p>;
 
     return (
-      <div className="ui top attached menu">
-        <a className="ui item" onClick={this.openContactAddModal}>
-          <i className="add user icon"/>
-          &nbsp; Add contacts
-        </a>
-        <Link className="ui icon item" to="/invites">
-          <i className="users icon"/>
-          &nbsp; Invites {totalInvites}
-        </Link>
-        <div className="right menu">
-          <div ref="notification" className="ui dropdown icon item">
-            <i className="bell icon"/>
-            &nbsp; {totalNotifications}
-            <i className="dropdown left"/>
-            <div id="notifications-menu" className="menu">
-              {this.props.notifications.map(notification =>
-                <NavbarNotificationItemContainer key={notification._id} notification={notification}/>
-              )}
-              <div className="item">
-                {notificationsHelper}
+      <div id="navbar">
+        <div className="ui top attached secondary menu">
+          <a className="ui item" onClick={this.openContactAddModal}>
+            <i className="add user icon"/>
+            &nbsp; Add contacts
+          </a>
+          <Link className="ui icon item" to="/invites">
+            <i className="users icon"/>
+            &nbsp; Invites {totalInvites}
+          </Link>
+          <div className="right menu">
+            <div ref="notification" className="ui dropdown icon item">
+              <i className="bell icon"/>
+              &nbsp; {totalNotifications}
+              <div className="menu">
+                {this.props.notifications.map(notification =>
+                  <NavbarNotificationItemContainer key={notification._id} notification={notification}/>
+                )}
+                <div className="item">
+                  {notificationsHelper}
+                </div>
               </div>
             </div>
-          </div>
-          <div ref="profile" className="ui dropdown icon item">
-            <i className="user icon"/>
-            &nbsp; <i className="dropdown icon"/>
-            <div className="menu">
-              <div className="item"><i className="life ring icon"/> Help</div>
-              <div className="item"><i className="external icon"/> Feedback</div>
-              <a className="item" onClick={this.props.logout}>
-                <i className="sign out icon"/>
-                Logout
-              </a>
+            <div ref="profile" className="ui dropdown icon item">
+              <i className="user icon"/>
+              <div className="menu">
+                <div className="item"><i className="life ring icon"/> Help</div>
+                <div className="item"><i className="external icon"/> Feedback</div>
+                <a className="item" onClick={this.props.logout}>
+                  <i className="sign out icon"/>
+                  Logout
+                </a>
+              </div>
             </div>
           </div>
         </div>

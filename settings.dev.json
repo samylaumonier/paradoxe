@@ -34,7 +34,7 @@
     "windowOptions": {
       "width": 1024,
       "height": 700,
-      "minWidth": 770,
+      "minWidth": 890,
       "minHeight": 500,
       "autoHideMenuBar": true,
       "webPreferences": {

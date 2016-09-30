@@ -51,7 +51,7 @@ export const ChatNavbarComponent = React.createClass({
       </a>;
 
     return (
-      <div className="ui top attached menu" ref="navbar" id="chat-navbar">
+      <div className="ui top attached secondary menu" ref="navbar" id="chat-navbar">
         <a className="ui icon item" data-content="Select a file" onClick={this.openSelectFilesPage}>
           <i className="file icon"/>
         </a>
