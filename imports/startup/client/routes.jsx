@@ -6,6 +6,7 @@ import store from '/imports/store';
 
 import { requireGuestHook } from './hooks/routes/guest';
 import { requireAuthHook } from './hooks/routes/auth';
+import { logPageView } from './hooks/routes/ga';
 
 import { MainLayoutComponent } from '/imports/ui/components/layouts/MainLayoutComponent';
 
