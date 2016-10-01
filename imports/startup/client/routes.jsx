@@ -19,7 +19,7 @@ import { InvitesPageContainer } from '/imports/ui/containers/pages/InvitesPageCo
 
 export const renderRoutes = () => (
   <Provider store={store}>
-    <Router history={browserHistory}>
+    <Router history={browserHistory} onUpdate={logPageView}>
       <Route path="/" component={MainLayoutComponent} onEnter={requireGuestHook}>
         <IndexRoute component={LandingPageComponent}/>
         <Route path="connect" component={ConnectionPageComponent}/>

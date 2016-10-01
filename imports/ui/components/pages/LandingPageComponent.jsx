@@ -106,7 +106,7 @@ export const LandingPageComponent = React.createClass({
                   </a>
                 </div>
                 {/*<div className="ui centerted image">*/}
-                  {/*<img src="images/banner-2.jpg"/>*/}
+                  {/*<img src="images/banner.jpg"/>*/}
                 {/*</div>*/}
               </div>
             </div>
