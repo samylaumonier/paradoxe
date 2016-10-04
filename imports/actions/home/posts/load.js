@@ -31,7 +31,7 @@ export function loadPosts() {
 
             const users = Meteor.users.find({
               _id: {
-                $in:  _.uniq(_.pluck(posts, 'userId')),
+                $in: _.uniq(_.pluck(posts, 'userId')),
               },
             }).fetch();
 

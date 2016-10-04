@@ -1,14 +1,14 @@
 /* global Package, Npm */
 
 Package.describe({
-  name: 'risetechnologies:electron-builder',
+  name: 'risetechnologies:electron-builder-local',
   summary: 'A meteor wrapper around electron builder',
-  version: '0.1.0',
+  version: '0.1.1',
   git: 'https://github.com/risetechnologies/meteor-electron-builder',
 });
 
 Npm.depends({
-  'electron-builder': '7.0.0',
+  'electron-builder': '7.3.0',
   lodash: '4.15.0',
   'is-running': '1.0.5',
   'lucy-dirsum': '0.1.1',

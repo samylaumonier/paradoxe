@@ -3,9 +3,12 @@ import { Meteor } from 'meteor/meteor';
 import launchApp from './launchApp';
 import createBinaries from './createBinaries';
 
-const settings = Meteor.settings.electronBuilder || {};
+console.log('env is', process.env.NODE_ENV);
 
 if (process.env.NODE_ENV === 'development') {
+  console.log('start build');
+  const settings = Meteor.settings.electronBuilder || {};
+
   // Promise is returned
   createBinaries
     .then(packageJSON => {

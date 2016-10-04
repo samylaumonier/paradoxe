@@ -1,5 +1,5 @@
 import { Meteor } from 'meteor/meteor';
-import { Electron } from 'meteor/risetechnologies:electron-builder';
+import { Electron } from 'meteor/risetechnologies:electron-builder-local';
 
 export const requireGuestHook = (nextState, replace) => {
   if (Electron.isElectron() && window.location.pathname === '/' || Meteor.userId()) {

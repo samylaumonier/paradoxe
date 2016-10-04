@@ -30,7 +30,7 @@ export function loadNotifications() {
           return {
             notifications,
             users,
-          }
+          };
         },
       },
     });

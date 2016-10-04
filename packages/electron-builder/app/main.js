@@ -33,18 +33,20 @@ const windowOptions = _.defaults(settings.windowOptions, {
 _.set(windowOptions, 'webPreferences.nodeIntegration', false);
 _.set(windowOptions, 'webPreferences.preload', path.join(__dirname, 'preload.js'));
 
+
 // Keep a global reference of the window object so that it won't be garbage collected
 // and the window closed.
 var mainWindow = null;
 
-// Unfortunately, we must set the menu before the application becomes ready and so before the main
-// window is available to be passed directly to `createDefaultMenu`.
-createDefaultMenu(app, () => mainWindow, () => AppUpdater.checkForUpdates(true));
-
 const hideInsteadofClose = e => {
+  if (!mainWindow) return;
   mainWindow.hide();
   e.preventDefault();
 };
+
+// Unfortunately, we must set the menu before the application becomes ready and so before the main
+// window is available to be passed directly to `createDefaultMenu`.
+createDefaultMenu(app, () => mainWindow, () => AppUpdater.checkForUpdates(true));
 
 app.on('ready', () => {
   mainWindow = new BrowserWindow(windowOptions);
@@ -57,21 +59,21 @@ app.on('ready', () => {
   if (settings.maximize) mainWindow.maximize();
   mainWindow.focus();
   mainWindow.loadURL(settings.rootUrl);
-});
 
-app.on('before-quit', () => {
-  // We need to remove our close event handler from the main window,
-  // otherwise the app will not quit.
-  mainWindow.removeListener('close', hideInsteadofClose);
-});
+  app.on('activate', () => {
+    // Show the main window when the customer clicks on the app icon.
+    if (!mainWindow.isVisible()) mainWindow.show();
+  });
 
-app.on('activate', () => {
-  // Show the main window when the customer clicks on the app icon.
-  if (!mainWindow.isVisible()) mainWindow.show();
-});
+  app.on('before-quit', () => {
+    // We need to remove our close event handler from the main window,
+    // otherwise the app will not quit.
+    mainWindow.removeListener('close', hideInsteadofClose);
+  });
 
-app.on('window-all-closed', () => {
-  if (process.platform !== 'darwin') {
-    app.quit();
-  }
+  app.on('window-all-closed', () => {
+    if (process.platform !== 'darwin') {
+      app.quit();
+    }
+  });
 });

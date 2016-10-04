@@ -36,6 +36,7 @@ momentjs:moment
 ongoworks:security
 ostrio:files
 peerlibrary:reactive-publish
-risetechnologies:electron-builder
+risetechnologies:electron-builder-local
+samy:redux-middlewares
 semantic:ui
 tmeasday:publish-counts

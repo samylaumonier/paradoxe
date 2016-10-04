@@ -24,7 +24,7 @@ const electronBuilderSettings = Meteor.settings.electronBuilder || {};
 
 /* Entry Point */
 const createBinaries = new Promise((resolve, reject) => {
-  const resolvedAppSrcDir = path.join(process.cwd(), 'assets', 'packages', 'risetechnologies_electron-builder', 'app');
+  const resolvedAppSrcDir = path.join(process.cwd(), 'assets', 'packages', 'risetechnologies_electron-builder-local', 'app');
   const resolvedAppSettingsPath = path.join(resolvedAppSrcDir, 'package.json');
 
   // Check if the package.json has changed before copying over the app files, to account for
@@ -33,7 +33,7 @@ const createBinaries = new Promise((resolve, reject) => {
   /* Write out Electron Settings */
   const defaults = {
     name: (electronSettings.name || 'electron').toLowerCase().replace(/\s/g, '-'),
-    productName: electronSettings.name || 'electron',
+    productName: electronSettings.productName || electronSettings.name || 'electron',
   };
 
   const appSettings = _.defaults(defaultAppSettings, defaults, electronSettings, {
@@ -48,8 +48,8 @@ const createBinaries = new Promise((resolve, reject) => {
   });
 
   // enforce some fields
-  devSettings.devDependencies = { electron: '1.3.5' };
-  devSettings.electronVersion = '1.3.5';
+  devSettings.electronVersion = '1.3.6';
+  devSettings.devDependencies = { electron: devSettings.electronVersion };
   devSettings.projectDir = projectDir;
   _.set(devSettings, 'devMetadata.directories.app', path.join(projectDir, 'app'));
   let buildResourcesDir = _.get(devSettings, 'devMetadata.directories.buildResources');
@@ -123,7 +123,7 @@ const createBinaries = new Promise((resolve, reject) => {
   const buildInfo = {
     output: outputDir,
     name: appSettings.name,
-    productName: electronSettings.productName,
+    productName: appSettings.productName,
     buildRequired: buildRequired && devSettings.autoRun,
   };
 

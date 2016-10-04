@@ -1,4 +1,4 @@
-# meteor-electron
+# meteor-electron-builder
 
 ##### This project started as a fork from https://github.com/electron-webapps/meteor-electron. A lot parts have been refactored and simplified, `electron-packager` has been replaced with `electron-builder`.
 
@@ -15,14 +15,14 @@ Some of the things it does:
 
 ## Getting Started
 
-`meteor add risetechnologies:electron` (to be done)
+`meteor add risetechnologies:electron-builder`
 
-meteor-electron will download the Electron binary for your system and build and launch an Electron
+electron-builder will download the Electron binary for your system and build and launch an Electron
 app pointing to your local development server. The download process may take a few minutes based on
 your Internet connection but only needs to be done once.
 
 The app, as well as the ready-to-distribute binaries (see [Deploy](#deploy)), is built within
-`YOUR_PROJECT_DIRECTORY/.meteor-electron`. This allows the apps to be easily located as well as the
+`YOUR_PROJECT_DIRECTORY/.meteor-electron-builder`. This allows the apps to be easily located as well as the
 builds to be cached for speedier startup. You should add this directory to your `.gitignore`.
 
 ## Configuration
@@ -112,16 +112,6 @@ the app icon, to add a menu bar icon, etc.&mdash;you'll need to distribute a new
 
 Please refer to https://github.com/electron-userland/electron-builder/wiki as this projects tries to let electron-builder to all the heavy lifting. We also advise to use https://github.com/GitbookIO/nuts as an autoupdate server.
 
-## Example
-
-[TODO] link to an example app
-[TODO] add proper linting rules
-[TODO] release on atmosphere
-[TODO] test on windows
-[TODO] test on linux
-[TODO] enable autorun on linux
-[TODO] test if custom appsrc works
-
 ## Q&A
 ### Q: How is this different from https://github.com/electron-webapps/meteor-electron?
 
@@ -141,14 +131,14 @@ memory leaks, via the `Electron` module--see [`client.js`](client.js). To reques
 expose additional functionality, please [submit a pull request](https://github.com/rissem/meteor-electron/pull/new/master)
 or [file an issue](https://github.com/rissem/meteor-electron/issues/new).
 
-You may also substitute your own application code for `meteor-electron`'s default application by
-setting the `appSrcDir` settings option. `meteor-electron` will continue to package your application
+You may also substitute your own application code for `meteor-electron-builder`'s default application by
+setting the `appSrcDir` settings option. `meteor-electron-builder` will continue to package your application
 and serve the application update feed and download URLs, but in-app functionality will be your
 responsibility.  **Warning**: this responsibility includes setting up your application window and menu,
 checking for remote updates, registering the `Electron` module (that defines `Electron.isElectron`),
 and possibly other things. If you take this route, it's recommended that you start by copying
-`meteor-electron`'s `app` directory.
+`meteor-electron-builder`'s `app` directory.
 
 Also, you also probably want to keep your application code in a subdirectory of your application's
 `private` directory so that Meteor will observe changes to it and restart the server; when it does
-so, `meteor-electron` will rebuild and relaunch the app.
+so, `meteor-electron-builder` will rebuild and relaunch the app.

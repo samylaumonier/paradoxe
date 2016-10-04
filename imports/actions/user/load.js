@@ -8,7 +8,7 @@ export function loadUser() {
     dispatch({
       type: USER,
       meteor: {
-        get: () => Meteor.user(),
+        get: () => Meteor.user() || {},
       },
     });
   };
