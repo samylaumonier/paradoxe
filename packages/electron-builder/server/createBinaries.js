@@ -23,7 +23,7 @@ const electronSettings = Meteor.settings.electron || {};
 const electronBuilderSettings = Meteor.settings.electronBuilder || {};
 
 /* Entry Point */
-const createBinaries = new Promise((resolve, reject) => {
+const createBinaries = (resolve, reject) => {
   const resolvedAppSrcDir = path.join(process.cwd(), 'assets', 'packages', 'risetechnologies_electron-builder-local', 'app');
   const resolvedAppSettingsPath = path.join(resolvedAppSrcDir, 'package.json');
 
@@ -138,6 +138,6 @@ const createBinaries = new Promise((resolve, reject) => {
   } else {
     resolve(buildInfo);
   }
-});
+};
 
 export default createBinaries;
