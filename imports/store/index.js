@@ -1,11 +1,9 @@
+import { sources, subscriptions } from 'meteor/samy:redux-middlewares';
 import { applyMiddleware, createStore, compose } from 'redux';
 import thunk from 'redux-thunk';
 import createLogger from 'redux-logger';
 
 import rootReducer from '/imports/reducers';
-
-import sources from '/imports/middlewares/sources';
-import subscriptions from '/imports/middlewares/subscriptions';
 
 let store;
 

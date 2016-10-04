@@ -4,63 +4,7 @@ import '/imports/ui/styles/pages/LandingPageComponentStyle.less';
 
 export const LandingPageComponent = React.createClass({
   componentDidMount: function () {
-    $(document)
-      .ready(function () {
-        
-        var
-          changeSides = function () {
-            $('.ui.shape')
-              .eq(0)
-              .shape('flip over')
-              .end()
-              .eq(1)
-              .shape('flip over')
-              .end()
-              .eq(2)
-              .shape('flip back')
-              .end()
-              .eq(3)
-              .shape('flip back')
-              .end()
-            ;
-          },
-          validationRules = {
-            firstName: {
-              identifier: 'email',
-              rules: [
-                {
-                  type: 'empty',
-                  prompt: 'Please enter an e-mail'
-                },
-                {
-                  type: 'email',
-                  prompt: 'Please enter a valid e-mail'
-                }
-              ]
-            }
-          }
-          ;
-        
-        $('.ui.dropdown')
-          .dropdown({
-            on: 'hover'
-          })
-        ;
-        
-        $('.ui.form')
-          .form(validationRules, {
-            on: 'blur'
-          })
-        ;
-        
-        $('.masthead .information')
-          .transition('scale in', 1000)
-        ;
-        
-        setInterval(changeSides, 3000);
-        
-      })
-    ;
+    $(this.refs.header).transition('scale in', 1000);
   },
   render: function () {
     return (
@@ -83,7 +27,7 @@ export const LandingPageComponent = React.createClass({
                   </a>
                 </div>
               </div>
-              <div id="page-header" className="ui hidden transition information">
+              <div id="page-header" className="ui hidden transition information" ref="header">
                 <h1 className="ui inverted centered hudge header">
                   Paradoxe Alpha
                 </h1>
@@ -168,7 +112,7 @@ export const LandingPageComponent = React.createClass({
                     Video and audio calls
                   </div>
                   <p>
-                    It's not just about keeping in touch it's about how you keep in touch.
+                    It's not just about keeping in touch, it's about how you keep in touch.
                     Keep in touch with your contacts through <b>cristal clear video and audio. </b>
                     Give a friend a call and we would love to hear what you think.
                   </p>
@@ -192,7 +136,7 @@ export const LandingPageComponent = React.createClass({
                     File transfer
                   </div>
                   <p>
-                    <b>Drag, drop and it's sent. </b> It's that easy to share file. Send any file of any type you need to share,
+                    <b>Drag, drop and it's sent. </b> It's that easy to share files. Send any file of any type you need to share,
                     we will make sure it get's there. Your files will be safely stored in your conversation.
                     It will remain accessible until you or your contact feels like it needs to be removed.
                   </p>
@@ -227,10 +171,10 @@ export const LandingPageComponent = React.createClass({
                     Browser based use
                   </div>
                   <p>
-                    On the go or using a friends PC.
-                    No problem just click <a href="/connect">here</a> for the web version.
-                    Our video and and audio calls are <b>supported by a number of web browsers. </b>
-                    Like Chrome, Firefox, Opera. So you never have to be disconnected.
+                    On the go or using a friend's computer.
+                    No problem, just <a href="/connect">click here</a> for the web version.
+                    Our video and and audio calls are <b>supported by a number of web browsers</b>
+                    like Chrome, Firefox, Opera. So you never have to be disconnected.
                   </p>
                 </div>
                 

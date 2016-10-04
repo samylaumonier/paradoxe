@@ -3,11 +3,10 @@ import { Meteor } from 'meteor/meteor';
 import launchApp from './launchApp';
 import createBinaries from './createBinaries';
 
-const settings = Meteor.settings.electronBuilder || {};
-
 if (process.env.NODE_ENV === 'development') {
-  // Promise is returned
-  createBinaries
+  const settings = Meteor.settings.electronBuilder || {};
+
+  new Promise(createBinaries)
     .then(packageJSON => {
       if (packageJSON && settings.autoRun) launchApp(packageJSON);
     })
