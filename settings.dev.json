@@ -56,7 +56,7 @@
   },
   "electronBuilder": {
     "autoRun": true,
-    "targets": ["CURRENT", "MAC", "LINUX", "WINDOWS"],
+    "targets": [],
     "devMetadata": {
       "build": {
         "appId": "paradoxe",

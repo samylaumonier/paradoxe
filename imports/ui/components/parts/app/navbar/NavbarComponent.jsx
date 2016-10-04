@@ -64,8 +64,9 @@ export const NavbarComponent = React.createClass({
             <div ref="profile" className="ui dropdown icon item">
               <i className="user icon"/>
               <div className="menu">
-                <div className="item"><i className="life ring icon"/> Help</div>
-                <div className="item"><i className="external icon"/> Feedback</div>
+                <a className="item"><i className="life ring icon"/> Help</a>
+                <a className="item"><i className="external icon"/> Feedback</a>
+                <a className="item" href="/change-password"><i className="lock icon"/> change password</a>
                 <a className="item" onClick={this.props.logout}>
                   <i className="sign out icon"/>
                   Logout
