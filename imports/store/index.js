@@ -7,11 +7,18 @@ import rootReducer from '/imports/reducers';
 import sources from '/imports/middlewares/sources';
 import subscriptions from '/imports/middlewares/subscriptions';
 
-const logger = createLogger();
+let store;
 
-const store = createStore(rootReducer, compose(
-  applyMiddleware(sources, subscriptions, thunk, logger),
-  window.devToolsExtension ? window.devToolsExtension() : f => f
-));
+if (process.env.NODE_ENV === 'development') {
+  const logger = createLogger();
+  store = createStore(rootReducer, compose(
+    applyMiddleware(sources, subscriptions, thunk, logger),
+    window.devToolsExtension ? window.devToolsExtension() : f => f
+  ));
+} else {
+  store = createStore(rootReducer, compose(
+    applyMiddleware(sources, subscriptions, thunk)
+  ));
+}
 
 export default store;

@@ -7,11 +7,14 @@ import store from '/imports/store';
 import { requireGuestHook } from './hooks/routes/guest';
 import { requireAuthHook } from './hooks/routes/auth';
 import { logPageView } from './hooks/routes/ga';
+import { verifyUser } from './hooks/routes/verify';
 
-import { MainLayoutComponent } from '/imports/ui/components/layouts/MainLayoutComponent';
+import { MainLayoutContainer } from '/imports/ui/containers/layouts/MainLayoutContainer';
 
 import { UserLayoutContainer } from '/imports/ui/containers/layouts/UserLayoutContainer';
 import { ConnectionPageComponent } from '/imports/ui/components/pages/ConnectionPageComponent';
+import { ResetPasswordPageContainer } from '/imports/ui/containers/pages/ResetPasswordPageContainer';
+import { ForgotPasswordPageContainer } from '/imports/ui/containers/pages/ForgotPasswordPageContainer';
 import { HomePageComponent } from '/imports/ui/components/pages/HomePageComponent';
 import { LandingPageComponent } from '/imports/ui/components/pages/LandingPageComponent';
 
@@ -21,9 +24,12 @@ import { InvitesPageContainer } from '/imports/ui/containers/pages/InvitesPageCo
 export const renderRoutes = () => (
   <Provider store={store}>
     <Router history={browserHistory} onUpdate={logPageView}>
-      <Route path="/" component={MainLayoutComponent} onEnter={requireGuestHook}>
+      <Route path="/verify-email/:token" onEnter={verifyUser}/>
+      <Route path="/" component={MainLayoutContainer} onEnter={requireGuestHook}>
         <IndexRoute component={LandingPageComponent}/>
         <Route path="connect" component={ConnectionPageComponent}/>
+        <Route path="reset-password/:token" component={ResetPasswordPageContainer}/>
+        <Route path="forgot-password" component={ForgotPasswordPageContainer}/>
       </Route>
       <Route path="/" component={UserLayoutContainer} onEnter={requireAuthHook}>
         <Route path="invites" component={InvitesPageContainer}/>

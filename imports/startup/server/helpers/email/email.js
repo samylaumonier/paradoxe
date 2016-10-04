@@ -1,4 +1,6 @@
-EmailHelper = class EmailHelper {
+import { TemplateHelper } from './template';
+
+export class EmailHelper {
     static getHtml (template, values, lang = 'fr') {
         let html = Assets.getText('email/layout.html').replace(
             TemplateHelper.getIncludeRegex('content'),
@@ -28,7 +30,7 @@ EmailHelper = class EmailHelper {
         };
 
         Accounts.emailTemplates.verifyEmail.html = function (user, url) {
-            return EmailHelper.getHtml('verify your email', {
+            return EmailHelper.getHtml('verify', {
                 subject,
                 username: user.username,
                 verifyUrl: EmailHelper.sanitizeUrl(url)
@@ -56,4 +58,4 @@ EmailHelper = class EmailHelper {
     static sanitizeUrl (url) {
         return url.replace('/#/', '/');
     }
-};
+}

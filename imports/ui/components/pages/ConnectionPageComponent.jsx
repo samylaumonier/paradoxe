@@ -23,5 +23,6 @@ export const ConnectionPageComponent = () => (
         </div>
       </div>
     </div>
+    <a href="/forgot-password" className="center aligned">I forget my password?</a>
   </div>
 );

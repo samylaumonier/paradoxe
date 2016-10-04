@@ -11,13 +11,23 @@
     "filesPath": "../paradoxe-files",
     "uploadMaxFileSize": 2147483648
   },
+  "mail": {
+    "from": "Paradoxe <contact@paradoxe.io>",
+    "siteName": "Paradoxe",
+    "domainName": "paradoxe.io",
+    "protocol": "smtp",
+    "username": "contact@paradoxe.io",
+    "password": "zxFQDpNKERT1k3yBRfLh",
+    "server": "mail.paradoxe.io",
+    "port": "465"
+  },
   "peer": {
     "port": 9000,
     "proxied": false
   },
   "bot": {
     "username": "bot",
-    "email": "bot@paradoxe.com"
+    "email": "bot@paradoxe.io"
   },
   "electron": {
     "name": "paradoxe",
@@ -41,10 +51,12 @@
         "devTools": false
       }
     },
+    "rootUrl": "https://paradoxe.io/",
     "feedURL": "https://download.paradoxe.io/"
   },
   "electronBuilder": {
     "autoRun": true,
+    "targets": ["CURRENT", "MAC", "LINUX", "WINDOWS"],
     "devMetadata": {
       "build": {
         "appId": "paradoxe",

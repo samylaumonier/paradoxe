@@ -210,5 +210,9 @@ Accounts.onCreateUser((options, user) => {
     lastNudgeSentAt: {},
   };
   
-  return user;
+ return user;
+});
+
+Meteor.users.after.insert(function () {
+  Accounts.sendVerificationEmail(this._id);
 });

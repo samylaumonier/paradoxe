@@ -92,15 +92,15 @@ export const LandingPageComponent = React.createClass({
                   We get extraordinary.
                 </p>
                 <div id="download-buttons">
-                  <a href="#" className="center aligned large basic inverted animated fade ui button">
+                  <a href="https://download.paradoxe.io/download/latest/windows_64" className="center aligned large basic inverted animated fade ui button">
                     <div className="visible content"><i className="windows icon"/></div>
                     <div className="hidden content">Get it</div>
                   </a>
-                  <a href="#" className="center aligned large basic inverted animated fade ui button">
+                  <a href="https://download.paradoxe.io/download/latest/osx" className="center aligned large basic inverted animated fade ui button">
                     <div className="visible content"><i className="apple icon"/></div>
                     <div className="hidden content">Get it</div>
                   </a>
-                  <a href="#" className="center aligned large basic inverted animated fade ui button">
+                  <a href="https://download.paradoxe.io/download/latest/linux_64" className="center aligned large basic inverted animated fade ui button">
                     <div className="visible content"><i className="linux icon"/></div>
                     <div className="hidden content">Get it</div>
                   </a>

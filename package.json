@@ -1,5 +1,5 @@
 {
-  "name": "video",
+  "name": "Paradoxe",
   "private": true,
   "version": "1.0.0",
   "description": "Multiplatform Video and chat application",
@@ -16,9 +16,9 @@
     "social"
   ],
   "author": {
-    "name": "Glib Inc",
-    "email": "contact@glib.io",
-    "url": "https://glib.io/"
+    "name": "Paradoxe Inc",
+    "email": "contact@paradoxe.io",
+    "url": "https://paradoxe.io/"
   },
   "contributors": [
     {
@@ -34,9 +34,9 @@
   ],
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/shaneBen23/video/issues"
+    "url": "https://github.com/shaneBen23/paradoxe/issues"
   },
-  "homepage": "https://github.com/shaneBen23/video#readme",
+  "homepage": "https://github.com/shaneBen23/paradoxe#readme",
   "dependencies": {
     "animate.css": "^3.5.2",
     "autosize": "^3.0.17",
