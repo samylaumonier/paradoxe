@@ -14,12 +14,11 @@
   "mail": {
     "from": "Paradoxe <contact@paradoxe.io>",
     "siteName": "Paradoxe",
-    "domainName": "paradoxe.io",
     "protocol": "smtp",
     "username": "contact@paradoxe.io",
     "password": "zxFQDpNKERT1k3yBRfLh",
     "server": "mail.paradoxe.io",
-    "port": "465"
+    "port": 587
   },
   "peer": {
     "port": 9000,
@@ -55,7 +54,7 @@
     "feedURL": "https://download.paradoxe.io/"
   },
   "electronBuilder": {
-    "autoRun": true,
+    "autoRun": false,
     "targets": [],
     "devMetadata": {
       "build": {
@@ -74,5 +73,8 @@
         "buildResources": "private/build/"
       }
     }
+  },
+  "env": {
+    "ROOT_URL": "http://localhost:3000"
   }
 }
