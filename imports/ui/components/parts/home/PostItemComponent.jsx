@@ -18,8 +18,7 @@ export const PostItemComponent = React.createClass({
     const canDelete = this.props.post.userId === this.props.user._id ?
       <a className="reply" onClick={this.props.deletePost}>
         <i className="trash outline icon"/>
-      </a> :
-      <span/>;
+      </a> : null;
     
     return (
       <div className="ui card">
