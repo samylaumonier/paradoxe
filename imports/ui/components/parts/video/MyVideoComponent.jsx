@@ -1,6 +1,8 @@
 import React from 'react';
 import { getUserStatus } from '/imports/api/collections/users';
 
+import '/imports/ui/styles/parts/video/MyVideoComponentStyle.less';
+
 export const MyVideoComponent = React.createClass({
   propTypes: {
     user: React.PropTypes.object.isRequired,
@@ -13,7 +15,7 @@ export const MyVideoComponent = React.createClass({
     return (
       <div className="chat-sidebar-avatar bottom" key={this.props.stream.id}>
         <video
-          className={"avatar-image " + getUserStatus(this.props.user.status)}
+          className={"my-video avatar-image " + getUserStatus(this.props.user.status)}
           src={URL.createObjectURL(this.props.stream)}
           muted
           autoPlay
