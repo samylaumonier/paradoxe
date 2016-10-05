@@ -40,8 +40,7 @@ export const ChatMessageComponent = React.createClass({
         <a className="reply" onClick={this.props.deleteMessage}>
           <i className="trash outline icon"/> Delete
         </a>
-      </div>
-      : <span/>;
+      </div> : null;
 
     const message = this.props.message.content.split(newlineRegex).map((line, index) => {
       if (line.match(newlineRegex)) {
