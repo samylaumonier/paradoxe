@@ -16,7 +16,7 @@ export const ConnectionPageComponent = () => (
         </h1>
         <br/>
         <div className="ui large form">
-          <div className="ui two column middle aligned very relaxed stackable grid">
+          <div id="connection-container" className="ui two column middle aligned very relaxed stackable grid">
             <LoginContainer />
             <RegisterContainer />
           </div>
