@@ -47,7 +47,7 @@
       "minHeight": 500,
       "autoHideMenuBar": true,
       "webPreferences": {
-        "devTools": false
+        "devTools": true
       }
     },
     "feedURL": "https://download.paradoxe.io/"

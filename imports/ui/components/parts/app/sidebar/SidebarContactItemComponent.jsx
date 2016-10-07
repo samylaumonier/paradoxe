@@ -128,7 +128,7 @@ export const SidebarContactItemComponent = React.createClass({
 
 
 
-export function isBlurred() {
+function isBlurred() {
   let blurred = false;
   
   $(window).focus(function() {

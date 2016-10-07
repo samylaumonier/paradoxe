@@ -24,6 +24,15 @@ export const NavbarComponent = React.createClass({
     $(this.refs.profile).dropdown();
     $(this.refs.notification).dropdown();
   },
+  componentWillReceiveProps: function (nextProps) {
+    if (nextProps.notifications && nextProps.notifications.length > this.props.notifications.length) {
+      this.playSound(this.refs.notificationSound);
+    }
+  },
+  playSound: function (audio) {
+    audio.currentTime = 0;
+    audio.play();
+  },
   render: function () {
     const totalInvites = this.props.hasInvites
       ? <span className="ui mini green circular label navbar-label">{this.props.totalInvites}</span>
@@ -75,6 +84,7 @@ export const NavbarComponent = React.createClass({
             </div>
           </div>
         </div>
+        <audio src="/sounds/notification.mp3" hidden ref="notificationSound"/>
       </div>
     );
   },

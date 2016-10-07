@@ -110,6 +110,8 @@ ElectronImplementation = {
 };
 
 if(remote.getCurrentWindow()){
+  remote.getCurrentWindow().removeAllListeners();
+  
   remote.getCurrentWindow().on('minimize', () => {
     minimized = true;
   });
@@ -117,17 +119,12 @@ if(remote.getCurrentWindow()){
   remote.getCurrentWindow().on('restore', () => {
     minimized = false;
   });
-}
-
-if(remote.getCurrentWindow()){
+  
   remote.getCurrentWindow().on('blur', () => {
-    console.log('blurred');
     blurred = true;
-//    remote.getCurrentWindow().focus();
   });
   
   remote.getCurrentWindow().on('focus', () => {
-    console.log('Focused');
     blurred = false;
   });
 }
