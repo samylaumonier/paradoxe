@@ -13,6 +13,8 @@ var ipc = require('electron').ipcRenderer;
 var remote = require('electron').remote;
 var shell = require('electron').shell;
 var desktopCapturer = require('electron').desktopCapturer;
+var minimized = false;
+var blurred = false;
 
 /**
  * Defines methods with which to extend the `Electron` module defined in `client.js`.
@@ -41,7 +43,24 @@ ElectronImplementation = {
   isFullScreen: function() {
     return remote.getCurrentWindow().isFullScreen();
   },
-
+  
+  isMinimized: function () {
+    return minimized;
+  },
+  
+  isBlurred: function () {
+    return blurred;
+  },
+  
+  bringToForeGround: function () {
+    if(this.isMinimized()){
+      remote.getCurrentWindow().restore();
+    }
+    if(this.isBlurred()){
+      remote.getCurrentWindow().focus();
+    }
+  },
+  
   /**
    * Invokes _callback_ when the specified `BrowserWindow` event is fired.
    *
@@ -89,3 +108,26 @@ ElectronImplementation = {
    */
   desktopCapturer: desktopCapturer,
 };
+
+if(remote.getCurrentWindow()){
+  remote.getCurrentWindow().on('minimize', () => {
+    minimized = true;
+  });
+  
+  remote.getCurrentWindow().on('restore', () => {
+    minimized = false;
+  });
+}
+
+if(remote.getCurrentWindow()){
+  remote.getCurrentWindow().on('blur', () => {
+    console.log('blurred');
+    blurred = true;
+//    remote.getCurrentWindow().focus();
+  });
+  
+  remote.getCurrentWindow().on('focus', () => {
+    console.log('Focused');
+    blurred = false;
+  });
+}

@@ -214,5 +214,10 @@ Accounts.onCreateUser((options, user) => {
 });
 
 Meteor.users.after.insert(function () {
-  Accounts.sendVerificationEmail(this._id);
+  try {
+    Accounts.sendVerificationEmail(this._id);
+  } catch (err){
+    console.log('Verification mail error:', err);
+  }
 });
+

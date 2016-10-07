@@ -10,7 +10,7 @@ export const ChangePasswordPageComponent = React.createClass({
         <h1>Change password</h1>
         <div className="ui form segment">
           <div className="field">
-            <label>old password</label>
+            <label>Old password</label>
             <div className="ui left labeled icon input">
               <input ref="oldPassword" type="password" required/>
               <i className="lock icon"/>
