@@ -10,7 +10,7 @@ export const ChangePasswordPageComponent = React.createClass({
     return (
     <div id="change-password-page">
       <div className="ui form column grid aligned centered stackable">
-        <div className="eight wide centered aligned column">
+        <div className="ten wide centered aligned column">
           <div className="ui child segment">
             <form className="column" onSubmit={this.change}>
               <h2 className="ui teal image header">

@@ -7,6 +7,7 @@ import { NavbarNotificationItemContainer } from '/imports/ui/containers/parts/ap
 
 export const NavbarComponent = React.createClass({
   propTypes: {
+    user: React.PropTypes.bool.isRequired,
     hasInvites: React.PropTypes.bool.isRequired,
     totalInvites: React.PropTypes.number.isRequired,
     loadInvites: React.PropTypes.func.isRequired,
@@ -57,24 +58,25 @@ export const NavbarComponent = React.createClass({
             <i className="users icon"/>
             &nbsp; Invites {totalInvites}
           </Link>
-          <div className="right menu">
-            <div ref="notification" className="ui dropdown icon item">
-              <i className="bell icon"/>
-              &nbsp; {totalNotifications}
-              <div className="menu">
-                {this.props.notifications.map(notification =>
-                  <NavbarNotificationItemContainer key={notification._id} notification={notification}/>
-                )}
-                <div className="item">
-                  {notificationsHelper}
-                </div>
+          <div ref="notification" className="ui dropdown icon item">
+            <i className="bell icon"/>
+            &nbsp; {totalNotifications}
+            <div className="menu">
+              {this.props.notifications.map(notification =>
+                <NavbarNotificationItemContainer key={notification._id} notification={notification}/>
+              )}
+              <div className="item">
+                {notificationsHelper}
               </div>
             </div>
+          </div>
+          <div className="right menu">
             <div ref="profile" className="ui dropdown icon item">
               <i className="user icon"/>
+              &nbsp; {this.props.user.username}
               <div className="menu">
                 <a className="item"><i className="external icon"/> Feedback</a>
-                <a className="item" href="/change-password"><i className="lock icon"/> change password</a>
+                <a className="item" href="/change-password"><i className="lock icon"/> Change password</a>
                 <a className="item" onClick={this.props.logout}>
                   <i className="sign out icon"/>
                   Logout
