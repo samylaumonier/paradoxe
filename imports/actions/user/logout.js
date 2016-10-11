@@ -17,7 +17,7 @@ export function logout() {
           })
         );
       } else {
-        browserHistory.push('/connect');
+        browserHistory.push('/login');
       }
     });
   };

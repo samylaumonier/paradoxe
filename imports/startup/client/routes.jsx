@@ -12,7 +12,8 @@ import { verifyUser } from './hooks/routes/verify';
 import { MainLayoutContainer } from '/imports/ui/containers/layouts/MainLayoutContainer';
 
 import { UserLayoutContainer } from '/imports/ui/containers/layouts/UserLayoutContainer';
-import { ConnectionPageComponent } from '/imports/ui/components/pages/ConnectionPageComponent';
+import { RegisterPageComponent } from '/imports/ui/components/pages/RegisterPageComponent';
+import { LoginPageComponent } from '/imports/ui/components/pages/LoginPageComponent';
 import { ResetPasswordPageContainer } from '/imports/ui/containers/pages/ResetPasswordPageContainer';
 import { ForgotPasswordPageContainer } from '/imports/ui/containers/pages/ForgotPasswordPageContainer';
 import { HomePageComponent } from '/imports/ui/components/pages/HomePageComponent';
@@ -28,7 +29,8 @@ export const renderRoutes = () => (
       <Route path="/verify-email/:token" onEnter={verifyUser}/>
       <Route path="/" component={MainLayoutContainer} onEnter={requireGuestHook}>
         <IndexRoute component={LandingPageComponent}/>
-        <Route path="connect" component={ConnectionPageComponent}/>
+        <Route path="register" component={RegisterPageComponent}/>
+        <Route path="login" component={LoginPageComponent}/>
         <Route path="reset-password/:token" component={ResetPasswordPageContainer}/>
         <Route path="forgot-password" component={ForgotPasswordPageContainer}/>
       </Route>

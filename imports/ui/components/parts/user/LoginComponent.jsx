@@ -9,7 +9,7 @@ export const LoginComponent = React.createClass({
       <form className="column" onSubmit={this.login}>
         <h2 className="ui teal image header">
           <div className="content">
-            Login
+            See who's online
           </div>
         </h2>
         <div className="ui form">
