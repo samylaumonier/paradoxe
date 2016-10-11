@@ -1,4 +1,5 @@
 import { Meteor } from 'meteor/meteor';
+import youtubeRegex from 'youtube-regex';
 
 import { FileSchema } from './files';
 
@@ -23,6 +24,15 @@ export const UPLOADED_STATUS = 8;
 export const RINGING_DURATION = 30;
 export const NUDGE_LIMIT = 15;
 
+const MessageVideoSchema = new SimpleSchema({
+  id: {
+    type: String,
+  },
+  watchTogether: {
+    type: Boolean,
+  },
+});
+
 export const MessagesSchema = new SimpleSchema({
 //  _id is need when using the schema with a check function, if attaching it to a collection it should be removed
   _id: {
@@ -36,6 +46,9 @@ export const MessagesSchema = new SimpleSchema({
   },
   createdAt: {
     type: Date,
+  },
+  videos: {
+    type: [MessageVideoSchema],
   },
   read: {
     type: [String],
@@ -147,4 +160,22 @@ export function getSidebarMessages(user) {
 export function shouldMarkMessageAsRead(message) {
   const user = Meteor.user();
   return message.toUserId.includes(user._id) && !message.read.includes(user._id);
+}
+
+// Videos
+const videosRegex = new RegExp(youtubeRegex());
+
+export function getVideosIds(message) {
+  const videosIds = [];
+  let match;
+
+  do {
+    match = videosRegex.exec(message.content);
+
+    if (match) {
+      videosIds.push(match[1]);
+    }
+  } while (match);
+
+  return _.uniq(videosIds);
 }

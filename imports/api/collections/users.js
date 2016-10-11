@@ -1,3 +1,6 @@
+import { Meteor } from 'meteor/meteor';
+import { Accounts } from 'meteor/accounts-base';
+
 export const getUserStatus = function (status) {
   if (!status) {
     return 'gray';
@@ -25,4 +28,11 @@ function checkRequiredField(user, field) {
     console.log(user);
     throw new Error('Required field not found!');
   }
+}
+
+export function findUserByLoginToken(userId, loginToken, options = {}) {
+  return Meteor.users.findOne({
+    _id: userId,
+    'services.resume.loginTokens.hashedToken': Accounts._hashLoginToken(loginToken)
+  }, options);
 }
