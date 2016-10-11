@@ -2,6 +2,7 @@ import { connect } from 'react-redux';
 import { browserHistory } from 'react-router';
 
 import { nudgeUser } from '/imports/actions/user/nudge.js';
+import { notify } from '/imports/actions/user/notify.js';
 import { getUserStatus, userHasBlockedContact } from '/imports/api/collections/users';
 import {
   INCOMING_VIDEO_CALL_TAG,
@@ -46,6 +47,9 @@ const mapDispatchToProps = (dispatch, props) => {
   return {
     openChat: () => {
       browserHistory.push(`/chat/${props.contact.username}`);
+    },
+    notify: (title, options) => {
+      dispatch(notify(title, options));
     },
     nudgeUser: nudgeMessages => {
       dispatch(nudgeUser(nudgeMessages));

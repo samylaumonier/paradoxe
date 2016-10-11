@@ -1,7 +1,7 @@
 import { Meteor } from 'meteor/meteor';
-import { Accounts } from 'meteor/accounts-base';
-
 import escapeStringRegExp from 'escape-string-regexp';
+
+import { findUserByLoginToken } from '/imports/api/collections/users';
 
 Picker.route('/users/search', function (params, req, res) {
   // Required headers
@@ -14,10 +14,7 @@ Picker.route('/users/search', function (params, req, res) {
   }
 
   // Connected user
-  const user = Meteor.users.findOne({
-    _id: userId,
-    'services.resume.loginTokens.hashedToken': Accounts._hashLoginToken(loginToken)
-  }, {
+  const user = findUserByLoginToken(userId, loginToken, {
     fields: {
       'profile.contacts': 1
     }

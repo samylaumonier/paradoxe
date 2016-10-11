@@ -208,11 +208,17 @@ Accounts.onCreateUser((options, user) => {
     blockedContacts: [],
     emailHash: md5(user.emails[0].address),
     lastNudgeSentAt: {},
+    sockets: [],
   };
   
  return user;
 });
 
 Meteor.users.after.insert(function () {
-  Accounts.sendVerificationEmail(this._id);
+  try {
+    Accounts.sendVerificationEmail(this._id);
+  } catch (err){
+    console.log('Verification mail error:', err);
+  }
 });
+

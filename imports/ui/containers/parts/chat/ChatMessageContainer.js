@@ -7,10 +7,11 @@ import { ChatMessageComponent } from '/imports/ui/components/parts/chat/ChatMess
 
 const mapStateToProps = (state, props) => {
   return {
+    user: state.user,
     author: _.findWhere(state.chats[props.contact.username].users, {
       _id: props.message.userId,
     }),
-    user: state.user,
+    hasVideos: props.message.videos.length !== 0,
   };
 };
 

@@ -17,6 +17,7 @@ Meteor.startup(() => {
         blockedContacts: [],
         emailHash: md5(Meteor.settings.bot.email),
         lastNudgeSentAt: {},
+        sockets: [],
       }
     });
   }

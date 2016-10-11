@@ -22,7 +22,7 @@ export const LandingPageComponent = React.createClass({
                   Paradoxe
                 </a>
                 <div className="right menu">
-                  <a className="ui active item button" href="/connect">
+                  <a className="ui active item button" href="/login">
                     Web app
                   </a>
                 </div>
@@ -196,73 +196,6 @@ export const LandingPageComponent = React.createClass({
             
           </div>
         </div>
-        
-        
-        {/*<div className="ui recent-works vertical segment">*/}
-          {/*<div className="ui very relaxed stackable centered page grid">*/}
-            {/**/}
-            {/*<div className="row">*/}
-              {/*<div className="eight wide centered column">*/}
-                {/*<h2 className="center aligned ui inverted header">*/}
-                  {/*Recent Works*/}
-                {/*</h2>*/}
-                {/*<div className="ui horizontal divider"><i className="white camera icon"/></div>*/}
-                {/*<p className="ui centered lead">Checkout Our Recently Completed Works<br/>you will be amazed!.</p>*/}
-              {/*</div>*/}
-            {/*</div>*/}
-            {/**/}
-            {/*<div className="fourteen wide column">*/}
-              {/*<div className="ui three column aligned stackable divided grid">*/}
-                {/**/}
-                {/*<div className="column">*/}
-                  {/*<div className="ui centered card">*/}
-                    {/*<div className="content">*/}
-                      {/*<div className="ui icon header">*/}
-                        {/*<i className="file icon"/>*/}
-                        {/*My Neighbor Totoro*/}
-                      {/*</div>*/}
-                      {/*<div className="description">*/}
-                        {/*Two sisters move to the country with their father in order to be closer to their hospitalized*/}
-                        {/*mother, and discover the surrounding trees are inhabited by magical spirits.*/}
-                      {/*</div>*/}
-                    {/*</div>*/}
-                  {/*</div>*/}
-                {/*</div>*/}
-                {/**/}
-                {/*<div className="column">*/}
-                  {/*<div className="ui centered card">*/}
-                    {/*<div className="content">*/}
-                      {/*<div className="ui icon header">*/}
-                        {/*<i className="file icon"/>*/}
-                        {/*My Neighbor Totoro*/}
-                      {/*</div>*/}
-                      {/*<div className="description">*/}
-                        {/*Two sisters move to the country with their father in order to be closer to their hospitalized*/}
-                        {/*mother, and discover the surrounding trees are inhabited by magical spirits.*/}
-                      {/*</div>*/}
-                    {/*</div>*/}
-                  {/*</div>*/}
-                {/*</div>*/}
-                {/**/}
-                {/*<div className="column centered">*/}
-                  {/*<div className="ui centered card">*/}
-                    {/*<div className="content">*/}
-                      {/*<div className="ui icon header">*/}
-                        {/*<i className="file icon"/>*/}
-                        {/*My Neighbor Totoro*/}
-                      {/*</div>*/}
-                      {/*<div className="description">*/}
-                        {/*Two sisters move to the country with their father in order to be closer to their hospitalized*/}
-                        {/*mother, and discover the surrounding trees are inhabited by magical spirits.*/}
-                      {/*</div>*/}
-                    {/*</div>*/}
-                  {/*</div>*/}
-                {/*</div>*/}
-                {/**/}
-              {/*</div>*/}
-            {/*</div>*/}
-          {/*</div>*/}
-        {/*</div>*/}
         
         
         <div className="ui vertical segment white-footer">

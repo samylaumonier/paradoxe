@@ -5,6 +5,11 @@
       "port": 9000,
       "path": "/main"
     },
+    "socket": {
+      "protocol": "http",
+      "host": "localhost",
+      "port": 4000
+    },
     "bot": {
       "id": "bot"
     },
@@ -24,6 +29,9 @@
     "port": 9000,
     "proxied": false
   },
+  "socket": {
+    "port": 4000
+  },
   "bot": {
     "username": "bot",
     "email": "bot@paradoxe.io"
@@ -31,7 +39,7 @@
   "electron": {
     "name": "paradoxe",
     "productName": "Paradoxe",
-    "version": "0.0.1",
+    "version": "0.0.3",
     "description": "Multiplatform video and chat application",
     "homepage": "https://paradoxe.io/",
     "license": "MIT",
@@ -47,10 +55,9 @@
       "minHeight": 500,
       "autoHideMenuBar": true,
       "webPreferences": {
-        "devTools": false
+        "devTools": true
       }
     },
-    "rootUrl": "https://paradoxe.io/",
     "feedURL": "https://download.paradoxe.io/"
   },
   "electronBuilder": {

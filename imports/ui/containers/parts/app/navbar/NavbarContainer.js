@@ -8,6 +8,7 @@ import { NavbarComponent } from '/imports/ui/components/parts/app/navbar/NavbarC
 
 const mapStateToProps = state => {
   return {
+    user: state.user,
     hasInvites: state.navbar.totalInvites > 0,
     totalInvites: state.navbar.totalInvites,
     hasNotifications: state.navbar.notifications.length > 0,

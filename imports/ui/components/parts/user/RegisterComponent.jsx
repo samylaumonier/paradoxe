@@ -9,7 +9,7 @@ export const RegisterComponent = React.createClass({
       <form className="column" onSubmit={this.register}>
         <h2 className="ui teal image header">
           <div className="content">
-            Sign up
+            Join in the chat
           </div>
         </h2>
         <div className="ui form">
