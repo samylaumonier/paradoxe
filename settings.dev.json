@@ -5,6 +5,11 @@
       "port": 9000,
       "path": "/main"
     },
+    "socket": {
+      "protocol": "http",
+      "host": "localhost",
+      "port": 4000
+    },
     "bot": {
       "id": "bot"
     },
@@ -23,6 +28,9 @@
   "peer": {
     "port": 9000,
     "proxied": false
+  },
+  "socket": {
+    "port": 4000
   },
   "bot": {
     "username": "bot",
@@ -53,7 +61,7 @@
     "feedURL": "https://download.paradoxe.io/"
   },
   "electronBuilder": {
-    "autoRun": true,
+    "autoRun": false,
     "targets": [],
     "devMetadata": {
       "build": {

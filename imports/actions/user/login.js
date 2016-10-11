@@ -1,6 +1,5 @@
 import { Meteor } from 'meteor/meteor';
 import { browserHistory } from 'react-router';
-
 import Notifications from 'react-notification-system-redux';
 
 export function login(username, password) {
