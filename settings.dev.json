@@ -58,11 +58,11 @@
         "devTools": true
       }
     },
-    "feedURL": "https://download.paradoxe.io/"
+    "feedURL": "https://download.paradoxe.io"
   },
   "electronBuilder": {
-    "autoRun": false,
-    "targets": [],
+    "autoRun": true,
+    "targets": ["CURRENT"],
     "devMetadata": {
       "build": {
         "appId": "paradoxe",

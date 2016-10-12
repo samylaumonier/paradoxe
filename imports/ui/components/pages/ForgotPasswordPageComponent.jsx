@@ -27,6 +27,10 @@ export const ForgotPasswordPageComponent = React.createClass({
                   </div>
                 </div>
                 <button type="submit" className="ui green submit button">Send email</button>
+                <div className="centered aligned">
+                  <br/>
+                  <a href="/login" className="center aligned">Go to login</a>
+                </div>
               </div>
             </form>
           </div>

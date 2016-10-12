@@ -7,7 +7,7 @@ import { NavbarNotificationItemContainer } from '/imports/ui/containers/parts/ap
 
 export const NavbarComponent = React.createClass({
   propTypes: {
-    user: React.PropTypes.bool.isRequired,
+    user: React.PropTypes.object.isRequired,
     hasInvites: React.PropTypes.bool.isRequired,
     totalInvites: React.PropTypes.number.isRequired,
     loadInvites: React.PropTypes.func.isRequired,
@@ -75,8 +75,14 @@ export const NavbarComponent = React.createClass({
               <i className="user icon"/>
               &nbsp; {this.props.user.username}
               <div className="menu">
-                <a className="item"><i className="external icon"/> Feedback</a>
-                <a className="item" href="/change-password"><i className="lock icon"/> Change password</a>
+                <Link className="item" to="/feedback">
+                  <i className="external icon"/>
+                  Feedback
+                </Link>
+                <Link className="item" to="/change-password">
+                  <i className="lock icon"/>
+                  Change password
+                </Link>
                 <a className="item" onClick={this.props.logout}>
                   <i className="sign out icon"/>
                   Logout

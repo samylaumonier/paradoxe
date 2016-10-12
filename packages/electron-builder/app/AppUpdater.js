@@ -11,6 +11,7 @@ const feedURL = settings.feedURL;
 const updateURL = `${feedURL}/update/${os.platform()}_${os.arch()}/${app.getVersion()}`;
 
 try {
+  console.log("updateURL:", updateURL);
   autoUpdater.setFeedURL(updateURL);
 } catch (e) {
   console.error(e);

@@ -28,6 +28,11 @@ export const ResetPasswordPageComponent = React.createClass({
                 </div>
                 <br/>
                 <button type="submit" className="ui green submit button">Reset password</button>
+                <br/>
+                <div className="centered aligned">
+                  <br/>
+                  <a href="/login" className="center aligned">Go to login</a>
+                </div>
               </div>
             </form>
           </div>

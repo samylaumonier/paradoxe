@@ -16,6 +16,7 @@ import { RegisterPageComponent } from '/imports/ui/components/pages/RegisterPage
 import { LoginPageComponent } from '/imports/ui/components/pages/LoginPageComponent';
 import { ResetPasswordPageContainer } from '/imports/ui/containers/pages/ResetPasswordPageContainer';
 import { ForgotPasswordPageContainer } from '/imports/ui/containers/pages/ForgotPasswordPageContainer';
+import { FeedbackPageContainer } from '/imports/ui/containers/pages/FeedbackPageContainer';
 import { HomePageComponent } from '/imports/ui/components/pages/HomePageComponent';
 import { LandingPageComponent } from '/imports/ui/components/pages/LandingPageComponent';
 
@@ -38,6 +39,7 @@ export const renderRoutes = () => (
         <Route path="invites" component={InvitesPageContainer}/>
         <Route path="posts" component={HomePageComponent}/>
         <Route path="change-password" component={ChangePasswordPageContainer}/>
+        <Route path="feedback" component={FeedbackPageContainer}/>
         <Route path="chat/:contactUsername" component={ChatPageContainer}/>
       </Route>
     </Router>
