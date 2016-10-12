@@ -25,7 +25,6 @@ export const userHasBlockedContact = function (user, contactId) {
 
 function checkRequiredField(user, field) {
   if (!user.profile || !user.profile[field]) {
-    console.log(user);
     throw new Error('Required field not found!');
   }
 }

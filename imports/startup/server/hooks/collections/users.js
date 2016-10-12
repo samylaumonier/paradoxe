@@ -207,6 +207,7 @@ Accounts.onCreateUser((options, user) => {
     contacts: [],
     blockedContacts: [],
     emailHash: md5(user.emails[0].address),
+    pictureId: null,
     lastNudgeSentAt: {},
     sockets: [],
   };

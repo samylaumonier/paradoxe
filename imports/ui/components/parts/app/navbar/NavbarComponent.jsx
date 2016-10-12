@@ -75,13 +75,12 @@ export const NavbarComponent = React.createClass({
               <i className="user icon"/>
               &nbsp; {this.props.user.username}
               <div className="menu">
+                <Link className="item" to="/settings">
+                  <i className="settings icon"/> Settings
+                </Link>
                 <Link className="item" to="/feedback">
                   <i className="external icon"/>
                   Feedback
-                </Link>
-                <Link className="item" to="/change-password">
-                  <i className="lock icon"/>
-                  Change password
                 </Link>
                 <a className="item" onClick={this.props.logout}>
                   <i className="sign out icon"/>
