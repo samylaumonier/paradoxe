@@ -30,7 +30,7 @@ export const SidebarComponent = React.createClass({
       <div id="sidebar" className="ui vertical inverted left visible sidebar secondary menu">
         <div className="item">
           <Link className="ui logo icon image" to="/posts">
-            <img src="/images/logo.png"/>
+            <img src="/images/logo-35x35.png"/>
           </Link>
           <Link to="/posts"><b>Paradoxe</b></Link>
         </div>

@@ -15,7 +15,7 @@ export const LandingPageComponent = React.createClass({
               <div className="ui secondary pointing menu">
                 <p className="logo item">
                   <a>
-                    <img  className="logo-item" src="/images/logo.png" alt="Paradoxe logo"/>
+                    <img  className="logo-item" src="/images/logo-35x35.png" alt="Paradoxe logo"/>
                   </a>
                 </p>
                 <a className="ui item">

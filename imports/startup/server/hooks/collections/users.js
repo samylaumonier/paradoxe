@@ -4,12 +4,21 @@ import md5 from 'md5';
 Accounts.onCreateUser((options, user) => {
   user.username =  options.username.toLowerCase();
   
-//  var usernameValidator = /?=^.{3,20}$)^[a-zA-Z][a-zA-Z0-9]*[._-]?[a-zA-Z0-9]+$/g;
+  const usernameValidator = /^[a-z0-9_]{3,16}$/;
   
-//  if (usernameValidator.test(user.username)) {
-//    throw new Meteor.Error('400','Invalid username');
+  if (!usernameValidator.test(user.username)) {
+    throw new Meteor.Error('400','Invalid username: Username must be alphanumerical with a minimum of 3 characters and a maximum of 16, underscore is allowed anywhere in the name.');
+  }
+  
+//  console.log("option:", options);
+//
+//  throw new Meteor.Error('');
+//
+//  const pwdValidator = /^.*(?=.{8,})(?=.*[a-zA-Z])(?=.*\d)[a-zA-Z0-9!@#$%-_]+$/;
+//
+//  if (!pwdValidator.test(options.password)) {
+//    throw new Meteor.Error('400','Invalid username: Username must be alphanumerical with a minimum of 3 characters and a maximum of 16, underscore is allowed anywhere in the name.');
 //  }
-  
 
   if (!validator.validate(user.emails[0].address)) {
     throw new Meteor.Error('400','Invalid email');
@@ -222,4 +231,3 @@ Meteor.users.after.insert(function () {
     console.log('Verification mail error:', err);
   }
 });
-
