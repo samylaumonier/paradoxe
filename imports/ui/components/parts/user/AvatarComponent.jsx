@@ -30,8 +30,10 @@ export const AvatarComponent = React.createClass({
     const style = {
       width: `${this.props.size}px`,
       height: `${this.props.size}px`,
-      'background': `url(${src}) no-repeat center`,
+      'background-image': `url(${src})`,
       'background-size': 'cover',
+      'background-repeat': 'no-repeat',
+      'background-position': 'center',
     };
 
     return <div src={src} className={this.props.className || ''} style={style}/>;
