@@ -18,7 +18,7 @@ export const FeedbackPageComponent = React.createClass({
               <form className="column" onSubmit={this.feedback}>
                 <h2 className="ui teal image header">
                   <div className="content">
-                    We value your input.
+                    Thank you for your input.
                   </div>
                 </h2>
                 <br/>
@@ -49,13 +49,13 @@ export const FeedbackPageComponent = React.createClass({
                     <i className="align justify icon"/>
                   </div>
                 </div>
-                <div className="field">
-                  <label>Image (optional)</label>
-                  <div className="ui left labeled icon input">
-                    <input ref="image" type="file"/>
-                    <i className="image icon"/>
-                  </div>
-                </div>
+                {/*<div className="field">*/}
+                  {/*<label>Image (optional)</label>*/}
+                  {/*<div className="ui left labeled icon input">*/}
+                    {/*<input ref="image" type="file"/>*/}
+                    {/*<i className="image icon"/>*/}
+                  {/*</div>*/}
+                {/*</div>*/}
                 <button type="submit" className="ui blue submit button">Submit</button>
               </form>
             </div>
@@ -70,7 +70,6 @@ export const FeedbackPageComponent = React.createClass({
       subject: this.refs.subject.value,
       type: $("div#feedback-type").text().toLowerCase(),
       description: this.refs.description.value,
-      image: this.refs.image.value,
     };
     
     this.props.feedback(feedbackAttributes);

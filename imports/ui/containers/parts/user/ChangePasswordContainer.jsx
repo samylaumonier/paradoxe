@@ -2,7 +2,7 @@ import { connect } from 'react-redux';
 
 import { change } from '/imports/actions/user/change';
 
-import { ChangePasswordPageComponent } from '/imports/ui/components/pages/ChangePasswordPageComponent';
+import { ChangePasswordPageComponent } from '/imports/ui/components/parts/user/ChangePasswordComponent';
 
 const mapStateToProps = () => {
   return {

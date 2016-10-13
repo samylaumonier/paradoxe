@@ -23,7 +23,6 @@ import { LandingPageComponent } from '/imports/ui/components/pages/LandingPageCo
 import { ChatPageContainer } from '/imports/ui/containers/pages/ChatPageContainer';
 import { InvitesPageContainer } from '/imports/ui/containers/pages/InvitesPageContainer';
 import { SettingsPageContainer } from '/imports/ui/containers/pages/SettingsPageContainer';
-import { ChangePasswordPageContainer } from '/imports/ui/containers/pages/ChangePasswordPageContainer';
 
 export const renderRoutes = () => (
   <Provider store={store}>
@@ -40,7 +39,6 @@ export const renderRoutes = () => (
         <Route path="invites" component={InvitesPageContainer}/>
         <Route path="posts" component={HomePageComponent}/>
         <Route path="settings" component={SettingsPageContainer}/>
-        <Route path="change-password" component={ChangePasswordPageContainer}/>
         <Route path="feedback" component={FeedbackPageContainer}/>
         <Route path="chat/:contactUsername" component={ChatPageContainer}/>
       </Route>

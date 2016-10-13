@@ -46,7 +46,7 @@
     "author": {
       "name": "Paradoxe Inc",
       "email": "contact@paradoxe.io",
-      "url": "https://paradoxe.io/"
+      "url": "https://paradoxe.io"
     },
     "windowOptions": {
       "width": 1024,
@@ -62,7 +62,7 @@
   },
   "electronBuilder": {
     "autoRun": true,
-    "targets": ["CURRENT"],
+    "targets": [],
     "devMetadata": {
       "build": {
         "appId": "paradoxe",

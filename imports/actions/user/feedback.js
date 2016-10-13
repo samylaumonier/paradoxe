@@ -4,7 +4,6 @@ import Notifications from 'react-notification-system-redux';
 
 export function feedback(feedbackAttributes) {
   return dispatch => {
-    console.log('feedback:', feedbackAttributes);
     Meteor.call('feedback', feedbackAttributes, err => {
       if (err) {
         dispatch(
@@ -21,7 +20,7 @@ export function feedback(feedbackAttributes) {
         dispatch(
           Notifications.success({
             title: `Your feedback was sent`,
-            message: `Thank you, your opinion is important and your feedback is valued.`,
+            message: `Thank you, your opinion is important to us.`,
             position: 'tr',
             autoDismiss: 5,
             dismissible: true
