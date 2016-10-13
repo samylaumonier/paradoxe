@@ -39,7 +39,7 @@
   "electron": {
     "name": "paradoxe",
     "productName": "Paradoxe",
-    "version": "0.0.3",
+    "version": "0.0.4",
     "description": "Multiplatform video and chat application",
     "homepage": "https://paradoxe.io/",
     "license": "MIT",
