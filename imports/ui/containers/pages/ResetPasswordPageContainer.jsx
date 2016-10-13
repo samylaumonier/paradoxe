@@ -4,7 +4,7 @@ import { reset } from '/imports/actions/user/reset';
 
 import { ResetPasswordPageComponent } from '/imports/ui/components/pages/ResetPasswordPageComponent';
 
-const mapStateToProps = state => {
+const mapStateToProps = () => {
   return {
     
   };
@@ -12,8 +12,8 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = (dispatch, props) => {
   return {
-    reset: (password) => {
-      dispatch(reset(password, props.params.token));
+    reset: (password, callback) => {
+      dispatch(reset(password, props.params.token, callback));
     }
   };
 };

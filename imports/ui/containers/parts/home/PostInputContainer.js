@@ -12,8 +12,8 @@ const mapStateToProps = () => {
 
 const mapDispatchToProps = dispatch => {
   return {
-    onSubmit: content => {
-      dispatch(addPost(content));
+    onSubmit: (content, callback) => {
+      dispatch(addPost(content, callback));
     }
   };
 };

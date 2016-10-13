@@ -56,12 +56,12 @@ export const ChatNavbarComponent = React.createClass({
           <i className="file icon"/>
         </a>
         <input type="file" className="hidden" ref="files" onChange={this.startUploadFiles} multiple/>
-        <a className="ui icon item">
-          <i className="game icon"/>
-        </a>
-        <a className="ui icon item">
-          <i className="phone icon"/>
-        </a>
+        {/*<a className="ui icon item">*/}
+          {/*<i className="game icon"/>*/}
+        {/*</a>*/}
+        {/*<a className="ui icon item">*/}
+          {/*<i className="phone icon"/>*/}
+        {/*</a>*/}
         {videoCallControl}
         <a className="ui icon item" data-content="Send a nudge" onClick={this.props.sendNudge}>
           <i className="lightning icon"/>

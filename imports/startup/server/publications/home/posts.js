@@ -1,4 +1,6 @@
 import { Meteor } from 'meteor/meteor';
+
+import { Files } from '/imports/api/collections/files';
 import { Posts } from '/imports/api/collections/posts';
 
 Meteor.publish('home.posts', function () {
@@ -8,30 +10,47 @@ Meteor.publish('home.posts', function () {
     }
 
     const user = Meteor.users.findOne(this.userId);
-    let ids = [];
+
+    // Users ids
+    let usersIds = [];
 
     if (user.profile && user.profile.contacts) {
-      ids = user.profile.contacts;
+      usersIds = user.profile.contacts;
     }
 
-    ids.push(this.userId);
+    usersIds.push(this.userId);
+
+    // Users
+    const users = Meteor.users.find({
+      _id: {
+        $in: usersIds
+      },
+    }, {
+      fields: {
+        username: 1,
+        'profile.emailHash': 1,
+        'profile.pictureId': 1,
+      },
+    });
+
+    // Posts
+    const posts = Posts.find({
+      userId: {
+        $in: usersIds,
+      },
+    });
+
+    // Profile pictures
+    const files = Files.find({
+      _id: {
+        $in: _.compact(_.map(users.fetch(), user => user.profile.pictureId)),
+      },
+    }).cursor;
 
     return [
-      Posts.find({
-        userId: {
-          $in: ids
-        }
-      }),
-      Meteor.users.find({
-        _id: {
-          $in: ids
-        }
-      }, {
-        fields: {
-          username: 1,
-          'profile.emailHash': 1
-        }
-      })
+      posts,
+      users,
+      files,
     ];
   });
 });

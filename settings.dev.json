@@ -39,14 +39,14 @@
   "electron": {
     "name": "paradoxe",
     "productName": "Paradoxe",
-    "version": "0.0.3",
+    "version": "0.0.4",
     "description": "Multiplatform video and chat application",
     "homepage": "https://paradoxe.io/",
     "license": "MIT",
     "author": {
       "name": "Paradoxe Inc",
       "email": "contact@paradoxe.io",
-      "url": "https://paradoxe.io/"
+      "url": "https://paradoxe.io"
     },
     "windowOptions": {
       "width": 1024,
@@ -58,10 +58,10 @@
         "devTools": true
       }
     },
-    "feedURL": "https://download.paradoxe.io/"
+    "feedURL": "https://download.paradoxe.io"
   },
   "electronBuilder": {
-    "autoRun": false,
+    "autoRun": true,
     "targets": [],
     "devMetadata": {
       "build": {

@@ -1,6 +1,7 @@
 import { connect } from 'react-redux';
 
 import { userHasBlockedContact } from '/imports/api/collections/users';
+import { fileListToArray } from '/imports/api/collections/files';
 
 import { filesDropped } from '/imports/actions/chats/file/dropped';
 import { startVideoCall } from '/imports/actions/chats/video/start';
@@ -23,15 +24,7 @@ const mapStateToProps = (state, props) => {
 
 const mapDispatchToProps = (dispatch, props) => {
   return {
-    fileListToArray: list => {
-      const files = [];
-
-      for (let i = 0; i < list.length; i++) {
-        files.push(list[i]);
-      }
-
-      return files;
-    },
+    fileListToArray,
     startUploadFiles: files => {
       dispatch(filesDropped(props.contact, files));
     },

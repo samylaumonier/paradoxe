@@ -14,11 +14,27 @@ const mapStateToProps = () => {
 
 const mapDispatchToProps = (dispatch, props) => {
   return {
-    answerVideoCall: () => {
-      dispatch(answerVideoCall(props.contact, props.message));
+    answerVideoCall: button => {
+      if (button.isLocked()) {
+        return false;
+      }
+
+      button.lock();
+
+      dispatch(answerVideoCall(props.contact, props.message, () => {
+        button.unlock();
+      }));
     },
-    declineVideoCall: () => {
-      dispatch(declineVideoCall(props.contact, props.message));
+    declineVideoCall: button => {
+      if (button.isLocked()) {
+        return false;
+      }
+
+      button.lock();
+
+      dispatch(declineVideoCall(props.contact, props.message, () => {
+        button.unlock();
+      }));
     },
     videoCallRinging: () => {
       dispatch(chatVideoUpdate(props.contact, {

@@ -20,8 +20,16 @@ const mapDispatchToProps = (dispatch, props) => {
     videoCallMissed: () => {
       dispatch(videoCallMissed(props.contact, props.message));
     },
-    cancelVideoCall: () => {
-      dispatch(cancelVideoCall(props.contact, props.message));
+    cancelVideoCall: button => {
+      if (button.isLocked()) {
+        return false;
+      }
+
+      button.lock();
+
+      dispatch(cancelVideoCall(props.contact, props.message, () => {
+        button.unlock();
+      }));
     },
   };
 };

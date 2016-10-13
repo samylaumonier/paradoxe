@@ -16,12 +16,13 @@ import { RegisterPageComponent } from '/imports/ui/components/pages/RegisterPage
 import { LoginPageComponent } from '/imports/ui/components/pages/LoginPageComponent';
 import { ResetPasswordPageContainer } from '/imports/ui/containers/pages/ResetPasswordPageContainer';
 import { ForgotPasswordPageContainer } from '/imports/ui/containers/pages/ForgotPasswordPageContainer';
+import { FeedbackPageContainer } from '/imports/ui/containers/pages/FeedbackPageContainer';
 import { HomePageComponent } from '/imports/ui/components/pages/HomePageComponent';
 import { LandingPageComponent } from '/imports/ui/components/pages/LandingPageComponent';
 
 import { ChatPageContainer } from '/imports/ui/containers/pages/ChatPageContainer';
 import { InvitesPageContainer } from '/imports/ui/containers/pages/InvitesPageContainer';
-import { ChangePasswordPageContainer } from '/imports/ui/containers/pages/ChangePasswordPageContainer';
+import { SettingsPageContainer } from '/imports/ui/containers/pages/SettingsPageContainer';
 
 export const renderRoutes = () => (
   <Provider store={store}>
@@ -37,7 +38,8 @@ export const renderRoutes = () => (
       <Route path="/" component={UserLayoutContainer} onEnter={requireAuthHook}>
         <Route path="invites" component={InvitesPageContainer}/>
         <Route path="posts" component={HomePageComponent}/>
-        <Route path="change-password" component={ChangePasswordPageContainer}/>
+        <Route path="settings" component={SettingsPageContainer}/>
+        <Route path="feedback" component={FeedbackPageContainer}/>
         <Route path="chat/:contactUsername" component={ChatPageContainer}/>
       </Route>
     </Router>

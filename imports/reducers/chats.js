@@ -95,9 +95,7 @@ export function chats(state = initialState, action) {
       const index = nextState[action.contact.username].localFiles.findIndex(localFile => localFile.id === action.localFileId);
 
       if (index > -1) {
-        console.log('before remove', nextState[action.contact.username].localFiles);
         nextState[action.contact.username].localFiles.splice(index, 1);
-        console.log('after remove', nextState[action.contact.username].localFiles);
       }
 
       return nextState;

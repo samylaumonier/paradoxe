@@ -4,7 +4,12 @@ export const CHAT_FILES_DROPPED = 'CHAT_FILES_DROPPED';
 
 export function filesDropped(contact, files) {
   return dispatch => {
+    if (files.length === 0) {
+      return false;
+    }
+
     const filesInfo = [];
+
     files.forEach(file => {
       if (!file.id) {
         file.id = Random.id(8);

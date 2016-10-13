@@ -26,7 +26,8 @@ Meteor.publish('chat.messages', function (contactUsername) {
         }, {
           fields: {
             username: 1,
-            'profile.emailHash': 1
+            'profile.emailHash': 1,
+            'profile.pictureId': 1,
           }
         }),
         Messages.find({
@@ -45,6 +46,8 @@ Meteor.publish('chat.messages', function (contactUsername) {
           $or: [
             { userId: user._id, 'meta.contactId': { $in: [contact._id] }},
             { userId: contact._id, 'meta.contactId': { $in: [user._id] }},
+            { _id: user.profile.pictureId },
+            { _id: contact.profile.pictureId },
           ]
         }).cursor,
       ];

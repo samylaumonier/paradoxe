@@ -9,6 +9,8 @@ import {
   RINGING_STATUS
 } from '/imports/api/collections/messages';
 
+import { LockableButtonComponent } from '/imports/ui/components/parts/app/spinner/LockableButtonComponent';
+
 export const ChatOutgoingVideoCallComponent = React.createClass({
   propTypes: {
     contact: React.PropTypes.object.isRequired,
@@ -51,10 +53,11 @@ export const ChatOutgoingVideoCallComponent = React.createClass({
           <Case expr={this.props.message.status === RINGING_STATUS}>
             <span>
               You are making a video call to {this.props.contact.username}.
-              <button className="ui labeled icon button" onClick={this.props.cancelVideoCall}>
-                <i className="remove icon"/>
+              <br/>
+              <LockableButtonComponent ref="button" className="ui labeled icon button" onClick={this.props.cancelVideoCall}>
+                <i className="remove icon" />
                 Cancel
-              </button>
+              </LockableButtonComponent>
             </span>
           </Case>
           <Case expr={this.props.message.status === ANSWERED_STATUS}>

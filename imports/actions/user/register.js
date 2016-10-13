@@ -1,15 +1,16 @@
 import { Accounts } from 'meteor/accounts-base';
 import { browserHistory } from 'react-router';
-
 import Notifications from 'react-notification-system-redux';
 
-export function register(username, email, password) {
+export function register(username, email, password, callback) {
   return dispatch => {
     Accounts.createUser({
       username,
       email,
       password,
     }, err => {
+      callback();
+
       if (err) {
         dispatch(
           Notifications.error({

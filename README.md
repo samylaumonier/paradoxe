@@ -1,2 +1,3 @@
-# Glib
-Multiplatform Video and chat application
+# Paradoxe
+
+Multiplatform video and chat application

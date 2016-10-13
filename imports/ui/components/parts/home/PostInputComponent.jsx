@@ -1,6 +1,8 @@
 import React from 'react';
 import autosize from 'autosize';
 
+import { LockableButtonComponent } from '/imports/ui/components/parts/app/spinner/LockableButtonComponent';
+
 import '/imports/ui/styles/parts/home/PostInputComponentStyle.less';
 
 export const PostInputComponent = React.createClass({
@@ -9,7 +11,7 @@ export const PostInputComponent = React.createClass({
   },
   getInitialState: function () {
     return {
-      content: ''
+      content: '',
     };
   },
   componentDidMount: function () {
@@ -31,7 +33,9 @@ export const PostInputComponent = React.createClass({
                 value={this.state.content}
                 onChange={this.onChange}
               />
-              <button type="submit" className="ui blue submit button">Submit</button>
+              <LockableButtonComponent ref="button" type="submit" className="ui blue submit button">
+                Submit
+              </LockableButtonComponent>
             </div>
           </div>
         </form>
@@ -45,9 +49,18 @@ export const PostInputComponent = React.createClass({
   },
   onSubmit: function (event) {
     event.preventDefault();
-    this.props.onSubmit(this.state.content);
-    this.setState({
-      content: ''
+
+    if (this.refs.button.isLocked()) {
+      return false;
+    }
+
+    this.refs.button.lock();
+
+    this.props.onSubmit(this.state.content, () => {
+      this.refs.button.unlock();
+      this.setState({
+        content: ''
+      });
     });
   },
 });

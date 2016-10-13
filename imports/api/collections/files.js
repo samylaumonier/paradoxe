@@ -10,6 +10,10 @@ export const Files = new FilesCollection({
   allowClientCode: false, // Disallow remove files from client
   onBeforeUpload: file => {
     if (file.size <= Meteor.settings.public.uploadMaxFileSize) {
+      if (file.meta.profilePicture && !/png|jpg|jpeg|gif/i.test(file.extension)) {
+        return `Please select an image (.png, .jpg, .jpeg or .gif).`;
+      }
+
       return true;
     } else {
       const max = numeral(Meteor.settings.public.uploadMaxFileSize).format('0.00 b');
@@ -39,3 +43,13 @@ export const FileSchema = new SimpleSchema({
     optional: true,
   },
 });
+
+export function fileListToArray(list) {
+  const files = [];
+
+  for (let i = 0; i < list.length; i++) {
+    files.push(list[i]);
+  }
+
+  return files;
+}
