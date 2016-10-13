@@ -1,12 +1,14 @@
 import React from 'react';
 
+import { LockableButtonComponent } from '/imports/ui/components/parts/app/spinner/LockableButtonComponent';
+
 export const LoginComponent = React.createClass({
   propTypes: {
     login: React.PropTypes.func.isRequired,
   },
-  render: function ()  {
+  render: function () {
     return (
-      <form className="column" onSubmit={this.login}>
+      <form className="column" onSubmit={this.onSubmit}>
         <h2 className="ui teal image header">
           <div className="content">
             See who's online
@@ -27,17 +29,27 @@ export const LoginComponent = React.createClass({
               <i className="lock icon"/>
             </div>
           </div>
-          <button type="submit" className="ui blue submit button">Login</button>
+          <LockableButtonComponent ref="button" type="submit" className="ui blue submit button">
+            Login
+          </LockableButtonComponent>
         </div>
       </form>
     );
   },
-  login: function (e) {
+  onSubmit: function (e) {
     e.preventDefault();
-    
+
+    if (this.refs.button.isLocked()) {
+      return false;
+    }
+
+    this.refs.button.lock();
+
     const username = $(this.refs.username).val();
     const password = $(this.refs.password).val();
 
-    this.props.login(username, password);
-  }
+    this.props.login(username, password, () => {
+      this.refs.button.unlock();
+    });
+  },
 });

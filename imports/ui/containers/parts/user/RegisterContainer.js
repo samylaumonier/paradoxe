@@ -12,8 +12,8 @@ const mapStateToProps = () => {
 
 const mapDispatchToProps = dispatch => {
   return {
-    register: (username, email, password) => {
-      dispatch(register(username, email, password));
+    register: (username, email, password, callback) => {
+      dispatch(register(username, email, password, callback));
     },
   };
 };

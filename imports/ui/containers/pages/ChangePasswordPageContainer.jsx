@@ -4,7 +4,7 @@ import { change } from '/imports/actions/user/change';
 
 import { ChangePasswordPageComponent } from '/imports/ui/components/pages/ChangePasswordPageComponent';
 
-const mapStateToProps = state => {
+const mapStateToProps = () => {
   return {
     
   };
@@ -12,8 +12,8 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = dispatch => {
   return {
-    change: (oldPassword, newPassword) => {
-      dispatch(change(oldPassword, newPassword));
+    change: (oldPassword, newPassword, callback) => {
+      dispatch(change(oldPassword, newPassword, callback));
     }
   };
 };

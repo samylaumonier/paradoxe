@@ -4,7 +4,7 @@ import { forgot } from '/imports/actions/user/forgot';
 
 import { ForgotPasswordPageComponent } from '/imports/ui/components/pages/ForgotPasswordPageComponent';
 
-const mapStateToProps = state => {
+const mapStateToProps = () => {
   return {
     
   };
@@ -12,8 +12,8 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = dispatch => {
   return {
-    forgot: email => {
-      dispatch(forgot(email));
+    forgot: (email, callback) => {
+      dispatch(forgot(email, callback));
     }
   };
 };
