@@ -4,19 +4,19 @@ import { stopVideoPeer } from './peer';
 
 import { CANCELED_STATUS } from '/imports/api/collections/messages';
 
-export function cancelVideoCall(contact, message) {
+export function cancelVideoCall(contact, message, unlock) {
   return (dispatch, getState) => {
     Meteor.call('updateVideoCallStatus', message._id, CANCELED_STATUS, err => {
+      unlock();
+
       if (err) {
-        dispatch(
-          Notifications.error({
-            title: `An error occurred`,
-            message: err.reason,
-            position: 'tr',
-            autoDismiss: 5,
-            dismissible: true
-          })
-        );
+        dispatch(Notifications.error({
+          title: `An error occurred`,
+          message: err.reason,
+          position: 'tr',
+          autoDismiss: 5,
+          dismissible: true
+        }));
       }
     });
 

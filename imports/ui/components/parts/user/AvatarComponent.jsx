@@ -23,17 +23,22 @@ export const AvatarComponent = React.createClass({
   getDefaultSrc: function () {
     return `https://secure.gravatar.com/avatar/?s=${this.props.size}&d=mm`;
   },
-  getClassicImage: function(src = this.getDefaultSrc()) {
-    return <img src={src} className={this.props.className || ''} width={this.props.size} height={this.props.size}/>;
-  },
-  getBackgroundImage: function(src) {
+  getClassicImage: function (src = this.getDefaultSrc()) {
     const style = {
-      width: `${this.props.size}px`,
-      height: `${this.props.size}px`,
-      'background-image': `url(${src})`,
-      'background-size': 'cover',
-      'background-repeat': 'no-repeat',
-      'background-position': 'center',
+      maxWidth: `${this.props.size}px`,
+      maxHeight: `${this.props.size}px`,
+    };
+
+    return <img src={src} className={this.props.className || ''} style={style}/>;
+  },
+  getBackgroundImage: function (src) {
+    const style = {
+      maxWidth: `${this.props.size}px`,
+      maxHeight: `${this.props.size}px`,
+      backgroundImage: `url(${src})`,
+      backgroundSize: 'cover',
+      backgroundRepeat: 'no-repeat',
+      backgroundPosition: 'center',
     };
 
     return <div src={src} className={this.props.className || ''} style={style}/>;
