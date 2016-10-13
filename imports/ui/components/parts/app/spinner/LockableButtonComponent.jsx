@@ -2,9 +2,10 @@ import React from 'react';
 
 export const LockableButtonComponent = React.createClass({
   propTypes: {
-    type: React.PropTypes.string.isRequired,
+    type: React.PropTypes.string,
     className: React.PropTypes.string.isRequired,
     children: React.PropTypes.node.isRequired,
+    onClick: React.PropTypes.func,
   },
   getInitialState: function () {
     return {
@@ -32,9 +33,14 @@ export const LockableButtonComponent = React.createClass({
     }
 
     return (
-      <button type={this.props.type} className={className}>
+      <button type={this.props.type || 'button'} className={className} onClick={this.onClick}>
         {this.props.children}
       </button>
     );
-  }
+  },
+  onClick: function () {
+    if (this.props.onClick) {
+      this.props.onClick(this);
+    }
+  },
 });
