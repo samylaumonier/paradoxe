@@ -16,6 +16,7 @@ export const NavbarComponent = React.createClass({
     notifications: React.PropTypes.array.isRequired,
     loadNotifications: React.PropTypes.func.isRequired,
     logout: React.PropTypes.func.isRequired,
+    seeAll: React.PropTypes.func.isRequired,
   },
   componentWillMount: function () {
     this.props.loadInvites();
@@ -44,7 +45,7 @@ export const NavbarComponent = React.createClass({
       : null;
 
     const notificationsHelper = this.props.hasNotifications
-      ? <p className="center">Mark all as seen.</p>
+      ? <p className="center" onClick={this.props.seeAll}>Mark all as seen.</p>
       : <p className="center">No notifications.</p>;
 
     return (

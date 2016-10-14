@@ -1,11 +1,10 @@
 import { Meteor } from 'meteor/meteor';
-import { browserHistory } from 'react-router';
 
 import Notifications from 'react-notification-system-redux';
 
-export function markNotificationSeen(notification) {
+export function seeAll() {
   return dispatch => {
-    Meteor.call('notificationSeen', notification._id, err => {
+    Meteor.call('seeAllNotifications', err => {
       if (err) {
         dispatch(
           Notifications.error({
@@ -18,6 +17,6 @@ export function markNotificationSeen(notification) {
         );
       }
     });
-    browserHistory.push(notification.url);
   };
 }
+
