@@ -79,7 +79,5 @@ export const ChatComponent = React.createClass({
     this.setState({
       selectedEmoji: emoji
     });
-
-    this.toggleEmojis();
   },
 });
