@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router';
 
 import '/imports/ui/styles/pages/LandingPageComponentStyle.less';
 
@@ -172,7 +173,7 @@ export const LandingPageComponent = React.createClass({
                   </div>
                   <p>
                     On the go or using a friend's computer.
-                    No problem, just <a href="/connect">click here</a> for the web version.
+                    No problem, just <Link to="/login">click here</Link> for the web version.
                     Our video and and audio calls are <b>supported by a number of web browsers</b>
                     like Chrome, Firefox, Opera. So you never have to be disconnected.
                   </p>
@@ -198,7 +199,7 @@ export const LandingPageComponent = React.createClass({
         </div>
         
         
-        <div className="ui vertical segment white-footer">
+        <div className="ui vertical segment white-footer hidden">
           <div className="ui stackable center aligned page grid">
             
             <div className="three column row">
@@ -245,7 +246,7 @@ export const LandingPageComponent = React.createClass({
                     <div className="ui four column aligned stackable grid">
                       
                       <div className="column">
-                        <a className="item icon inverted">
+                        <a className="item icon inverted hidden">
                           <i className="twitter icon"/>
                           Twitter
                         </a>
