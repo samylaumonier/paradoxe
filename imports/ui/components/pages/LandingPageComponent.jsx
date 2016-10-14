@@ -23,9 +23,12 @@ export const LandingPageComponent = React.createClass({
                   Paradoxe
                 </a>
                 <div className="right menu">
-                  <a className="ui active item button" href="/login">
-                    Web app
-                  </a>
+                  <Link to="/register" className="ui active item button" >
+                    Register
+                  </Link>
+                  <Link to="/login" className="ui active item button" >
+                    Login
+                  </Link>
                 </div>
               </div>
               <div id="page-header" className="ui hidden transition information" ref="header">
@@ -37,6 +40,10 @@ export const LandingPageComponent = React.createClass({
                   We get extraordinary.
                 </p>
                 <div id="download-buttons">
+                  <Link to="/register" className="center aligned large basic inverted animated fade ui button" download>
+                    <div className="visible content"><i className="browser icon"/></div>
+                    <div className="hidden content">Try it</div>
+                  </Link>
                   <a href="https://download.paradoxe.io/download/latest/windows_64" className="center aligned large basic inverted animated fade ui button" download>
                     <div className="visible content"><i className="windows icon"/></div>
                     <div className="hidden content">Get it</div>
@@ -199,7 +206,7 @@ export const LandingPageComponent = React.createClass({
         </div>
         
         
-        <div className="ui vertical segment white-footer hidden">
+        <div className="ui vertical segment white-footer alpha-hidden">
           <div className="ui stackable center aligned page grid">
             
             <div className="three column row">
@@ -246,7 +253,7 @@ export const LandingPageComponent = React.createClass({
                     <div className="ui four column aligned stackable grid">
                       
                       <div className="column">
-                        <a className="item icon inverted hidden">
+                        <a className="item icon inverted alpha-hidden">
                           <i className="twitter icon"/>
                           Twitter
                         </a>
