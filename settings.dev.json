@@ -1,5 +1,6 @@
 {
   "public": {
+    "version": "0.0.4",
     "peer": {
       "host": "localhost",
       "port": 9000,

@@ -49,9 +49,9 @@ export const LandingPageComponent = React.createClass({
                     <div className="hidden content">Get it</div>
                   </a>
                 </div>
-                {/*<div className="ui centerted image">*/}
-                  {/*<img src="images/banner.jpg"/>*/}
-                {/*</div>*/}
+                <div className="ui centerted image">
+                  <img src="images/screenshot.png"/>
+                </div>
               </div>
             </div>
           </div>

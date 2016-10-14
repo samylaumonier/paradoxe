@@ -39,6 +39,17 @@ export const SettingsPageComponent = React.createClass({
                         Change profile picture {progress}
                       </button>
                     </div>
+                    <div className="title">
+                      <i className="dropdown icon"/> Paradoxe
+                    </div>
+                    <div className="content">
+                      <div className="content">
+                        <p>
+                          Version {Meteor.settings.public.version} <br/>
+                          Made in Lyon
+                        </p>
+                      </div>
+                    </div>
                   </div>
                 </div>
               </div>
