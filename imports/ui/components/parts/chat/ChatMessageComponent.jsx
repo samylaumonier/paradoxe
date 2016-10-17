@@ -1,6 +1,8 @@
 import React from 'react';
 import emojione from 'emojione';
 
+import { Electron } from 'meteor/risetechnologies:electron-builder-local';
+
 import { shouldMarkMessageAsRead } from '/imports/api/collections/messages';
 
 import { AvatarComponent } from '/imports/ui/components/parts/user/AvatarComponent';
@@ -24,6 +26,13 @@ export const ChatMessageComponent = React.createClass({
     deleteMessage: React.PropTypes.func.isRequired,
   },
   componentDidMount: function () {
+    $('.url').click( (e) => {
+      if(Electron.isElectron()){
+        e.preventDefault();
+        Electron.openExternal($(e.target).attr("href"));
+      }
+    });
+    
     $(this.refs.text).find('span').each(function () {
       const line = $(this);
 
@@ -89,5 +98,5 @@ function getMessageLine(line) {
 }
 
 function linkify(text) {
-  return text.replace(urlRegex, url => `<a href="${url}" target="_blank" rel="noopener">${url}</a>`);
+  return text.replace(urlRegex, url => `<a href="${url}" target="_blank" rel="noopener" class="url">${url}</a>`);
 }

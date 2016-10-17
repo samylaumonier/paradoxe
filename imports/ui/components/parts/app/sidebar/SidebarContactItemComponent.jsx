@@ -125,17 +125,3 @@ export const SidebarContactItemComponent = React.createClass({
     });
   },
 });
-
-
-
-function isBlurred() {
-  let blurred = false;
-  
-  $(window).focus(function() {
-    blurred = false;
-  }).blur(function() {
-    blurred = true;
-  });
-  return blurred;
-}
-
