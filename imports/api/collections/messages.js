@@ -24,15 +24,6 @@ export const UPLOADED_STATUS = 8;
 export const RINGING_DURATION = 30;
 export const NUDGE_LIMIT = 15;
 
-const MessageVideoSchema = new SimpleSchema({
-  id: {
-    type: String,
-  },
-  watchTogether: {
-    type: Boolean,
-  },
-});
-
 export const MessagesSchema = new SimpleSchema({
 //  _id is need when using the schema with a check function, if attaching it to a collection it should be removed
   _id: {
@@ -48,7 +39,7 @@ export const MessagesSchema = new SimpleSchema({
     type: Date,
   },
   videos: {
-    type: [MessageVideoSchema],
+    type: [String],
   },
   read: {
     type: [String],

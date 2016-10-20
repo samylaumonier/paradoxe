@@ -7,10 +7,7 @@ Messages.before.insert(function (userId, doc) {
   doc.read = [];
 
   // Videos
-  doc.videos = getVideosIds(doc).map(id => ({
-    id,
-    watchTogether: false,
-  }));
+  doc.videos = getVideosIds(doc);
 
   // Escape HTML
   if (doc.content) {

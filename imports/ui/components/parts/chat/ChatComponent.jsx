@@ -20,14 +20,13 @@ export const ChatComponent = React.createClass({
     };
   },
   render: function () {
-    const messages = this.props.messages.length
-      ? <div className="ui comments">
+    const messages = this.props.messages.length ?
+      <div className="ui comments">
         {this.props.messages.map(message => message.tag
           ? <ChatTaggedMessageContainer key={message._id} contact={this.props.contact} message={message}/>
           : <ChatMessageContainer key={message._id} contact={this.props.contact} message={message}/>
         )}
-      </div>
-      :  <p>No messages yet!</p>;
+      </div> : <p>No messages yet!</p>;
 
     return (
       <ChatReceiverContainer contact={this.props.contact}>
