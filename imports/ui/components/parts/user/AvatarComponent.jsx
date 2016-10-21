@@ -27,9 +27,10 @@ export const AvatarComponent = React.createClass({
     const style = {
       maxWidth: `${this.props.size}px`,
       maxHeight: `${this.props.size}px`,
+      backgroundImage: `url(${src})`,
     };
 
-    return <img src={src} className={this.props.className || ''} style={style}/>;
+    return <div className={this.props.className || ''} style={style}/>;
   },
   getBackgroundImage: function (src) {
     const style = {
@@ -41,6 +42,6 @@ export const AvatarComponent = React.createClass({
       backgroundPosition: 'center',
     };
 
-    return <div src={src} className={this.props.className || ''} style={style}/>;
+    return <div className={this.props.className || ''} style={style}/>;
   },
 });
