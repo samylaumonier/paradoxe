@@ -7,6 +7,7 @@ import { invites } from './invites';
 import { navbar } from './navbar';
 import { settings } from './settings';
 import { user } from './user';
+import { videos } from './videos';
 import { sidebar } from './sidebar';
 
 const rootReducer = combineReducers({
@@ -15,8 +16,9 @@ const rootReducer = combineReducers({
   invites,
   navbar,
   settings,
-  user,
   sidebar,
+  user,
+  videos,
   notifications,
 });
 

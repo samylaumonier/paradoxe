@@ -1,10 +1,12 @@
 import React from 'react';
 import emojione from 'emojione';
 
+import { Electron } from 'meteor/risetechnologies:electron-builder-local';
+
 import { shouldMarkMessageAsRead } from '/imports/api/collections/messages';
 
 import { AvatarComponent } from '/imports/ui/components/parts/user/AvatarComponent';
-import { ChatVideoContainer } from '/imports/ui/containers/parts/chat/ChatVideoContainer';
+import { ChatVideoThumbnailContainer } from '/imports/ui/containers/parts/chat/ChatVideoThumbnailContainer';
 
 import '/imports/ui/styles/parts/chat/ChatMessageComponentStyle.less';
 
@@ -24,6 +26,13 @@ export const ChatMessageComponent = React.createClass({
     deleteMessage: React.PropTypes.func.isRequired,
   },
   componentDidMount: function () {
+    $('.url').click((e) => {
+      if (Electron.isElectron()) {
+        e.preventDefault();
+        Electron.openExternal($(e.target).attr("href"));
+      }
+    });
+
     $(this.refs.text).find('span').each(function () {
       const line = $(this);
 
@@ -52,15 +61,14 @@ export const ChatMessageComponent = React.createClass({
       );
 
     const videos = this.props.hasVideos ?
-      <div className="videos">{this.props.message.videos.map(video =>
-        <ChatVideoContainer
-          key={video.id}
+      <div className="videos ui cards">{this.props.message.videos.map(videoId =>
+        <ChatVideoThumbnailContainer
+          key={videoId}
           contactId={this.props.contact._id}
-          messageId={this.props.message._id}
-          video={video}
+          videoId={videoId}
         />
       )}</div> : null;
-    
+
     return (
       <div className="comment">
         <a className="avatar">
@@ -89,5 +97,5 @@ function getMessageLine(line) {
 }
 
 function linkify(text) {
-  return text.replace(urlRegex, url => `<a href="${url}" target="_blank" rel="noopener">${url}</a>`);
+  return text.replace(urlRegex, url => `<a href="${url}" target="_blank" rel="noopener" class="url">${url}</a>`);
 }

@@ -1,12 +1,14 @@
 import { connect } from 'react-redux';
 
-import { socket } from '/imports/api/socket/client';
-import {
-  CHAT_VIDEO_PLAY,
-  CHAT_VIDEO_PAUSE,
-} from '/imports/api/socket/videos';
-
-import { setWatchTogether } from '/imports/actions/chats/youtube/together';
+import { closeVideo } from '/imports/actions/videos/close';
+import { playVideo } from '/imports/actions/videos/play';
+import { pauseVideo } from '/imports/actions/videos/pause';
+import { seekTo } from '/imports/actions/videos/seekTo';
+import { videoReady } from '/imports/actions/videos/ready';
+import { videoPlayed } from '/imports/actions/videos/played';
+import { videoPaused } from '/imports/actions/videos/paused';
+import { muteVideo } from '/imports/actions/videos/mute';
+import { unMuteVideo } from '/imports/actions/videos/unMute';
 
 import { ChatVideoComponent } from '/imports/ui/components/parts/chat/ChatVideoComponent';
 
@@ -17,72 +19,33 @@ const mapStateToProps = () => {
 };
 
 const mapDispatchToProps = (dispatch, props) => {
-  const getVideoContext = (event, callback) => {
-    callback({
-      player: event.target,
-      contactId: props.contactId,
-      messageId: props.messageId,
-      videoId: props.video.id,
-    });
-  };
-
-  let propagatePlay = true;
-
   return {
-    onVideoReady: event => {
-      getVideoContext(event, ({ player, messageId, videoId }) => {
-        const isTargetVideo = options => options.messageId === messageId && options.videoId === videoId;
-
-        socket.on(CHAT_VIDEO_PLAY, options => {
-          if (isTargetVideo(options)) {
-            propagatePlay = false;
-            player.seekTo(options.seconds, true);
-            player.playVideo();
-          }
-        });
-
-        socket.on(CHAT_VIDEO_PAUSE, options => {
-          if (isTargetVideo(options)) {
-            player.seekTo(options.seconds, true);
-            player.pauseVideo();
-          }
-        });
-      });
+    onReady: event => {
+      dispatch(videoReady(props.contactId, props.videoId, event.target));
     },
-    onVideoPlay: event => {
-      if (!props.video.watchTogether) {
-        return false;
-      }
-
-      if (propagatePlay) {
-        getVideoContext(event, ({ player, contactId, messageId, videoId }) => {
-          socket.emit(CHAT_VIDEO_PLAY, {
-            contactId,
-            messageId,
-            videoId,
-            seconds: player.getCurrentTime(),
-          });
-        });
-      } else {
-        propagatePlay = true;
-      }
+    onClose: () => {
+      dispatch(closeVideo(props.contactId, props.videoId));
     },
-    onVideoPause: event => {
-      if (!props.video.watchTogether) {
-        return false;
-      }
-
-      getVideoContext(event, ({ player, contactId, messageId, videoId }) => {
-        socket.emit(CHAT_VIDEO_PAUSE, {
-          contactId,
-          messageId,
-          videoId,
-          seconds: player.getCurrentTime(),
-        });
-      });
+    onPlay: () => {
+      dispatch(playVideo(props.contactId, props.videoId));
     },
-    onSetWatchTogether: event => {
-      dispatch(setWatchTogether(props.messageId, props.video.id, event.target.checked));
+    onPause: () => {
+      dispatch(pauseVideo(props.contactId, props.videoId));
+    },
+    onSeekTo: seconds => {
+      dispatch(seekTo(props.contactId, props.videoId, seconds));
+    },
+    onPlayed: () => {
+      dispatch(videoPlayed(props.contactId, props.videoId));
+    },
+    onPaused: () => {
+      dispatch(videoPaused(props.contactId, props.videoId));
+    },
+    onUnMute: () => {
+      dispatch(unMuteVideo(props.contactId, props.videoId));
+    },
+    onMute: () => {
+      dispatch(muteVideo(props.contactId, props.videoId));
     },
   };
 };

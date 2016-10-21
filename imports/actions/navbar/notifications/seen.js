@@ -18,7 +18,6 @@ export function markNotificationSeen(notification) {
         );
       }
     });
-
     browserHistory.push(notification.url);
   };
 }

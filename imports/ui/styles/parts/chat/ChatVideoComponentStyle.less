@@ -1,19 +1,128 @@
-#chat {
-  .comment {
-    clear: both;
+#videos {
+  position: fixed;
+  top: 0;
+  width: 0;
+  height: 0;
+  z-index: 200;
 
-    .videos {
-      .video {
-        float: left;
-        margin-right: 10px;
-        margin-bottom: 10px;
+  .react-draggable {
+    width: 640px;
 
-        > span {
-          display: block;
+    .video {
+      border-radius: 5px;
+      background-color: #e0e1e2;
+      color: white;
+
+      .player {
+        min-height: 360px;
+      }
+
+      iframe {
+        max-width: 100%;
+        pointer-events: none;
+      }
+
+      .handle {
+        cursor: move;
+      }
+
+      .title {
+        position: relative;
+        height: 40px;
+        background-color: #e0e1e2;
+        color: rgba(0, 0, 0, 0.8);
+        text-align: center;
+        padding: 10px;
+        border-radius: 5px 5px 0 0;
+
+        .ui.button {
+          position: absolute;
+          top: 0;
+          right: 0;
+          height: 100%;
+          margin-right: 0;
+          border-radius: 0 0.28571429rem 0 0;
+        }
+      }
+
+      .controls {
+        margin-top: -5px;
+
+        .rangeslider {
+          position: relative;
+          background: #34495e;
+
+          .rangeslider__fill, .rangeslider__handle {
+            position: absolute;
+          }
+
+          &, .rangeslider__fill {
+            display: block;
+          }
+
+          .rangeslider__handle {
+            background: #fff;
+            border: 1px solid #ccc;
+            cursor: pointer;
+            display: inline-block;
+            position: absolute;
+            &:active {
+              background: #999;
+            }
+          }
         }
 
+        .rangeslider-horizontal {
+          height: 10px;
+
+          .rangeslider__fill {
+            height: 100%;
+            background: #e74c3c;
+            top: 0;
+          }
+
+          .rangeslider__handle {
+            width: 10px;
+            height: 10px;
+            border-radius: 5px;
+            top: 0;
+          }
+        }
+
+        .handle {
+          position: relative;
+
+          .ui.button {
+            border-radius: 0;
+            margin-right: 0;
+          }
+
+          .ui.button:first-of-type {
+            border-radius: 0 0 0 0.28571429rem;
+          }
+
+          .right {
+            position: absolute;
+            right: 0;
+            bottom: 0;
+
+            .ui.button:last-of-type {
+              border-radius: 0 0 0.28571429rem 0;
+            }
+          }
+        }
+      }
+    }
+  }
+  @media all and (max-width: 800px) {
+    .react-draggable {
+      width: 200px;
+      height: 140px;
+
+      .video{
         iframe {
-          max-width: 100%;
+          width: 200px;
+          height: 114px;
         }
       }
     }

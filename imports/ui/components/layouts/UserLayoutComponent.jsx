@@ -4,7 +4,10 @@ import Notifications from 'react-notification-system-redux';
 
 import { SidebarContainer } from '/imports/ui/containers/parts/app/sidebar/SidebarContainer';
 import { NavbarContainer } from '/imports/ui/containers/parts/app/navbar/NavbarContainer';
+import { ChatVideosContainer } from '/imports/ui/containers/parts/chat/ChatVideosContainer';
 import { AddContactsModalContainer } from '/imports/ui/containers/parts/app/modals/AddContactsModalContainer';
+
+import '/imports/ui/styles/layout/UserLayoutComponentStyle.less';
 
 export const UserLayoutComponent = React.createClass({
   propTypes: {
@@ -22,16 +25,15 @@ export const UserLayoutComponent = React.createClass({
     };
   },
   render: function () {
-    const children = this.props.user.ready
-      ? <div>
+    const children = this.props.user.ready ?
+      <div>
         <SidebarContainer />
-        <div className="user-layout">
+        <div id="user-layout">
           <NavbarContainer />
           {this.props.children}
         </div>
         <AddContactsModalContainer />
-      </div>
-      : null;
+      </div> : null;
 
     return (
       <div>
@@ -39,7 +41,8 @@ export const UserLayoutComponent = React.createClass({
         <div id="modals"></div>
         <div id="popups"></div>
         <Notifications notifications={this.props.notifications}/>
+        <ChatVideosContainer/>
       </div>
     );
-  }
+  },
 });

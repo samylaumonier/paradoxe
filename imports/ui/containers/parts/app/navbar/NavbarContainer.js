@@ -2,6 +2,7 @@ import { connect } from 'react-redux';
 
 import { loadInvites } from '/imports/actions/navbar/invites/load';
 import { loadNotifications } from '/imports/actions/navbar/notifications/load';
+import { seeAll } from '/imports/actions/navbar/notifications/seenAll';
 import { logout } from '/imports/actions/user/logout';
 
 import { NavbarComponent } from '/imports/ui/components/parts/app/navbar/NavbarComponent';
@@ -27,6 +28,9 @@ const mapDispatchToProps = dispatch => {
     },
     logout: () => {
       dispatch(logout());
+    },
+    seeAll: () => {
+      dispatch(seeAll());
     },
   };
 };

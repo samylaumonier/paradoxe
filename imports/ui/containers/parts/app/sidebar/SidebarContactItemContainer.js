@@ -47,6 +47,9 @@ const mapDispatchToProps = (dispatch, props) => {
   return {
     openChat: () => {
       browserHistory.push(`/chat/${props.contact.username}`);
+      if($(window).width() < 801) {
+        $('.ui.vertical.inverted.left.sidebar.secondary.menu').sidebar('toggle');
+      }
     },
     notify: (title, options) => {
       dispatch(notify(title, options));

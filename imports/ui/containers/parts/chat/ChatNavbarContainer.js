@@ -1,6 +1,6 @@
 import { connect } from 'react-redux';
 
-import { userHasBlockedContact } from '/imports/api/collections/users';
+import { getUserStatus, userHasBlockedContact } from '/imports/api/collections/users';
 import { fileListToArray } from '/imports/api/collections/files';
 
 import { filesDropped } from '/imports/actions/chats/file/dropped';
@@ -16,6 +16,7 @@ import { ChatNavbarComponent } from '/imports/ui/components/parts/chat/ChatNavba
 const mapStateToProps = (state, props) => {
   return {
     user: state.user,
+    contactStatus: getUserStatus(props.contact.status),
     userHasBlockedContact: userHasBlockedContact(state.user, props.contact._id),
     currentVideoCall: !!state.chats[props.contact.username].videoCall.call,
     videoCallRinging: !!state.chats[props.contact.username].videoCall.isRinging,
