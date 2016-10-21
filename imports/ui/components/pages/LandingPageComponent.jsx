@@ -37,7 +37,8 @@ export const LandingPageComponent = React.createClass({
               </div>
               <div id="page-header" className="ui hidden transition information" ref="header">
                 <h1 className="ui inverted centered hudge header">
-                  Paradoxe (Alpha)
+                  Paradoxe
+                  <small>alpha</small>
                 </h1>
                 <p className="ui centered">
                   When simplicity meets functionality. <br/>
@@ -55,7 +56,6 @@ export const LandingPageComponent = React.createClass({
                      className="center aligned large basic inverted ui button" download>
                     <div className="visible content"><i className="apple icon"/></div>
                   </a>
-                  
                   <div className="ui buttons center aligned large basic inverted animated fade">
                     <div className="ui button dropdown">
                       <div className="visible content"><i className="linux icon"/></div>
@@ -89,10 +89,8 @@ export const LandingPageComponent = React.createClass({
             </div>
           </div>
         </div>
-        
         <div className="ui vertical feature segment">
           <div className="ui centered page grid">
-            
             <div className="eight wide centered column">
               <h2 className="center aligned ui huge header">
                 What does it do ?
@@ -100,46 +98,37 @@ export const LandingPageComponent = React.createClass({
               <div className="ui divider"></div>
               <p className="ui centered lead">Here are some of the things we do best.</p>
             </div>
-          
           </div>
           <br/>
         </div>
-        
         <div className="ui vertical feature segment">
           <div className="ui centered page grid">
             <div className="sixteen wide column">
-              
               <div className="ui two column aligned stackable grid">
-                
                 <div className="ten wide column">
                   <div className="ui centerted image">
                     <img src="/images/youtube.png"/>
                   </div>
                 </div>
-                
                 <div className="six wide column">
                   <div className="ui header">
                     Watch videos together
                   </div>
                   <p>
-                    Watch YouTube videos with contacts. Just drop a YouTube link in the chat,
+                    Watch YouTube videos with friends. Just drop a YouTube link in the chat,
                     we'll go get it. All you have to do after that is click on "watch together"
                     and the video will start playing for the both of you.
                   </p>
                 </div>
-              
               </div>
             </div>
           </div>
         </div>
-        
-        
         <div className="ui vertical feature segment">
           <div className="ui centered page grid">
             <div className="sixteen wide column">
               <br/>
               <div className="ui two column aligned stackable grid">
-                
                 <div className="six wide column">
                   <div className="ui header">
                     Direct messaging
@@ -149,7 +138,6 @@ export const LandingPageComponent = React.createClass({
                     believe we have async
                     Done very well. No worries when you send a message with us we will get the job do. So send a DM it's
                     <b> privacy and security.</b>
-                  
                   </p>
                 </div>
                 <div className="ten wide column">
@@ -157,25 +145,19 @@ export const LandingPageComponent = React.createClass({
                     <img src="/images/chat-bubble.png"/>
                   </div>
                 </div>
-              
               </div>
             </div>
           </div>
         </div>
-        
-        
         <div className="ui vertical feature segment">
           <div className="ui centered page grid">
             <div className="sixteen wide column">
-              
               <div className="ui two column aligned stackable grid">
-                
                 <div className="ten wide column">
                   <div className="ui centerted image">
                     <img src="/images/video-audio.png"/>
                   </div>
                 </div>
-                
                 <div className="six wide column">
                   <div className="ui header">
                     Video and audio calls
@@ -186,19 +168,14 @@ export const LandingPageComponent = React.createClass({
                     Give a friend a call and we would love to hear what you think.
                   </p>
                 </div>
-              
               </div>
             </div>
           </div>
         </div>
-        
         <div className="ui vertical feature segment">
           <div className="ui centered page grid">
             <div className="sixteen wide column">
-              
               <div className="ui two column aligned stackable grid">
-                
-                
                 <div className="six wide column">
                   <div className="ui icon header">
                     File transfer
@@ -210,13 +187,11 @@ export const LandingPageComponent = React.createClass({
                     It will remain accessible until you or your contact feels like it needs to be removed.
                   </p>
                 </div>
-                
                 <div className="ten wide column">
                   <div className="ui centerted image">
                     <img src="images/files.png"/>
                   </div>
                 </div>
-              
               </div>
             </div>
           </div>
@@ -226,15 +201,12 @@ export const LandingPageComponent = React.createClass({
         <div className="ui vertical feature segment">
           <div className="ui centered page grid">
             <div className="sixteen wide column">
-              
               <div className="ui two column aligned stackable grid">
-                
                 <div className="ten wide column">
                   <div className="ui centerted image">
                     <img src="images/browsers.png"/>
                   </div>
                 </div>
-                
                 <div className="six wide column">
                   <div className="ui icon header">
                     Browser based use
@@ -246,32 +218,23 @@ export const LandingPageComponent = React.createClass({
                     like Chrome, Firefox, Opera. So you never have to be disconnected.
                   </p>
                 </div>
-              
               </div>
             </div>
           </div>
           <br/>
         </div>
-        
-        
         <div className="ui recent-works vertical segment">
           <div className="ui very relaxed stackable centered page grid">
-            
             <div className="row">
               <div className="eight wide centered column">
                 <div className="ui horizontal divider"><i className="huge white star icon"/></div>
               </div>
             </div>
-          
           </div>
         </div>
-        
-        
         <div className="ui vertical segment white-footer alpha-hidden">
           <div className="ui stackable center aligned page grid">
-            
             <div className="three column row">
-              
               <div className="column">
                 <h5 className="ui header using-paradoxe">Using Paradoxe</h5>
                 <div className="ui link list">
@@ -279,14 +242,12 @@ export const LandingPageComponent = React.createClass({
                   <a className="item">Feedback</a>
                 </div>
               </div>
-              
               <div className="column">
                 <h5 className="ui header paradoxe">Paradoxe</h5>
                 <div className="ui link list">
                   <a className="item">About</a>
                 </div>
               </div>
-              
               <div className="column">
                 <h5 className="ui header download">Download</h5>
                 <div className="ui link list">
@@ -295,43 +256,29 @@ export const LandingPageComponent = React.createClass({
                   <a className="item">Linux</a>
                 </div>
               </div>
-            
             </div>
           </div>
         </div>
-        
-        
         <div className="ui inverted footer vertical segment center">
-          
           <div className="ui centered page grid">
             <div className="sixteen wide column">
-              
               <div className="ui two column aligned stackable grid">
-                
                 <div className="eight wide column">
-                  
-                  
                   <div className="ui four column aligned stackable grid">
-                    
                     <div className="column">
-                      <a className="item icon inverted alpha-hidden">
+                      <a href="https://twitter.com/ParadoxeApp" className="item icon inverted">
                         <i className="twitter icon"/>
                         Twitter
                       </a>
                     </div>
                   </div>
-                
                 </div>
-                
                 <div className="eight wide column">
                   <a className="item inverted"><b>© Paradoxe</b></a>
                 </div>
-              
               </div>
             </div>
           </div>
-        
-        
         </div>
       </div>
     );
