@@ -7,6 +7,8 @@ import { NavbarContainer } from '/imports/ui/containers/parts/app/navbar/NavbarC
 import { ChatVideosContainer } from '/imports/ui/containers/parts/chat/ChatVideosContainer';
 import { AddContactsModalContainer } from '/imports/ui/containers/parts/app/modals/AddContactsModalContainer';
 
+import '/imports/ui/styles/layout/UserLayoutComponentStyle.less';
+
 export const UserLayoutComponent = React.createClass({
   propTypes: {
     children: React.PropTypes.node,
@@ -26,7 +28,7 @@ export const UserLayoutComponent = React.createClass({
     const children = this.props.user.ready ?
       <div>
         <SidebarContainer />
-        <div className="user-layout">
+        <div id="user-layout">
           <NavbarContainer />
           {this.props.children}
         </div>
@@ -42,5 +44,5 @@ export const UserLayoutComponent = React.createClass({
         <ChatVideosContainer/>
       </div>
     );
-  }
+  },
 });

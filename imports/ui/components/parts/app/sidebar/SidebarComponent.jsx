@@ -20,22 +20,22 @@ export const SidebarComponent = React.createClass({
     this.props.loadMessages();
   },
   render: function () {
+
     const contacts = this.props.contacts.length
       ? <div className="ui mini middle aligned selection inverted relaxed divided list">
         {this.props.contacts.map(contact => <SidebarContactItemContainer key={contact._id} contact={contact}/>)}
       </div>
       : <div className="no-contacts">No contact found!</div>;
-
+  
+    
     return (
-      <div id="sidebar" className="ui vertical inverted left visible sidebar secondary menu">
+      <div id="sidebar" className={`ui vertical inverted left sidebar secondary menu ${this.visible()}`}>
+        <Link className="item ui middle aligned selection inverted relaxed divided list" to="/posts"  onClick={this.toggleSidebar}>
+          <i className="home icon"/>
+          Home
+        </Link>
         <div className="item">
-          <Link className="ui logo icon image" to="/posts">
-            <img src="/images/logo-35x35.png"/>
-          </Link>
-          <Link to="/posts"><b>Paradoxe</b></Link>
-        </div>
-        <div className="item">
-          <Link className="ui middle aligned selection inverted relaxed divided list" to="/settings">
+          <Link className="ui middle aligned selection inverted relaxed divided list" to="/settings"  onClick={this.toggleSidebar}>
             <div className="item">
               <span className={`user-status-header mini ui empty circular label ${this.props.userStatus}`}/>
               <AvatarComponent user={this.props.user} className={"ui avatar image"} size={28}/>
@@ -60,5 +60,17 @@ export const SidebarComponent = React.createClass({
         </div>
       </div>
     );
+  },
+  visible: function () {
+    if($(window).width() < 801) {
+      return '';
+    }else {
+      return 'visible';
+    }
+  },
+  toggleSidebar: function () {
+    if($(window).width() < 801) {
+      $('.ui.vertical.inverted.left.sidebar.secondary.menu').sidebar('toggle');
+    }
   },
 });

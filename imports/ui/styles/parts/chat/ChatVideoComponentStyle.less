@@ -18,6 +18,7 @@
       }
 
       iframe {
+        max-width: 100%;
         pointer-events: none;
       }
 
@@ -109,6 +110,19 @@
               border-radius: 0 0 0.28571429rem 0;
             }
           }
+        }
+      }
+    }
+  }
+  @media all and (max-width: 800px) {
+    .react-draggable {
+      width: 200px;
+      height: 140px;
+
+      .video{
+        iframe {
+          width: 200px;
+          height: 114px;
         }
       }
     }

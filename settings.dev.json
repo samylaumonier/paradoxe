@@ -1,14 +1,14 @@
 {
   "public": {
-    "version": "0.0.4",
+    "version": "0.0.5",
     "peer": {
-      "host": "localhost",
+      "host": "10.31.6.11",
       "port": 9000,
       "path": "/main"
     },
     "socket": {
       "protocol": "http",
-      "host": "localhost",
+      "host": "10.31.6.11",
       "port": 4000
     },
     "bot": {
@@ -40,7 +40,7 @@
   "electron": {
     "name": "paradoxe",
     "productName": "Paradoxe",
-    "version": "0.0.4",
+    "version": "0.0.5",
     "description": "Multiplatform video and chat application",
     "homepage": "https://paradoxe.io/",
     "license": "MIT",
@@ -83,6 +83,6 @@
     }
   },
   "env": {
-    "ROOT_URL": "http://localhost:3000"
+    "ROOT_URL": "http://10.31.6.11:3000"
   }
 }
