@@ -19,7 +19,7 @@ export const Files = new FilesCollection({
       const max = numeral(Meteor.settings.public.uploadMaxFileSize).format('0.00 b');
       return `Please upload file with size equal to or less than ${max}.`;
     }
-  }
+  },
 });
 
 export const FileSchema = new SimpleSchema({
