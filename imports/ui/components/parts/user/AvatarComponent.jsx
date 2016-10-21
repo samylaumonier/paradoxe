@@ -9,34 +9,29 @@ export const AvatarComponent = React.createClass({
     className: React.PropTypes.string,
   },
   render: function () {
-    if (this.props.user.profile && this.props.user.profile.pictureId) {
-      const file = Files.findOne(this.props.user.profile.pictureId);
-      return file ? this.getBackgroundImage(file.link()) : this.getClassicImage();
-    }
-
-    return this.getClassicImage(
-      this.props.user.profile && this.props.user.profile.emailHash
-        ? `https://secure.gravatar.com/avatar/${this.props.user.profile.emailHash}?s=${this.props.size}&d=identicon`
-        : this.getDefaultSrc()
-    );
+    return this.getImage();
   },
-  getDefaultSrc: function () {
+  getDefaultUrl: function () {
     return `https://secure.gravatar.com/avatar/?s=${this.props.size}&d=mm`;
   },
-  getClassicImage: function (src = this.getDefaultSrc()) {
-    const style = {
-      maxWidth: `${this.props.size}px`,
-      maxHeight: `${this.props.size}px`,
-      backgroundImage: `url(${src})`,
-    };
+  getUrl: function () {
+    if (this.props.user.profile && this.props.user.profile.pictureId) {
+      const file = Files.findOne(this.props.user.profile.pictureId);
 
-    return <div className={this.props.className || ''} style={style}/>;
+      if (file && file.name) {
+        return file.link();
+      }
+    }
+
+    return this.props.user.profile && this.props.user.profile.emailHash
+      ? `https://secure.gravatar.com/avatar/${this.props.user.profile.emailHash}?s=${this.props.size}&d=identicon`
+      : this.getDefaultUrl();
   },
-  getBackgroundImage: function (src) {
+  getImage: function () {
     const style = {
       maxWidth: `${this.props.size}px`,
       maxHeight: `${this.props.size}px`,
-      backgroundImage: `url(${src})`,
+      backgroundImage: `url('${this.getUrl()}')`,
       backgroundSize: 'cover',
       backgroundRepeat: 'no-repeat',
       backgroundPosition: 'center',

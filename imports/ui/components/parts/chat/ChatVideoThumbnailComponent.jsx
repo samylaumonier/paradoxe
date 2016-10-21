@@ -12,7 +12,7 @@ export const ChatVideoThumbnailComponent = React.createClass({
     return (
       <div className="ui card" onClick={this.props.onClick}>
         <a className="image" href="#">
-          <img src={`http://i1.ytimg.com/vi/${this.props.videoId}/hqdefault.jpg`}/>
+          <img src={`https://i1.ytimg.com/vi/${this.props.videoId}/hqdefault.jpg`}/>
         </a>
         <div className="ui bottom attached button">
           <i className="play icon"/>

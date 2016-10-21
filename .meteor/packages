@@ -30,6 +30,7 @@ fortawesome:fontawesome
 juliancwirko:postcss
 kevohagan:sweetalert
 matb33:collection-hooks
+mdg:camera
 meteorhacks:picker
 mizzao:user-status
 momentjs:moment
@@ -40,4 +41,3 @@ risetechnologies:electron-builder-local
 samy:redux-middlewares
 semantic:ui
 tmeasday:publish-counts
-mdg:camera

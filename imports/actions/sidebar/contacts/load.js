@@ -1,5 +1,4 @@
 import { Meteor } from 'meteor/meteor';
-
 import Notifications from 'react-notification-system-redux';
 import { browserHistory } from 'react-router';
 
@@ -26,9 +25,10 @@ export function loadContacts() {
                   $in: ids
                 }
               }).fetch();
-              
+
               oldContacts.forEach(oldContact => {
                 const contact = _.findWhere(contacts, { _id: oldContact._id });
+
                 if (contact && oldContact.status && !oldContact.status.online && contact.status && contact.status.online) {
                   dispatch(
                     Notifications.info({
@@ -45,9 +45,11 @@ export function loadContacts() {
                   );
                 }
               });
+
               return contacts;
             }
           }
+
           return [];
         },
       },
