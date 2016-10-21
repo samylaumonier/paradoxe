@@ -15,7 +15,7 @@ export function videoReady(contactId, videoId, player) {
       currentTime: 0,
       progressInterval: setInterval(() => {
         dispatch(setVideoCurrentTime(contactId, videoId, player.getCurrentTime()));
-      }, 250),
+      }, 100),
     });
   };
 }

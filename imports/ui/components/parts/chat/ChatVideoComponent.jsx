@@ -71,7 +71,7 @@ export const ChatVideoComponent = React.createClass({
         <div className="controls">
           <Slider
             max={this.props.duration}
-            step={0.00000000000000001}
+            step={0.01}
             value={this.props.currentTime}
             onChange={this.props.onSeekTo}
           />
