@@ -10,17 +10,23 @@ export const CHAT_SUBSCRIPTION_READY = 'CHAT_SUBSCRIPTION_READY';
 export const CHAT_SUBSCRIPTION_CHANGED = 'CHAT_SUBSCRIPTION_CHANGED';
 
 export function loadChat(contactUsername) {
-  return dispatch => {
+  return (dispatch, getState) => {
     dispatch({
       type: CHAT_SUBSCRIPTION,
       meteor: {
-        subscribe: () => Meteor.subscribe('chat.messages', contactUsername),
+        subscribe: () => {
+          const chat = getState().chats[contactUsername];
+          const limit = chat ? chat.messagesLimit : null;
+
+          return Meteor.subscribe('chat.messages', contactUsername, limit);
+        },
         get: () => {
           const user = Meteor.user();
           const chatState = {
             ...defaultChatState
           };
 
+          delete chatState.messagesLimit;
           delete chatState.videoCall;
           delete chatState.localFiles;
           delete chatState.uploadHandlers;

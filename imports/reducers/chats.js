@@ -1,4 +1,7 @@
+import { MESSAGES_PER_PAGE } from '/imports/api/collections/messages';
+
 import { CHAT_SUBSCRIPTION_READY, CHAT_SUBSCRIPTION_CHANGED } from '/imports/actions/chats/load';
+import { CHAT_INCREASE_LIMIT } from '/imports/actions/chats/message/limit';
 import { CHAT_VIDEO_UPDATE } from '/imports/actions/chats/video/update';
 import { CHAT_VIDEO_RESET } from '/imports/actions/chats/video/reset';
 import { CHAT_FILES_DROPPED } from '/imports/actions/chats/file/dropped';
@@ -24,6 +27,7 @@ export const defaultChatState = {
   hasContact: false,
   contact: null,
   messages: [],
+  messagesLimit: MESSAGES_PER_PAGE,
   users: [],
   files: [],
   localFiles: [],
@@ -58,6 +62,11 @@ export function chats(state = initialState, action) {
           ...defaultVideoCallState,
         };
       }
+
+      return nextState;
+    case CHAT_INCREASE_LIMIT:
+      nextState = getNextState(state, action.contactUsername);
+      nextState[action.contactUsername].messagesLimit += MESSAGES_PER_PAGE;
 
       return nextState;
     case CHAT_VIDEO_UPDATE:

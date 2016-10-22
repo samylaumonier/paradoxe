@@ -24,6 +24,8 @@ export const UPLOADED_STATUS = 8;
 export const RINGING_DURATION = 30;
 export const NUDGE_LIMIT = 15;
 
+export const MESSAGES_PER_PAGE = 25;
+
 export const MessagesSchema = new SimpleSchema({
 //  _id is need when using the schema with a check function, if attaching it to a collection it should be removed
   _id: {
