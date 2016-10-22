@@ -1,6 +1,6 @@
 import React from 'react';
-
 import Notifications from 'react-notification-system-redux';
+import { Electron } from 'meteor/risetechnologies:electron-builder-local';
 
 import { SidebarContainer } from '/imports/ui/containers/parts/app/sidebar/SidebarContainer';
 import { NavbarContainer } from '/imports/ui/containers/parts/app/navbar/NavbarContainer';
@@ -23,6 +23,13 @@ export const UserLayoutComponent = React.createClass({
     $.fn.api.settings.api = {
       'search users': '/users/search/?username={username}'
     };
+
+    if (Electron.isElectron()) {
+      $('body').on('click', '.url', e => {
+        e.preventDefault();
+        Electron.openExternal($(e.target).attr('href'));
+      });
+    }
   },
   render: function () {
     const children = this.props.user.ready ?
