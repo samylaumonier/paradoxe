@@ -39,8 +39,7 @@ Meteor.publish('chat.messages', function (contactUsername) {
         }, {
           sort: {
             sentAt: -1
-          },
-          limit: 500
+          }
         }),
         Files.find({
           $or: [
