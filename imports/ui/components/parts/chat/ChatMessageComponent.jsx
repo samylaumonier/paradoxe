@@ -61,7 +61,7 @@ export const ChatMessageComponent = React.createClass({
       )}</div> : null;
 
     return (
-      <div className="comment">
+      <div className="comment" data-id={this.props.message._id}>
         <a className="avatar">
           <AvatarComponent user={this.props.author} size={35}/>
         </a>

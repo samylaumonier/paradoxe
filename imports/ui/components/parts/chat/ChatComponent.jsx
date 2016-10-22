@@ -1,5 +1,6 @@
 import React from 'react';
 import EmojiPicker from 'emojione-picker';
+import ScrollListener from 'react-scroll-listener';
 
 import { ChatNavbarContainer } from '/imports/ui/containers/parts/chat/ChatNavbarContainer';
 import { ChatMessageContainer } from '/imports/ui/containers/parts/chat/ChatMessageContainer';
@@ -13,13 +14,36 @@ export const ChatComponent = React.createClass({
   propTypes: {
     contact: React.PropTypes.object.isRequired,
     messages: React.PropTypes.array.isRequired,
+    ready: React.PropTypes.bool.isRequired,
+    increaseChatLimit: React.PropTypes.func.isRequired,
   },
   getInitialState: function () {
     return {
       selectedEmoji: null,
+      lastDisplayedMessage: null,
     };
   },
+  componentDidMount: function () {
+    const scrollListener = new ScrollListener({
+      host: this.refs.messages,
+    });
+
+    scrollListener.addScrollEndHandler('messages', this.onScrollEnd);
+  },
+  componentDidUpdate: function (prevProps) {
+    if (this.state.lastDisplayedMessage && prevProps.messages.length !== this.props.messages.length) {
+      this.scrollToMessage(this.state.lastDisplayedMessage);
+      this.setState({
+        lastDisplayedMessage: null,
+      });
+    } else if (_.last(prevProps.messages)._id !== _.last(this.props.messages)._id) {
+      this.scrollToBottom();
+    }
+  },
   render: function () {
+    const spinner = !this.props.ready ?
+      <div className="ui active centered inline loader"/> : null;
+
     const messages = this.props.messages.length ?
       <div className="ui comments">
         {this.props.messages.map(message => message.tag
@@ -33,6 +57,7 @@ export const ChatComponent = React.createClass({
         <div id="chat">
           <ChatNavbarContainer contact={this.props.contact}/>
           <div id="message-zone" ref="messages">
+            {spinner}
             {messages}
           </div>
           <div id="emojis-container" ref="emojis">
@@ -61,6 +86,24 @@ export const ChatComponent = React.createClass({
     messages.stop().animate({
       scrollTop: messages.prop('scrollHeight'),
     }, smooth ? 500 : 0);
+  },
+  onScrollEnd: function (event) {
+    if (event.target.scrollTop === 0) {
+      this.setState({
+        lastDisplayedMessage: this.props.messages[0],
+      }, () => {
+        this.props.increaseChatLimit();
+      });
+    }
+  },
+  scrollToMessage: function (message) {
+    const messages = $(this.refs.messages);
+    const element = messages.find(`[data-id="${message._id}"]`);
+
+    if (element) {
+      const offset = messages.scrollTop() - messages.offset().top + element.offset().top - element.outerHeight() - 30;
+      messages.scrollTop(offset < 0 ? 0 : offset);
+    }
   },
   toggleEmojis: function (event = null) {
     if (event) {

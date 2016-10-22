@@ -33,9 +33,6 @@ export const ChatMessageFormComponent = React.createClass({
 
     this.props.scrollToBottom(false);
   },
-  componentDidUpdate: function () {
-    this.props.scrollToBottom();
-  },
   componentWillReceiveProps: function (nextProps) {
     if (nextProps.selectedEmoji) {
       this.setState({
@@ -85,11 +82,13 @@ export const ChatMessageFormComponent = React.createClass({
     event.preventDefault();
 
     const message = this.state.message.trim();
-    
-    if(!message){
+
+    if (!message) {
       return false;
     }
-    
+
+    this.props.scrollToBottom();
+
     Messages.insert({
       toUserId: [this.props.contact._id],
       content: message,

@@ -1,9 +1,14 @@
 import { Meteor } from 'meteor/meteor';
-import { Messages } from '/imports/api/collections/messages';
+
+import { Messages, MESSAGES_PER_PAGE } from '/imports/api/collections/messages';
 import { userHasContact } from '/imports/api/collections/users';
 import { Files } from '/imports/api/collections/files';
 
-Meteor.publish('chat.messages', function (contactUsername) {
+Meteor.publish('chat.messages', function (contactUsername, limit) {
+  if (!limit || limit <= 0) {
+    limit = MESSAGES_PER_PAGE;
+  }
+
   this.autorun(function () {
     if (!this.userId) {
       return [];
@@ -38,8 +43,9 @@ Meteor.publish('chat.messages', function (contactUsername) {
           ]
         }, {
           sort: {
-            sentAt: -1
-          }
+            createdAt: -1,
+          },
+          limit,
         }),
         Files.find({
           $or: [
