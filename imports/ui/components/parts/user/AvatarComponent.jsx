@@ -8,19 +8,31 @@ export const AvatarComponent = React.createClass({
     size: React.PropTypes.number.isRequired,
     className: React.PropTypes.string,
   },
+  shouldComponentUpdate: function (nextProps) {
+    return !(this.getFile() && !this.getFile(nextProps));
+  },
   render: function () {
     return this.getImage();
   },
   getDefaultUrl: function () {
     return `https://secure.gravatar.com/avatar/?s=${this.props.size}&d=mm`;
   },
-  getUrl: function () {
-    if (this.props.user.profile && this.props.user.profile.pictureId) {
-      const file = Files.findOne(this.props.user.profile.pictureId);
+  getFile: function (props = this.props) {
+    if (props.user.profile && props.user.profile.pictureId) {
+      const file = Files.findOne(props.user.profile.pictureId);
 
       if (file && file.name) {
-        return file.link();
+        return file;
       }
+    }
+
+    return null;
+  },
+  getUrl: function () {
+    const file = this.getFile();
+
+    if (file) {
+      return file.link();
     }
 
     return this.props.user.profile && this.props.user.profile.emailHash
