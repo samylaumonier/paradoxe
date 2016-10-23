@@ -9,7 +9,15 @@ export const AvatarComponent = React.createClass({
     className: React.PropTypes.string,
   },
   shouldComponentUpdate: function (nextProps) {
-    return !(this.getFile() && !this.getFile(nextProps));
+    if (this.getFile() && !this.getFile(nextProps)) {
+      return false;
+    }
+
+    if (_.has(nextProps.user, 'ready')) {
+      return nextProps.user.ready;
+    }
+
+    return true;
   },
   render: function () {
     return this.getImage();

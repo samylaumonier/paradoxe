@@ -24,6 +24,10 @@ export function loadContacts() {
                 _id: {
                   $in: ids
                 }
+              }, {
+                sort: {
+                  username: 1
+                }
               }).fetch();
 
               oldContacts.forEach(oldContact => {

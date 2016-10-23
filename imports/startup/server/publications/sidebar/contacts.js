@@ -60,10 +60,10 @@ Meteor.publish('sidebar.contacts', function () {
 
     const filesObservable = filesCursor.observe({
       added: file => {
-        this.added('files', file._id);
+        this.added('files', file._id, file);
       },
       changed: file => {
-        this.changed('files', file._id);
+        this.changed('files', file._id, file);
       },
       removed: file => {
         this.removed('files', file._id);
