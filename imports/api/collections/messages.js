@@ -46,6 +46,12 @@ export const MessagesSchema = new SimpleSchema({
   read: {
     type: [String],
   },
+  likers: {
+    type: [String],
+  },
+  likes: {
+    type: Number,
+  },
   tag: {
     type: Number,
     optional: true,

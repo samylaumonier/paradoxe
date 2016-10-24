@@ -42,6 +42,7 @@
     "autosize": "^3.0.17",
     "bcrypt": "^0.8.7",
     "better-react-spinkit": "^2.0.0-4",
+    "bufferutil": "^1.2.1",
     "email-validator": "^1.0.4",
     "emojione": "^2.2.6",
     "emojione-picker": "^1.1.0",
@@ -77,6 +78,7 @@
     "socket.io": "^1.4.8",
     "socket.io-client": "^1.4.8",
     "underscore": "^1.8.3",
+    "utf-8-validate": "^1.2.1",
     "youtube-regex": "^1.0.5"
   },
   "devDependencies": {

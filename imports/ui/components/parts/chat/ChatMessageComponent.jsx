@@ -20,8 +20,10 @@ export const ChatMessageComponent = React.createClass({
     message: React.PropTypes.object.isRequired,
     author: React.PropTypes.object.isRequired,
     hasVideos: React.PropTypes.bool.isRequired,
+    liked: React.PropTypes.bool.isRequired,
     readMessage: React.PropTypes.func.isRequired,
     deleteMessage: React.PropTypes.func.isRequired,
+    likeMessage: React.PropTypes.func.isRequired,
   },
   componentDidMount: function () {
     $(this.refs.text).find('span').each(function () {
@@ -70,6 +72,12 @@ export const ChatMessageComponent = React.createClass({
           <div className="metadata">
             <div className="date">
               {moment(this.props.message.createdAt).fromNow()}
+            </div>
+            <div className="actions">
+              <a className="reply">
+                <i className={`like icon ${this.props.liked ? 'message-liked' : ''}`} onClick={this.props.likeMessage}/>
+                {this.props.message.likes}
+              </a>
             </div>
             {actions}
           </div>

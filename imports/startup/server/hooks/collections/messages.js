@@ -5,6 +5,8 @@ Messages.before.insert(function (userId, doc) {
   doc.userId = doc.userId || userId;
   doc.createdAt = new Date();
   doc.read = [];
+  doc.likers = [];
+  doc.likes = 0;
 
   // Videos
   doc.videos = getVideosIds(doc);

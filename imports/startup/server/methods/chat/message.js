@@ -52,4 +52,43 @@ Meteor.methods({
     
     Messages.remove(message._id);
   },
+  
+  likeMessage: function (messageId) {
+    var user = Meteor.user();
+    var message = Messages.findOne(messageId);
+    
+    if (!user) {
+      throw new Meteor.Error('400', 'User not found');
+    }
+    
+    if (!message) {
+      throw new Meteor.Error('400', 'Message does not exist');
+    }
+    
+//    if(message.userId != user._id){
+//      if(!userHasContact(user, message.userId)){
+//        throw new Meteor.Error('401', 'User is not your contact');
+//      }
+//    }
+    
+    if (message.likers.includes(user._id)) {
+      Messages.update(message._id, {
+        $pull: {
+          likers: user._id,
+        },
+        $inc: {
+          likes: -1
+        }
+      });
+    } else {
+      Messages.update(message._id, {
+        $push: {
+          likers: user._id,
+        },
+        $inc: {
+          likes: 1
+        }
+      });
+    }
+  },
 });

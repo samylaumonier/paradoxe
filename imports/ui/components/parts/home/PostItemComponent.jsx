@@ -38,7 +38,7 @@ export const PostItemComponent = React.createClass({
         </div>
         <div className="extra content">
           <span className="left floated like" onClick={this.props.likePost}>
-            <i className={`like icon ${this.props.liked ? 'post-liked' : ''}`}/>
+            <i className={`like icon ${this.props.liked ? '`' : ''}`}/>
             Like
           </span>
           <span className="right floated">

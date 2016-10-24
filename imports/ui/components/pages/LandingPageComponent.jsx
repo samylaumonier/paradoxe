@@ -135,9 +135,9 @@ export const LandingPageComponent = React.createClass({
                   </div>
                   <p>
                     Messaging is without a doubt one of the most used forms of communication, and this is something we
-                    believe we have async
-                    Done very well. No worries when you send a message with us we will get the job do. So send a DM it's
-                    <b> privacy and security.</b>
+                    believe we have done very well.
+                    No worries when you send a message with us we will get the job do. So send a DM
+                    <b> stay in touch.</b>
                   </p>
                 </div>
                 <div className="ten wide column">
@@ -163,8 +163,8 @@ export const LandingPageComponent = React.createClass({
                     Video and audio calls
                   </div>
                   <p>
-                    It's not just about keeping in touch, it's about how you keep in touch.
-                    Keep in touch with your contacts through <b>cristal clear video and audio. </b>
+                    It's not just about keeping in touch; it's about how you keep in touch.
+                    Keep in touch with your contacts through <b>crystal clear video and audio. </b>
                     Give a friend a call and we would love to hear what you think.
                   </p>
                 </div>
