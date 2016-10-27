@@ -2,6 +2,7 @@ import './chat/file';
 import './chat/message';
 import './chat/nudge';
 import './chat/video';
+import './groups/create';
 import './invites/accept';
 import './home/post';
 import './navbar/notifications';

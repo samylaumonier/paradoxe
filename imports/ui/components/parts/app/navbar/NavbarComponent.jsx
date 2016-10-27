@@ -89,6 +89,10 @@ export const NavbarComponent = React.createClass({
             <i className="add user icon"/>
             <span className="visible-big-navbar">&nbsp; Add contacts</span>
           </a>
+          <a className="ui item" onClick={this.openGroupCreateModal}>
+            <i className="add users icon"/>
+            <span className="visible-big-navbar">&nbsp; New group</span>
+          </a>
           <Link className="ui icon item" to="/invites">
             <i className="users icon"/>
             <span className="visible-big-navbar">&nbsp; Invites {totalInvites}</span>
@@ -138,6 +142,10 @@ export const NavbarComponent = React.createClass({
   openContactAddModal: function (event) {
     event.preventDefault();
     $('#contact-add-modal').modal('show');
+  },
+  openGroupCreateModal: function (event) {
+    event.preventDefault();
+    $('#group-create-modal').modal('show');
   },
   toggleSidebar: function () {
     $('.ui.left.sidebar').sidebar({

@@ -10,7 +10,7 @@ let store;
 if (process.env.NODE_ENV === 'development') {
   const logger = createLogger();
   store = createStore(rootReducer, compose(
-    applyMiddleware(sources, subscriptions, thunk, logger),
+    applyMiddleware(sources, subscriptions, thunk/*, logger*/),
     window.devToolsExtension ? window.devToolsExtension() : f => f
   ));
 } else {

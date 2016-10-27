@@ -4,6 +4,7 @@ export const AddContactsModalComponent = React.createClass({
   propTypes: {
     user: React.PropTypes.object.isRequired,
     loginToken: React.PropTypes.string.isRequired,
+    inviteUsers: React.PropTypes.func.isRequired,
   },
   componentDidMount: function () {
     const modal = $(this.refs.modal);

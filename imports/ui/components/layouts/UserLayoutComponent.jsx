@@ -6,6 +6,7 @@ import { SidebarContainer } from '/imports/ui/containers/parts/app/sidebar/Sideb
 import { NavbarContainer } from '/imports/ui/containers/parts/app/navbar/NavbarContainer';
 import { ChatVideosContainer } from '/imports/ui/containers/parts/chat/ChatVideosContainer';
 import { AddContactsModalContainer } from '/imports/ui/containers/parts/app/modals/AddContactsModalContainer';
+import { CreateGroupModalContainer } from '/imports/ui/containers/parts/app/modals/CreateGroupModalContainer';
 
 import '/imports/ui/styles/layout/UserLayoutComponentStyle.less';
 
@@ -21,7 +22,8 @@ export const UserLayoutComponent = React.createClass({
   },
   componentDidMount: function () {
     $.fn.api.settings.api = {
-      'search users': '/users/search/?username={username}'
+      'search users': '/users/search/?username={username}',
+      'search contacts': '/contacts/search/?username={username}',
     };
 
     if (Electron.isElectron()) {
@@ -39,7 +41,8 @@ export const UserLayoutComponent = React.createClass({
           <NavbarContainer />
           {this.props.children}
         </div>
-        <AddContactsModalContainer />
+        <AddContactsModalContainer/>
+        <CreateGroupModalContainer/>
       </div> : null;
 
     return (

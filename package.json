@@ -78,6 +78,7 @@
     "socket.io": "^1.4.8",
     "socket.io-client": "^1.4.8",
     "underscore": "^1.8.3",
+    "underscore.string": "^3.3.4",
     "utf-8-validate": "^1.2.1",
     "youtube-regex": "^1.0.5"
   },

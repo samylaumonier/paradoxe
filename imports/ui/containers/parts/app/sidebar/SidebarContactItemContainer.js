@@ -1,6 +1,8 @@
 import { connect } from 'react-redux';
 import { browserHistory } from 'react-router';
 
+import { toggleSidebar } from '/imports/api/sidebar/toggle';
+
 import { nudgeUser } from '/imports/actions/user/nudge.js';
 import { notify } from '/imports/actions/user/notify.js';
 import { getUserStatus, userHasBlockedContact } from '/imports/api/collections/users';
@@ -47,9 +49,7 @@ const mapDispatchToProps = (dispatch, props) => {
   return {
     openChat: () => {
       browserHistory.push(`/chat/${props.contact.username}`);
-      if($(window).width() < 801) {
-        $('.ui.vertical.inverted.left.sidebar.secondary.menu').sidebar('toggle');
-      }
+      toggleSidebar();
     },
     notify: (title, options) => {
       dispatch(notify(title, options));

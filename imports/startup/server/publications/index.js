@@ -5,4 +5,5 @@ import './navbar/invites';
 import './navbar/notifications';
 import './profile/user';
 import './sidebar/contacts';
+import './sidebar/groups';
 import './sidebar/messages';
