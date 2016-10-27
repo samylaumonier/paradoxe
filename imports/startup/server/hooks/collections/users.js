@@ -219,6 +219,7 @@ Accounts.onCreateUser((options, user) => {
     pictureId: null,
     lastNudgeSentAt: {},
     sockets: [],
+    coins: 0,
   };
   
  return user;

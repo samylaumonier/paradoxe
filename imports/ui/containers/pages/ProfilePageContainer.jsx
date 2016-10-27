@@ -1,19 +1,21 @@
 import { connect } from 'react-redux';
 
-import { loadInvites } from '/imports/actions/invites/load';
+import { loadProfile } from '/imports/actions/profile/load';
 
 import { ProfilePageComponent } from '/imports/ui/components/pages/ProfilePageComponent';
 
 const mapStateToProps = state => {
   return {
-    user: state.user,
+    currentUser: state.user,
+    user: state.profile.user,
+    ready: state.profile.ready,
   };
 };
 
-const mapDispatchToProps = dispatch => {
+const mapDispatchToProps = (dispatch, props) => {
   return {
-    loadInvites: () => {
-      dispatch(loadInvites());
+    loadProfile: (username = props.params.username) => {
+      dispatch(loadProfile(username));
     }
   };
 };

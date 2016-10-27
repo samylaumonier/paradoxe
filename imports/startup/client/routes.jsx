@@ -21,8 +21,10 @@ import { HomePageComponent } from '/imports/ui/components/pages/HomePageComponen
 import { LandingPageComponent } from '/imports/ui/components/pages/LandingPageComponent';
 
 import { ChatPageContainer } from '/imports/ui/containers/pages/ChatPageContainer';
+import { ProfilePageContainer } from '/imports/ui/containers/pages/ProfilePageContainer';
 import { InvitesPageContainer } from '/imports/ui/containers/pages/InvitesPageContainer';
 import { SettingsPageContainer } from '/imports/ui/containers/pages/SettingsPageContainer';
+import { StorePageContainer } from '/imports/ui/containers/pages/StorePageContainer';
 
 export const renderRoutes = () => (
   <Provider store={store}>
@@ -39,8 +41,10 @@ export const renderRoutes = () => (
         <Route path="invites" component={InvitesPageContainer}/>
         <Route path="posts" component={HomePageComponent}/>
         <Route path="settings" component={SettingsPageContainer}/>
+        <Route path="store" component={StorePageContainer}/>
         <Route path="feedback" component={FeedbackPageContainer}/>
         <Route path="chat/:contactUsername" component={ChatPageContainer}/>
+        <Route path="profile/:username" component={ProfilePageContainer}/>
       </Route>
     </Router>
   </Provider>

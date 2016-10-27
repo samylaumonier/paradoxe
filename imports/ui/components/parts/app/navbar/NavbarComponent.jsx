@@ -95,7 +95,7 @@ export const NavbarComponent = React.createClass({
           </Link>
           <div ref="notification" className="ui dropdown icon item">
             <i className="bell icon"/>
-            &nbsp; {totalNotifications}
+            &nbsp; Notifications {totalNotifications}
             <div className="menu">
               {this.props.notifications.map(notification =>
                 <NavbarNotificationItemContainer key={notification._id} notification={notification}/>
@@ -106,6 +106,10 @@ export const NavbarComponent = React.createClass({
             </div>
           </div>
           <div className="right menu">
+            <Link className="ui icon item" to="/store">
+              <i className="shopping basket icon"/>
+              <span className="visible-big-navbar">&nbsp; Store</span>
+            </Link>
             <div ref="profile" className="ui dropdown icon item">
               <i className="user icon visible-big-navbar"/>
               <span className="visible-big-navbar">&nbsp; {this.props.user.username}</span>

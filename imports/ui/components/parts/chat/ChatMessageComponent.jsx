@@ -76,7 +76,6 @@ export const ChatMessageComponent = React.createClass({
             <div className="actions">
               <a className="reply">
                 <i className={`like icon ${this.props.liked ? 'message-liked' : ''}`} onClick={this.props.likeMessage}/>
-                {this.props.message.likes}
               </a>
             </div>
             {actions}
