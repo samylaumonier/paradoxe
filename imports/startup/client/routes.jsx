@@ -45,7 +45,7 @@ export const renderRoutes = () => (
         <Route path="feedback" component={FeedbackPageContainer}/>
         <Route path="chat/:contactUsername" component={ChatPageContainer}/>
         <Route path="group/:groupId-:groupSlug"/> /*TODO: create group chat container and component*/
-        <Route path="profile/:username" component={ProfilePageContainer}/>
+        {/*<Route path="profile/:username" component={ProfilePageContainer}/>*/}
       </Route>
     </Router>
   </Provider>

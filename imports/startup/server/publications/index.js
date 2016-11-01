@@ -7,3 +7,4 @@ import './profile/user';
 import './sidebar/contacts';
 import './sidebar/groups';
 import './sidebar/messages';
+import './store/products';

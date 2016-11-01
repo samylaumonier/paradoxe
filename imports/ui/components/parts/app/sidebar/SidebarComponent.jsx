@@ -41,12 +41,12 @@ export const SidebarComponent = React.createClass({
 
     return (
       <div id="sidebar" className={`ui vertical inverted left sidebar secondary menu ${this.visible()}`}>
-        <Link className="item ui middle aligned selection inverted relaxed divided list" to="/posts" onClick={toggleSidebar}>
+        <Link id="home-sidebar-link" className="item ui middle aligned selection inverted relaxed divided list" to="/posts" onClick={toggleSidebar}>
           <i className="home icon"/>
           Home
         </Link>
         <div className="item">
-          <Link className="ui middle aligned selection inverted relaxed divided list" to={`/profile/${this.props.user.username}`} onClick={toggleSidebar}>
+          <Link className="ui middle aligned selection inverted relaxed divided list" to={`/settings`} onClick={toggleSidebar}>
             <div className="item">
               <span className={`user-status-header mini ui empty circular label ${this.props.userStatus}`}/>
               <AvatarComponent user={this.props.user} className={"ui avatar image"} size={28}/>

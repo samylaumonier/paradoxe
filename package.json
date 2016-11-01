@@ -49,6 +49,7 @@
     "escape-html": "^1.0.3",
     "escape-string-regexp": "^1.0.5",
     "gm": "^1.23.0",
+    "imports": "^1.0.0",
     "inline-style-prefixer": "^2.0.3",
     "jsx-switch": "0.0.3",
     "md5": "^2.1.0",

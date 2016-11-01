@@ -1,4 +1,17 @@
 #navbar{
+  top: 0;
+  right: 0;
+  z-index: 5;
+  margin-left: 260px;
+  left: 0;
+  position: fixed;
+  background-color: white;
+
+  .ui.attached.menu:not(.tabular){
+    border: 0;
+    border-bottom: 1px solid lightgrey;
+  }
+
   .ui.label.navbar-label {
     min-height: 1.5em;
     padding: 1px 0 0 !important;
@@ -33,14 +46,24 @@
       display: none;
     }
 
-    //.ui.menu .ui.dropdown.item .menu .item:not(.filtered){
-    //  display: block;
-    //  z-index: 100000;
-    //}
+    top: 0;
+    right: 0;
+    z-index: 10;
+    margin-left: 260px;
+    left: 0;
+    position: fixed;
+    background-color: white;
+
+    .ui.attached.menu:not(.tabular){
+      border: 0;
+      border-bottom: 1px solid lightgrey;
+    }
   }
   @media all and (max-width: 800px) {
     .visible-big-navbar{
       display: none;
     }
+
+    margin-left: 0;
   }
 }

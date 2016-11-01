@@ -10,6 +10,7 @@ import { settings } from './settings';
 import { user } from './user';
 import { videos } from './videos';
 import { sidebar } from './sidebar';
+import { store } from './store';
 
 const rootReducer = combineReducers({
   chats,
@@ -19,6 +20,7 @@ const rootReducer = combineReducers({
   profile,
   settings,
   sidebar,
+  store,
   user,
   videos,
   notifications,
