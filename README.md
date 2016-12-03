@@ -2,7 +2,7 @@
 
 ## What is it?
 
-Paradoxe is a multiplatform video, chat application. It's similar to Skype but for you web browser, we also have a desktop apllication you can download. We host the web app at [Paradoxe.io](https://paradoxe.io), any code that is added to this repo will be deploied to the server in the next version.
+Paradoxe is a multiplatform video, chat application. It's similar to Skype but for you web browser, we also have a desktop apllication you can download. We host the web app at [Paradoxe.io](https://paradoxe.io), any code that is added to this repo will be deployed to the server in the next version.
 
 ## The vision
 
